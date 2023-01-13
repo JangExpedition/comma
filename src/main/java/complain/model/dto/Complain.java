@@ -1,4 +1,4 @@
-package complain.dto;
+package complain.model.dto;
 
 import java.sql.Date;
 

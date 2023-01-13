@@ -1,4 +1,4 @@
-package font.dto;
+package font;
 
 public class Font {
 	private int no;

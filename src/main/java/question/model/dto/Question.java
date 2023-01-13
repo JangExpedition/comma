@@ -1,4 +1,4 @@
-package question.dto;
+package question.model.dto;
 
 import common.Form;
 
