@@ -1,4 +1,4 @@
-package counseling.dto;
+package counseling.model.dto;
 
 import common.Category;
 import common.Form;

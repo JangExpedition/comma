@@ -1,4 +1,4 @@
-package complain.dto;
+package complain.model.dto;
 
 public enum Partition {
 	LETTER,

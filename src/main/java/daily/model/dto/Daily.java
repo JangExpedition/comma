@@ -1,4 +1,4 @@
-package daily.dto;
+package daily.model.dto;
 
 import common.Form;
 
