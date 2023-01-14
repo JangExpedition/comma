@@ -1,11 +1,12 @@
 @charset "UTF-8";
 
 section{
-    background-image: url(../images/memberEnroll.jpeg);
-    width: 100%;
-    height: 100vh;
+    /* background-image: url(../images/memberEnroll.jpeg);
     background-size: cover;
-    background-position: center;
+    background-position: center; */
+    background-color: #f5f6f7;
+    width: 100%;
+    height: 120vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -17,12 +18,11 @@ section{
 }
 
 #enrollTitle{
-    font-size: 100px;
-    height: 15%;
+    font-size: 80px;
+    margin: 80px 0 50px 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0;
 }
 
 fieldset{
@@ -30,20 +30,18 @@ fieldset{
 }
 
 table{
-    border: 1px solid #fff;
-    border-collapse: collapse;
-    height: 85%;
+    border-spacing: 10px;
+    height: 90%;
 }
 
 td{
-    border: 1px solid #fff;
     width: 200px;
 }
 
 .labelTd{
-    color: #fff;
+    color: #000;
     height: 15px;
-    font-size: 20px;
+    font-size: 17px;
 }
 
 .inputTd input{
@@ -71,4 +69,14 @@ td{
     width: 200px;
     height: 40px;
     box-sizing: border-box;
+}
+
+label > span{
+    font-size: 15px;
+    color: #8e8e8e;
+}
+
+#authenBtn{
+    background-color: #454a7b;
+    border: 0;
 }
