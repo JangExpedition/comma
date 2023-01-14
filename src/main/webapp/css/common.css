@@ -104,13 +104,3 @@ header{
 .pointColor{
 	color: #454a7b !important;
 }
-
-/* footer{
-    position: fixed;
-    top: 90vh;
-    width: 100%;
-    height: 10vh;
-    display: flex;
-    align-items: center;
-    background-color : #000;
-} */

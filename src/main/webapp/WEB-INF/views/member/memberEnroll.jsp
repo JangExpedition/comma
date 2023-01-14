@@ -10,7 +10,7 @@
 <body>
 	<section>
 		<div id="enrollBox">
-			<h1 id="enrollTitle" class="white fontStyle">회원가입</h1>
+			<h1 id="enrollTitle" class="pointColor fontStyle">회원가입</h1>
 			<form action="">
 				<fieldset>
 					<table>
@@ -34,7 +34,7 @@
 								<td class="errorTd fontStyle"></td><td></td><td></td>
 							</tr>
 							<tr>
-								<td class="labelTd fontStyle"><label for="checkPassword">비밀번호 확인</label></td><td></td><td></td>
+								<td class="labelTd fontStyle"><label for="checkPassword">비밀번호 재확인</label></td><td></td><td></td>
 							</tr>
 							<tr>
 								<td class="inputTd fontStyle" colspan="3"><input type="password" id="checkPassword" name="checkPassword"/></td>
@@ -57,6 +57,7 @@
 							<tr>
 								<td class="genderTd fontSytle" colspan="3">
 									<select name="gender" id="gender">
+										<option value="">성별</option>
 										<option value="남자">남자</option>
 										<option value="여자">여자</option>
 									</select>
@@ -92,7 +93,7 @@
 								<td class="errorTd fontStyle"></td><td></td><td></td>
 							</tr>
 							<tr>
-								<td class="labelTd fontStyle"><label for="phone">휴대폰</label></td><td></td><td></td>
+								<td class="labelTd fontStyle"><label for="phone">휴대전화 <span>(선택)</span></label></td><td></td><td></td>
 							</tr>
 							<tr>
 								<td class="inputTd fontStyle" colspan="3"><input type="text" id="phone" name="phone" /></td>
@@ -104,7 +105,8 @@
 								<td class="labelTd fontStyle"><label for="email">이메일</label></td><td></td><td></td>
 							</tr>
 							<tr>
-								<td class="inputTd fontStyle" colspan="3"><input type="text" id="email" name="email" /></td>
+								<td class="inputTd fontStyle" colspan="2"><input type="text" id="email" name="email" /></td>
+								<td class="inputTd"><input type="button" value="인증번호 받기" class="fontStyle white" id="authenBtn"></td>
 							</tr>
 							<tr>
 								<td class="errorTd fontStyle"></td><td></td><td></td>
