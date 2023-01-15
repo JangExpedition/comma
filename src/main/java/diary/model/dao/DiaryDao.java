@@ -1,4 +1,4 @@
-package daily.model.dao;
+package diary.model.dao;
 
 import java.io.FileReader;
 import java.io.IOException;
