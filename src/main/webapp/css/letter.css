@@ -1,0 +1,29 @@
+body{
+	background-image: url("../images/index2.png");
+	background-size: cover;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+section{
+    background-color: rgba(69, 74, 123, 0.5);
+    width: 70%;
+    height: 90%;
+}
+
+table{
+    width: 100%;
+}
+
+#writerLetterTitle{
+    text-align: left;
+    font-size: 20px;
+    height: 50px;
+    border-bottom: 1px solid #fff;
+}
+
+#writeLetterFrm > fieldset{
+    border: 0;
+}

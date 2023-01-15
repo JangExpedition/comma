@@ -19,21 +19,20 @@
 	페이지 별 CSS 파일 구분 메서드
 	*/
 
-	let link = "";
+	const link = document.createElement("link");
+	link.rel = "stylesheet";
 	switch(location.pathname){
 		case "/comma/" : 
-		link = document.createElement("link");
 		link.href = "<%= request.getContextPath() %>/css/index.css";
-		link.rel = "stylesheet";
-		document.querySelector("head").append(link);
 		break;
 	case "/comma/member/memberEnroll" :
-		link = document.createElement("link");
 		link.href = "<%= request.getContextPath() %>/css/memberEnroll.css";
-		link.rel = "stylesheet";
-		document.querySelector("head").append(link);
+		break;
+	case "/comma/letter/writeLetter" :
+		link.href = "<%= request.getContextPath() %>/css/letter.css"; 
 		break;
 	}; // switch end
+	document.querySelector("head").append(link);
 </script>
 </head>
 <body>
@@ -116,8 +115,9 @@
 	    편지쓰기jsp 이동 메서드
 	    */
 	    document.querySelector("#toLetter").addEventListener("click", (e)=>{
-	    	location.href = "<%= request.getContextPath() %>/letter/letter.jsp";
+	    	location.href = "<%= request.getContextPath() %>/letter/writeLetter";
 	    })
+
 	    /*
 	    Date : 2023.  1. 15
 	    @한혜진
@@ -127,5 +127,25 @@
 	    document.querySelector("#toMypage").addEventListener("click",(e)=>{
 	    	location.href = "<%=request.getContextPath()%>/mypage";
 	    })
+   
+	    
+	    /*
+	   	Date : 2023. 1. 15
+	   	@장원정
+	   	
+	    고객센터jsp 이동 메서드
+	    */
+	    document.querySelector("#toQuestion").addEventListener("click", (e)=>{
+	    	location.href = "<%= request.getContextPath() %>/question/faq";
+	    })
+	    
+	    /*
+	      Date : 2023. 01. 15
+	      @최민경
+	      
+	      diary.jsp 이동 메소드
+	     */
+	     document.querySelector("#toDiary").addEventListener('click', (e) => {
+	    	location.href = "<%= request.getContextPath() %>/diary/diaryList"; 
+	     });
     </script>
-    
