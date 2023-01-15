@@ -76,7 +76,7 @@ label > span{
     color: #8e8e8e;
 }
 
-#authenBtn{
+#authenBtn, #enrollBtn{
     background-color: #454a7b;
     border: 0;
 }

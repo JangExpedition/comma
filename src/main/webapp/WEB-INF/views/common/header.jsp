@@ -123,6 +123,17 @@
 	    document.querySelector("#toLetter").addEventListener("click", (e)=>{
 	    	location.href = "<%= request.getContextPath() %>/letter/writeLetter";
 	    })
+
+	    /*
+	    Date : 2023.  1. 15
+	    @한혜진
+	    
+	    마이페이지 jsp 이동 메서드 
+	    */
+	    document.querySelector("#toMypage").addEventListener("click",(e)=>{
+	    	location.href = "<%=request.getContextPath()%>/mypage";
+	    })
+   
 	    
 	    /*
 	   	Date : 2023. 1. 15

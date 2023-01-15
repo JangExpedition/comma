@@ -104,6 +104,9 @@
 							<tr>
 								<td class="errorTd fontStyle"></td><td></td><td></td>
 							</tr>
+							<tr>
+								<td class="inputTd" colspan="3"><input type="button" value="회원가입" class="fontStyle white" id="enrollBtn"/></td>
+							</tr>
 						</tbody>
 					</table>
 				</fieldset>
