@@ -46,6 +46,7 @@ header{
 
 #title{
     margin: auto;
+    cursor: pointer;
 }
 
 #centerBox{
@@ -103,4 +104,8 @@ header{
 
 .pointColor{
 	color: #454a7b !important;
+}
+
+.navBtn{
+    cursor: pointer;
 }
