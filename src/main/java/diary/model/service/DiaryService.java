@@ -1,6 +1,6 @@
-package daily.model.service;
+package diary.model.service;
 
-import daily.model.dao.DiaryDao;
+import diary.model.dao.DiaryDao;
 
 public class DiaryService {
 
