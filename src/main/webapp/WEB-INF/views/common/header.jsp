@@ -13,27 +13,27 @@
 <title>쉼표 ,</title>
 <script>
 	/*
-	    Date : 2023. 1. 13
-	    @장원정
-	
-	    페이지 별 CSS 파일 구분 메서드
-	     */
+	Date : 2023. 1. 13
+	@장원정
 
-		let link = "";
-		switch(location.pathname){
-	     case "/comma/" : 
-	     	link = document.createElement("link");
-	    	link.href = "<%= request.getContextPath() %>/css/index.css";
-	    	link.rel = "stylesheet";
-	    	document.querySelector("head").append(link);
-	    	break;
-	    case "/comma/member/memberEnroll" :
-			link = document.createElement("link");
-	    	link.href = "<%= request.getContextPath() %>/css/memberEnroll.css";
-	    	link.rel = "stylesheet";
-	    	document.querySelector("head").append(link);
-			break;
-	    }; // switch end
+	페이지 별 CSS 파일 구분 메서드
+	*/
+
+	let link = "";
+	switch(location.pathname){
+		case "/comma/" : 
+		link = document.createElement("link");
+		link.href = "<%= request.getContextPath() %>/css/index.css";
+		link.rel = "stylesheet";
+		document.querySelector("head").append(link);
+		break;
+	case "/comma/member/memberEnroll" :
+		link = document.createElement("link");
+		link.href = "<%= request.getContextPath() %>/css/memberEnroll.css";
+		link.rel = "stylesheet";
+		document.querySelector("head").append(link);
+		break;
+	}; // switch end
 </script>
 </head>
 <body>
@@ -46,14 +46,14 @@
         </div>  
         <div id="centerBox">
 	        <div id="category" class="pointColor fontStyle">
-				<div>일기장</div>
-				<div>우편함</div>
-				<div>편지쓰기</div>
-				<div>익명채팅방</div>
-				<div>고민상담소</div>
-				<div>마이페이지</div>
-				<div>고객센터</div>
-				<div>로그아웃</div>
+				<div id="toDiary" class="navBtn">일기장</div>
+				<div id="toPost" class="navBtn">우편함</div>
+				<div id="toLetter" class="navBtn">편지쓰기</div>
+				<div id="toChat" class="navBtn">익명채팅방</div>
+				<div id="toCounseling" class="navBtn">고민상담소</div>
+				<div id="toMypage" class="navBtn">마이페이지</div>
+				<div id="toQuestion" class="navBtn">고객센터</div>
+				<div id="logoutBtn" class="navBtn">로그아웃</div>
 	     	</div>
         </div>
         <div id="menuBox">
@@ -98,4 +98,24 @@
 	    	$("#logo").animate({width: "100%", height: "10%"});
 	    	$("#titleBox").animate({width: "100%", height: "100%"}).css("border", "0").css("borderRadius", "0");
 	    }); // Event() end
+	    
+	    /*
+	    Date 2023. 1. 15
+	    @장원정
+	    
+	    타이틀 클릭시 홈화면 이동 메서드
+	    */
+	    document.querySelector("#title").addEventListener("click", (e)=>{
+	    	location.href = "<%= request.getContextPath() %>/";
+	    })
+	    
+	    /*
+	   	Date : 2023. 1. 15
+	   	@장원정
+	   	
+	    편지쓰기jsp 이동 메서드
+	    */
+	    document.querySelector("#toLetter").addEventListener("click", (e)=>{
+	    	location.href = "<%= request.getContextPath() %>/letter/letter.jsp";
+	    })
     </script>
