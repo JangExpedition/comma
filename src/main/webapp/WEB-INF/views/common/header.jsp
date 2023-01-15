@@ -116,6 +116,16 @@
 	    편지쓰기jsp 이동 메서드
 	    */
 	    document.querySelector("#toLetter").addEventListener("click", (e)=>{
-	    	location.href = "<%= request.getContextPath() %>/letter/letter.jsp";
+	    	location.href = "<%= request.getContextPath() %>/letter/writeLetter";
 	    })
+	    
+	    /*
+	      Date : 2023. 01. 15
+	      @최민경
+	      
+	      diary.jsp 이동 메소드
+	     */
+	     document.querySelector("#toDiary").addEventListener('click', (e) => {
+	    	location.href = "<%= request.getContextPath() %>/diary/diaryList"; 
+	     });
     </script>
