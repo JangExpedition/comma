@@ -2,19 +2,19 @@ package daily.model.dto;
 
 import common.Form;
 
-public class Daily extends Form{
+public class Diary extends Form{
 	
 	private int designNo;
 	private int fontNo;
 	private String originalFilename;
 	private String renamedFilename;
 	
-	public Daily() {
+	public Diary() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Daily(int designNo, int fontNo, String originalFilename, String renamedFilename) {
+	public Diary(int designNo, int fontNo, String originalFilename, String renamedFilename) {
 		super();
 		this.designNo = designNo;
 		this.fontNo = fontNo;

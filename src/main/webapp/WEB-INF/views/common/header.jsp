@@ -127,4 +127,14 @@
 	    document.querySelector("#toQuestion").addEventListener("click", (e)=>{
 	    	location.href = "<%= request.getContextPath() %>/question/faq";
 	    })
+	    
+	    /*
+	      Date : 2023. 01. 15
+	      @최민경
+	      
+	      diary.jsp 이동 메소드
+	     */
+	     document.querySelector("#toDiary").addEventListener('click', (e) => {
+	    	location.href = "<%= request.getContextPath() %>/diary/diaryList"; 
+	     });
     </script>
