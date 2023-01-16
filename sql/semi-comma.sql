@@ -381,8 +381,8 @@ create sequence seq_complain_no;
 -- chatting 테이블 생성
 create table chatting (
     no number,
-    name varchar2(100) not null,
-    maker varchar2(50) not null,
+    name varchar2(100) not null, -- 채팅방 이름
+    maker varchar2(50) not null,  -- 방장
     able_gender char(1) not null,
     able_age number not null,
     able_count number not null,
@@ -401,11 +401,11 @@ create sequence seq_chatting_no;
 
 -- chatting_member 테이블 생성
 create table chatting_member (
-    no number,
+    no number,                                          -- 채팅방 별 참여자 테이블 고유 번호
     chat_no number not null,
-    member varchar2(50) not null,
-    start_date date default sysdate not null,
-    end_date date default null
+    member varchar2(50) not null,               -- 회원 닉네임
+    start_date date default sysdate not null,   -- 채팅방 참여일
+    end_date date default null                      -- 채팅방 퇴장일
 );
 -- chatting_member 제약조건 추가
 alter table chatting_member
@@ -419,7 +419,7 @@ create sequence seq_chatting_member_no;
 
 -- chatting_log 테이블 생성
 create table chatting_log (
-    no number,
+    no number, -- 채팅로그 별 고유 번호
     chat_no number,
     member_no number,
     which_one char(1) not null,
