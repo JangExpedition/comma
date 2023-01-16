@@ -174,7 +174,7 @@ create table letter (
 	addressee varchar2(50),
 	design_no number not null,
 	font_no number not null,
-	content varchar2(4000) not null,
+	content clob not null,
 	reg_date date default sysdate not null,
 	read_check char(1) default 'X' not null,
     limit_gender char(1) default 'X' not null,
@@ -217,7 +217,7 @@ create table diary (
 	writer varchar2(50),
 	design_no number not null,
 	font_no number not null,
-	content varchar2(4000) not null,
+	content clob not null,
 	original_filename varchar2(300),
 	renamed_filename varchar2(300),
 	reg_date date default sysdate not null
@@ -301,7 +301,7 @@ create table question (
 	no number,
 	writer varchar2(50) not null,
 	title varchar2(100) not null,
-	content varchar2(4000) not null,
+	content clob not null,
 	reg_date date default sysdate not null
 );
 -- question 제약조건 추가
