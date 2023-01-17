@@ -88,3 +88,86 @@ section {
 
 
 /* diaryEnroll.jsp */
+#diaryEnrollModal {
+	position: absolute;
+	display: none;
+	width: 600px;
+	height: 700px;
+	top: 10%;
+	text-align: center;
+	background-color: #454a7b;
+	border: none;
+	border-radius: 25px;
+	color: #fff;
+}
+
+#diaryEnrollTitle {
+	padding: 30px 10px;
+	text-align: center;
+	font-size: 30px;
+	margin: 0px;
+	font-weight: bold;
+	/*color: #454a7b;*/
+	color: #fff;
+}
+
+#diaryEnrollClose {
+	position: absolute;
+	top: 35px;
+	right: 30px;
+	font-size: 20px;
+}
+
+#diaryEnrollClose:hover {
+	cursor: pointer;
+}
+
+#diaryEnroll {
+	padding: 0px 2%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center
+}
+
+#diaryEnrollFrm {
+	font-size: 20px;
+}
+
+#diaryEnrollFrm td:first-child {
+	color: #fff;
+}
+
+#diaryEnrollFrm td {
+	height: 50px;
+	text-align: left;
+}
+
+#diaryEnrollFrm tr:nth-child(2) input {
+	background-color: rgba(0, 0, 0, 0);
+	border: none;
+	color: #fff;
+	font-size: 15px;
+}
+
+#diaryEnrollFrm textarea {
+	border: none;
+    resize: none;
+}
+
+#diaryEnrollFrm tr:last-child td {
+	text-align: center;
+}
+
+#diaryEnrollFrm tr:last-child td input:hover {
+	cursor: pointer;
+}
+
+#writeSubmit {
+	background-color: #fff;
+	padding: 15px 25px;
+	color: #454a7b;
+	border: none;
+	border-radius: 10px;
+	font-size: 20px;
+}

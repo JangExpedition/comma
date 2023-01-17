@@ -88,20 +88,21 @@ select * from chatting_log;
 -- ======================================================================
 -- member 테이블 생성
 create table member(
-    member_id varchar2(15),
+    email varchar2(30),
     nickname varchar2(50) not null,
     password varchar2(300) not null,
     birthday date not null,
     gender char(1) not null,
     phone varchar2(11) not null,
-    email varchar2(30) not null,
     enroll_date date default sysdate not null,
     member_role char(1) default 'U' not null,
+    original_filename varchar2(300) default 'default.png',
+    renamed_filename varchar2(300),
     warning_count number default 0 not null
 );
 -- member 제약조건 추가
 alter table member
-    add constraint pk_member_id primary key (member_id)
+    add constraint pk_member_email primary key (email)
     add constraint uq_member_nickname unique (nickname)
     add constraint ck_member_gender check (gender in ('M', 'F'))
     add constraint ck_member_role check (member_role in ('U', 'M', 'A'))
@@ -114,8 +115,9 @@ as
 (select m.*, sysdate leave_date from member m);
 -- leave_member 제약조건 추가
 alter table leave_member
-    add constraint pk_leave_member_id primary key (member_id)
-    modify leave_date default sysdate;
+    add constraint pk_leave_member_email primary key (email)
+    modify leave_date default sysdate
+    modify original_filename default 'default.png';
     
 
 -- friends 테이블 생성
@@ -381,8 +383,8 @@ create sequence seq_complain_no;
 -- chatting 테이블 생성
 create table chatting (
     no number,
-    name varchar2(100) not null,
-    maker varchar2(50) not null,
+    name varchar2(100) not null, -- 채팅방 이름
+    captin varchar2(50) not null,  -- 방장
     able_gender char(1) not null,
     able_age number not null,
     able_count number not null,
@@ -391,7 +393,7 @@ create table chatting (
 -- chatting 제약조건 추가
 alter table chatting
     add constraint pk_chatting_no primary key (no)
-    add constraint fk_chatting_maker foreign key (maker) references member(nickname) on delete cascade
+    add constraint fk_chatting_maker foreign key (captin) references member(nickname) on delete cascade
     add constraint ck_chatting_able_gender check (able_gender in ('M', 'F', 'X'))
     add constraint ck_chatting_able_age check (able_age >= 0 and able_age <= 5);
 
@@ -401,17 +403,17 @@ create sequence seq_chatting_no;
 
 -- chatting_member 테이블 생성
 create table chatting_member (
-    no number,
+    no number,                                          -- 채팅방 별 참여자 테이블 고유 번호
     chat_no number not null,
-    member varchar2(50) not null,
-    start_date date default sysdate not null,
-    end_date date default null
+    nickname varchar2(50) not null,               -- 회원 닉네임
+    start_date date default sysdate not null,   -- 채팅방 참여일
+    end_date date default null                      -- 채팅방 퇴장일
 );
 -- chatting_member 제약조건 추가
 alter table chatting_member
     add constraint pk_chatting_member_no primary key (no)
     add constraint fk_chatting_member_chat_no foreign key (chat_no) references chatting(no) on delete cascade
-    add constraint fk_chatting_member_member foreign key (member) references member(nickname) on delete cascade;
+    add constraint fk_chatting_member_member foreign key (nickname) references member(nickname) on delete cascade;
 
 -- seq_chatting_member_no 시퀀스 생성
 create sequence seq_chatting_member_no;
@@ -419,7 +421,7 @@ create sequence seq_chatting_member_no;
 
 -- chatting_log 테이블 생성
 create table chatting_log (
-    no number,
+    no number, -- 채팅로그 별 고유 번호
     chat_no number,
     member_no number,
     which_one char(1) not null,
@@ -470,22 +472,26 @@ end;
 
 
 -- member에 warning_count가 3이 되면 member 탈퇴 (에러나서 보류)
---create or replace trigger trig_member_warning_count
---    before
---    update on member
---    for each row
---begin
---    if :new.warning_count = 3 then
---        delete from
---            member
---        where
---            member_id = :new.member_id;
---    end if;
---end;
---/
+create or replace trigger trig_member_warning_count
+    before
+    update on member
+    for each row
+begin
+    if :new.warning_count = 3 then
+        delete from
+            member
+        where
+            member_id = :old.member_id;
+    end if;
+end;
+/
 --drop trigger trig_member_warning_count;
 
-
+--select * from member;
+--insert into member values('test', 'test', 'test', '1999-09-09', 'M', '01012341234', 'test@naver.com', default, default, default);
+--insert into member values('test1', 'test1', 'test1', '1999-09-09', 'M', '01012341234', 'test1@naver.com', default, default, default);
+--update member set warning_count = 2 where member_id = 'test';
+--update member set warning_count = 3 where member_id = 'test';
 
 -- ======================================================================
 -- TABLE 및 COLUMN 주석
@@ -648,7 +654,7 @@ comment on column complain.reg_date is '신고일';
 comment on table chatting is '채팅방 테이블';
 comment on column chatting.no is '채팅방 번호(PK, 변경불가)';
 comment on column chatting.name is '채팅방 이름(필수입력)';
-comment on column chatting.maker is '채팅방 방장(FK member.nickname on delete cascade)';
+comment on column chatting.captin is '채팅방 방장(FK member.nickname on delete cascade)';
 comment on column chatting.able_gender is '채팅방 참여 가능 성별(CK in (M, F, X))';
 comment on column chatting.able_age is '채팅방 참여 가능 연령(CK 0 <= age <= 5)';
 comment on column chatting.able_count is '채팅방 참여 가능 인원';
@@ -658,7 +664,7 @@ comment on column chatting.reg_date is '채팅방 생성일';
 comment on table chatting_member is '채팅 참여자 테이블';
 comment on column chatting_member.no is '채팅 참여자 번호(PK, 변경불가)';
 comment on column chatting_member.chat_no is '채팅방 참조 번호(FK chatting.no on delete cascade)';
-comment on column chatting_member.member is '채팅방 참여자 닉네임(FK member.nickname on delete cascade)';
+comment on column chatting_member.nickname is '채팅방 참여자 닉네임(FK member.nickname on delete cascade)';
 comment on column chatting_member.start_date is '채팅방 참여 시작일';
 comment on column chatting_member.end_date is '채팅방 퇴장일';
 
