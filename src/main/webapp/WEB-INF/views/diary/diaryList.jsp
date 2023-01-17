@@ -12,7 +12,7 @@
 
 	<section id="diaryTotalList" class="fontStyle">
 		<div id="diaryTitle">일기장</div>
-		<div id="inputBtn"><input type="button" id="writeBtn" value="일기 작성하기" /></div>
+		<div id="inputBtn"><input type="button" id="writeBtn" class="fontStyle" value="일기 작성하기" /></div>
 		
 		<div id="diaryList">
 			<p class="title">2023년</p>
@@ -36,7 +36,7 @@
 	
 	<div id="diaryEnrollModal" class="modal fontStyle">
 		<div id="diaryEnrollTitle">일기작성</div>
-		<span id="diaryEnrollClose" onclick="modalClose();">X</span>
+		<span id="diaryEnrollClose" onclick="modalClose(this);">X</span>
 		<div id="diaryEnrollDiv">
 			<div id="diaryEnroll">
 				<form id="diaryEnrollFrm" name="diaryEnrollFrm">
@@ -50,7 +50,9 @@
 										<option value="폰트2" class="font2" >폰트2</option>
 									</select>
 								</td>
-								<td><input type="button" id="designChoice" class="designChoice" value="디자인 선택" /></td>
+								<td>
+									<input type="button" id="designChoice" class="designChoice" value="디자인 선택" />
+								</td>
 							</tr>
 							<tr>
 								<td><label for="nowDate" class="labelDate">날짜 :&nbsp;&nbsp;</label></td>
@@ -73,6 +75,47 @@
 			</div>
 		</div>
 	</div>
+	
+	<div id="designChoiceModal" class="fontStyle">
+		<div id="designModalTitle">
+			<span class="design-title">디자인 선택</span>
+			<input type="button" value="X" class="fontStyle modal-close" onclick="modalClose(this);" />
+			<hr />
+		</div>
+		<div id="designModalContent">
+			<table>
+				<tbody>
+					<tr>
+						<td>
+							<img src="<%= request.getContextPath() %>/images/default.png" alt="디자인1이미지" class="designImage" />
+						</td>
+						<td>디자인1</td>
+						<td>
+							<input type="button" value="선택" class="fontStyle designBtn" />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<img src="<%= request.getContextPath() %>/images/default.png" alt="디자인2이미지" class="designImage" />
+						</td>
+						<td>디자인2</td>
+						<td>
+							<input type="button" value="선택" class="fontStyle designBtn" />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<img src="<%= request.getContextPath() %>/images/default.png" alt="디자인3이미지" class="designImage" />
+						</td>
+						<td>디자인3</td>
+						<td class="design-btn">
+							<input type="button" value="선택" class="fontStyle designBtn" />
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
 	<script>
 		document.querySelector("#writeBtn").addEventListener('click', () => {
 			const modal = document.querySelector('#diaryEnrollModal');
@@ -81,8 +124,17 @@
 			modal.style.display = 'inline-block';
 		});
 		
-		const modalClose = () => {
-			diaryEnrollModal.style.display = 'none';
+		designChoice.addEventListener('click', () => {
+			designChoiceModal.style.display = 'inline-block';
+		});
+		
+		const modalClose = (target) => {
+			console.log(target.id);
+			if (target.id != '') {
+				diaryEnrollModal.style.display = 'none';
+			} else {
+				designChoiceModal.style.display = 'none';
+			}
 		};
 	</script>
 </body>
