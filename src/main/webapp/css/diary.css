@@ -103,7 +103,7 @@ section {
 }
 
 
-/* diaryEnroll.jsp */
+/* diaryEnroll */
 #diaryEnrollModal {
 	position: absolute;
 	display: none;
@@ -143,7 +143,7 @@ section {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	align-items: center
+	align-items: center;
 }
 
 #diaryEnrollFrm {
@@ -186,4 +186,72 @@ section {
 	border: none;
 	border-radius: 10px;
 	font-size: 20px;
+}
+
+
+/* designChoiceModal */
+#designChoiceModal {
+	position: absolute;
+	display: none;
+	width: 300px;
+	height: 300px;
+	top: 15%;
+	text-align: center;
+	background-color: #fff;
+	border: 3px solid #272b45;
+	border-radius: 15px;
+	color: #454a7b;
+}
+
+#designModalTitle {
+	text-align: center;
+	padding: 15px 0px;
+	font-size: 20px;
+	margin: 0px;
+	font-weight: bold;
+	color: #454a7b;
+}
+
+.modal-close {
+	position: absolute;
+	top: 15px;
+	right: 15px;
+	font-size: 15px;
+	background-color: rgba(0, 0, 0, 0);
+	color: #454a7b;
+	border: none;
+}
+
+.modal-close:hover {
+	cursor: pointer;
+}
+
+#designModalContent {
+	font-size: 15px;
+	padding: 0px 20px;
+}
+
+#designModalContent td {
+	padding: 5px 10px;
+}
+
+#designModalContent td:last-child {
+	text-align: right;
+}
+
+.designImage {
+	width: 50px;
+	border-radius: 50%;
+}
+
+.designBtn {
+	background-color: #454a7b;
+	color: #fff;
+	border: none;
+	border-radius: 5px;
+	padding: 5px 10px;
+}
+
+.designBtn:hover {
+	cursor: pointer;
 }
