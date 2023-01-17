@@ -1,3 +1,19 @@
+#category>div:not(#toDiary)>i.selected{
+    display: none;
+}
+
+#category>div:not(#toDiary)>i.disselected{
+    display: inline;
+}
+
+#toDiary>i.selected{
+    display: inline;
+}
+
+#toDiary>i.disselected{
+    display: none;
+}
+
 section {
 	display: inline;
 	width: 100%;
