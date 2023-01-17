@@ -1,9 +1,18 @@
+<%@page import="java.time.format.DateTimeFormatter"%>
+<%@page import="java.time.LocalDateTime"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
-	<section class="fontStyle">
+
+<%
+	LocalDateTime today = LocalDateTime.now();
+	String formatToday = today.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+	System.out.println(formatToday);
+%>
+
+	<section id="diaryTotalList" class="fontStyle">
 		<div id="diaryTitle">일기장</div>
-		<div id="inputBtn"><input type="button" id="writeBtn" class="fontStyle" value="일기 작성하기" /></div>
+		<div id="inputBtn"><input type="button" id="writeBtn" value="일기 작성하기" /></div>
 		
 		<div id="diaryList">
 			<p class="title">2023년</p>
@@ -24,10 +33,57 @@
 			</div>
 		</div>
 	</section>
+	
+	<div id="diaryEnrollModal" class="modal fontStyle">
+		<div id="diaryEnrollTitle">일기작성</div>
+		<span id="diaryEnrollClose" onclick="modalClose();">X</span>
+		<div id="diaryEnrollDiv">
+			<div id="diaryEnroll">
+				<form id="diaryEnrollFrm" name="diaryEnrollFrm">
+					<table>
+						<tbody>
+							<tr>
+								<td><label for="fontChoice">폰트 선택 :&nbsp;&nbsp;</label></td>
+								<td>
+									<select name="fontChoice" id="fontChoice">
+										<option value="폰트1" class="font1" selected >폰트1</option>
+										<option value="폰트2" class="font2" >폰트2</option>
+									</select>
+								</td>
+								<td><input type="button" id="designChoice" class="designChoice" value="디자인 선택" /></td>
+							</tr>
+							<tr>
+								<td><label for="nowDate" class="labelDate">날짜 :&nbsp;&nbsp;</label></td>
+								<td colspan="2"><input type="date" name="nowDate" id="nowDate" class="fontStyle" value=<%= formatToday %> readonly /></td>
+							</tr>
+							<tr>
+								<td><label for="nowContent" class="labelContent">내용 :&nbsp;&nbsp;</label></td>
+								<td colspan="2"><textarea name="nowContent" id="nowContent" cols="55" rows="20"></textarea></td>
+							</tr>
+							<tr>
+								<td><label for="nowImage" class="labelImage">사진첨부 :&nbsp;&nbsp;</label></td>
+								<td colspan="2"><input type="file" name="nowImage" id="nowImage" /></td>
+							</tr>
+							<tr>
+								<td colspan="3"><input type="button" id="writeSubmit" class="fontStyle" onclick="writeDiary();" value="일기 등록" /></td>
+							</tr>
+						</tbody>
+					</table>
+				</form>			
+			</div>
+		</div>
+	</div>
 	<script>
 		document.querySelector("#writeBtn").addEventListener('click', () => {
-			location.href = "<%= request.getContextPath() %>/diary/diaryEnroll";
+			const modal = document.querySelector('#diaryEnrollModal');
+			console.log(modal);
+			// diaryTotalList.style.backgroundColor = 'rgba(0, 0, 0, 0.2)';
+			modal.style.display = 'inline-block';
 		});
+		
+		const modalClose = () => {
+			diaryEnrollModal.style.display = 'none';
+		};
 	</script>
 </body>
 </html>
