@@ -91,8 +91,11 @@
 		/*
 		Date : 2023. 1. 17
 		@장원정
-		회원가입 기재사항 미기재시 버튼 비활성화
+		로그인 후 화면 임시 메서드
 		*/
+		document.querySelector("#loginBtn").addEventListener("click", (e)=>{
+			location.href = "<%= request.getContextPath() %>/counseling/counselingList"
+		})
 	</script>
 	<script type="text/javascript">
 		var naver_id_login = new naver_id_login("QpkQpxEPEtiAfKtw0PUw", "http://localhost:8080/comma/");

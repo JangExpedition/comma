@@ -202,3 +202,7 @@ label{
 	width: 70px;
 	height: 40px;
 }
+
+.btnStyle:hover{
+	cursor: pointer;
+}

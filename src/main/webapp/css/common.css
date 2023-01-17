@@ -19,29 +19,22 @@ header{
     position: fixed;
     top: 0;
     left: 0;
-    width: 150px;
-    height: 100vh;
+    width: 100%;
+    height: 50px;
     display: flex;
-    flex-direction: column;
     align-items: center;
+    justify-content: center;
     background-color: #fff;
 }
 
 #logo{
-    width: 100%;
-    height: 10%;
+    width: 10%;
+    height: 100%;
     margin: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-#titleBox{
-	width: 100%;
-	height: 100%;
-	box-sizing: border-box;
-	display: flex;
-    align-items: center;
+    margin-right: 50px;
 }
 
 #title{
@@ -50,52 +43,37 @@ header{
 }
 
 #centerBox{
-	width: 100%;
-    height: 84%;
+	width: 90%;
+    height: 100%;
 	display: flex;
-    flex-direction: column;
     align-items: center;
-    margin-top: 100px;
 }
 
 #category{
-	display: none;
 	font-size: 20px;
-}
-
-#category > div{
-    margin-bottom: 20px;
-}
-
-#menuBox{
-    width: 100%;
-    height: 6%;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    cursor: pointer;
 }
 
-#closeBox{
-	width: 50px;
-	height: 80px;
-	font-size: 30px;
-	display: none;
+#category>div{
+    display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
-}
-
-.menuBar{
-    width: 38px;
-    height: 25%;
-    border-bottom: 5px solid #454a7b;
     box-sizing: border-box;
+    height: 50px;
+    width: 60px;
 }
 
-.menuBar:last-child{
-    border: 0;
+i{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+}
+
+#category>div:hover{
+    cursor: pointer;
+    background-color: #fafafa;
 }
 
 .white{
@@ -103,9 +81,13 @@ header{
 }
 
 .pointColor{
-	color: #454a7b !important;
+	color: #b92b27 !important;
 }
 
 .navBtn{
     cursor: pointer;
+}
+
+i.disselected{
+    display: none;
 }

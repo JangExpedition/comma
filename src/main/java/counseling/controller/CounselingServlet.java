@@ -1,4 +1,4 @@
-package diary.controller;
+package counseling.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,22 +7,28 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import diary.model.service.DiaryService;
-
 /**
- * Servlet implementation class DailyListServlet
+ * Servlet implementation class CounselingServlet
  */
-@WebServlet("/diary/diaryList")
-public class DiaryListServlet extends HttpServlet {
+@WebServlet("/counseling/counselingList")
+public class CounselingServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-//	private DiaryService diaryService = new DiaryService();
+    
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/views/diary/diaryList.jsp")
+		request.getRequestDispatcher("/WEB-INF/views/counseling/counseling.jsp")
 			.forward(request, response);
-	} // doGet() end
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
 
 }

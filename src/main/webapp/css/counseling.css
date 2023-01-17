@@ -1,0 +1,15 @@
+#category>div:not(#toCounseling)>i.selected{
+    display: none;
+}
+
+#category>div:not(#toCounseling)>i.disselected{
+    display: inline;
+}
+
+#toCounseling>i.selected{
+    display: inline;
+}
+
+#toCounseling>i.disselected{
+    display: none;
+}
