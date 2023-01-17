@@ -7,11 +7,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
-<script src="<%= request.getContextPath() %>/js/jquery-3.6.1.js"></script>
-<title>쉼표 ,</title>
-<script>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
+	<script src="<%= request.getContextPath() %>/js/jquery-3.6.1.js"></script>
+	<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+  	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<title>쉼표 ,</title>
+	<script>
 	/*
 	Date : 2023. 1. 13
 	@장원정
@@ -31,18 +33,12 @@
 	case "/comma/letter/writeLetter" :
 		link.href = "<%= request.getContextPath() %>/css/letter.css"; 
 		break;
-	case "/comma/diary/diaryList" :
-		link.href = "<%= request.getContextPath() %>/css/diary.css";
-		break;
-	case "/comma/diary/diaryEnroll" :
-		link.href = "<%= request.getContextPath() %>/css/diary.css";
-		break;
 	}; // switch end
 	document.querySelector("head").append(link);
 </script>
 </head>
 <body>
-	<% if(true){ %>
+	<% if(false){ %>
     <header>
         <div id="logo">
         	<div id="titleBox">
@@ -123,17 +119,6 @@
 	    document.querySelector("#toLetter").addEventListener("click", (e)=>{
 	    	location.href = "<%= request.getContextPath() %>/letter/writeLetter";
 	    })
-
-	    /*
-	    Date : 2023.  1. 15
-	    @한혜진
-	    
-	    마이페이지 jsp 이동 메서드 
-	    */
-	    document.querySelector("#toMypage").addEventListener("click",(e)=>{
-	    	location.href = "<%=request.getContextPath()%>/mypage";
-	    })
-   
 	    
 	    /*
 	   	Date : 2023. 1. 15
