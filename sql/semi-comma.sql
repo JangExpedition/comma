@@ -88,20 +88,21 @@ select * from chatting_log;
 -- ======================================================================
 -- member 테이블 생성
 create table member(
-    member_id varchar2(15),
+    email varchar2(30),
     nickname varchar2(50) not null,
     password varchar2(300) not null,
     birthday date not null,
     gender char(1) not null,
     phone varchar2(11) not null,
-    email varchar2(30) not null,
     enroll_date date default sysdate not null,
     member_role char(1) default 'U' not null,
+    original_filename varchar2(300) default 'default.png',
+    renamed_filename varchar2(300),
     warning_count number default 0 not null
 );
 -- member 제약조건 추가
 alter table member
-    add constraint pk_member_id primary key (member_id)
+    add constraint pk_member_email primary key (email)
     add constraint uq_member_nickname unique (nickname)
     add constraint ck_member_gender check (gender in ('M', 'F'))
     add constraint ck_member_role check (member_role in ('U', 'M', 'A'))
@@ -114,8 +115,9 @@ as
 (select m.*, sysdate leave_date from member m);
 -- leave_member 제약조건 추가
 alter table leave_member
-    add constraint pk_leave_member_id primary key (member_id)
-    modify leave_date default sysdate;
+    add constraint pk_leave_member_email primary key (email)
+    modify leave_date default sysdate
+    modify original_filename default 'default.png';
     
 
 -- friends 테이블 생성
