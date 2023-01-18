@@ -74,37 +74,24 @@
 			<div id="diaryEnrollDiv">
 				<div id="diaryEnroll">
 					<form id="diaryEnrollFrm" name="diaryEnrollFrm">
-						<table>
-							<tbody>
-								<tr>
-									<td><label for="fontChoice">폰트 선택 :&nbsp;&nbsp;</label></td>
-									<td>
-										<select name="fontChoice" id="fontChoice">
-											<option value="폰트1" class="font1" selected >폰트1</option>
-											<option value="폰트2" class="font2" >폰트2</option>
-										</select>
-									</td>
-									<td>
-										<input type="button" id="designChoice" class="designChoice" value="디자인 선택" />
-									</td>
-								</tr>
-								<tr>
-									<td><label for="nowDate" class="labelDate">날짜 :&nbsp;&nbsp;</label></td>
-									<td colspan="2"><input type="date" name="nowDate" id="nowDate" class="fontStyle" value=<%= formatToday %> readonly /></td>
-								</tr>
-								<tr>
-									<td><label for="nowContent" class="labelContent">내용 :&nbsp;&nbsp;</label></td>
-									<td colspan="2"><textarea name="nowContent" id="nowContent" cols="55" rows="20"></textarea></td>
-								</tr>
-								<tr>
-									<td><label for="nowImage" class="labelImage">사진첨부 :&nbsp;&nbsp;</label></td>
-									<td colspan="2"><input type="file" name="nowImage" id="nowImage" /></td>
-								</tr>
-								<tr>
-									<td colspan="3"><input type="button" id="writeSubmit" class="fontStyle" onclick="writeDiary();" value="일기 등록" /></td>
-								</tr>
-							</tbody>
-						</table>
+						<div id="enrollDate"></div>
+						<div id="enrollImage">
+							<input type="date" name="nowDate" id="nowDate" class="fontStyle" value=<%= formatToday %> readonly />
+						</div>
+						<div id="enrollContent">
+							<label for="nowContent" class="labelContent">내용 :&nbsp;&nbsp;</label>
+							<textarea name="nowContent" id="nowContent" cols="55" rows="20"></textarea>
+						</div>
+						<div id="enrollFont">
+							<label for="fontChoice">폰트 선택 :&nbsp;&nbsp;</label>
+							<select name="fontChoice" id="fontChoice">
+								<option value="폰트1" class="font1" selected >폰트1</option>
+								<option value="폰트2" class="font2" >폰트2</option>
+							</select>
+						</div>
+						<div id="enrollDesign">
+						
+						</div>
 					</form>			
 				</div>
 			</div>
