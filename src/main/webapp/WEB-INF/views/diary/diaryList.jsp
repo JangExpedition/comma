@@ -67,7 +67,7 @@
 	</section>
 	
 	<!-- 일기 작성 모달 -->
-	<section id="diaryEnrollBack">
+	<div id="diaryEnrollBack">
 		<div id="diaryEnrollModal" class="modal fontStyle">
 			<div id="diaryEnrollTitle">일기작성</div>
 			<span id="diaryEnrollClose" onclick="modalClose(this);">X</span>
@@ -92,11 +92,11 @@
 						<div id="enrollDesign">
 						
 						</div>
-					</form>			
+					</form>
 				</div>
 			</div>
 		</div>
-	</section>
+	</div>
 	
 	<!-- 디자인 선택 모달 -->
 	<div id="designChoiceModal" class="fontStyle">
@@ -141,24 +141,27 @@
 	</div>
 	
 	<script>
+		const modal = document.querySelector('#diaryEnrollBack');
+		
 		document.querySelector("#writeBtn").addEventListener('click', () => {
-			const modal = document.querySelector('#diaryEnrollBack');
 			console.log(modal);
 			modal.style.display = 'flex';
 		});
 		
+		/*
 		designChoice.addEventListener('click', () => {
 			designChoiceModal.style.display = 'inline-block';
 		});
+		*/
 		
-		diaryEnrollBack.onclick = () => {
-			diaryEnrollBack.style.display = 'none';
-		}
+		modal.addEventListener('click', () => {
+			modal.style.display = 'none';
+		});
 		
 		const modalClose = (target) => {
 			console.log(target.id);
 			if (target.id != '') {
-				diaryEnrollBack.style.display = 'none';
+				modal.style.display = 'none';
 			} else {
 				designChoiceModal.style.display = 'none';
 			}
