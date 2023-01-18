@@ -9,7 +9,7 @@
 	String formatToday = today.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 	System.out.println(formatToday);
 %>
-
+	
 	<section id="diaryTotalList" class="fontStyle">
 		<div id="diaryTitle">일기장</div>
 		<div id="inputBtn"><input type="button" id="writeBtn" class="fontStyle" value="일기 작성하기" /></div>
@@ -67,36 +67,98 @@
 	</section>
 	
 	<!-- 일기 작성 모달 -->
-	<section id="diaryEnrollBack">
+	<div id="diaryEnrollBack">
 		<div id="diaryEnrollModal" class="modal fontStyle">
 			<div id="diaryEnrollTitle">일기작성</div>
 			<span id="diaryEnrollClose" onclick="modalClose(this);">X</span>
 			<div id="diaryEnrollDiv">
 				<div id="diaryEnroll">
 					<form id="diaryEnrollFrm" name="diaryEnrollFrm">
-						<div id="enrollDate"></div>
-						<div id="enrollImage">
-							<input type="date" name="nowDate" id="nowDate" class="fontStyle" value=<%= formatToday %> readonly />
-						</div>
-						<div id="enrollContent">
-							<label for="nowContent" class="labelContent">내용 :&nbsp;&nbsp;</label>
-							<textarea name="nowContent" id="nowContent" cols="55" rows="20"></textarea>
-						</div>
-						<div id="enrollFont">
-							<label for="fontChoice">폰트 선택 :&nbsp;&nbsp;</label>
-							<select name="fontChoice" id="fontChoice">
-								<option value="폰트1" class="font1" selected >폰트1</option>
-								<option value="폰트2" class="font2" >폰트2</option>
-							</select>
-						</div>
-						<div id="enrollDesign">
-						
-						</div>
-					</form>			
+						<table>
+							<tbody>
+								<tr>
+									<td>
+										<div id="enrollFont">
+											<label for="fontChoice"></label>
+											<select name="fontChoice" id="fontChoice">
+												<option value="폰트1" class="font1" selected >폰트1</option>
+												<option value="폰트2" class="font2" >폰트2</option>
+											</select>
+										</div>
+									</td>
+									<td>
+										<div id="enrollDesign">
+											<div id="designChoiceTitle">
+												<span id="designTitle">디자인선택&nbsp;&nbsp;V</span>
+											</div>
+											<div id="designChoiceContent">
+												<table>
+													<tbody>
+														<tr>
+															<td>
+																<img src="<%= request.getContextPath() %>/images/default.png" alt="디자인1이미지" class="designImage" />
+															</td>
+															<td>디자인1</td>
+															<td>
+																<input type="button" value="선택" class="fontStyle designBtn" />
+															</td>
+														</tr>
+														<tr>
+															<td>
+																<img src="<%= request.getContextPath() %>/images/default.png" alt="디자인2이미지" class="designImage" />
+															</td>
+															<td>디자인2</td>
+															<td>
+																<input type="button" value="선택" class="fontStyle designBtn" />
+															</td>
+														</tr>
+														<tr>
+															<td>
+																<img src="<%= request.getContextPath() %>/images/default.png" alt="디자인3이미지" class="designImage" />
+															</td>
+															<td>디자인3</td>
+															<td class="design-btn">
+																<input type="button" value="선택" class="fontStyle designBtn" />
+															</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2">
+										<div id="enrollDate">
+											<input type="date" name="nowDate" id="nowDate" class="fontStyle" value=<%= formatToday %> readonly />						
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<div id="enrollImage">
+											<img src="<%= request.getContextPath() %>/images/default.png" alt="첨부한 이미지" class="enrollImage" />
+										</div>										
+									</td>
+									<td>
+										<div id="enrollContent">
+											<label for="nowContent"></label>
+											<textarea name="nowContent" id="nowContent" cols="50" rows="12" placeholder="내용 작성"></textarea>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2">
+										<input id="diaryEnrollFrmSubmit" class="fontStyle" type="button" value="등록하기" />
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</form>
 				</div>
 			</div>
 		</div>
-	</section>
+	</div>
 	
 	<!-- 디자인 선택 모달 -->
 	<div id="designChoiceModal" class="fontStyle">
@@ -141,28 +203,43 @@
 	</div>
 	
 	<script>
+		const modal = document.querySelector('#diaryEnrollBack');
+		
 		document.querySelector("#writeBtn").addEventListener('click', () => {
-			const modal = document.querySelector('#diaryEnrollBack');
 			console.log(modal);
 			modal.style.display = 'flex';
 		});
 		
+		/*
 		designChoice.addEventListener('click', () => {
 			designChoiceModal.style.display = 'inline-block';
 		});
+		*/
 		
-		diaryEnrollBack.onclick = () => {
-			diaryEnrollBack.style.display = 'none';
-		}
+		modal.addEventListener('click', (e) => {
+			if(e.target !== e.currentTarget) return;
+			modal.style.display = 'none';
+		});
 		
 		const modalClose = (target) => {
 			console.log(target.id);
 			if (target.id != '') {
-				diaryEnrollBack.style.display = 'none';
+				modal.style.display = 'none';
 			} else {
 				designChoiceModal.style.display = 'none';
 			}
 		};
+		
+		document.querySelector('#designChoiceTitle').addEventListener('click', () => {
+			const content = document.querySelector('#designChoiceContent');
+			console.log(content.style.display);
+			
+			if (content.style.display == 'none') {
+				content.style.display = 'flex';
+			} else {
+				content.style.display = 'none';
+			}
+		});
 	</script>
 
 </body>

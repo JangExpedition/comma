@@ -93,7 +93,6 @@ create table member(
     password varchar2(300) not null,
     birthday date not null,
     gender char(1) not null,
-    phone varchar2(11) not null,
     enroll_date date default sysdate not null,
     member_role char(1) default 'U' not null,
     original_filename varchar2(300) default 'default.png',
@@ -472,56 +471,46 @@ end;
 
 
 -- member에 warning_count가 3이 되면 member 탈퇴 (에러나서 보류)
-create or replace trigger trig_member_warning_count
-    before
-    update on member
-    for each row
-begin
-    if :new.warning_count = 3 then
-        delete from
-            member
-        where
-            member_id = :old.member_id;
-    end if;
-end;
-/
+--create or replace trigger trig_member_warning_count
+--    before
+--    update on member
+--    for each row
+--begin
+--    if :new.warning_count = 3 then
+--        delete from
+--            member
+--        where
+--            member_id = :old.member_id;
+--    end if;
+--end;
+--/
 --drop trigger trig_member_warning_count;
 
---select * from member;
---insert into member values('test', 'test', 'test', '1999-09-09', 'M', '01012341234', 'test@naver.com', default, default, default);
---insert into member values('test1', 'test1', 'test1', '1999-09-09', 'M', '01012341234', 'test1@naver.com', default, default, default);
---update member set warning_count = 2 where member_id = 'test';
---update member set warning_count = 3 where member_id = 'test';
 
 -- ======================================================================
 -- TABLE 및 COLUMN 주석
 -- ======================================================================
 -- member 테이블
 comment on table member is '회원관리테이블';
-comment on column member.member_id is '회원 아이디(PK, 변경불가)';
+comment on column member.email is '회원 이메일(PK, 변경불가)';
 comment on column member.nickname is '회원 닉네임(UQ)';
 comment on column member.password is '회원 비밀번호(필수입력)';
 comment on column member.birthday is '회원 생년월일(필수입력)';
 comment on column member.gender is '회원 성별(필수입력)';
-comment on column member.phone is '회원 전화번호(필수입력)';
-comment on column member.email is '회원 이메일(필수입력)';
 comment on column member.enroll_date is '회원가입일';
 comment on column member.member_role is '회원권한(CK in (U, M, A))';
-comment on column member.friends is '회원친구목록';
 comment on column member.warning_count is '누적경고숫자(CK 0 <= count <= 3)';
 
 -- leave_member 테이블
 comment on table leave_member is '탈퇴회원관리테이블';
-comment on column leave_member.member_id is '탈퇴회원아이디(PK, 변경불가)';
+comment on column leave_member.email is '탈퇴회원이메일(PK, 변경불가)';
 comment on column leave_member.nickname is '탈퇴회원닉네임(UQ)';
 comment on column leave_member.password is '탈퇴회원비밀번호(필수입력)';
 comment on column leave_member.birthday is '탈퇴회원생년월일(필수입력)';
 comment on column leave_member.gender is '탈퇴회원성별(필수입력)';
-comment on column leave_member.phone is '탈퇴회원전화번호(필수입력)';
-comment on column leave_member.email is '탈퇴회원이메일(필수입력)';
+comment on column leave_member.email is '탈퇴회원이메일(PK, 변경불가)';
 comment on column leave_member.enroll_date is '탈퇴회원가입일';
 comment on column leave_member.member_role is '탈퇴회원권한';
-comment on column leave_member.friends is '탈퇴회원친구목록';
 comment on column leave_member.warning_count is '탈퇴누적경고숫자';
 comment on column leave_member.leave_date is '회원탈퇴일';
 
@@ -678,3 +667,17 @@ comment on column chatting_log.content is '채팅 내용';
 comment on column chatting_log.original_filename is '채팅 첨부파일 원본명';
 comment on column chatting_log.renamed_filename is '채팅 첨부파일 저장명';
 comment on column chatting_log.reg_date is '채팅시간';
+
+
+-- ======================================================================
+-- member 테이블 insert
+-- ======================================================================
+--insert into member values ('test@naver.com', 'test', 'test', '1989-01-11', 'M', default, 'A', null, null, default);
+--insert into member values ('test1@naver.com', 'test1', 'test1', '1990-09-09', 'M', default, default, null, null, default);
+--insert into member values ('test2@naver.com', 'test2', 'test2', '1999-09-19', 'F', default, default, null, null, default);
+
+
+-- ======================================================================
+-- friends 테이블 insert
+-- ======================================================================
+--insert into friends values (seq_friends_no.nextval, 'test1', 'test2', 'O');
