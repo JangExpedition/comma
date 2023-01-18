@@ -40,6 +40,9 @@
 	case "/comma/mypage/myPage" :
 		link.href = "<%= request.getContextPath() %>/css/mypage.css";
 		break;
+	case "/comma/friend/friendsList" :
+		link.href = "<%= request.getContextPath() %>/css/friends.css";
+		break;
 	}; // switch end
 	document.querySelector("head").append(link);
 </script>

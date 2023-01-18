@@ -9,7 +9,7 @@
 	String formatToday = today.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 	System.out.println(formatToday);
 %>
-
+	
 	<section id="diaryTotalList" class="fontStyle">
 		<div id="diaryTitle">일기장</div>
 		<div id="inputBtn"><input type="button" id="writeBtn" class="fontStyle" value="일기 작성하기" /></div>
