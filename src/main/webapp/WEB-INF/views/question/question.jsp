@@ -1,0 +1,138 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
+ 
+ <section id="questionTotalList" class="fontStyle">
+		<h1 id="enrollTitle" class="pointColor fontStyle">고객센터</h1>
+		<hr>
+		<td colspan="6"><input type="button" value="FAQ" /></td>
+		<td colspan="6"><input type="button" value="문의내역" /></td>
+		<br>
+		  <h1 id="enrollTitle" class="pointColor fontStyle">문의내역</h1>
+		<br>
+
+    <!-- board seach area -->
+    <div id="board-search">
+        <div class="container">
+            <div class="search-window">
+                <form action="">
+                    <div class="search-wrap">
+                        <label for="search" class="blind">문의내역 검색</label>
+                        <input id="search" type="search" name="" placeholder="검색어를 입력해주세요." value="">
+                        <button type="submit" class="btn btn-dark">검색</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br>
+   
+  <!-- board list area -->
+    <div id="board-list">
+        <div class="container">
+            <table class="board-table">
+                <thead>
+                <tr>
+                    <th scope="col" class="th-num">번호</th>
+                    <th scope="col" class="th-title">제목</th>
+                    <th scope="col" class="th-date">등록일</th>
+                </tr>
+                </thead>
+                <tbody>
+                
+                    <tr>
+                    <td>4</td>
+                    <th><a href="#!">일기는 어떻게 쓰는건가요?</a></th>
+                    <td>2022.01.09</td>
+                </tr>
+                
+                <tr>
+                    <td>3</td>
+                    <th>
+                      <a href="#!">익명채팅은 어떻게 만드나요?</a>
+                    </th>
+                    <td>2022.01.12</td>
+                </tr>
+
+                <tr>
+                    <td>2</td>
+                    <th><a href="#!">친구신청은 어떻게 하나요?</a></th>
+                    <td>2022.01.17</td>
+                </tr>
+
+                <tr>
+                    <td>1</td>
+                    <th><a href="#!">편지 답장은 언제 받을 수 있는 건가요?</a></th>
+                    <td>2022.01.18</td>
+                </tr>
+     			<br>
+                </tbody>
+            </table>
+             <div> <div id="inputBtn"><input type="button" id="writeBtn" class="fontStyle" value="질문작성" /></div>
+        </div>
+    </div>
+    </div>
+    
+    
+<br><br><br>
+    
+    
+    
+    
+    <div>
+   <h1 id="enrollTitle" class="pointColor fontStyle">FAQ</h1>
+  <!-- board list area -->
+    <div id="board-list">
+        <div class="container">
+            <table class="board-table">
+                <thead>
+                <tr>
+                    <th scope="col" class="th-num">번호</th>
+                    <th scope="col" class="th-title">제목</th>
+                    <th scope="col" class="th-date">등록일</th>
+                </tr>
+                </thead>
+                <tbody>
+                
+                    <tr>
+                    <td>4</td>
+                    <th><a href="#!">일기는 어떻게 쓰는건가요?</a></th>
+                    <td>2022.01.09</td>
+                </tr>
+                
+                <tr>
+                    <td>3</td>
+                    <th>
+                      <a href="#!">익명채팅은 어떻게 만드나요?</a>
+                    </th>
+                    <td>2022.01.12</td>
+                </tr>
+
+                <tr>
+                    <td>2</td>
+                    <th><a href="#!">친구신청은 어떻게 하나요?</a></th>
+                    <td>2022.01.17</td>
+                </tr>
+
+                <tr>
+                    <td>1</td>
+                    <th><a href="#!">편지 답장은 언제 받을 수 있는 건가요?</a></th>
+                    <td>2022.01.18</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+    
+    
+    </div>
+
+</section>
+
+
+
+
+
+
+
