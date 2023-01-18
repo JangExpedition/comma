@@ -66,7 +66,6 @@
 			</div>
 		</div>
 	</section>
-	</section>
 	<!-- Modal-->
 	<!-- The Modal -->
 	<div id="enrollModal">
@@ -81,52 +80,48 @@
 			<div id="modalBody">
 			  <form action="" id="firstEnrollFrm">
 				<fieldset>
-					<div id="signUpTitle">Sign up</div>
-					<label for="nickname">Nickname</label>
-					<input type="text" id="nickname" name="nickname" placeholder="What would you like to be called?" class="inputBar">
-					<label for="Email">Email</label>
-					<input type="email" id="enrollMemberId" name="enrollMemberId" placeholder="Your email" class="inputBar"/>
+					<div id="signUpTitle">회원가입</div>
+					<label for="nickname">닉네임</label>
+					<input type="text" id="nickname" name="nickname" placeholder="쉼표에서 사용할 닉네임을 입력해주세요." class="inputBar">
+					<label for="Email">이메일</label>
+					<input type="email" id="enrollMemberId" name="enrollMemberId" placeholder="이메일을 입력해주세요." class="inputBar"/>
+				</fieldset>
+			  </form>
+			  <form action="" id="secondEnrollFrm">
+				<fieldset>
+					<div id="signUpTitle">회원가입</div>
+					<label for="code">인증번호</label>
+					<input type="text" id="code" name="code" placeholder="이메일로 보낸 인증번호를 입력해주세요." class="inputBar">
+				</fieldset>
+			  </form>
+			  <form action="" id="thirdEnrollFrm">
+				<fieldset>
+					<div id="signUpTitle">회원가입</div>
+					<label for="pwd">비밀번호</label>
+					<input type="password" id="pwd" name="pwd" placeholder="비밀번호를 입력해주세요." class="inputBar">
+					<label for="passwordCheck">비밀번호 확인</label>
+					<input type="password" id="passwordCheck" name="passwordCheck" placeholder="비밀번호를 다시 입력해주세요." class="inputBar"/>
+				</fieldset>
+			  </form>
+			  <form action="" id="fourthEnrollFrm">
+				<fieldset>
+					<div id="signUpTitle">회원가입</div>
+					<label for="pwd">생년월일</label>
+					<input type="password" id="pwd" name="pwd" placeholder="비밀번호를 입력해주세요." class="inputBar">
+					<label for="passwordCheck">비밀번호 확인</label>
+					<input type="password" id="passwordCheck" name="passwordCheck" placeholder="비밀번호를 다시 입력해주세요." class="inputBar"/>
 				</fieldset>
 			  </form>
 			</div>
 			
 			<!-- Modal footer -->
 			<div id="modalFooter">
-			  <input type="button" value="Next" class="btnStyle">
+			  <input type="button" value="Next" id="nextBtn" name="nextBtn" class="btnStyle">
 			</div>
 		</div>
 	  </div>
-    </section>
-	<!-- Modal-->
-	<!-- The Modal -->
-	<div id="enrollModal">
-		<div id="modalDialog">
-		  
-			<!-- Modal Header -->
-			<div id="modalHeader">
-			  <div id="closeBtn">X</div>
-			</div>
-			
-			<!-- Modal body -->
-			<div id="modalBody">
-			  <form action="" id="firstEnrollFrm">
-				<fieldset>
-					<div id="signUpTitle">Sign up</div>
-					<label for="nickname">Nickname</label>
-					<input type="text" id="nickname" name="nickname" placeholder="What would you like to be called?" class="inputBar">
-					<label for="Email">Email</label>
-					<input type="email" id="enrollMemberId" name="enrollMemberId" placeholder="Your email" class="inputBar"/>
-				</fieldset>
-			  </form>
-			</div>
-			
-			<!-- Modal footer -->
-			<div id="modalFooter">
-			  <input type="button" value="Next" class="btnStyle">
-			</div>
-		</div>
-	</div>
 	<script>
+		let cnt;
 		/*
 		Date : 2023. 1. 17
 		@장원정
@@ -134,6 +129,7 @@
 		*/
 		document.querySelector("#signUpWithEmail").addEventListener("click", (e)=>{
 			document.querySelector("#enrollModal").style.display = "flex";
+			cnt = 0;
 		});
 	
 		/*
@@ -143,11 +139,41 @@
 		*/
 		document.querySelector("#closeBtn").addEventListener("click", (e)=>{
 			document.querySelector("#enrollModal").style.display = "none";
+			cnt = 0;
 		});
 
 		document.querySelector("#enrollModal").addEventListener("click", (e)=>{
 			if(e.target !== e.currentTarget) return;
 			document.querySelector("#enrollModal").style.display = "none";
+			cnt = 0;
+		});
+		
+		/*
+		Date : 2023. 1. 18
+		@장원정
+		회원가입 다음 폼 불러오기 메서드
+		*/
+		document.querySelector("#nextBtn").addEventListener("click", (e)=>{
+			cnt = cnt + 1;
+			console.log(cnt);
+			if(cnt === 1){
+				document.querySelector("#firstEnrollFrm").style.display = "none";
+				document.querySelector("#secondEnrollFrm").style.display = "inline";
+			}
+			cnt = cnt + 1;
+			if(cnt === 2){
+				document.querySelector("#secondEnrollFrm").style.display = "none";
+				document.querySelector("#thirdEnrollFrm").style.display = "inline";
+			}
+			cnt = cnt + 1;
+			if(cnt === 3){
+				document.querySelector("#thirdEnrollFrm").style.display = "none";
+				document.querySelector("#fourthEnrollFrm").style.display = "inline";
+			}
+			cnt = cnt + 1;
+			if(cnt === 4){
+				document.querySelector("#closeBtn").click();
+			}
 		});
 		
 		/*
@@ -158,6 +184,15 @@
 		document.querySelector("#loginBtn").addEventListener("click", (e)=>{
 			location.href = "<%= request.getContextPath() %>/counseling/counselingList"
 		})
+	</script>
+	<script type="text/javascript">
+		var naver_id_login = new naver_id_login("QpkQpxEPEtiAfKtw0PUw", "http://localhost:8080/comma/");
+		var state = naver_id_login.getUniqState();
+		naver_id_login.setButton("white", 2,40);
+		naver_id_login.setDomain("http://localhost:8080/comma/");
+		naver_id_login.setState(state);
+		naver_id_login.setPopup();
+		naver_id_login.init_naver_id_login();
 	</script>
 </body>
 </html>
