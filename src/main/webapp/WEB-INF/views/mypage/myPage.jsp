@@ -58,27 +58,6 @@
 								<td></td>
 							</tr>
 							<tr>
-								<td class="labelTd fontStyle"><label for="phoneNumber"></label></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td class="inputTd fontStyle" colspan="6"><input
-									type="text" id="phoneNumber" name="phoneNumber"
-									placeholder="핸드폰 번호" /></td>
-							</tr>
-							<tr>
-								<td class="errorTd fontStyle"></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
 								<td class="labelTd fontStyle"><label for="birthDay"></label></td>
 								<td></td>
 								<td></td>
