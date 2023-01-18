@@ -66,6 +66,7 @@
 		</article>
 	</section>
 	
+	<!-- 일기 작성 모달 -->
 	<div id="diaryEnrollModal" class="modal fontStyle">
 		<div id="diaryEnrollTitle">일기작성</div>
 		<span id="diaryEnrollClose" onclick="modalClose(this);">X</span>
@@ -108,6 +109,7 @@
 		</div>
 	</div>
 	
+	<!-- 디자인 선택 모달 -->
 	<div id="designChoiceModal" class="fontStyle">
 		<div id="designModalTitle">
 			<span class="design-title">디자인 선택</span>
