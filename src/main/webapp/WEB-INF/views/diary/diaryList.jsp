@@ -74,24 +74,86 @@
 			<div id="diaryEnrollDiv">
 				<div id="diaryEnroll">
 					<form id="diaryEnrollFrm" name="diaryEnrollFrm">
-						<div id="enrollDate"></div>
-						<div id="enrollImage">
-							<input type="date" name="nowDate" id="nowDate" class="fontStyle" value=<%= formatToday %> readonly />
-						</div>
-						<div id="enrollContent">
-							<label for="nowContent" class="labelContent">내용 :&nbsp;&nbsp;</label>
-							<textarea name="nowContent" id="nowContent" cols="55" rows="20"></textarea>
-						</div>
-						<div id="enrollFont">
-							<label for="fontChoice">폰트 선택 :&nbsp;&nbsp;</label>
-							<select name="fontChoice" id="fontChoice">
-								<option value="폰트1" class="font1" selected >폰트1</option>
-								<option value="폰트2" class="font2" >폰트2</option>
-							</select>
-						</div>
-						<div id="enrollDesign">
-						
-						</div>
+						<table>
+							<tbody>
+								<tr>
+									<td>
+										<div id="enrollFont">
+											<label for="fontChoice"></label>
+											<select name="fontChoice" id="fontChoice">
+												<option value="폰트1" class="font1" selected >폰트1</option>
+												<option value="폰트2" class="font2" >폰트2</option>
+											</select>
+										</div>
+									</td>
+									<td>
+										<div id="enrollDesign">
+											<div id="designChoiceTitle">
+												<span id="designTitle">디자인선택&nbsp;&nbsp;V</span>
+											</div>
+											<div id="designChoiceContent">
+												<table>
+													<tbody>
+														<tr>
+															<td>
+																<img src="<%= request.getContextPath() %>/images/default.png" alt="디자인1이미지" class="designImage" />
+															</td>
+															<td>디자인1</td>
+															<td>
+																<input type="button" value="선택" class="fontStyle designBtn" />
+															</td>
+														</tr>
+														<tr>
+															<td>
+																<img src="<%= request.getContextPath() %>/images/default.png" alt="디자인2이미지" class="designImage" />
+															</td>
+															<td>디자인2</td>
+															<td>
+																<input type="button" value="선택" class="fontStyle designBtn" />
+															</td>
+														</tr>
+														<tr>
+															<td>
+																<img src="<%= request.getContextPath() %>/images/default.png" alt="디자인3이미지" class="designImage" />
+															</td>
+															<td>디자인3</td>
+															<td class="design-btn">
+																<input type="button" value="선택" class="fontStyle designBtn" />
+															</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2">
+										<div id="enrollDate">
+											<input type="date" name="nowDate" id="nowDate" class="fontStyle" value=<%= formatToday %> readonly />						
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<div id="enrollImage">
+											<img src="<%= request.getContextPath() %>/images/default.png" alt="첨부한 이미지" class="enrollImage" />
+										</div>										
+									</td>
+									<td>
+										<div id="enrollContent">
+											<label for="nowContent"></label>
+											<textarea name="nowContent" id="nowContent" cols="50" rows="12" placeholder="내용 작성"></textarea>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2">
+										<input id="diaryEnrollFrmSubmit" class="fontStyle" type="button" value="등록하기" />
+									</td>
+								</tr>
+							</tbody>
+						</table>
 					</form>
 				</div>
 			</div>
@@ -154,7 +216,8 @@
 		});
 		*/
 		
-		modal.addEventListener('click', () => {
+		modal.addEventListener('click', (e) => {
+			if(e.target !== e.currentTarget) return;
 			modal.style.display = 'none';
 		});
 		
@@ -166,6 +229,17 @@
 				designChoiceModal.style.display = 'none';
 			}
 		};
+		
+		document.querySelector('#designChoiceTitle').addEventListener('click', () => {
+			const content = document.querySelector('#designChoiceContent');
+			console.log(content.style.display);
+			
+			if (content.style.display == 'none') {
+				content.style.display = 'flex';
+			} else {
+				content.style.display = 'none';
+			}
+		});
 	</script>
 
 </body>
