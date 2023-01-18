@@ -111,6 +111,7 @@ td{
 	width: 100%;
 	margin-top: 10px;
 }
+
 #signUpWithEmail{
 	background-color: #454a7b;
 	color: #fff;
@@ -138,7 +139,7 @@ td{
 	height: 100vh;
 	position: absolute;
 	left: 0;
-	top: 0;
+	top: 500vh;
 	background-color: rgba(0, 0, 0, 0.5);
 }
 #modalDialog{
@@ -230,8 +231,20 @@ label{
 	color: #939598;
 }
 
+#secondEnrollFrm{
+	display: none;
+}
+
+#thirdEnrollFrm{
+	display: none;
+}
+
+#fourthEnrollFrm{
+	display: none;
+}
+
 .btnStyle{
-	background: #454a7b;
+	background-color: #454a7b;
 	color: #fff;
 	font-weight: bolder;
 	border-radius: 20px;
@@ -242,4 +255,6 @@ label{
 
 .btnStyle:hover{
 	cursor: pointer;
+	background-color: #fafafa;
+	color: #454a7b;
 }

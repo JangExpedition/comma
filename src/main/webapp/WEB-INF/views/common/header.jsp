@@ -7,18 +7,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
-<script src="<%= request.getContextPath() %>/js/jquery-3.6.1.js"></script>
-<title>쉼표 ,</title>
-<script>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
+	<script src="<%= request.getContextPath() %>/js/jquery-3.6.1.js"></script>
+	<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+	<!-- <script src="https://kit.fontawesome.com/f16d134c1f.js" crossorigin="anonymous"></script> -->
+	 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<title>쉼표 ,</title>
+	<script>
 	/*
 	Date : 2023. 1. 13
 	@장원정
-
+	
 	페이지 별 CSS 파일 구분 메서드
 	*/
-
+	
 	const link = document.createElement("link");
 	link.rel = "stylesheet";
 	switch(location.pathname){
