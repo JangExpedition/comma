@@ -471,26 +471,21 @@ end;
 
 
 -- member에 warning_count가 3이 되면 member 탈퇴 (에러나서 보류)
-create or replace trigger trig_member_warning_count
-    before
-    update on member
-    for each row
-begin
-    if :new.warning_count = 3 then
-        delete from
-            member
-        where
-            member_id = :old.member_id;
-    end if;
-end;
-/
+--create or replace trigger trig_member_warning_count
+--    before
+--    update on member
+--    for each row
+--begin
+--    if :new.warning_count = 3 then
+--        delete from
+--            member
+--        where
+--            member_id = :old.member_id;
+--    end if;
+--end;
+--/
 --drop trigger trig_member_warning_count;
 
---select * from member;
---insert into member values('test', 'test', 'test', '1999-09-09', 'M', '01012341234', 'test@naver.com', default, default, default);
---insert into member values('test1', 'test1', 'test1', '1999-09-09', 'M', '01012341234', 'test1@naver.com', default, default, default);
---update member set warning_count = 2 where member_id = 'test';
---update member set warning_count = 3 where member_id = 'test';
 
 -- ======================================================================
 -- TABLE 및 COLUMN 주석
@@ -677,7 +672,12 @@ comment on column chatting_log.reg_date is '채팅시간';
 -- ======================================================================
 -- member 테이블 insert
 -- ======================================================================
-insert into member values ('test1@naver.com', 'test1', 'test1', '1990-09-09', 'M', default, default, null, null, default);
-insert into member values ('test2@naver.com', 'test2', 'test2', '1999-09-19', 'F', default, default, null, null, default);
-insert into friends values (seq_friends_no.nextval, 'test1', 'test2', 'O');
-commit;
+--insert into member values ('test@naver.com', 'test', 'test', '1989-01-11', 'M', default, 'A', null, null, default);
+--insert into member values ('test1@naver.com', 'test1', 'test1', '1990-09-09', 'M', default, default, null, null, default);
+--insert into member values ('test2@naver.com', 'test2', 'test2', '1999-09-19', 'F', default, default, null, null, default);
+
+
+-- ======================================================================
+-- friends 테이블 insert
+-- ======================================================================
+--insert into friends values (seq_friends_no.nextval, 'test1', 'test2', 'O');
