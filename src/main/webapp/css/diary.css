@@ -59,10 +59,6 @@ section {
 	justify-content: center;
 }
 
-#diary {
-	width: 80px;
-}
-
 .title {
 	padding: 30px 10px;
 	text-align: left;
@@ -71,9 +67,14 @@ section {
 	font-weight: bold;
 }
 
+#diaryListContent {
+	display: flex;
+	flex-direction: row;
+}
+
 #diary {
-	width: 100%;
-	margin: 5px 0px;
+	width: 30%;
+	margin: 5px 5px;
 	padding: 15px;
 	display: flex;
 	flex-direction: column;
@@ -83,6 +84,14 @@ section {
 
 #diary:hover {
 	cursor: pointer;
+}
+
+#imgBox {
+	text-align: center;
+}
+
+.writeImg {
+	width: 200px;
 }
 
 .writeDate {
