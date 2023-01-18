@@ -1,5 +1,7 @@
 package diary.model.service;
 
+import static common.JdbcTemplate.*;
+
 import diary.model.dao.DiaryDao;
 
 public class DiaryService {

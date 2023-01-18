@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+section {
+	display: inline;
+	width: 100%;
+	/* color: #454a7b; */
+}
+
+.title {
+    font-size: 80px;
+    margin: 80px 0 50px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #454a7b;
+}
