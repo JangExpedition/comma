@@ -31,6 +31,9 @@
 	case "/comma/letter/writeLetter" :
 		link.href = "<%= request.getContextPath() %>/css/letter.css"; 
 		break;
+	case "/comma/diary/diaryList" :
+		link.href = "<%= request.getContextPath() %>/css/diary.css";
+		break;
 	}; // switch end
 	document.querySelector("head").append(link);
 </script>

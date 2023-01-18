@@ -66,7 +66,7 @@
 			</div>
 		</div>
 	</section>
-	</section>
+	<section>
 	<!-- Modal-->
 	<!-- The Modal -->
 	<div id="enrollModal">
