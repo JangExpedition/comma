@@ -37,6 +37,9 @@
 	case "/comma/diary/diaryList" :
 		link.href = "<%= request.getContextPath() %>/css/diary.css";
 		break;
+	case "/comma/mypage/myPage" :
+		link.href = "<%= request.getContextPath() %>/css/mypage.css";
+		break;
 	}; // switch end
 	document.querySelector("head").append(link);
 </script>
@@ -143,4 +146,16 @@
 	     document.querySelector("#toDiary").addEventListener('click', (e) => {
 	    	location.href = "<%= request.getContextPath() %>/diary/diaryList"; 
 	     });
+	    
+	    /*
+	    Date : 2023. 01. 18
+	    @한혜진
+	    
+	    myPage.jsp 이동 메소드
+	    */
+	    document.querySelector("#toMypage").addEventListener('click', (e) => {
+	    	location.href = "<%= request.getContextPath() %>/mypage/myPage"; 
+	     });
+	    
+	    
     </script>
