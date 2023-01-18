@@ -101,6 +101,10 @@ header{
     color: #fff !important;
 }
 
+.black{
+	color: #000 !important
+}
+
 .pointColor{
 	color: #454a7b !important;
 }
