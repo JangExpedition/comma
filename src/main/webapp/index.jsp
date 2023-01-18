@@ -35,21 +35,129 @@
     		</tbody>
     	</table>
     </section>
-    <section id="loginSection">
-    	<form action="" id="loginFrm" name="loginFrm">
-    		<fieldset>
-    			<h1 class="white fontStyle" id="loginTitle">잠시 쉬었다 가세요.</h1>
-    			<input type="text" placeholder="&nbsp;&nbsp;아이디를 입력해주세요."/>
-    			<input type="password" placeholder="&nbsp;&nbsp;비밀번호를 입력해주세요."/>
-    			<input type="submit" id="loginBtn" value="로그인" />
-    			<p class="white fontStyle" id="enrollBtn">회원가입</p>
-    		</fieldset>
-    	</form>
+    <section id="background">
+		<div id="centerContainer">
+			<div id="welcomeBox">
+				<div id="commaBox" class="pointColor fontStyle">잠시 쉬었다 가세요.</div>
+			</div>
+			<div id="enrollAndLoginBox">
+				<div id="enrollBox">
+					<div id="agreeBox" class="pointColor fontStyle">By continuing you indicate that you agree to Comma’s Terms of Service and Privacy Policy.</div>
+					<div id="naver_id_login" class="easyLogin"></div>
+					<div id="signUpWithEmail" class="fontStyle">Sign up with email</div>
+				</div>
+				<div>
+					<form action="" id="loginFrm" name="loginFrm">
+						<fieldset>
+							<div id="loginTitle" class="black fontStyle">Login</div>
+							<label for="memberId" class="black fontStyle">Email</label>
+							<input type="email" id="memberId" name="memberId" placeholder="Your email" class="inputBar"/>
+							<label for="Password" class="black fontStyle">Password</label>
+							<input type="text" id="password" name="password" placeholder="Your password" class="inputBar"/>
+						</fieldset>
+					</form>
+					<div id="submitBox">
+						<div id="searchPwd">
+							<span class="pointColor fontStyle">Forgot password?</span>
+						</div>
+						<input type="submit" value="Login" id="loginBtn" name="loginBtn" class="btnStyle fontStyle">
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	</section>
+	<!-- Modal-->
+	<!-- The Modal -->
+	<div id="enrollModal">
+		<div id="modalDialog">
+		  
+			<!-- Modal Header -->
+			<div id="modalHeader">
+			  <div id="closeBtn">X</div>
+			</div>
+			
+			<!-- Modal body -->
+			<div id="modalBody">
+			  <form action="" id="firstEnrollFrm">
+				<fieldset>
+					<div id="signUpTitle">Sign up</div>
+					<label for="nickname">Nickname</label>
+					<input type="text" id="nickname" name="nickname" placeholder="What would you like to be called?" class="inputBar">
+					<label for="Email">Email</label>
+					<input type="email" id="enrollMemberId" name="enrollMemberId" placeholder="Your email" class="inputBar"/>
+				</fieldset>
+			  </form>
+			</div>
+			
+			<!-- Modal footer -->
+			<div id="modalFooter">
+			  <input type="button" value="Next" class="btnStyle">
+			</div>
+		</div>
+	  </div>
     </section>
-    <script>
-    	document.querySelector("#enrollBtn").addEventListener("click", ()=>{
-    		location.href = "<%= request.getContextPath() %>/member/memberEnroll";
-    	});
-    </script>
+	<!-- Modal-->
+	<!-- The Modal -->
+	<div id="enrollModal">
+		<div id="modalDialog">
+		  
+			<!-- Modal Header -->
+			<div id="modalHeader">
+			  <div id="closeBtn">X</div>
+			</div>
+			
+			<!-- Modal body -->
+			<div id="modalBody">
+			  <form action="" id="firstEnrollFrm">
+				<fieldset>
+					<div id="signUpTitle">Sign up</div>
+					<label for="nickname">Nickname</label>
+					<input type="text" id="nickname" name="nickname" placeholder="What would you like to be called?" class="inputBar">
+					<label for="Email">Email</label>
+					<input type="email" id="enrollMemberId" name="enrollMemberId" placeholder="Your email" class="inputBar"/>
+				</fieldset>
+			  </form>
+			</div>
+			
+			<!-- Modal footer -->
+			<div id="modalFooter">
+			  <input type="button" value="Next" class="btnStyle">
+			</div>
+		</div>
+	</div>
+	<script>
+		/*
+		Date : 2023. 1. 17
+		@장원정
+		회원가입 모달창 open 메서드
+		*/
+		document.querySelector("#signUpWithEmail").addEventListener("click", (e)=>{
+			document.querySelector("#enrollModal").style.display = "flex";
+		});
+	
+		/*
+		Date : 2023. 1. 17
+		@장원정
+		회원가입 모달창 close 메서드
+		*/
+		document.querySelector("#closeBtn").addEventListener("click", (e)=>{
+			document.querySelector("#enrollModal").style.display = "none";
+		});
+
+		document.querySelector("#enrollModal").addEventListener("click", (e)=>{
+			if(e.target !== e.currentTarget) return;
+			document.querySelector("#enrollModal").style.display = "none";
+		});
+		
+		/*
+		Date : 2023. 1. 17
+		@장원정
+		로그인 후 화면 임시 메서드
+		*/
+		document.querySelector("#loginBtn").addEventListener("click", (e)=>{
+			location.href = "<%= request.getContextPath() %>/counseling/counselingList"
+		})
+	</script>
 </body>
 </html>
