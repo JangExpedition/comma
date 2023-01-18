@@ -70,16 +70,19 @@ section {
 #diaryListContent {
 	display: flex;
 	flex-direction: row;
+	flex-wrap: wrap;
 }
 
 #diary {
-	width: 30%;
+	width: 250px;
+	height: 270px;
 	margin: 5px 5px;
 	padding: 15px;
 	display: flex;
 	flex-direction: column;
 	border: 5px solid #454a7b;
 	border-radius: 20px;
+	overflow: auto;
 }
 
 #diary:hover {
@@ -113,9 +116,21 @@ section {
 
 
 /* diaryEnroll */
-#diaryEnrollModal {
-	position: absolute;
+#diaryEnrollBack {
 	display: none;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100vh;
+	position: absolute;
+	left: 0;
+	top: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+#diaryEnrollModal {
+	/*position: relative;*/
+	display: inline-block;
 	width: 600px;
 	height: 700px;
 	top: 10%;
