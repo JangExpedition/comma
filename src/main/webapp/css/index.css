@@ -1,208 +1,111 @@
-#background{
-	background-image: url(../images/index.jpeg);
-	background-size: cover;
+#firstSection{
 	width: 100%;
 	height: 100vh;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-#centerContainer{
-	width: 700px;
-	height: 480px;
-	background-color: #fff;
-}
-
-#welcomeBox{
-	width: 700px;
-	height: 150px;
-}
-
-#commaBox{
-	height: 70%;
-	width: 100%;
-	display: flex;
-	align-items: flex-end;
-	justify-content: center;
-	color: #b92b27;
-	font-size: 50px;
-	font-weight: bolder;
-}
-
-#commentBox{
 	text-align: center;
-	font-weight: bolder;
-	color: #636466;
+	background-image: url(../images/index2.png);
+    background-size: cover;
 }
 
-#enrollAndLoginBox{
-	display: flex;
-	padding-bottom: 30px;
+#hello{
+	display : flex;
+	flex-direction: column;
+	margin: auto;
+	align-items: center;
 }
 
-#enrollBox{
-	width: 50%;
-	height: 300px;
-	border-right: 1px solid lightgray;
-	box-sizing: border-box;
-	background-color: #fff;
-	padding: 0 30px;
+#mainTitle{
+	font-size: 400px;
+	margin: 250px auto 0;
 }
 
-#agreeBox{
-	font-size: 13px;
+#comment{
+	font-size: 30px;
 }
 
-.easyLogin{
-	height: 45px;
+#introSection{
 	width: 100%;
-	margin-top: 10px;
-}
-
-#signUpWithEmail{
-	margin-top: 10px;
-	width: 100%;
-	height: 30px;
+	height: 400vh;
+	background-color: #454a7b;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	border-radius: 15px;
-	border: 1px solid #fff;
+}
+
+table{
+	width: 80%;
+	height: 90%;
+	margin-left : 150px;
+	border-spacing: 20px;
+}
+
+td{
+	text-align: center;
+	font-size: 30px;
 	box-sizing: border-box;
-	cursor: pointer;
+	padding: 0;
 }
 
-#signUpWithEmail:hover{
-	background-color: lightgray;
-	border: 1px solid lightgray;
+.introImg{
+	width: 450px;
+	height: 450px;
 }
 
-#enrollModal{
-	display: none;
-	align-items: center;
-	justify-content: center;
+#gapBox{
+	height: 200px
+}
+
+#lastIntro{
+	height: 410px;
+	font-size: 50px;
+}
+
+#loginSection{
 	width: 100%;
 	height: 100vh;
-	position: absolute;
-	left: 0;
-	top: 0;
-	background-color: rgba(0, 0, 0, 0.5);
-}
-
-#modalDialog{
-	width: 600px;
-	height: 400px;
-	background-color: #fff;
-	border: 1px solid #fff;
-	border-radius: 10px;
-	box-sizing: border-box;
-}
-
-#modalHeader{
-	height: 56px;
-	display: flex;
-	justify-content: flex-start;
-	padding: 8px;
-	box-sizing: border-box;
-}
-
-#closeBtn{
-	width: 40px;
-	height: 40px;
-	box-sizing: border-box;
-	border: 1px solid #fff;
-	border-radius: 50%;
-	font-size: 20px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	cursor: pointer;
-}
-
-#closeBtn:hover{
-	background-color: #fafafa;
-}
-
-#modalBody{
-	height: 288px;
-}
-
-#signUpTitle{
-	font-size: 20px;
-	font-weight: bolder;
-}
-
-#modalFooter{
-	display: flex;
-	justify-content: flex-end;
-	border-top: 1px solid lightgrey;
-	box-sizing: border-box;
-	height: 56px;
-	padding: 8px;
+	background-image: url(../images/index2.png);
+	background-size: cover;
 }
 
 #loginFrm{
-	width: 350px;
-	height: 260px;
+	width: 1024px;
+	height: 60%;
+	background-color: rgba(69, 74, 123, 0.5);
 }
 
-fieldset{
-	margin: 0;
+#loginFrm>fieldset{
+	width: 100%;
+	height: 100%;
 	border: 0;
-	padding: 0 20px;
 	display: flex;
 	flex-direction: column;
-	height: 260px;
+	align-items: center;
+	justify-content: center;
 }
 
 #loginTitle{
-	border-bottom: 1px solid lightgray;
+	font-size: 50px;
+}
+
+input{
+	opacity: 1;
+	width: 500px;
 	height: 40px;
-	display: flex;
-	align-items: center;
-	font-weight: bold;
-}
-
-label{
-	margin-top: 20px;
-	font-weight: bolder;
-}
-
-.inputBar{
-	height: 45px;
-	margin-top: 10px;
-	padding: 8px;
+	padding: 0;
 	box-sizing: border-box;
+	margin: 20px 0;
+	border-radius: 10px;
 }
 
-#submitBox{
-	display: flex;
-	align-items: center;
-	height: 40px;
-	padding: 0 20px;
-}
-
-#searchPwd{
-	width: 240px;
-}
-
-#searchPwd > span {
-	cursor: pointer;
-	font-size: 15px;
-	color: #939598;
-}
-
-.btnStyle{
-	background: #2e69ff;
-	color: #fff;
+#loginBtn{
+	color: #454a7b;
+	background-color: #fff;
 	font-weight: bolder;
-	border-radius: 20px;
-	border: 0;
-	width: 70px;
-	height: 40px;
+	font-size: 16px;
 }
 
-.btnStyle:hover{
+#enrollBtn{
 	cursor: pointer;
 }
