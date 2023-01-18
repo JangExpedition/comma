@@ -19,61 +19,82 @@ header{
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 50px;
+    width: 150px;
+    height: 100vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
     background-color: #fff;
 }
 
 #logo{
-    width: 10%;
-    height: 100%;
+    width: 100%;
+    height: 10%;
     margin: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 50px;
 }
 
-#title{
-    margin: auto;
-    cursor: pointer;
-}
-
-#centerBox{
-	width: 90%;
-    height: 100%;
+#titleBox{
+	width: 100%;
+	height: 100%;
+	box-sizing: border-box;
 	display: flex;
     align-items: center;
 }
 
+#title{
+    margin: auto;
+}
+
+#centerBox{
+	width: 100%;
+    height: 84%;
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
+}
+
 #category{
+	display: none;
 	font-size: 20px;
-    display: flex;
-    align-items: center;
 }
 
-#category>div{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-    height: 50px;
-    width: 60px;
+#category > div{
+    margin-bottom: 20px;
 }
 
-i{
+#menuBox{
+    width: 100%;
+    height: 6%;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-size: 25px;
-}
-
-#category>div:hover{
     cursor: pointer;
-    background-color: #fafafa;
+}
+
+#closeBox{
+	width: 50px;
+	height: 80px;
+	font-size: 30px;
+	display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.menuBar{
+    width: 38px;
+    height: 25%;
+    border-bottom: 5px solid #454a7b;
+    box-sizing: border-box;
+}
+
+.menuBar:last-child{
+    border: 0;
 }
 
 .white{
@@ -81,13 +102,15 @@ i{
 }
 
 .pointColor{
-	color: #b92b27 !important;
+	color: #454a7b !important;
 }
 
-.navBtn{
-    cursor: pointer;
-}
-
-i.disselected{
-    display: none;
-}
+/* footer{
+    position: fixed;
+    top: 90vh;
+    width: 100%;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    background-color : #000;
+} */
