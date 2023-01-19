@@ -4,7 +4,7 @@
 	<section id="questionTotalList" class="fontStyle">
 	<h1 id="enrollTitle" class="pointColor fontStyle">고객센터</h1>
 	
-	<form method = "get" action = "write_action.php">
+	<form method = "post" action = "<%= request.getContextPath() %>/question/questionEnroll">
         <table  style="padding-top:50px" align = center width=700 border=0 cellpadding=2 >
                 <tr>
                 <td height=20 align= center bgcolor=#ccc><font color=white>질문 작성</font></td>
@@ -29,13 +29,17 @@
                         </tr>
  
                         <tr>
-                       <td><input type = "button" id="Questionenroll" value="작성하기"></td>
+                       <td><input type = "submit" id="Questionenroll" value="작성하기"></td>                   
                		   </tr>
                		   
                		   <tr>
                        <td><input type = "button" id="Questionenroll" value="목록"></td>
                		   </tr>
-       </table>
+               		   
+               		   <tr>
+                       <td><input type = "button" id="Questionenroll" value="사진 첨부"></td>
+               		   </tr>
+         </table>
        </table>
      </form>
 </body>

@@ -6,11 +6,69 @@ section {
 	/* color: #454a7b; */
 }
 
-.title {
+#friendsTitle {
     font-size: 80px;
     margin: 80px 0 50px 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #454a7b;
+    color: #5F5DA6;
+}
+
+#search-container {
+	text-align: center;
+}
+
+#searchNick {
+	height: 30px;
+}
+
+#searchBtn {
+	background-color: #fff;
+	color: #454a7b;
+	border: 3px solid #454a7b;
+	font-size: 25px;
+	padding: 5px 12px;
+	border-radius: 5px;
+}
+
+#searchBtn:hover {
+	cursor: pointer;
+}
+
+#friends-list {
+	margin: 20px 0px;
+	font-size: 25px;
+}
+
+#friends-list table {
+	/* border: 1px solid #000; */
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.friends-list-table td {
+	padding: 5px 0px;
+}
+
+.friends-list-table tr td:first-child {
+	width: 100px;
+}
+
+.friends-list-table tr td:nth-child(2) {
+	width: 200px;
+}
+
+.friendsImage {
+	width: 50px;
+	border-radius: 50%;
+}
+
+.friendsBtn {
+	background-color: #253759;
+	color: #fff;
+	border: none;
+	font-size: 20px;
+	padding: 5px 10px;
+	border-radius: 5px;
 }

@@ -76,6 +76,7 @@
 					<form id="diaryEnrollFrm" name="diaryEnrollFrm">
 						<table>
 							<tbody>
+							<!-- 
 								<tr>
 									<td>
 										<div id="enrollFont">
@@ -127,6 +128,7 @@
 										</div>
 									</td>
 								</tr>
+								 -->
 								<tr>
 									<td colspan="2">
 										<div id="enrollDate">
@@ -145,6 +147,13 @@
 											<label for="nowContent"></label>
 											<textarea name="nowContent" id="nowContent" cols="50" rows="12" placeholder="내용 작성"></textarea>
 										</div>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2">
+										<i id="enrollImageChoice" class="fa-regular fa-image"></i>
+										<i id="enrollFontChoice" class="fa-solid fa-font"></i>
+										<i id="enrollDesignChoice" class="fa-solid fa-brush"></i>
 									</td>
 								</tr>
 								<tr>
@@ -230,6 +239,12 @@
 			}
 		};
 		
+		// 디자인 이미지 클릭하면 디자인 선택창 띄움
+		enrollDesignChoice.addEventListener('click', () => {
+			designChoiceModal.style.display = 'inline-block';
+		});
+		
+		/*
 		document.querySelector('#designChoiceTitle').addEventListener('click', () => {
 			const content = document.querySelector('#designChoiceContent');
 			console.log(content.style.display);
@@ -240,6 +255,7 @@
 				content.style.display = 'none';
 			}
 		});
+		*/
 	</script>
 
 </body>
