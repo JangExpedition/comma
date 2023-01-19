@@ -2,8 +2,10 @@ package question.model.service;
 
 import static common.JdbcTemplate.*;
 import java.sql.Connection;
+import java.util.List;
 
 import question.model.dao.QuestionDao;
+import question.model.dto.Question;
 
 public class QuestionService {
 
@@ -19,6 +21,12 @@ public class QuestionService {
 			throw e;
 		}
 		return result; 
+	}
+	public List<Question> selectAllQuestion() {
+		Connection conn = getConnection();
+		List<Question> questionList = questionDao.selectAllQuestion(conn);
+		close(conn);
+		return questionList;
 	}
 
 }
