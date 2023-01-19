@@ -347,6 +347,10 @@ section {
 	cursor: pointer;
 }
 
+#diaryEnrollFrm tr:nth-child(3) td {
+	text-align: right;
+}
+
 #diaryEnrollFrm tr:last-child td {
 	text-align: center;
 }
