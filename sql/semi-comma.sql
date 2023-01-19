@@ -99,6 +99,9 @@ create table member(
     renamed_filename varchar2(300),
     warning_count number default 0 not null
 );
+
+--insert into member values('admin@gmail.com', 'admin', 1234, sysdate, 'M', default, 'A', default, 'sdf', default);
+--insert into member values('admin1@gmail.com', 'admin1', 1234, sysdate, 'M', default, 'A', default, 'sdf', default);
 -- member 제약조건 추가
 alter table member
     add constraint pk_member_email primary key (email)
@@ -245,7 +248,7 @@ create table counseling (
 	category varchar2(15) not null,
 	reg_date date default sysdate not null,
     limit_gender char(1) default 'X' not null,
-    limit_age numer default 0 not null
+    limit_age number default 0 not null
 );
 -- counseling 제약조건 추가
 alter table counseling
@@ -675,6 +678,7 @@ comment on column chatting_log.reg_date is '채팅시간';
 --insert into member values ('test@naver.com', 'test', 'test', '1989-01-11', 'M', default, 'A', null, null, default);
 --insert into member values ('test1@naver.com', 'test1', 'test1', '1990-09-09', 'M', default, default, null, null, default);
 --insert into member values ('test2@naver.com', 'test2', 'test2', '1999-09-19', 'F', default, default, null, null, default);
+--insert into question values (seq_question_no.nextval,?,?,?,default)
 
 
 -- ======================================================================

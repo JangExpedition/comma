@@ -1,6 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+<%@page import="java.util.List"%>
+<%@page import="member.model.service.MemberService" %>
+	<script>
+	window.onload = () =>{
+		selectAllMember();
+	};
+	
+	const nicks = [];
+	const emails = [];
+	
+	const selectAllMember = () => {
+		$.ajax({
+			url : "<%= request.getContextPath() %>/member/selectAllMember",
+			dataType: "json",
+			success(data){
+				for(let i = 0; i < data.length; i++){
+					nicks[i] = data[i].nickname;
+					emails[i] = data[i].email;
+				}
+			},
+			error: console.log
+		});
+	}
+	</script>
     <section id="firstSection">
     	<div id="hello">
     		<p id="mainTitle" class="white fontStyle">&nbsp;쉼표 ,</p>
@@ -78,50 +102,51 @@
 			
 			<!-- Modal body -->
 			<div id="modalBody">
-			  <form action="" id="firstEnrollFrm">
-				<fieldset>
+			  <form action="" id="enrollFrm" name="enrollFrm">
+				<fieldset id="firstEnrollFrm" class="enrollFset">
 					<div id="signUpTitle">회원가입</div>
 					<label for="nickname">닉네임</label>
-					<input type="text" id="nickname" name="nickname" placeholder="쉼표에서 사용할 닉네임을 입력해주세요." class="inputBar">
-					<label for="Email">이메일</label>
-					<input type="email" id="enrollMemberId" name="enrollMemberId" placeholder="이메일을 입력해주세요." class="inputBar"/>
+					<input type="text" id="nickname" name="nickname" placeholder="4글자 이상 12글자 이하의 한글, 숫자, 영문자를 입력해주세요." class="inputBar">
+					<span id="nickErrorMsg" class="errorMsg fontStyle"></span>
+					<label for="email">이메일</label>
+					<input type="email" id="email" name="email" placeholder="이메일을 입력해주세요." class="inputBar"/>
+					<span id="emailErrorMsg" class="errorMsg fontStyle"></span>
 				</fieldset>
-			  </form>
-			  <form action="" id="secondEnrollFrm">
-				<fieldset>
+				<fieldset id="secondEnrollFrm" class="enrollFset">
 					<div id="signUpTitle">회원가입</div>
 					<label for="code">인증번호</label>
 					<input type="text" id="code" name="code" placeholder="이메일로 보낸 인증번호를 입력해주세요." class="inputBar">
 				</fieldset>
-			  </form>
-			  <form action="" id="thirdEnrollFrm">
-				<fieldset>
+				<fieldset id="thirdEnrollFrm" class="enrollFset">
 					<div id="signUpTitle">회원가입</div>
 					<label for="pwd">비밀번호</label>
 					<input type="password" id="pwd" name="pwd" placeholder="비밀번호를 입력해주세요." class="inputBar">
 					<label for="passwordCheck">비밀번호 확인</label>
 					<input type="password" id="passwordCheck" name="passwordCheck" placeholder="비밀번호를 다시 입력해주세요." class="inputBar"/>
 				</fieldset>
-			  </form>
-			  <form action="" id="fourthEnrollFrm">
-				<fieldset>
+				<fieldset id="fourthEnrollFrm" class="enrollFset">
 					<div id="signUpTitle">회원가입</div>
-					<label for="pwd">생년월일</label>
-					<input type="password" id="pwd" name="pwd" placeholder="비밀번호를 입력해주세요." class="inputBar">
-					<label for="passwordCheck">비밀번호 확인</label>
-					<input type="password" id="passwordCheck" name="passwordCheck" placeholder="비밀번호를 다시 입력해주세요." class="inputBar"/>
+					<label for="birth">생년월일</label>
+					<input type="password" id="birth" name="birth" placeholder="생년월일 6자리를 입력주세요. (예 : 930803)" class="inputBar">
+					<label for="passwordCheck">성별</label>
+					<select name="gender" id="gender" class="inputBar">
+						<option value="">성별</option>
+						<option value="남자">남자</option>
+						<option value="여자">여자</option>
+					</select>
 				</fieldset>
 			  </form>
+			<!-- Modal footer -->
+				<div id="modalFooter">
+				  <input type="button" value="Next" id="nextBtn" name="nextBtn" class="btnStyle">
+				</div>
 			</div>
 			
-			<!-- Modal footer -->
-			<div id="modalFooter">
-			  <input type="button" value="Next" id="nextBtn" name="nextBtn" class="btnStyle">
-			</div>
 		</div>
 	  </div>
-	<script>
-		let cnt;
+	<script>	
+		let cnt; // 회원가입 폼 페이지 번호 변수
+		
 		/*
 		Date : 2023. 1. 17
 		@장원정
@@ -154,36 +179,119 @@
 		회원가입 다음 폼 불러오기 메서드
 		*/
 		document.querySelector("#nextBtn").addEventListener("click", (e)=>{
+			if(cnt === 0){
+				document.querySelector("#fourthEnrollFrm").style.display = "none";
+				document.querySelector("#firstEnrollFrm").style.display = "flex";
+			}
 			cnt = cnt + 1;
-			console.log(cnt);
 			if(cnt === 1){
 				document.querySelector("#firstEnrollFrm").style.display = "none";
-				document.querySelector("#secondEnrollFrm").style.display = "inline";
+				document.querySelector("#secondEnrollFrm").style.display = "flex";
 			}
-			cnt = cnt + 1;
 			if(cnt === 2){
 				document.querySelector("#secondEnrollFrm").style.display = "none";
-				document.querySelector("#thirdEnrollFrm").style.display = "inline";
+				document.querySelector("#thirdEnrollFrm").style.display = "flex";
 			}
-			cnt = cnt + 1;
 			if(cnt === 3){
 				document.querySelector("#thirdEnrollFrm").style.display = "none";
-				document.querySelector("#fourthEnrollFrm").style.display = "inline";
+				document.querySelector("#fourthEnrollFrm").style.display = "flex";
+				e.target.value = "Submit";
+				e.target.type = "submit";
 			}
-			cnt = cnt + 1;
 			if(cnt === 4){
-				document.querySelector("#closeBtn").click();
+				e.target.value = "Next";
+				e.target.type = "button";
+				document.enrollFrm.submit();
 			}
 		});
 		
 		/*
-		Date : 2023. 1. 17
+		Date : 2023. 1. 18
 		@장원정
-		로그인 후 화면 임시 메서드
+		회원가입 유효성 검사 메서드
 		*/
-		document.querySelector("#loginBtn").addEventListener("click", (e)=>{
-			location.href = "<%= request.getContextPath() %>/counseling/counselingList"
-		})
+		const btn = document.querySelector("#nextBtn");
+		
+		$("#nickname").focusout((e)=>{
+			const nickname = e.target.value;
+			const nicknameErrorMsg = document.querySelector("#nickErrorMsg"); 
+			nicknameErrorMsg.style.color = "tomato";
+			// 아이디 중복검사
+			nicks.forEach((nick)=>{
+				console.log(nickname, typeof nickname, nick, typeof nick);
+				if(nick === nickname){
+					console.log("asdfjisadjfiowaefjio");
+					nicknameErrorMsg.innerHTML = "이미 존재하는 닉네임입니다.";
+					btn.disabled = true;
+					return;
+				} 
+			}); // forEach end
+			
+			// 아이디 유효성검사
+			if(!/^[A-Za-z가-힣0-9]{4,12}$/.test(nickname)){
+				nicknameErrorMsg.innerHTML = "사용할 수 없는 닉네임입니다.";
+				btn.disabled = true;
+				return;
+			}
+			
+			// 성공 시
+			nicknameErrorMsg.style.color = "green";
+			btn.disabled = false;
+			nicknameErrorMsg.innerHTML = "사용가능한 닉네임입니다.";
+			
+		}); // 아이디 검사 end
+		
+			
+		$("#email").focusout((e)=>{
+			const email = e.target.value;
+			const emailErrorMsg = document.querySelector("#emailErrorMsg");
+			emailErrorMsg.style.color = "tomato";
+			
+			// 이메일 중복검사
+			emails.forEach((em)=>{
+				console.log(em, email);
+				if(email === em){
+					emailErrorMsg.innerHTML = "이미 존재하는 이메일입니다.";
+					btn.disabled = true;
+					return;
+				}
+				
+			}); // forEach end
+			
+			// 이메일 유효성 검사
+			if (!/^[\w]{4,}@[\w]+(\.[\w]+){1,3}$/.test(email)) {
+				emailErrorMsg.innerHTML = "유효하지 않는 이메일입니다.";
+				btn.disabled = true;
+		    	return;
+		    };
+			
+		    // 성공 시
+			emailErrorMsg.style.color = "green";
+			btn.disabled = false;
+			emailErrorMsg.innerHTML = "사용가능한 이메일입니다.";
+			
+		});
+			
+			
+		
+		const email = document.querySelector("#email");
+		const pwd = document.querySelector("#pwd");
+		const passwordCheck = document.querySelector("#passwordCheck");
+		const birth = document.querySelector("#birth");
+		const gender = document.querySelector("#gender");
+		
+				
+		
+		/*
+		Date : 2023. 1. 18
+		@장원정
+		회원가입 폼제출 메서드
+		*/
+		document.enrollFrm.onsubmit = (e) => {
+			e.preventDefault();
+			document.querySelector("#closeBtn").click();
+		};
+		
 	</script>
 	<script type="text/javascript">
 		var naver_id_login = new naver_id_login("QpkQpxEPEtiAfKtw0PUw", "http://localhost:8080/comma/");

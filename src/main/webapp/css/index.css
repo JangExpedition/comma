@@ -173,7 +173,7 @@ td{
 	background-color: #fafafa;
 }
 #modalBody{
-	height: 288px;
+	height: 344px;
 }
 #signUpTitle{
 	font-size: 20px;
@@ -184,13 +184,13 @@ td{
 	justify-content: flex-end;
 	border-top: 1px solid lightgrey;
 	box-sizing: border-box;
-	height: 56px;
 	padding: 8px;
 }
 #loginFrm{
 	width: 350px;
-	height: 260px;
+	height: 288px;
 }
+
 fieldset{
 	margin: 0;
 	border: 0;
@@ -199,6 +199,11 @@ fieldset{
 	flex-direction: column;
 	height: 260px;
 }
+
+.enrollFset{
+	height: 288px;
+}
+
 #loginTitle{
 	border-bottom: 1px solid lightgray;
 	height: 40px;
@@ -257,4 +262,10 @@ label{
 	cursor: pointer;
 	background-color: #fafafa;
 	color: #454a7b;
+}
+
+.errorMsg{
+	color: tomato;
+	font-size: 15px;
+	margin-top: 10px;
 }
