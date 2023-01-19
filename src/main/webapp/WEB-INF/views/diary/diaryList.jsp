@@ -76,6 +76,7 @@
 					<form id="diaryEnrollFrm" name="diaryEnrollFrm">
 						<table>
 							<tbody>
+							<!-- 
 								<tr>
 									<td>
 										<div id="enrollFont">
@@ -127,6 +128,7 @@
 										</div>
 									</td>
 								</tr>
+								 -->
 								<tr>
 									<td colspan="2">
 										<div id="enrollDate">
@@ -145,6 +147,12 @@
 											<label for="nowContent"></label>
 											<textarea name="nowContent" id="nowContent" cols="50" rows="12" placeholder="내용 작성"></textarea>
 										</div>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<i class="fa-regular fa-image"></i>
+										<i class="fa-solid fa-font"></i>
 									</td>
 								</tr>
 								<tr>
