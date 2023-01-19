@@ -675,13 +675,16 @@ comment on column chatting_log.reg_date is '채팅시간';
 -- ======================================================================
 -- member 테이블 insert
 -- ======================================================================
---insert into member values ('test@naver.com', 'test', 'test', '1989-01-11', 'M', default, 'A', null, null, default);
+--insert into member values ('test@naver.com', 'test', 'test', '1989-01-11', 'M', default, default, null, null, default);
 --insert into member values ('test1@naver.com', 'test1', 'test1', '1990-09-09', 'M', default, default, null, null, default);
 --insert into member values ('test2@naver.com', 'test2', 'test2', '1999-09-19', 'F', default, default, null, null, default);
---insert into question values (seq_question_no.nextval,?,?,?,default)
 
 
 -- ======================================================================
 -- friends 테이블 insert
 -- ======================================================================
 --insert into friends values (seq_friends_no.nextval, 'test1', 'test2', 'O');
+--insert into friends values (seq_friends_no.nextval, 'test', 'test1', 'O');
+--insert into friends values (seq_friends_no.nextval, 'test', 'test2', 'O');
+
+--select * from friends f left join member m on f.f_nickname = m.nickname where my_nickname = ?;

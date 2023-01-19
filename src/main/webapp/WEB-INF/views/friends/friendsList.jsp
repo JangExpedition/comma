@@ -3,7 +3,7 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 	<section class="fontStyle">
-		<div class="title">친구</div>
+		<div id="friendsTitle" class="fontStyle">친구</div>
 		
 		<div id="search-container">
 			<form action="#">
@@ -16,11 +16,17 @@
 		<div id="friends-list">
 			<table class="friends-list-table">
 				<tbody>
+		<%
+			if (!friendsList.isEmpty()) {
+				for (Friends friend : friendsList) {
+		%>
 					<tr>
 						<td>
-							<img src="<%= request.getContextPath() %>/images/default.png" alt="" class="friendsImage" />
+						<% if (friend.getOriginalFileName() == null) { %>
+							<img src="<%= request.getContextPath() %>/images/default.png" alt="" class="friendsImage" />							
+						<% } %>
 						</td>
-						<td>test1</td>
+						<td><%= friend.getNickname() %></td>
 						<td>
 							<input id="friends-send-letter" class="friendsBtn fontStyle" type="button" value="편지작성" />
 						</td>
@@ -28,18 +34,16 @@
 							<input class="friendsBtn fontStyle" type="button" value="친구삭제" />
 						</td>
 					</tr>
+		<%
+				}
+			} else {
+		%>
 					<tr>
-						<td>
-							<img src="<%= request.getContextPath() %>/images/default.png" alt="" class="friendsImage" />
-						</td>
-						<td>test2</td>
-						<td>
-							<input class="friendsBtn fontStyle" type="button" value="편지작성" />
-						</td>
-						<td>
-							<input class="friendsBtn fontStyle" type="button" value="친구삭제" />
-						</td>
+						<td colspan="4">조회된 친구 목록이 없습니다.</td>
 					</tr>
+		<%
+			}
+		%>
 				</tbody>
 			</table>
 		</div>
@@ -50,5 +54,6 @@
 			location.href = '<%= request.getContextPath() %>/letter/writeLetter';
 		});
 	</script>
+	
 </body>
 </html>
