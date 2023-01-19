@@ -11,26 +11,25 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
+import member.model.dto.Member;
 import member.model.manager.MemberManager;
-import member.model.service.MemberService;
 
 /**
  * Servlet implementation class CheckOverlapNickname
  */
-@WebServlet("/member/selectAllNickname")
-public class SelectAllNickname extends HttpServlet {
+@WebServlet("/member/selectAllMember")
+public class SelectAllMember extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private MemberService memberService = new MemberService();
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<String> nicks = MemberManager.getInstance().getNicks();
+		List<Member> memberList = MemberManager.getInstance().getNicks();
 		
 		response.setContentType("application/jsp; charset=utf-8");
 		Gson gson = new Gson();
-		String jsonStr = gson.toJson(nicks);
+		String jsonStr = gson.toJson(memberList);
 		System.out.println(jsonStr);
 		
 		response.getWriter().append(jsonStr);

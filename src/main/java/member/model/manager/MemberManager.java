@@ -3,16 +3,17 @@ package member.model.manager;
 import java.util.ArrayList;
 import java.util.List;
 
+import member.model.dto.Member;
 import member.model.service.MemberService;
 
 public class MemberManager {
 
 	private static MemberManager INSTANCE;
-	private List<String> nicks = new ArrayList<>();
+	private List<Member> memberList = new ArrayList<>();
 	private MemberService memberService = new MemberService();
 	
 	private MemberManager() {
-		nicks = memberService.selectAllNickname();
+		memberList = memberService.selectAllNickname();
 	}
 	
 	public static MemberManager getInstance() {
@@ -22,7 +23,7 @@ public class MemberManager {
 		return INSTANCE;
 	}
 
-	public List<String> getNicks() {
-		return this.nicks;
+	public List<Member> getNicks() {
+		return this.memberList;
 	}
 }

@@ -9,23 +9,16 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
 
-/**
- * 
- * static 자원을 사용하는 jdbc 공용클래스
- *
- */
 public class JdbcTemplate {
+
+	static String driverClass;
+	static String url;
+	static String user;
+	static String password;
 	
-	private static String driverClass;
-	private static String url; // 접속프로토콜@url:port:sid
-	private static String user;
-	private static String password;
-	
+	// 초기화 블럭
 	static {
-		// /build/classes/datasource.properties 내용 불러오기
-		// / -> /build/classes
 		final String datasourceConfigPath = JdbcTemplate.class.getResource("/datasource.properties").getPath();
-		System.out.println(datasourceConfigPath);
 		Properties prop = new Properties();
 		try {
 			prop.load(new FileReader(datasourceConfigPath));
@@ -35,75 +28,76 @@ public class JdbcTemplate {
 			password = prop.getProperty("password");
 		} catch (IOException e) {
 			e.printStackTrace();
-		};
+		}
 		
 		try {
-			// 1. driver class 등록 : 프로그램 실행시 최초 1회만 처리
+			// 프로그램 실행 시 최초 1회만 처리
 			Class.forName(driverClass);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-	}
-
+	} // static 초기화 블럭 end
+	
+	
 	public static Connection getConnection() {
-		// 2. Connection객체 생성(autoCommit false처리)
 		Connection conn = null;
 		try {
 			conn = DriverManager.getConnection(url, user, password);
 			conn.setAutoCommit(false);
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
 		return conn;
-	}
-
+	} // getConnection() end
+	
+	
 	public static void commit(Connection conn) {
 		try {
-			if(conn != null && !conn.isClosed())
+			if (conn != null && !conn.isClosed())
 				conn.commit();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}
-
+	} // commit() end
+	
+	
 	public static void rollback(Connection conn) {
 		try {
-			if(conn != null && !conn.isClosed())
+			if (conn != null && !conn.isClosed())
 				conn.rollback();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}
-
+	} // rollback() end
+	
 	public static void close(Connection conn) {
 		try {
-			if(conn != null && !conn.isClosed())
+			if (conn != null && !conn.isClosed())
 				conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}		
-	}
-
-	/**
-	 * Statement는 PreparedStatement의 부모 인터페이스이다.
-	 * @param stmt
-	 */
+		}
+	} // close(conn) end
+	
+	
 	public static void close(Statement stmt) {
 		try {
-			if(stmt != null && !stmt.isClosed())
+			if (stmt != null && !stmt.isClosed())
 				stmt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}		
-	}
+		}
+	} // close(stmt) end
+	
 	
 	public static void close(ResultSet rset) {
 		try {
-			if(rset != null && !rset.isClosed())
+			if (rset != null && !rset.isClosed())
 				rset.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}		
-	}
+		}
+	} // close(rset) end
 	
-}
+} // class end

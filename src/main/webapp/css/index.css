@@ -263,3 +263,9 @@ label{
 	background-color: #fafafa;
 	color: #454a7b;
 }
+
+.errorMsg{
+	color: tomato;
+	font-size: 15px;
+	margin-top: 10px;
+}

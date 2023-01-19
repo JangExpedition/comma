@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class faqServlet
  */
-@WebServlet("/question/faq")
-public class faqServlet extends HttpServlet {
+@WebServlet("/faq")
+public class FaqServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**

@@ -3,6 +3,28 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%@page import="java.util.List"%>
 <%@page import="member.model.service.MemberService" %>
+	<script>
+	window.onload = () =>{
+		selectAllMember();
+	};
+	
+	const nicks = [];
+	const emails = [];
+	
+	const selectAllMember = () => {
+		$.ajax({
+			url : "<%= request.getContextPath() %>/member/selectAllMember",
+			dataType: "json",
+			success(data){
+				for(let i = 0; i < data.length; i++){
+					nicks[i] = data[i].nickname;
+					emails[i] = data[i].email;
+				}
+			},
+			error: console.log
+		});
+	}
+	</script>
     <section id="firstSection">
     	<div id="hello">
     		<p id="mainTitle" class="white fontStyle">&nbsp;쉼표 ,</p>
@@ -84,9 +106,11 @@
 				<fieldset id="firstEnrollFrm" class="enrollFset">
 					<div id="signUpTitle">회원가입</div>
 					<label for="nickname">닉네임</label>
-					<input type="text" id="nickname" name="nickname" placeholder="쉼표에서 사용할 닉네임을 입력해주세요." class="inputBar">
+					<input type="text" id="nickname" name="nickname" placeholder="4글자 이상 12글자 이하의 한글, 숫자, 영문자를 입력해주세요." class="inputBar">
+					<span id="nickErrorMsg" class="errorMsg fontStyle"></span>
 					<label for="email">이메일</label>
 					<input type="email" id="email" name="email" placeholder="이메일을 입력해주세요." class="inputBar"/>
+					<span id="emailErrorMsg" class="errorMsg fontStyle"></span>
 				</fieldset>
 				<fieldset id="secondEnrollFrm" class="enrollFset">
 					<div id="signUpTitle">회원가입</div>
@@ -120,27 +144,7 @@
 			
 		</div>
 	  </div>
-	  <form action="" id="checkOverlapNickFrm" name="checkOverlapNickFrm">
-	  	<input type="hidden" id="forCheckOverlapNick" name="forCheckOverlapNick"/>
-	  </form>
-	<script>
-		window.onload = () =>{
-			selectAllNickname();
-		};
-		
-		const selectAllNickname = () => {
-			$.ajax({
-				url : "<%= request.getContextPath() %>/member/selectAllNickname",
-				dataType: "json",
-				successs(data){
-					data.forEach((nick) => {
-						console.log(nick);
-					})
-				},
-				error: console.log
-			});
-		}
-	
+	<script>	
 		let cnt; // 회원가입 폼 페이지 번호 변수
 		
 		/*
@@ -206,12 +210,67 @@
 		@장원정
 		회원가입 유효성 검사 메서드
 		*/
+		const btn = document.querySelector("#nextBtn");
+		
 		$("#nickname").focusout((e)=>{
-			console.log(nicks);
-		});
+			const nickname = e.target.value;
+			const nicknameErrorMsg = document.querySelector("#nickErrorMsg"); 
+			nicknameErrorMsg.style.color = "tomato";
+			// 아이디 중복검사
+			nicks.forEach((nick)=>{
+				console.log(nickname, typeof nickname, nick, typeof nick);
+				if(nick === nickname){
+					console.log("asdfjisadjfiowaefjio");
+					nicknameErrorMsg.innerHTML = "이미 존재하는 닉네임입니다.";
+					btn.disabled = true;
+					return;
+				} 
+			}); // forEach end
+			
+			// 아이디 유효성검사
+			if(!/^[A-Za-z가-힣0-9]{4,12}$/.test(nickname)){
+				nicknameErrorMsg.innerHTML = "사용할 수 없는 닉네임입니다.";
+				btn.disabled = true;
+				return;
+			}
+			
+			// 성공 시
+			nicknameErrorMsg.style.color = "green";
+			btn.disabled = false;
+			nicknameErrorMsg.innerHTML = "사용가능한 닉네임입니다.";
+			
+		}); // 아이디 검사 end
 		
 			
+		$("#email").focusout((e)=>{
+			const email = e.target.value;
+			const emailErrorMsg = document.querySelector("#emailErrorMsg");
+			emailErrorMsg.style.color = "tomato";
 			
+			// 이메일 중복검사
+			emails.forEach((em)=>{
+				console.log(em, email);
+				if(email === em){
+					emailErrorMsg.innerHTML = "이미 존재하는 이메일입니다.";
+					btn.disabled = true;
+					return;
+				}
+				
+			}); // forEach end
+			
+			// 이메일 유효성 검사
+			if (!/^[\w]{4,}@[\w]+(\.[\w]+){1,3}$/.test(email)) {
+				emailErrorMsg.innerHTML = "유효하지 않는 이메일입니다.";
+				btn.disabled = true;
+		    	return;
+		    };
+			
+		    // 성공 시
+			emailErrorMsg.style.color = "green";
+			btn.disabled = false;
+			emailErrorMsg.innerHTML = "사용가능한 이메일입니다.";
+			
+		});
 			
 			
 		

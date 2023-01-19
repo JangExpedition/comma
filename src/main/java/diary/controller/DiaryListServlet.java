@@ -15,14 +15,13 @@ import diary.model.service.DiaryService;
 @WebServlet("/diary/diaryList")
 public class DiaryListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-//	private DiaryService diaryService = new DiaryService();
+	private DiaryService diaryService = new DiaryService();
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/views/diary/diaryList.jsp")
-			.forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/diary/diaryList.jsp").forward(request, response);
 	} // doGet() end
 
 }
