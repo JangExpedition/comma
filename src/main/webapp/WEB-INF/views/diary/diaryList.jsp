@@ -239,6 +239,7 @@
 			}
 		};
 		
+		// 디자인 이미지 클릭하면 디자인 선택창 띄움
 		enrollDesignChoice.addEventListener('click', () => {
 			designChoiceModal.style.display = 'inline-block';
 		});
