@@ -129,6 +129,12 @@
     </div>
 
 </section>
+</body>
+<script>
+document.querySelector("#writeBtn").addEventListener('click', (e) => {
+	location.href = "<%= request.getContextPath() %>/question/questionEnroll"
+ });
+</script>
 
 
 
