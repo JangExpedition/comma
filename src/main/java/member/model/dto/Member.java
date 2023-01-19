@@ -4,45 +4,35 @@ import java.sql.Date;
 import java.util.List;
 
 public class Member {
-	private String memberId;
 	private String nickname;
 	private String password;
 	private Date birthday;
 	private Gender gender;
-	private String phone;
 	private String email;
 	private Date enrollDate;
 	private MemberRole memberRole;
-	private List<String> friends;
 	private int warningCount;
+	private String originalFilename;
+	private String renamedFilename;
 	
 	public Member() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Member(String memberId, String nickname, String password, Date birthday, Gender gender, String phone,
-			String email, Date enrollDate, MemberRole memberRole, List<String> friends, int warningCount) {
+	public Member(String nickname, String password, Date birthday, Gender gender, String email, Date enrollDate,
+			MemberRole memberRole, int warningCount, String originalFilename, String renamedFilename) {
 		super();
-		this.memberId = memberId;
 		this.nickname = nickname;
 		this.password = password;
 		this.birthday = birthday;
 		this.gender = gender;
-		this.phone = phone;
 		this.email = email;
 		this.enrollDate = enrollDate;
 		this.memberRole = memberRole;
-		this.friends = friends;
 		this.warningCount = warningCount;
-	}
-
-	public String getMemberId() {
-		return memberId;
-	}
-
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
+		this.originalFilename = originalFilename;
+		this.renamedFilename = renamedFilename;
 	}
 
 	public String getNickname() {
@@ -77,14 +67,6 @@ public class Member {
 		this.gender = gender;
 	}
 
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
 	public String getEmail() {
 		return email;
 	}
@@ -109,14 +91,6 @@ public class Member {
 		this.memberRole = memberRole;
 	}
 
-	public List<String> getFriends() {
-		return friends;
-	}
-
-	public void setFriends(List<String> friends) {
-		this.friends = friends;
-	}
-
 	public int getWarningCount() {
 		return warningCount;
 	}
@@ -125,12 +99,28 @@ public class Member {
 		this.warningCount = warningCount;
 	}
 
+	public String getOriginalFilename() {
+		return originalFilename;
+	}
+
+	public void setOriginalFilename(String originalFilename) {
+		this.originalFilename = originalFilename;
+	}
+
+	public String getRenamedFilename() {
+		return renamedFilename;
+	}
+
+	public void setRenamedFilename(String renamedFilename) {
+		this.renamedFilename = renamedFilename;
+	}
+
 	@Override
 	public String toString() {
-		return "Member [memberId=" + memberId + ", nickname=" + nickname + ", password=" + password + ", birthday="
-				+ birthday + ", gender=" + gender + ", phone=" + phone + ", email=" + email + ", enrollDate="
-				+ enrollDate + ", memberRole=" + memberRole + ", friends=" + friends + ", warningCount=" + warningCount
-				+ "]";
+		return "Member [nickname=" + nickname + ", password=" + password + ", birthday=" + birthday + ", gender="
+				+ gender + ", email=" + email + ", enrollDate=" + enrollDate + ", memberRole=" + memberRole
+				+ ", warningCount=" + warningCount + ", originalFilename=" + originalFilename + ", renamedFilename="
+				+ renamedFilename + "]";
 	}
 	
 }
