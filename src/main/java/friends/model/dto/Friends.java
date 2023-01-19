@@ -5,20 +5,22 @@ import common.OX;
 public class Friends {
 
 	private int no;
-	private String myNickname;
-	private String friendNickname;
+	private String nickname;
 	private OX isFriend;
+	private String originalFileName;
+	private String renamedFileName;
 	
 	public Friends() {
 		super();
 	}
-	
-	public Friends(int no, String myNickname, String friendNickname, OX isFriend) {
+
+	public Friends(int no, String nickname, OX isFriend, String originalFileName, String renamedFileName) {
 		super();
 		this.no = no;
-		this.myNickname = myNickname;
-		this.friendNickname = friendNickname;
+		this.nickname = nickname;
 		this.isFriend = isFriend;
+		this.originalFileName = originalFileName;
+		this.renamedFileName = renamedFileName;
 	}
 
 	public int getNo() {
@@ -29,20 +31,12 @@ public class Friends {
 		this.no = no;
 	}
 
-	public String getMyNickname() {
-		return myNickname;
+	public String getNickname() {
+		return nickname;
 	}
 
-	public void setMyNickname(String myNickname) {
-		this.myNickname = myNickname;
-	}
-
-	public String getFriendNickname() {
-		return friendNickname;
-	}
-
-	public void setFriendNickname(String friendNickname) {
-		this.friendNickname = friendNickname;
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 	public OX getIsFriend() {
@@ -53,10 +47,26 @@ public class Friends {
 		this.isFriend = isFriend;
 	}
 
+	public String getOriginalFileName() {
+		return originalFileName;
+	}
+
+	public void setOriginalFileName(String originalFileName) {
+		this.originalFileName = originalFileName;
+	}
+
+	public String getRenamedFileName() {
+		return renamedFileName;
+	}
+
+	public void setRenamedFileName(String renamedFileName) {
+		this.renamedFileName = renamedFileName;
+	}
+
 	@Override
 	public String toString() {
-		return "Friends [no=" + no + ", myNickname=" + myNickname + ", friendNickname=" + friendNickname + ", isFriend="
-				+ isFriend + "]";
+		return "Friends [no=" + no + ", nickname=" + nickname + ", isFriend=" + isFriend + ", originalFileName="
+				+ originalFileName + ", renamedFileName=" + renamedFileName + "]";
 	}
-	
+
 }

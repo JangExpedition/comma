@@ -1,8 +1,11 @@
+<%@page import="friends.model.dto.Friends"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <% System.out.println(request.getContextPath()); %>
 <%
 	String loginMember = "";
+	List<Friends> friendsList = (List<Friends>) session.getAttribute("friendsList");
 %>
 <!DOCTYPE html>
 <html>
