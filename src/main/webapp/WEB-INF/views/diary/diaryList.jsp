@@ -150,9 +150,10 @@
 									</td>
 								</tr>
 								<tr>
-									<td>
-										<i class="fa-regular fa-image"></i>
-										<i class="fa-solid fa-font"></i>
+									<td colspan="2">
+										<i id="enrollImageChoice" class="fa-regular fa-image"></i>
+										<i id="enrollFontChoice" class="fa-solid fa-font"></i>
+										<i id="enrollDesignChoice" class="fa-solid fa-brush"></i>
 									</td>
 								</tr>
 								<tr>
@@ -238,6 +239,12 @@
 			}
 		};
 		
+		// 디자인 이미지 클릭하면 디자인 선택창 띄움
+		enrollDesignChoice.addEventListener('click', () => {
+			designChoiceModal.style.display = 'inline-block';
+		});
+		
+		/*
 		document.querySelector('#designChoiceTitle').addEventListener('click', () => {
 			const content = document.querySelector('#designChoiceContent');
 			console.log(content.style.display);
@@ -248,6 +255,7 @@
 				content.style.display = 'none';
 			}
 		});
+		*/
 	</script>
 
 </body>
