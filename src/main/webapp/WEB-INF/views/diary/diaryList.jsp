@@ -154,8 +154,6 @@
 										<i class="fa-regular fa-image"></i>
 										<i class="fa-solid fa-font"></i>
 									</td>
-									<td>									
-									</td>
 								</tr>
 								<tr>
 									<td colspan="2">
