@@ -11,16 +11,17 @@ public class LeaveMember extends Member{
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-	public LeaveMember(String memberId, String nickname, String password, Date birthday, Gender gender, String phone,
-			String email, Date enrollDate, MemberRole memberRole, List<String> friends, int warningCount) {
-		super(memberId, nickname, password, birthday, gender, phone, email, enrollDate, memberRole, friends, warningCount);
-		// TODO Auto-generated constructor stub
-	}
-
+	
 	public LeaveMember(Date leaveDate) {
 		super();
 		this.leaveDate = leaveDate;
+	}
+
+	public LeaveMember(String nickname, String password, Date birthday, Gender gender, String email, Date enrollDate,
+			MemberRole memberRole, int warningCount, String originalFilename, String renamedFilename) {
+		super(nickname, password, birthday, gender, email, enrollDate, memberRole, warningCount, originalFilename,
+				renamedFilename);
+		// TODO Auto-generated constructor stub
 	}
 
 	public Date getLeaveDate() {
@@ -35,5 +36,5 @@ public class LeaveMember extends Member{
 	public String toString() {
 		return "LeaveMember [leaveDate=" + leaveDate + ", toString()=" + super.toString() + "]";
 	}
-	
+
 }

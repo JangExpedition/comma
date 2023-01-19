@@ -99,6 +99,9 @@ create table member(
     renamed_filename varchar2(300),
     warning_count number default 0 not null
 );
+
+--insert into member values('admin@gmail.com', 'admin', 1234, sysdate, 'M', default, 'A', default, 'sdf', default);
+--insert into member values('admin1@gmail.com', 'admin1', 1234, sysdate, 'M', default, 'A', default, 'sdf', default);
 -- member 제약조건 추가
 alter table member
     add constraint pk_member_email primary key (email)
@@ -245,7 +248,7 @@ create table counseling (
 	category varchar2(15) not null,
 	reg_date date default sysdate not null,
     limit_gender char(1) default 'X' not null,
-    limit_age numer default 0 not null
+    limit_age number default 0 not null
 );
 -- counseling 제약조건 추가
 alter table counseling
