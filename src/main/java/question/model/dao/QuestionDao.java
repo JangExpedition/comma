@@ -4,9 +4,13 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
+import question.model.dto.Question;
 import question.model.exception.QuestionException;
 
 public class QuestionDao {
@@ -37,6 +41,29 @@ private Properties prop = new Properties();
 			throw new QuestionException("문의 사항 등록 오류", e);
 		}
 		return result;
+	}
+
+	public List<Question> selectAllQuestion(Connection conn) {
+		List<Question> questionList = new ArrayList<>();
+		String sql = prop.getProperty("selectAllQuestion");
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			try (ResultSet rset = pstmt.executeQuery()){
+				while(rset.next()) {
+					Question question = new Question();
+					question.setNo(rset.getInt("no"));
+					question.setWriter(rset.getString("writer"));
+					question.setTitle(rset.getString("title"));
+					question.setContent(rset.getString("content"));
+					question.setRegDate(rset.getDate("reg_date"));
+					questionList.add(question);
+				}
+			}
+			
+		} catch (SQLException e) {
+			throw new QuestionException("문의 사항 조회 오류", e);
+		}
+		return questionList;
 	}
 
 }

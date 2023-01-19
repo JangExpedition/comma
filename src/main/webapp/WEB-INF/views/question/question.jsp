@@ -1,6 +1,12 @@
+<%@page import="question.model.dto.Question"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+ 
+ <%
+ List<Question> questionList = (List<Question>) request.getAttribute("questionList");
+ %>
  
  <section id="questionTotalList" class="fontStyle">
 		<h1 id="enrollTitle" class="pointColor fontStyle">고객센터</h1>
@@ -39,32 +45,28 @@
                 </tr>
                 </thead>
                 <tbody>
+                <% 
+                if (!questionList.isEmpty()) {
+                	for (Question question : questionList) {
+                %>
                 
-                    <tr>
-                    <td>4</td>
-                    <th><a href="#!">일기는 어떻게 쓰는건가요?</a></th>
-                    <td>2022.01.09</td>
-                </tr>
-                
-                <tr>
-                    <td>3</td>
-                    <th>
-                      <a href="#!">익명채팅은 어떻게 만드나요?</a>
-                    </th>
-                    <td>2022.01.12</td>
-                </tr>
-
-                <tr>
-                    <td>2</td>
-                    <th><a href="#!">친구신청은 어떻게 하나요?</a></th>
-                    <td>2022.01.17</td>
-                </tr>
-
-                <tr>
-                    <td>1</td>
-                    <th><a href="#!">편지 답장은 언제 받을 수 있는 건가요?</a></th>
-                    <td>2022.01.18</td>
-                </tr>
+	                <tr>
+	                    <td><%= question.getNo() %></td>
+	                    <th><a href="#!"><%= question.getTitle() %></a></th>
+	                    <td><%= question.getRegDate() %></td>
+	                </tr>
+                <%
+                	}
+                }
+                else {
+                %>
+                  <tr>
+	                    <td>조회된 문의내역이 없습니다.</td>	                  
+	              </tr>
+                <%
+                }
+                %>
+          
      			<br>
                 </tbody>
             </table>
