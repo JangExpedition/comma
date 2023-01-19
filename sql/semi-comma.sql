@@ -678,6 +678,7 @@ comment on column chatting_log.reg_date is '채팅시간';
 --insert into member values ('test@naver.com', 'test', 'test', '1989-01-11', 'M', default, 'A', null, null, default);
 --insert into member values ('test1@naver.com', 'test1', 'test1', '1990-09-09', 'M', default, default, null, null, default);
 --insert into member values ('test2@naver.com', 'test2', 'test2', '1999-09-19', 'F', default, default, null, null, default);
+--insert into question values (seq_question_no.nextval,?,?,?,default)
 
 
 -- ======================================================================
