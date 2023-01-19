@@ -6,7 +6,7 @@ section {
 	/* color: #454a7b; */
 }
 
-.title {
+#friendsTitle {
     font-size: 80px;
     margin: 80px 0 50px 0;
     display: flex;
