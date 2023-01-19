@@ -44,6 +44,10 @@
 	case "/comma/friends/friendsList" :
 		link.href = "<%= request.getContextPath() %>/css/friends.css";
 		break;
+	case "/comma/counseling/counselingList" :
+		link.href = "<%= request.getContextPath() %>/css/counseling.css";
+		break;
+		
 	}; // switch end
 	document.querySelector("head").append(link);
 </script>
@@ -171,5 +175,14 @@
 	    	location.href = "<%= request.getContextPath() %>/question"; 
 	     });
 	    
+	    /*
+	    Date : 2023. 01. 19
+	    @한혜진
+	    
+	    counseling.jsp 이동 메소드
+	    */
+	    document.querySelector("#toCounseling").addEventListener('click', (e) => {
+	    	location.href = "<%= request.getContextPath() %>/counseling/counselingList"; 
+	     });
 	    
     </script>
