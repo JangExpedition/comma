@@ -2,10 +2,12 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<% System.out.println(request.getContextPath()); %>
+<%@page import="member.model.dto.Member" %>
 <%
-	String loginMember = "";
+	Member loginMember = (Member) session.getAttribute("loginMember");
+	String msg = (String) session.getAttribute("msg");
 	List<Friends> friendsList = (List<Friends>) session.getAttribute("friendsList");
+	System.out.println(loginMember);
 %>
 <!DOCTYPE html>
 <html>
@@ -56,7 +58,7 @@
 </script>
 </head>
 <body>
-	<% if(true){ %>
+	<% if(loginMember != null){ %>
     <header>
         <div id="logo">
         	<div id="titleBox">
@@ -83,7 +85,6 @@
         </div>
         <div id="closeBox" class="pointColor fontStyle">X</div>
     </header>
-    <% } %>
     <script>
 	    /*
 	    Date : 2023. 1. 12
@@ -187,5 +188,5 @@
 	    document.querySelector("#toCounseling").addEventListener('click', (e) => {
 	    	location.href = "<%= request.getContextPath() %>/counseling/counselingList"; 
 	     });
-	    
     </script>
+    <% } %>

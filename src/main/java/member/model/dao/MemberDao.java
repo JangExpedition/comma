@@ -36,19 +36,7 @@ public class MemberDao {
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
 			try(ResultSet rset = pstmt.executeQuery()){
 				while(rset.next()) {
-					
-					Member member = new Member();
-					member.setNickname(rset.getString("nickname"));
-					member.setPassword(rset.getString("password"));
-					member.setGender(Gender.valueOf(rset.getString("gender")));
-					member.setEmail(rset.getString("email"));
-					member.setEnrollDate(rset.getDate("enroll_date"));
-					member.setMemberRole(MemberRole.valueOf(rset.getString("member_role")));
-					member.setWarningCount(rset.getInt("warning_count"));
-					member.setOriginalFilename(rset.getString("original_filename"));
-					member.setRenamedFilename(rset.getString("renamed_filename"));
-					
-					memberList.add(member);
+					memberList.add(handleMemberResultSet(rset));
 				}
 			}
 		} catch (SQLException e) {
@@ -57,5 +45,38 @@ public class MemberDao {
 		}
 		
 		return memberList;
+	}
+	
+	private Member handleMemberResultSet(ResultSet rset) throws SQLException {
+		Member member = new Member();
+		member.setNickname(rset.getString("nickname"));
+		member.setPassword(rset.getString("password"));
+		member.setGender(Gender.valueOf(rset.getString("gender")));
+		member.setEmail(rset.getString("email"));
+		member.setEnrollDate(rset.getDate("enroll_date"));
+		member.setMemberRole(MemberRole.valueOf(rset.getString("member_role")));
+		member.setWarningCount(rset.getInt("warning_count"));
+		member.setOriginalFilename(rset.getString("original_filename"));
+		member.setRenamedFilename(rset.getString("renamed_filename"));
+		
+		return member;
+	}
+
+
+	public Member selectOneMemeber(Connection conn, String id) {
+		Member member = null;
+		String sql = prop.getProperty("selectOneMemeber");
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setString(1, id);
+			
+			try(ResultSet rset = pstmt.executeQuery()){
+				if(rset.next()) {
+					member = handleMemberResultSet(rset);
+				}
+			}
+		} catch (SQLException e) {
+			throw new MemberException("로그인 실패!", e);
+		}
+		return member;
 	}
 }

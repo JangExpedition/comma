@@ -17,4 +17,11 @@ public class MemberService {
 		close(conn);
 		return memberList;
 	}
+
+	public Member selectOneMemeber(String id) {
+		Connection conn = getConnection();
+		Member member = memberDao.selectOneMemeber(conn, id);
+		close(conn);
+		return member;
+	}
 }

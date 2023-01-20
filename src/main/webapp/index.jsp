@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%@page import="java.util.List"%>
-<%@page import="member.model.service.MemberService" %>
     <section id="firstSection">
     	<div id="hello">
     		<p id="mainTitle" class="white fontStyle">&nbsp;쉼표 ,</p>
@@ -37,6 +36,7 @@
     		</tbody>
     	</table>
     </section>
+    <% if(loginMember == null) { %>
     <section id="background">
 		<div id="centerContainer">
 			<div id="welcomeBox">
@@ -54,20 +54,21 @@
 							<div id="loginTitle" class="black fontStyle">Login</div>
 							<label for="memberId" class="black fontStyle">Email</label>
 							<input type="email" id="memberId" name="memberId" placeholder="Your email" class="inputBar"/>
-							<label for="Password" class="black fontStyle">Password</label>
-							<input type="text" id="password" name="password" placeholder="Your password" class="inputBar"/>
+							<label for="password" class="black fontStyle">Password</label>
+							<input type="password" id="password" name="password" placeholder="Your password" class="inputBar"/>
 						</fieldset>
-					</form>
-					<div id="submitBox">
-						<div id="searchPwd">
-							<span class="pointColor fontStyle">Forgot password?</span>
+						<div id="submitBox">
+							<div id="searchPwd">
+								<span class="pointColor fontStyle">Forgot password?</span>
+							</div>
+							<input type="submit" value="Login" id="loginBtn" name="loginBtn" class="btnStyle fontStyle">
 						</div>
-						<input type="submit" value="Login" id="loginBtn" name="loginBtn" class="btnStyle fontStyle">
-					</div>
+					</form>
 				</div>
 			</div>
 		</div>
 	</section>
+	<% } %>
 	<!-- Modal-->
 	<!-- The Modal -->
 	<div id="enrollModal">
@@ -127,10 +128,21 @@
 		</div>
 	  </div>
 	<script>	
+		/*
+		Date : 2023. 1. 20
+		@장원정
+		로그인 메서드
+		*/
+		document.loginFrm.addEventListener("submit", (e)=>{
+			e.preventDefault();
+			console.log(e.target);
+			location.href = "<%= request.getContextPath() %>/member/login";
+		});
+		
 		let cnt = 0; // 회원가입 폼 페이지 번호 변수
 		const btn = document.querySelector("#nextBtn"); // 회원가입 폼 next 버튼
 		let nextBool = 0; // next버튼 활성화
-		const clientEmail = "";
+		let clientEmail = "";
 		
 		/*
 		Date : 2023. 1. 17
