@@ -76,59 +76,6 @@
 					<form id="diaryEnrollFrm" name="diaryEnrollFrm">
 						<table>
 							<tbody>
-							<!-- 
-								<tr>
-									<td>
-										<div id="enrollFont">
-											<label for="fontChoice"></label>
-											<select name="fontChoice" id="fontChoice">
-												<option value="폰트1" class="font1" selected >폰트1</option>
-												<option value="폰트2" class="font2" >폰트2</option>
-											</select>
-										</div>
-									</td>
-									<td>
-										<div id="enrollDesign">
-											<div id="designChoiceTitle">
-												<span id="designTitle">디자인선택&nbsp;&nbsp;V</span>
-											</div>
-											<div id="designChoiceContent">
-												<table>
-													<tbody>
-														<tr>
-															<td>
-																<img src="<%= request.getContextPath() %>/images/default.png" alt="디자인1이미지" class="designImage" />
-															</td>
-															<td>디자인1</td>
-															<td>
-																<input type="button" value="선택" class="fontStyle designBtn" />
-															</td>
-														</tr>
-														<tr>
-															<td>
-																<img src="<%= request.getContextPath() %>/images/default.png" alt="디자인2이미지" class="designImage" />
-															</td>
-															<td>디자인2</td>
-															<td>
-																<input type="button" value="선택" class="fontStyle designBtn" />
-															</td>
-														</tr>
-														<tr>
-															<td>
-																<img src="<%= request.getContextPath() %>/images/default.png" alt="디자인3이미지" class="designImage" />
-															</td>
-															<td>디자인3</td>
-															<td class="design-btn">
-																<input type="button" value="선택" class="fontStyle designBtn" />
-															</td>
-														</tr>
-													</tbody>
-												</table>
-											</div>
-										</div>
-									</td>
-								</tr>
-								 -->
 								<tr>
 									<td colspan="2">
 										<div id="enrollDate">
@@ -214,22 +161,26 @@
 	<script>
 		const modal = document.querySelector('#diaryEnrollBack');
 		
+		/*
+		  일기쓰기 버튼 클릭 시 모달 창 띄우기
+		*/
 		document.querySelector("#writeBtn").addEventListener('click', () => {
 			console.log(modal);
 			modal.style.display = 'flex';
 		});
 		
 		/*
-		designChoice.addEventListener('click', () => {
-			designChoiceModal.style.display = 'inline-block';
-		});
+		  모달 창 이외의 부분 클릭 시 창 닫기
 		*/
-		
 		modal.addEventListener('click', (e) => {
 			if(e.target !== e.currentTarget) return;
 			modal.style.display = 'none';
+			designChoiceModal.style.display = 'none';
 		});
 		
+		/*
+		  X 클릭 시 창 닫기
+		*/
 		const modalClose = (target) => {
 			console.log(target.id);
 			if (target.id != '') {
@@ -243,19 +194,6 @@
 		enrollDesignChoice.addEventListener('click', () => {
 			designChoiceModal.style.display = 'inline-block';
 		});
-		
-		/*
-		document.querySelector('#designChoiceTitle').addEventListener('click', () => {
-			const content = document.querySelector('#designChoiceContent');
-			console.log(content.style.display);
-			
-			if (content.style.display == 'none') {
-				content.style.display = 'flex';
-			} else {
-				content.style.display = 'none';
-			}
-		});
-		*/
 	</script>
 
 </body>

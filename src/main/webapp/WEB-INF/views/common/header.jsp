@@ -30,13 +30,14 @@
 	const link = document.createElement("link");
 	link.rel = "stylesheet";
 	switch(location.pathname){
-		case "/comma/" : 
+	case "/comma/" : 
 		link.href = "<%= request.getContextPath() %>/css/index.css";
 		break;
 	case "/comma/member/memberEnroll" :
 		link.href = "<%= request.getContextPath() %>/css/memberEnroll.css";
 		break;
 	case "/comma/letter/writeLetter" :
+	case "/comma/letter/letterList" :
 		link.href = "<%= request.getContextPath() %>/css/letter.css"; 
 		break;
 	case "/comma/diary/diaryList" :
@@ -51,7 +52,6 @@
 	case "/comma/counseling/counselingList" :
 		link.href = "<%= request.getContextPath() %>/css/counseling.css";
 		break;
-		
 	}; // switch end
 	document.querySelector("head").append(link);
 </script>
@@ -188,5 +188,15 @@
 	    document.querySelector("#toCounseling").addEventListener('click', (e) => {
 	    	location.href = "<%= request.getContextPath() %>/counseling/counselingList"; 
 	     });
+	    
+	    /*
+	      Date: 2023. 01. 20
+	      @최민경
+	      
+	      letterList.jsp 이동 메소드
+	    */
+	    document.querySelector("#toPost").addEventListener('click', (e) => {
+	    	location.href = "<%= request.getContextPath() %>/letter/letterList";
+	    });
 	    
     </script>

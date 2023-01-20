@@ -1,12 +1,21 @@
 
-
-
 section {
 	display: inline;
 	width: 100%;
     text-align: center;
+	padding-top: 50px;
 }
 
+#letterTitle{
+    text-align: center;
+    font-size: 40px;
+    height: 50px;
+    color: #454a7b;
+    border-bottom: 1px solid #fff;
+}
+
+
+/* letter.jsp */
 #writeLetter {
     display: flex;
     align-items: center;
@@ -14,38 +23,29 @@ section {
 }
 
 #writeLetterFrm {
-	padding-top: 50px;
 	padding-left: 200px;
 	margin: auto;
 	text-align: left;
 }
 
-table{
+#writeLetterTable {
     width: 100%;
 }
 
-table td {
+#writeLetterTable td {
 	padding: 10px;
 }
 
-table td:first-child {
+#writeLetterTable td:first-child {
 	width: 70px;
 }
 
-table td:nth-child(2) {
+#writeLetterTable td:nth-child(2) {
 	width: 220px;
 }
 
-table td:last-child {
+#writeLetterTable td:last-child {
 	width: 250px;
-}
-
-#writerLetterTitle{
-    text-align: center;
-    font-size: 40px;
-    height: 50px;
-    color: #454a7b;
-    border-bottom: 1px solid #fff;
 }
 
 .detailChoice {
@@ -82,4 +82,10 @@ table td:last-child {
 
 #writeLetterFrm > fieldset{
     border: 0;
+}
+
+
+/* letterList.jsp */
+#letterList {
+	
 }
