@@ -22,11 +22,9 @@ section {
 
 table{
     width: 100%;
-    /*table-layout: fixed;*/
 }
 
 table td {
-	/*white-space: nowrap;*/
 	padding: 10px;
 }
 
