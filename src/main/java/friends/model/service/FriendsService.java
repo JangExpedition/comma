@@ -4,6 +4,7 @@ import static common.JdbcTemplate.*;
 
 import java.sql.Connection;
 import java.util.List;
+import java.util.Map;
 
 import friends.model.dao.FriendsDao;
 import friends.model.dto.Friends;
@@ -18,5 +19,12 @@ public class FriendsService {
 		close(conn);
 		return friendsList;
 	} // selectAllFriends() end
+
+	public List<Friends> searchFriends(Map<String, Object> param) {
+		Connection conn = getConnection();
+		List<Friends> friends = friendsDao.searchFriends(conn, param);
+		close(conn);
+		return friends;
+	} // searchFriends() end
 	
 } // class
