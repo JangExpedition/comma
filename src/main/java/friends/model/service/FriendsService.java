@@ -12,9 +12,9 @@ public class FriendsService {
 
 	private FriendsDao friendsDao = new FriendsDao();
 
-	public List<Friends> selectAllFriends() {
+	public List<Friends> selectAllFriends(String nickname) {
 		Connection conn = getConnection();
-		List<Friends> friendsList = friendsDao.selectAllFriends(conn);
+		List<Friends> friendsList = friendsDao.selectAllFriends(conn, nickname);
 		close(conn);
 		return friendsList;
 	} // selectAllFriends() end

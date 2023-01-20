@@ -6,6 +6,7 @@
 <%
 	String loginMember = "";
 	List<Friends> friendsList = (List<Friends>) session.getAttribute("friendsList");
+	System.out.println("friendsList = " + friendsList);
 %>
 <!DOCTYPE html>
 <html>
