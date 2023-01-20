@@ -47,6 +47,7 @@
 		link.href = "<%= request.getContextPath() %>/css/mypage.css";
 		break;
 	case "/comma/friends/friendsList" :
+	case "/comma/friends/friendsFinder" :
 		link.href = "<%= request.getContextPath() %>/css/friends.css";
 		break;
 	case "/comma/counseling/counselingList" :
