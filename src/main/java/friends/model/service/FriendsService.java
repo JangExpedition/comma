@@ -22,9 +22,9 @@ public class FriendsService {
 
 	public List<Friends> searchFriends(Map<String, Object> param) {
 		Connection conn = getConnection();
-		List<Friends> friends = friendsDao.searchFriends(conn, param);
+		List<Friends> friendsList = friendsDao.searchFriends(conn, param);
 		close(conn);
-		return friends;
+		return friendsList;
 	} // searchFriends() end
 	
 } // class

@@ -60,7 +60,7 @@ public class FriendsDao {
 
 	
 	public List<Friends> searchFriends(Connection conn, Map<String, Object> param) {
-		List<Friends> friends = new ArrayList<>();
+		List<Friends> friendsList = new ArrayList<>();
 		String sql = prop.getProperty("searchFriends");
 		String nickname = (String) param.get("nickname");
 		String searchNick = (String) param.get("searchNick");
@@ -74,13 +74,13 @@ public class FriendsDao {
 			
 			try (ResultSet rset = pstmt.executeQuery()) {
 				while (rset.next())
-					friends.add(handleFriendsResultSet(rset));
+					friendsList.add(handleFriendsResultSet(rset));
 			}
 		} catch (SQLException e) {
 			throw new FriendsException("친구 목록 검색 오류", e);
 		}
 		
-		return friends;
+		return friendsList;
 	} // searchFriends() end
 	
 } // class end

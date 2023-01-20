@@ -35,11 +35,11 @@ public class FriendsFinderServlet extends HttpServlet {
 		param.put("searchNick", searchNick);
 		
 		// 업무로직
-		List<Friends> friends = friendsService.searchFriends(param);
-		System.out.println("friends = " + friends);
+		List<Friends> friendsList = friendsService.searchFriends(param);
+		System.out.println("friends = " + friendsList);
 		
 		// view단 처리
-		request.getSession().setAttribute("friendsList", friends);
+		request.getSession().setAttribute("friendsList", friendsList);
 		request.getRequestDispatcher("/WEB-INF/views/friends/friendsList.jsp").forward(request, response);
 		
 	} // doGet() end
