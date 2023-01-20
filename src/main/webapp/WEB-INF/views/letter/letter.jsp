@@ -6,10 +6,10 @@
 		<div id="writeLetter">
 		    <form action="" id="writeLetterFrm">
 		        <fieldset>
-		            <table>
+		            <table id="writeLetterTable">
 			            <thead>
 			                <tr>
-			                    <th id="writerLetterTitle" class="fontStyle" colspan="3">편지쓰기</th>
+			                    <th id="letterTitle" class="fontStyle" colspan="3">편지쓰기</th>
 			                </tr>
 			            </thead>
 			            <tbody>
@@ -109,14 +109,20 @@
 				genderChoiceTr.style.display = 'none';
 				ageChoiceTr.style.display = 'none';
 				friendsListTr.style.display = '';
+				
+				<% if (friendsList == null) { %>
+					letterContent.style.display = 'none';
+					letterSubmit.style.display = 'none';
+					return;
+				<% } %>
 			} else {
 				genderChoiceTr.style.display = '';
 				ageChoiceTr.style.display = '';
 				friendsListTr.style.display = 'none';
 			}
-			
 			letterContent.style.display = '';
 			letterSubmit.style.display = '';
+			
 		}; // clickSendChoice end
 		
 		
