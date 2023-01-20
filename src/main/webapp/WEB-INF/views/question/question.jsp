@@ -11,10 +11,10 @@
  <section id="questionTotalList" class="fontStyle">
 		<h1 id="enrollTitle" class="pointColor fontStyle">고객센터</h1>
 		<hr>
-		<td colspan="6"><input type="button" value="FAQ" /></td>
-		<td colspan="6"><input type="button" value="문의내역" /></td>
+		<div id ="questionButton"></div><td colspan="6"><input type="button" value="FAQ" /></td>
+		<td colspan="6"><input type="button" value="문의내역" /></td></div>
 		<br>
-		  <h1 id="enrollTitle" class="pointColor fontStyle">문의내역</h1>
+		  <div id = "questionList"></div><h1 id="enrollTitle" class="pointColor fontStyle">문의내역</h1></div>
 		<br>
 
     <!-- board seach area -->
