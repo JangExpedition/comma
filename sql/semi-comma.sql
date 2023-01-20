@@ -687,4 +687,4 @@ comment on column chatting_log.reg_date is '채팅시간';
 --insert into friends values (seq_friends_no.nextval, 'test', 'test1', 'O');
 --insert into friends values (seq_friends_no.nextval, 'test', 'test2', 'O');
 
---select * from friends f left join member m on f.f_nickname = m.nickname where my_nickname = ?;
+--select * from friends f left join member m on f.f_nickname = m.nickname where my_nickname = 'test';

@@ -39,16 +39,18 @@ public class FriendsDao {
 	} // handleFriendsResultSet() end
 
 	
-	public List<Friends> selectAllFriends(Connection conn) {
+	public List<Friends> selectAllFriends(Connection conn, String nickname) {
 		List<Friends> friendsList = new ArrayList<>();
 		String sql = prop.getProperty("selectAllFriends");
 		
-		try (PreparedStatement pstmt = conn.prepareStatement(sql);
-			 ResultSet rset = pstmt.executeQuery()) {
-			while (rset.next()) {
-				friendsList.add(handleFriendsResultSet(rset));
-			} // while end
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, nickname);
 			
+			try (ResultSet rset = pstmt.executeQuery()) {
+				while (rset.next()) {
+					friendsList.add(handleFriendsResultSet(rset));
+				} // while end
+			}
 		} catch (SQLException e) {
 			throw new FriendsException("친구 목록 조회 오류", e);
 		}
