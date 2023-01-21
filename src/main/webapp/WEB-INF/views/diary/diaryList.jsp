@@ -98,7 +98,10 @@
 								</tr>
 								<tr>
 									<td colspan="2">
-										<i id="enrollImageChoice" class="fa-regular fa-image"></i>
+										<label for="enrollImage">
+											<i id="enrollImageChoice" class="fa-regular fa-image"></i>
+										</label>
+										<input type="file" name="enrollImage" id="enrollImage" style="display: none;" />
 										<i id="enrollFontChoice" class="fa-solid fa-font"></i>
 										<i id="enrollDesignChoice" class="fa-solid fa-brush"></i>
 									</td>

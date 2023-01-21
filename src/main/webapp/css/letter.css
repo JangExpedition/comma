@@ -37,7 +37,7 @@ section {
 }
 
 #writeLetterTable td:first-child {
-	width: 70px;
+	width: 80px;
 }
 
 #writeLetterTable td:nth-child(2) {
@@ -55,6 +55,14 @@ section {
 
 .choiceDetail {
 	color: #424242;
+}
+
+.letterImg {
+	width: 30%;
+}
+
+.imgBtn {
+	text-align: right;
 }
 
 #content {
