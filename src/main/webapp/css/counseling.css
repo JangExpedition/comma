@@ -1,21 +1,8 @@
-#category>div:not(#toCounseling)>i.selected{
-    display: none;
-}
-
-#category>div:not(#toCounseling)>i.disselected{
-    display: inline;
-}
-
-#toCounseling>i.selected{
-    display: inline;
-}
-
-#toCounseling>i.disselected{
-    display: none;
-}
+@charset "UTF-8";
 
 #counselingTitle{
 	text-align : center;
+	color: #ffffff;
 }
 
 #counseilingCategory
@@ -26,6 +13,7 @@
 #wrap {
     width: 1000px;
 	margin:auto;
+	color: #5F5DA6;
 }
 table{
     width: 100%;
@@ -45,4 +33,20 @@ th {
 a{
     text-decoration: none;
     color: black;
+}
+
+#category>div:not(#toCounseling)>i.selected{
+    display: none;
+}
+
+#category>div:not(#toCounseling)>i.disselected{
+    display: inline;
+}
+
+#toCounseling>i.selected{
+    display: inline;
+}
+
+#toCounseling>i.disselected{
+    display: none;
 }

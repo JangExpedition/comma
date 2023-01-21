@@ -208,4 +208,5 @@
 	    	location.href = "<%= request.getContextPath() %>/letter/letterList";
 	    });
 	    
+	    
     </script>
