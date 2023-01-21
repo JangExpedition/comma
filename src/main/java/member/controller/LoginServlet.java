@@ -28,7 +28,7 @@ public class LoginServlet extends HttpServlet {
 		System.out.println(request);
 		HttpSession session = request.getSession();
 		String id = request.getParameter("memberId");
-		String pwd = CommaUtils.getEncryptedPassword(request.getParameter("password"), id);
+		String pwd = request.getParameter("password");
 		System.out.println("id =" + id + ", pwd = " + pwd);
 		
 		Member member = memberService.selectOneMember(id);
