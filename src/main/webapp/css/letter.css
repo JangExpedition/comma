@@ -32,12 +32,16 @@ section {
     width: 100%;
 }
 
+#writeLetterTable tbody {
+	padding-top: 20px;
+}
+
 #writeLetterTable td {
 	padding: 10px;
 }
 
 #writeLetterTable td:first-child {
-	width: 70px;
+	width: 80px;
 }
 
 #writeLetterTable td:nth-child(2) {
@@ -55,6 +59,14 @@ section {
 
 .choiceDetail {
 	color: #424242;
+}
+
+.letterImg {
+	width: 30%;
+}
+
+.imgBtn {
+	text-align: right;
 }
 
 #content {
@@ -86,6 +98,33 @@ section {
 
 
 /* letterList.jsp */
+#letterSmallTitle {
+	padding-top: 20px;
+	display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.letterSmall {
+	margin: 0px 10px;
+	padding: 5px 10px;
+	background-color: rgba(0, 0, 0, 0);
+	color: #5b5b5b;
+	border: 1px solid #8c8c8c;
+	border-radius: 50px;
+	font-size: 20px;
+}
+
+.letterSmallClick {
+	margin: 0px 10px;
+	padding: 5px 10px;
+	background-color: rgba(0, 0, 0, 0);
+	color: #253759;
+	border: 3px solid #212E40;
+	border-radius: 50px;
+	font-size: 20px;
+}
+
 #letterList {
-	
+	padding-top: 20px;
 }

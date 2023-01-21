@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import common.OX;
@@ -47,9 +48,8 @@ public class FriendsDao {
 			pstmt.setString(1, nickname);
 			
 			try (ResultSet rset = pstmt.executeQuery()) {
-				while (rset.next()) {
+				while (rset.next())
 					friendsList.add(handleFriendsResultSet(rset));
-				} // while end
 			}
 		} catch (SQLException e) {
 			throw new FriendsException("친구 목록 조회 오류", e);
@@ -57,7 +57,30 @@ public class FriendsDao {
 		
 		return friendsList;
 	} // selectAllFriends() end
+
 	
-	
+	public List<Friends> searchFriends(Connection conn, Map<String, Object> param) {
+		List<Friends> friendsList = new ArrayList<>();
+		String sql = prop.getProperty("searchFriends");
+		String nickname = (String) param.get("nickname");
+		String searchNick = (String) param.get("searchNick");
+		System.out.println("sql = " + sql);
+		System.out.println("nickname = " + nickname);
+		System.out.println("searchNick = " + searchNick);
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, nickname);
+			pstmt.setString(2, '%' + searchNick + '%');
+			
+			try (ResultSet rset = pstmt.executeQuery()) {
+				while (rset.next())
+					friendsList.add(handleFriendsResultSet(rset));
+			}
+		} catch (SQLException e) {
+			throw new FriendsException("친구 목록 검색 오류", e);
+		}
+		
+		return friendsList;
+	} // searchFriends() end
 	
 } // class end

@@ -5,9 +5,9 @@
 	<h1 id="enrollTitle" class="pointColor fontStyle">고객센터</h1>
 	
 	<form method = "post" action = "<%= request.getContextPath() %>/question/questionEnroll">
-        <table  style="padding-top:50px" align = center width=700 border=0 cellpadding=2 >
+        <table style="padding-top:50px" align = center width=700 border=0 cellpadding=2 >
                 <tr>
-                <td height=20 align= center bgcolor=#ccc><font color=white>질문 작성</font></td>
+                <td height=25 align= center bgcolor=#5F5DA6 ><font color=white>질문 작성</font></td>
                 </tr>
                 <tr>
                 <br>
