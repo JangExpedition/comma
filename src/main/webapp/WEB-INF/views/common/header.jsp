@@ -8,6 +8,7 @@
 	String msg = (String) session.getAttribute("msg");
 	List<Friends> friendsList = (List<Friends>) session.getAttribute("friendsList");
 	System.out.println(loginMember);
+	System.out.println("friendsList = " + friendsList);
 %>
 <!DOCTYPE html>
 <html>
@@ -15,10 +16,6 @@
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 	<script src="<%= request.getContextPath() %>/js/jquery-3.6.1.js"></script>
-	<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
-	<!-- <script src="https://kit.fontawesome.com/f16d134c1f.js" crossorigin="anonymous"></script> -->
-	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<title> 쉼표 ,</title>
 	<script>
 	/*
@@ -31,13 +28,14 @@
 	const link = document.createElement("link");
 	link.rel = "stylesheet";
 	switch(location.pathname){
-		case "/comma/" : 
+	case "/comma/" : 
 		link.href = "<%= request.getContextPath() %>/css/index.css";
 		break;
 	case "/comma/member/memberEnroll" :
 		link.href = "<%= request.getContextPath() %>/css/memberEnroll.css";
 		break;
 	case "/comma/letter/writeLetter" :
+	case "/comma/letter/letterList" :
 		link.href = "<%= request.getContextPath() %>/css/letter.css"; 
 		break;
 	case "/comma/diary/diaryList" :
@@ -52,7 +50,6 @@
 	case "/comma/counseling/counselingList" :
 		link.href = "<%= request.getContextPath() %>/css/counseling.css";
 		break;
-		
 	}; // switch end
 	document.querySelector("head").append(link);
 </script>
@@ -188,5 +185,16 @@
 	    document.querySelector("#toCounseling").addEventListener('click', (e) => {
 	    	location.href = "<%= request.getContextPath() %>/counseling/counselingList"; 
 	     });
-    </script>
-    <% } %>
+	    
+	    /*
+	      Date: 2023. 01. 20
+	      @최민경
+	      
+	      letterList.jsp 이동 메소드
+	    */
+	    document.querySelector("#toPost").addEventListener('click', (e) => {
+	    	location.href = "<%= request.getContextPath() %>/letter/letterList";
+	    });
+	    
+	    </script>
+	    <% } %>

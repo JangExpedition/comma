@@ -7,32 +7,25 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.google.gson.Gson;
-
-import mail.Mail;
+import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class MemberEmailCertify
+ * Servlet implementation class LogoutServlet
  */
-@WebServlet("/member/emailCertify")
-public class MemberEmailCertify extends HttpServlet {
+@WebServlet("/member/logout")
+public class LogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private Mail mail = new Mail();
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String clientMail = request.getParameter("clientMail");
-		String code = mail.sendMail(clientMail);
+		HttpSession session = request.getSession(false);
 		
-		response.setContentType("application/jsp; charset=utf-8");
-		Gson gson = new Gson();
-		String jsonStr = gson.toJson(code);
-		System.out.println(jsonStr);
+		if(session != null)
+			session.invalidate();
 		
-		response.getWriter().append(jsonStr);
+		response.sendRedirect(request.getContextPath() + "/");
 	}
 
 }

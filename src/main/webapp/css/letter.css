@@ -1,29 +1,91 @@
-body{
-	background-image: url("../images/index2.png");
-	background-size: cover;
-    height: 100vh;
+
+section {
+	display: inline;
+	width: 100%;
+    text-align: center;
+	padding-top: 50px;
+}
+
+#letterTitle{
+    text-align: center;
+    font-size: 40px;
+    height: 50px;
+    color: #454a7b;
+    border-bottom: 1px solid #fff;
+}
+
+
+/* letter.jsp */
+#writeLetter {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-section{
-    background-color: rgba(69, 74, 123, 0.5);
-    width: 70%;
-    height: 90%;
+#writeLetterFrm {
+	padding-left: 200px;
+	margin: auto;
+	text-align: left;
 }
 
-table{
+#writeLetterTable {
     width: 100%;
 }
 
-#writerLetterTitle{
-    text-align: left;
-    font-size: 20px;
-    height: 50px;
-    border-bottom: 1px solid #fff;
+#writeLetterTable td {
+	padding: 10px;
+}
+
+#writeLetterTable td:first-child {
+	width: 70px;
+}
+
+#writeLetterTable td:nth-child(2) {
+	width: 220px;
+}
+
+#writeLetterTable td:last-child {
+	width: 250px;
+}
+
+.detailChoice {
+	display: none;
+	font-weight: bold;
+}
+
+.choiceDetail {
+	color: #424242;
+}
+
+#content {
+	padding: 5px;
+	resize: none;
+	border: 2px solid #454a7b;
+}
+
+#letterSubmit td {
+	text-align: center;
+}
+
+#letterBtn {
+	padding: 10px 10px;
+	color: #fff;
+	background-color: #454a7b;
+	border: none;
+	font-size: 20px;
+	border-radius: 10px;
+}
+
+#letterBtn:hover {
+	cursor: pointer;
 }
 
 #writeLetterFrm > fieldset{
     border: 0;
+}
+
+
+/* letterList.jsp */
+#letterList {
+	
 }

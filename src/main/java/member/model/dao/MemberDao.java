@@ -63,9 +63,9 @@ public class MemberDao {
 	}
 
 
-	public Member selectOneMemeber(Connection conn, String id) {
+	public Member selectOneMember(Connection conn, String id) {
 		Member member = null;
-		String sql = prop.getProperty("selectOneMemeber");
+		String sql = prop.getProperty("selectOneMember");
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
 			pstmt.setString(1, id);
 			
@@ -78,5 +78,26 @@ public class MemberDao {
 			throw new MemberException("로그인 실패!", e);
 		}
 		return member;
+	}
+
+
+	public int insertMember(Connection conn, Member member) {
+		int result = 0;
+		String sql = prop.getProperty("insertMember");
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setString(1, member.getEmail());
+			pstmt.setString(2, member.getNickname());
+			pstmt.setString(3, member.getPassword());
+			pstmt.setDate(4, member.getBirthday());
+			pstmt.setString(5, member.getGender().toString());
+			pstmt.setString(6, member.getOriginalFilename());
+			pstmt.setString(7, member.getRenamedFilename());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			throw new MemberException();
+		}
+		return result;
 	}
 }

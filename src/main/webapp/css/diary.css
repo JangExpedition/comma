@@ -280,6 +280,20 @@ section {
 
 
 /* designChoiceModal */
+/*
+#designChoiceModalBack {
+	display: none;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100vh;
+	position: absolute;
+	left: 0;
+	top: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+*/
+
 #designChoiceModal {
 	position: absolute;
 	display: none;

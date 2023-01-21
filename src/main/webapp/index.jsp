@@ -37,6 +37,7 @@
     	</table>
     </section>
     <% if(loginMember == null) { %>
+    <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
     <section id="background">
 		<div id="centerContainer">
 			<div id="welcomeBox">
@@ -49,7 +50,7 @@
 					<div id="signUpWithEmail" class="fontStyle">Sign up with email</div>
 				</div>
 				<div>
-					<form action="" id="loginFrm" name="loginFrm">
+					<form action="<%= request.getContextPath() %>/member/login" id="loginFrm" name="loginFrm" method="POST">
 						<fieldset>
 							<div id="loginTitle" class="black fontStyle">Login</div>
 							<label for="memberId" class="black fontStyle">Email</label>
@@ -68,6 +69,16 @@
 			</div>
 		</div>
 	</section>
+	<script>
+		/*
+		Date : 2023. 1. 21
+		@장원정
+		로그아웃 메서드
+		*/
+		document.querySelector("#logoutBtn").addEventListener("click", (e)=>{
+			location.href = "<%= request.getContextPath() %>/member/logout";	
+		});
+	</script>
 	<% } %>
 	<!-- Modal-->
 	<!-- The Modal -->
@@ -128,17 +139,6 @@
 		</div>
 	  </div>
 	<script>	
-		/*
-		Date : 2023. 1. 20
-		@장원정
-		로그인 메서드
-		*/
-		document.loginFrm.addEventListener("submit", (e)=>{
-			e.preventDefault();
-			console.log(e.target);
-			location.href = "<%= request.getContextPath() %>/member/login";
-		});
-		
 		let cnt = 0; // 회원가입 폼 페이지 번호 변수
 		const btn = document.querySelector("#nextBtn"); // 회원가입 폼 next 버튼
 		let nextBool = 0; // next버튼 활성화
@@ -197,6 +197,7 @@
 			if(cnt === 1){
 				emailCertify(clientEmail);
 				/* btn.disabled = true; */
+				
 				document.querySelector("#firstEnrollFrm").style.display = "none";
 				document.querySelector("#secondEnrollFrm").style.display = "flex";
 				document.querySelector("#thirdEnrollFrm").style.display = "none";

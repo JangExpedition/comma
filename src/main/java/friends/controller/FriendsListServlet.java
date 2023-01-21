@@ -24,8 +24,13 @@ public class FriendsListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 사용자 입력값
+		String nickname = "test";
+		System.out.println("nickname = " + nickname);
+		
 		// 업무로직
-		List<Friends> friendsList = friendsService.selectAllFriends();
+		List<Friends> friendsList = friendsService.selectAllFriends(nickname);
+		System.out.println(friendsList);
 		
 		// 속성으로 전송
 		request.getSession().setAttribute("friendsList", friendsList);

@@ -18,10 +18,25 @@ public class MemberService {
 		return memberList;
 	}
 
-	public Member selectOneMemeber(String id) {
+	public Member selectOneMember(String id) {
 		Connection conn = getConnection();
-		Member member = memberDao.selectOneMemeber(conn, id);
+		Member member = memberDao.selectOneMember(conn, id);
 		close(conn);
 		return member;
+	}
+
+	public int insertMember(Member member) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = memberDao.insertMember(conn, member);
+			commit(conn);
+		}catch (Exception e) {
+			e.printStackTrace();
+			rollback(conn);
+		}finally {
+			close(conn);
+		}
+		return result;
 	}
 }
