@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.FileRenamePolicy;
 
-import common.Attachment;
 import common.CommaFileRenamePolicy;
 import common.CommaUtils;
 import member.model.dto.Gender;
@@ -26,7 +25,7 @@ import member.model.service.MemberService;
 public class MemberEnrollServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private MemberService memberService = new MemberService();
-	
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
