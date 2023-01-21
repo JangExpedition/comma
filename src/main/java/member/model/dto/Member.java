@@ -122,5 +122,9 @@ public class Member {
 				+ ", warningCount=" + warningCount + ", originalFilename=" + originalFilename + ", renamedFilename="
 				+ renamedFilename + "]";
 	}
+
+	public void setDefaultProfile() {
+		
+	}
 	
 }
