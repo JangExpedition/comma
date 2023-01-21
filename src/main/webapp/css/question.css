@@ -1,44 +1,56 @@
 @charset "UTF-8";
 
 #enrollTitle{
-	
-	
+	font-size: 30px;
+    margin: 30px 0 30px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #5F5DA6;
 }
+	
+
 
 #questionButton{
+    margin: 80px 0 50px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #5F5DA6;
 
 }
 
 
 #questionList{
-	
-	
+	 align-items: center;
+
 }
 
+
 #board-search{
-	
+ align-items: center;
+
 }
 
 container{
-	
+ align-items: center;
 }
 
 search-window{
-	
-	
+	 align-items: center;
+
 }
 
-search-window{
-	
-	
-}
 
 #no-title-date{
-	
+    align-items: center;
+
 }
 
 #question{
-	
+    align-items: center;
+    justify-content: center;
+    color: #5F5DA6;
 }
 
 

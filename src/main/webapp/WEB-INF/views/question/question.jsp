@@ -12,7 +12,7 @@
 <section id="questionTotalList" class="fontStyle">
 	<h1 id="enrollTitle" class="pointColor fontStyle">고객센터</h1>
 	<hr>
-	<div id="questionButton">
+	<div id="questionButton" >
 		<td colspan="6"><input type="button" value="FAQ" /></td>
 		<td colspan="6"><input type="button" value="문의내역" /></td>
 	</div>
@@ -20,7 +20,6 @@
 	<div id="questionList">
 		<h1 id="enrollTitle" class="pointColor fontStyle">문의내역</h1>
 	</div>
-	<br>
 
 	<!-- board seach area -->
 	<div id="board-search">

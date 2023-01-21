@@ -53,6 +53,14 @@
 	case "/comma/counseling/counselingList" :
 		link.href = "<%= request.getContextPath() %>/css/counseling.css";
 		break;
+	case "/comma/question" :
+		link.href = "<%= request.getContextPath() %>/css/question.css";
+		break;
+	case "/comma/question/questionEnroll" :
+		link.href = "<%= request.getContextPath() %>/css/question/questionEnroll.css";
+		break;
+		
+		
 	}; // switch end
 	document.querySelector("head").append(link);
 </script>
