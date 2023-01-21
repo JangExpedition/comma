@@ -57,6 +57,5 @@
 			location.href = '<%= request.getContextPath() %>/letter/writeLetter';
 		});
 	</script>
-	
 </body>
 </html>
