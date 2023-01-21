@@ -14,6 +14,12 @@ section {
     border-bottom: 1px solid #fff;
 }
 
+input[type="checkbox"]:checked {
+	background-color: #454a7b;
+	border: none;
+	color: #fff;
+}
+
 
 /* letter.jsp */
 #writeLetter {
@@ -26,6 +32,7 @@ section {
 	padding-left: 200px;
 	margin: auto;
 	text-align: left;
+	background-color: #bebebe;
 }
 
 #writeLetterTable {

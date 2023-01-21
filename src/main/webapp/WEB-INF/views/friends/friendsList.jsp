@@ -31,7 +31,7 @@
 						</td>
 						<td><%= friend.getNickname() %></td>
 						<td>
-							<input id="friends-send-letter" class="friendsBtn fontStyle" type="button" value="편지작성" />
+							<input id="friends-send-letter" class="friendsBtn fontStyle" type="button" data-friend-nick="<%= friend.getNickname() %>" value="편지작성" />
 						</td>
 						<td>
 							<input class="friendsBtn fontStyle" type="button" value="친구삭제" />
@@ -53,7 +53,9 @@
 	</section>
 	
 	<script>
-		document.querySelector('#friends-send-letter').addEventListener('click', () => {
+		document.querySelector('#friends-send-letter').addEventListener('click', (e) => {
+			const friendNick = e.target.dataset.friendNick;
+			localStorage.setItem('friendNick', friendNick);
 			location.href = '<%= request.getContextPath() %>/letter/writeLetter';
 		});
 	</script>

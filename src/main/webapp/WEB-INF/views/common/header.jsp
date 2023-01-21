@@ -205,5 +205,14 @@
 	    	location.href = "<%= request.getContextPath() %>/letter/letterList";
 	    });
 	    
+	    /*
+	    Date: 2023. 01. 21
+	    
+	    logout 기능 서블릿 이동 메소드
+	    */
+	    document.querySelector("#logoutBtn").addEventListener('click', (e) => {
+	    	location.href = '<%= request.getContextPath() %>/member/logout';
+	    });
+	    
 	    </script>
 	    <% } %>

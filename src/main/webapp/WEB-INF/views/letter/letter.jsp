@@ -2,12 +2,15 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
+	<script>
+		const sendFriend = localStorage.getItem('friendNick');
+		console.log('sendFriend = ' + sendFriend);
+	</script>
 	<section>
 		<div id="letterTitle" class="fontStyle">편지쓰기</div>
 		<div id="writeLetter">
 		    <form action="" id="writeLetterFrm">
 		        <fieldset>
-		        	
 		            <table id="writeLetterTable">
 			            <tbody>
 			                <tr>
@@ -53,7 +56,9 @@
 			                </tr>
 						<% if (friendsList != null) { %>
 			                <tr id="friendsListTr" style="display: none;">
-			                    <td colspan="3">
+			                	<td></td>
+			                	<td></td>
+			                    <td>
 			                    	<input type="text" list="friendsList"/>
 			                        <datalist id="friendsList">
 			                    <% for (Friends friend : friendsList) { %>
@@ -73,10 +78,10 @@
 			                    </td>
 			                    <td colspan="2">
 			                    	<select name="fontChoice" id="fontChoice">
-			                    		<option value="font1">폰트1</option>
-			                    		<option value="font2">폰트2</option>
-			                    		<option value="font3">폰트3</option>
-			                    		<option value="font4">폰트4</option>
+			                    		<option value="1">폰트1</option>
+			                    		<option value="2">폰트2</option>
+			                    		<option value="3">폰트3</option>
+			                    		<option value="4">폰트4</option>
 			                    	</select>
 			                    </td>
 							</tr>
@@ -86,10 +91,10 @@
 			                    </td>
 			                    <td colspan="2">
 			                    	<select name="designChoice" id="designChoice">
-			                    		<option value="design1">디자인1</option>
-			                    		<option value="design2">디자인2</option>
-			                    		<option value="design3">디자인3</option>
-			                    		<option value="design4">디자인4</option>
+			                    		<option value="1">디자인1</option>
+			                    		<option value="2">디자인2</option>
+			                    		<option value="3">디자인3</option>
+			                    		<option value="4">디자인4</option>
 			                    	</select>
 			                    </td>
 							</tr>
