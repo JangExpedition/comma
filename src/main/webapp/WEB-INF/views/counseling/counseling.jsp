@@ -7,6 +7,7 @@
 
 
 	<div id="counselingTitle"><h1>고민 상담소</h1></div>
+	
 	<form action="<%= request.getContextPath()%>/counseling/counselingList">
 	<div id = "counseilingCategory"><select name = "category">
 	<option value="" disabled selected>카테고리를 선택하세요.</option>
@@ -48,6 +49,12 @@
 			</c:forEach>
     	</table>
     </div>
+    
+    <script>
+    document.querySelector("#CounselingEnroll").addEventListener('click', (e) => {
+    	location.href = "<%= request.getContextPath() %>/counseling/counselingEnroll"
+     });
+    </script>
 </body>
 </html>
 	
