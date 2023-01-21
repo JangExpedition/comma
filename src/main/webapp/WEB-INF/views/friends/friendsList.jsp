@@ -1,3 +1,4 @@
+<%@page import="common.OX"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
@@ -33,9 +34,15 @@
 						<td>
 							<input id="friends-send-letter" class="friendsBtn fontStyle" type="button" data-friend-nick="<%= friend.getNickname() %>" value="편지작성" />
 						</td>
+					<% if (friend.getIsFriend() == OX.O) { %>
 						<td>
 							<input class="friendsBtn fontStyle" type="button" value="친구삭제" />
 						</td>
+					<% } else { %>
+						<td>
+							<input class="friendsBtn fontStyle" type="button" value="요청취소" />
+						</td>
+					<% } %>
 					</tr>
 		<%
 				}
