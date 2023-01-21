@@ -2,10 +2,12 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<% System.out.println(request.getContextPath()); %>
+<%@page import="member.model.dto.Member" %>
 <%
-	String loginMember = "";
+	Member loginMember = (Member) session.getAttribute("loginMember");
+	String msg = (String) session.getAttribute("msg");
 	List<Friends> friendsList = (List<Friends>) session.getAttribute("friendsList");
+	System.out.println(loginMember);
 	System.out.println("friendsList = " + friendsList);
 %>
 <!DOCTYPE html>
@@ -14,10 +16,6 @@
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 	<script src="<%= request.getContextPath() %>/js/jquery-3.6.1.js"></script>
-	<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
-	<!-- <script src="https://kit.fontawesome.com/f16d134c1f.js" crossorigin="anonymous"></script> -->
-	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<title> 쉼표 ,</title>
 	<script>
 	/*
@@ -66,7 +64,7 @@
 </script>
 </head>
 <body>
-	<% if(true){ %>
+	<% if(loginMember != null){ %>
     <header>
         <div id="logo">
         	<div id="titleBox">
@@ -93,7 +91,6 @@
         </div>
         <div id="closeBox" class="pointColor fontStyle">X</div>
     </header>
-    <% } %>
     <script>
 	    /*
 	    Date : 2023. 1. 12
@@ -208,5 +205,5 @@
 	    	location.href = "<%= request.getContextPath() %>/letter/letterList";
 	    });
 	    
-	    
-    </script>
+	    </script>
+	    <% } %>
