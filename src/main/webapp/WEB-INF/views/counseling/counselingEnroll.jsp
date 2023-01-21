@@ -25,10 +25,30 @@
 
 
 		<tr>
+			<td>공개 나이대 선택 : </td>
+		</tr>
+		
+		
+
+
+		<tr>
+			<td>공개 성별 선택 : </td>
+			
+			<td class="input fontsytle">
+		    남자 <input type="radio" name="gender" value ="남자">
+		    여자 <input type="radio" name="gender" value ="여자">
+		    전체공개 <input type="radio" name="gender" value ="전체공개">
+			</td>
+		</tr>
+
+		
+		<tr>
 			<td>
 				<input type="submit" id ="write" value="고민 작성하기">
 			</td>
 		<tr>
+		
+		
 	</table>
 
 </body>
