@@ -23,7 +23,8 @@
 				rows="15" id="content" placeholder="내용을 입력해 주세요."></textarea></td>
 	</tr>
 
-	<!-- 셀렉트 태그  -->
+
+	<!-- 셀렉트 태그!  -->
 	<tr>
 		<td>공개 나이대 선택 :</td>
 
