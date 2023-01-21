@@ -32,6 +32,10 @@ section {
     width: 100%;
 }
 
+#writeLetterTable tbody {
+	padding-top: 20px;
+}
+
 #writeLetterTable td {
 	padding: 10px;
 }

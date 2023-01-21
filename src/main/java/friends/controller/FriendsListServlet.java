@@ -32,10 +32,8 @@ public class FriendsListServlet extends HttpServlet {
 		List<Friends> friendsList = friendsService.selectAllFriends(nickname);
 		System.out.println(friendsList);
 		
-		// 속성으로 전송
-		request.getSession().setAttribute("friendsList", friendsList);
-		
 		// view단 처리
+		request.getSession().setAttribute("friendsList", friendsList);
 		request.getRequestDispatcher("/WEB-INF/views/friends/friendsList.jsp").forward(request, response);
 	} // doGet() end
 

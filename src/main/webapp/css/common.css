@@ -48,6 +48,14 @@ header{
     margin: auto;
 }
 
+#title:hover {
+	cursor: pointer;
+}
+
+.navBtn:hover {
+	cursor: pointer;
+}
+
 #centerBox{
 	width: 100%;
     height: 84%;
