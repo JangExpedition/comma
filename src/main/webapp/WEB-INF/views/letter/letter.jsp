@@ -3,15 +3,12 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 	<section>
+		<div id="letterTitle" class="fontStyle">편지쓰기</div>
 		<div id="writeLetter">
 		    <form action="" id="writeLetterFrm">
 		        <fieldset>
+		        	
 		            <table id="writeLetterTable">
-			            <thead>
-			                <tr>
-			                    <th id="letterTitle" class="fontStyle" colspan="3">편지쓰기</th>
-			                </tr>
-			            </thead>
 			            <tbody>
 			                <tr>
 			                    <td id="labelTd" class="fontStyle">보내는 사람</td>
