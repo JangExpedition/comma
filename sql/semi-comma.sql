@@ -54,7 +54,7 @@ select * from chatting_log;
 --drop table design;
 --drop table font;
 --drop table complain;
---drop table counseling;
+--drop table counseling cascade constraints;
 --drop table attachment_counseling;
 --drop table cs_comment;
 --drop table question;
@@ -245,7 +245,8 @@ create table counseling (
 	category varchar2(15) not null,
 	reg_date date default sysdate not null,
     limit_gender char(1) default 'X' not null,
-    limit_age number default 0 not null
+    limit_age number default 0 not null,
+    anonymous char(1)
 );
 -- counseling 제약조건 추가
 alter table counseling
@@ -253,7 +254,8 @@ alter table counseling
     add constraint fk_counseling_writer foreign key (writer) references member(nickname) on delete cascade
     add constraint ck_counseling_category check (category in ('DAILY', 'CAREER', 'LOVE', 'FRIENDS', 'FAMILY', 'STUDY', 'CHILDCARE'))
     add constraint ck_counseling_limit_gender check (limit_gender in ('M', 'F', 'X'))
-    add constraint ck_counseling_limit_age check (limit_age >= 0 and limit_age <= 5);
+    add constraint ck_counseling_limit_age check (limit_age >= 0 and limit_age <= 5)
+    add constraint ck_counseling_anonymous check (anonymous in ('O', 'X'));
 
 -- seq_cs_no 시퀀스 생성
 create sequence seq_cs_no;
