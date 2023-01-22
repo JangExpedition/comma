@@ -8,6 +8,7 @@
 <%
 	Member loginMember = (Member) session.getAttribute("loginMember");
 	String msg = (String) session.getAttribute("msg");
+	if(msg != null) session.removeAttribute("msg");
 	List<Friends> friendsList = (List<Friends>) session.getAttribute("friendsList");
 	System.out.println(loginMember);
 	System.out.println("friendsList = " + friendsList);
