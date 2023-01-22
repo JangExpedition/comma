@@ -16,7 +16,7 @@
 			                <tr>
 			                    <td id="labelTd" class="fontStyle">보내는 사람</td>
 			                    <td>
-			                    	<label><input type="checkbox" name="senderChoice" id="senderNick" value="<%= loginMember.getNickname() %>" onclick="clickSenderChoice(this);" checked />닉네임으로 보내기</label>
+			                    	<label><input type="checkbox" name="senderChoice" id="senderNick" value="" onclick="clickSenderChoice(this);" checked />닉네임으로 보내기</label>
 			                    </td>
 			                    <td>
 			                    	<label id="random"><input type="checkbox" name="senderChoice" id="senderRandom" value="익명" onclick="clickSenderChoice(this);" />익명으로 보내기</label>
@@ -103,7 +103,7 @@
 									<label for="imgChoice" id="labelTd" class="fontStyle">사진 첨부</label>
 								</td>
 								<td colspan="2">
-									<input type="file" name="imgChoice" id="imgChoice" accept=".jpg, .jpeg, .png" multiple />
+									<input type="file" name="imgChoice" id="imgChoice" accept=".jpg, .jpeg, .png" />
 								</td>
 								<!-- 
 								<td colspan="3" class="imgBtn">
@@ -251,37 +251,37 @@
 		
 		
 		let uploadCnt = 0;
+		let uploadFiles = [];
 		const getImageFiles = (e) => {
 			console.log(e.currentTarget);
-			const uploadFiles = [];
-			const files = e.currentTarget.files;
+			const file = e.currentTarget.files;
 			const imagePreview = document.querySelector('#letterImg');
 			uploadCnt += 1;
 			
-			if ([...files].length >= 4 || uploadCnt >= 4) {
+			if (uploadFiles.length >= 4 || uploadCnt >= 4) {
 				alert('이미지는 최대 3장까지 업로드 가능합니다.');
 				uploadCnt -= 1;
 				return;
 			}
-			
-			// 파일 타입 검사
-			[...files].forEach((file) => {
-				if (!file.type.match("image/.*")) {
-					alert('이미지 파일만 업로드 가능합니다.');
-					return;
-				}
 
-				// 파일 갯수 검사
-				if ([...files].length < 4) {
-					uploadFiles.push(file);
-					const reader = new FileReader();
-					reader.onload = (e) => {
-						const preview = createElement(e, file);
-						imagePreview.appendChild(preview);
-					};
-					reader.readAsDataURL(file);
-				}
-			});
+			// 파일 타입 검사
+			if (!file[0].type.match("image/.*")) {
+				alert('이미지 파일만 업로드 가능합니다.');
+				return;
+			}
+
+			// 파일 갯수 검사
+			if (uploadFiles.length >= 4 || uploadCnt < 4) {
+				console.log(file);
+				uploadFiles.push(file[0]);
+				const reader = new FileReader();
+				reader.onload = (e) => {
+					const preview = createElement(e, file[0]);
+					imagePreview.appendChild(preview);
+				};
+				reader.readAsDataURL(file[0]);
+				console.log(uploadFiles);
+			}
 		};
 		
 		const createElement = (e, file) => {
