@@ -116,9 +116,7 @@
 							</tr>
 							<tr id="letterImage" style="display: none;">
 								<td colspan="3" id="letterImg">
-									<img id="letterImg1" class="letterImg" src="" alt="" />
-									<img id="letterImg2" class="letterImg" src="" alt="" />
-									<img id="letterImg3" class="letterImg" src="" alt="" />
+								
 								</td>
 							</tr>
 							<tr id="letterContent" style="display: none;">
@@ -252,16 +250,17 @@
 		}; // clickAgeChoice end
 		
 		
-		
+		let uploadCnt = 0;
 		const getImageFiles = (e) => {
 			console.log(e.currentTarget);
 			const uploadFiles = [];
 			const files = e.currentTarget.files;
 			const imagePreview = document.querySelector('#letterImg');
-			const docFrag = new DocumentFragment();
+			uploadCnt += 1;
 			
-			if ([...files].length >= 4) {
+			if ([...files].length >= 4 || uploadCnt >= 4) {
 				alert('이미지는 최대 3장까지 업로드 가능합니다.');
+				uploadCnt -= 1;
 				return;
 			}
 			
@@ -288,12 +287,13 @@
 		const createElement = (e, file) => {
 			const img = document.createElement('img');
 			img.classList.add('letterImg');
-			img.src = e.target.result;
+			img.src = e.target.result
 			return img;
 		};
 		
 		imgChoice.addEventListener('change', (e) => {
 			getImageFiles(e);
+			console.log(uploadCnt);
 		});
 		
 		
