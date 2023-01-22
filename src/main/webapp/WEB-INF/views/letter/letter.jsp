@@ -16,10 +16,10 @@
 			                <tr>
 			                    <td id="labelTd" class="fontStyle">보내는 사람</td>
 			                    <td>
-			                    	<label><input type="checkbox" name="senderChoice" id="senderNick" value="senderNick" onclick="clickSenderChoice(this);" checked />닉네임으로 보내기</label>
+			                    	<label><input type="checkbox" name="senderChoice" id="senderNick" value="<%= loginMember.getNickname() %>" onclick="clickSenderChoice(this);" checked />닉네임으로 보내기</label>
 			                    </td>
 			                    <td>
-			                    	<label><input type="checkbox" name="senderChoice" id="senderRandom" value="senderRandom" onclick="clickSenderChoice(this);" />익명으로 보내기</label>
+			                    	<label id="random"><input type="checkbox" name="senderChoice" id="senderRandom" value="익명" onclick="clickSenderChoice(this);" />익명으로 보내기</label>
 			                    </td>
 							</tr>
 			                <tr>
@@ -103,7 +103,9 @@
 									<label for="imgChoice" id="labelTd" class="fontStyle">사진 첨부</label>
 								</td>
 								<td colspan="2">
-									<input type="file" name="imgChoice" id="imgChoice" />
+									<input type="file" name="imgChoice1" id="imgChoice1" accept=".jpg, .jpeg, .png" multiple />
+									<input type="file" name="imgChoice2" id="imgChoice2" accept=".jpg, .jpeg, .png" multiple />
+									<input type="file" name="imgChoice3" id="imgChoice3" accept=".jpg, .jpeg, .png" multiple />
 								</td>
 								<!-- 
 								<td colspan="3" class="imgBtn">
@@ -115,10 +117,10 @@
 								 -->
 							</tr>
 							<tr id="letterImage" style="display: none;">
-								<td colspan="3">
-									<img class="letterImg" src="<%= request.getContextPath() %>/images/default.png" alt="" />
-									<img class="letterImg" src="<%= request.getContextPath() %>/images/default.png" alt="" />
-									<img class="letterImg" src="<%= request.getContextPath() %>/images/default.png" alt="" />
+								<td colspan="3" id="letterImg">
+									<img class="letterImg" src="" alt="" />
+									<img class="letterImg" src="" alt="" />
+									<img class="letterImg" src="" alt="" />
 								</td>
 							</tr>
 							<tr id="letterContent" style="display: none;">
@@ -147,10 +149,26 @@
 			
 			const checkBox = document.querySelectorAll("input[type=checkbox]");
 			checkBox.forEach((box) => {
-				console.log(box);
 				box.classList.add('choiceDetail');
 			});
 		};
+		
+		/*
+		  친구에게 보내기 클릭 시 닉네임으로만 보낼 수 있도록 제한
+		*/
+		friend.addEventListener('click', (e) => {
+			random.style.display = 'none';
+			senderNick.checked = 'checked';
+		});
+		
+		/*
+		  임의의 누군가에게 보내는 경우 닉네임 또는 익명으로 보내기 선택 가능
+		*/
+		randomMember.addEventListener('click', (e) => {
+			random.style.display = '';
+			senderNick.checked = 'checked';
+			senderRandom.checked = '';
+		});
 	
 		/*
 		  받는 사람 체크박스 하나씩만 선택 가능
@@ -234,6 +252,53 @@
 			
 			target.checked = true;
 		}; // clickAgeChoice end
+		
+		
+		/*
+		  사진 첨부 시 이미지 미리보기 띄우기
+		*/
+		imgChoice.addEventListener('change', (e) => {
+			const files = e.target.files;
+			const reader = new FileReader();
+			reader.onload = ({target}) => {
+				const letterImgTd = document.querySelector('#letterImg');
+				const img = document.createElement("img");
+				img.classList.add('letterImg');
+				img.src = target.result;
+				letterImgTd.append(img);
+			};
+			reader.readAsDataURL(files[0]);
+			//handleImgFileSelect(e);
+		});
+		const imgCount = document.querySelectorAll('.letterImg');
+		console.log(imgCount);
+		
+		/*
+		let sel_file;
+		
+		const handleImgFileSelect = (e) => {
+			const files = e.target.files;
+			const filesArr = Array.prototype.slice.call(files);
+			
+			filesArr.forEach((f) => {
+				if (!f.type.match("image.*")) {
+					alert("이미지 파일 확장자만 가능합니다.");
+					return;
+				}
+				sel_file = f;
+				
+				const reader = new FileReader();
+				reader.addEventListener('load', (e) => {
+					const letterImgTd = document.querySelector('#letterImg');
+					const img = document.createElement("img");
+					img.classList.add('letterImg');
+					img.src = e.target.result;
+					letterImgTd.append(img);
+				});
+				reader.readAsDataURL(f);
+			});
+		}
+		*/
 	</script>
 </body>
 </html>
