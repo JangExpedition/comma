@@ -103,9 +103,7 @@
 									<label for="imgChoice" id="labelTd" class="fontStyle">사진 첨부</label>
 								</td>
 								<td colspan="2">
-									<input type="file" name="imgChoice1" id="imgChoice1" accept=".jpg, .jpeg, .png" multiple />
-									<input type="file" name="imgChoice2" id="imgChoice2" accept=".jpg, .jpeg, .png" multiple />
-									<input type="file" name="imgChoice3" id="imgChoice3" accept=".jpg, .jpeg, .png" multiple />
+									<input type="file" name="imgChoice" id="imgChoice" accept=".jpg, .jpeg, .png" multiple />
 								</td>
 								<!-- 
 								<td colspan="3" class="imgBtn">
@@ -118,9 +116,9 @@
 							</tr>
 							<tr id="letterImage" style="display: none;">
 								<td colspan="3" id="letterImg">
-									<img class="letterImg" src="" alt="" />
-									<img class="letterImg" src="" alt="" />
-									<img class="letterImg" src="" alt="" />
+									<img id="letterImg1" class="letterImg" src="" alt="" />
+									<img id="letterImg2" class="letterImg" src="" alt="" />
+									<img id="letterImg3" class="letterImg" src="" alt="" />
 								</td>
 							</tr>
 							<tr id="letterContent" style="display: none;">
@@ -254,50 +252,65 @@
 		}; // clickAgeChoice end
 		
 		
+		
+		const getImageFiles = (e) => {
+			console.log(e.currentTarget);
+			const uploadFiles = [];
+			const files = e.currentTarget.files;
+			const imagePreview = document.querySelector('#letterImg');
+			const docFrag = new DocumentFragment();
+			
+			if ([...files].length >= 4) {
+				alert('이미지는 최대 3장까지 업로드 가능합니다.');
+				return;
+			}
+			
+			// 파일 타입 검사
+			[...files].forEach((file) => {
+				if (!file.type.match("image/.*")) {
+					alert('이미지 파일만 업로드 가능합니다.');
+					return;
+				}
+
+				// 파일 갯수 검사
+				if ([...files].length < 4) {
+					uploadFiles.push(file);
+					const reader = new FileReader();
+					reader.onload = (e) => {
+						const preview = createElement(e, file);
+						imagePreview.appendChild(preview);
+					};
+					reader.readAsDataURL(file);
+				}
+			});
+		};
+		
+		const createElement = (e, file) => {
+			const img = document.createElement('img');
+			img.classList.add('letterImg');
+			img.src = e.target.result;
+			return img;
+		};
+		
+		imgChoice.addEventListener('change', (e) => {
+			getImageFiles(e);
+		});
+		
+		
+		
 		/*
 		  사진 첨부 시 이미지 미리보기 띄우기
-		*/
-		imgChoice.addEventListener('change', (e) => {
+		
+		imgChoice3.addEventListener('change', (e) => {
 			const files = e.target.files;
 			const reader = new FileReader();
 			reader.onload = ({target}) => {
-				const letterImgTd = document.querySelector('#letterImg');
-				const img = document.createElement("img");
-				img.classList.add('letterImg');
-				img.src = target.result;
-				letterImgTd.append(img);
+				const letterImg = document.querySelector('#letterImg3');
+				letterImg.src = target.result;
+				console.log(letterImg.src);
 			};
 			reader.readAsDataURL(files[0]);
-			//handleImgFileSelect(e);
 		});
-		const imgCount = document.querySelectorAll('.letterImg');
-		console.log(imgCount);
-		
-		/*
-		let sel_file;
-		
-		const handleImgFileSelect = (e) => {
-			const files = e.target.files;
-			const filesArr = Array.prototype.slice.call(files);
-			
-			filesArr.forEach((f) => {
-				if (!f.type.match("image.*")) {
-					alert("이미지 파일 확장자만 가능합니다.");
-					return;
-				}
-				sel_file = f;
-				
-				const reader = new FileReader();
-				reader.addEventListener('load', (e) => {
-					const letterImgTd = document.querySelector('#letterImg');
-					const img = document.createElement("img");
-					img.classList.add('letterImg');
-					img.src = e.target.result;
-					letterImgTd.append(img);
-				});
-				reader.readAsDataURL(f);
-			});
-		}
 		*/
 	</script>
 </body>
