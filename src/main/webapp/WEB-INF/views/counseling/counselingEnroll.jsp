@@ -8,6 +8,7 @@
 </div>
 
 <table>
+<form action="<%= request.getContextPath() %>/counseling/insertCounseling" method="POST">
 	<tr>
 		<td>제목작성 :</td>
 
@@ -29,12 +30,12 @@
 		<td>공개 나이대 선택 :</td>
 
 		<td><select name="age">
-				<option value="10">10대 이상</option>
-				<option value="20">20대 이상</option>
-				<option value="30">30대 이상</option>
-				<option value="40">40대 이상</option>
-				<option value="50">50대 이상</option>
-				<option value="irrelevant">연령 무관</option>
+				<option value="1">10대 이상</option>
+				<option value="2">20대 이상</option>
+				<option value="3">30대 이상</option>
+				<option value="4">40대 이상</option>
+				<option value="5">50대 이상</option>
+				<option value="0">연령 무관</option>
 		</select></td>
 	</tr>
 
@@ -42,9 +43,23 @@
 	<tr>
 		<td>공개 성별 선택 :</td>
 
-		<td class="input fontsytle">남자 <input type="radio" name="gender"
-			value="남자"> 여자 <input type="radio" name="gender" value="여자">
-			전체공개 <input type="radio" name="gender" value="전체공개">
+		<td class="input fontsytle">
+			<select name="gender" id="gender" name="gender" class="inputBar" required >
+				<option value="A">전체</option>
+				<option value="M">남자</option>
+				<option value="F">여자</option>
+			</select>
+		</td>
+	</tr>
+	<!-- 익명설정  -->
+	<tr>
+		<td>익명 선택 :</td>
+
+		<td class="input fontsytle">
+			<select name="anonymous" id="anonymous" name="anonymous" class="inputBar" required >
+				<option value="X">닉네임으로 작성하기</option>
+				<option value="O">익명으로 작성하기</option>
+			</select>
 		</td>
 	</tr>
 
@@ -55,14 +70,15 @@
 
 		<td class="input fontsytle"><select name="category">
 				<option value="" disabled selected>카테고리를 선택하세요.</option>
-				<option value="study">진로</option>
-				<option value="love">연애</option>
-				<option value="family">가족</option>
-				<option value="childcare">육아</option>
-				<option value="career">직장</option>
-				<option value="daily">일상</option>
-				<option value="friends">친구</option>
+				<option value="STUDY">진로</option>
+				<option value="LOVE">연애</option>
+				<option value="FAMILY">가족</option>
+				<option value="CHILDCARE">육아</option>
+				<option value="CAREER">직장</option>
+				<option value="DARILY">일상</option>
+				<option value="FRIENDS">친구</option>
 		</select></td>
+		<input type="hidden" name="loginMember" value="<%= loginMember.getNickname() %>"/>
 	</tr>
 
 
@@ -70,8 +86,8 @@
 	<tr>
 		<td><input type="submit" id="write" value="고민 작성하기"></td>
 	<tr>
+</form>
 </table>
 </body>
 </html>
-
 <!-- crtl shift f 줄맞춤  -->

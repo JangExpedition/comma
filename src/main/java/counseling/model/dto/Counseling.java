@@ -1,25 +1,52 @@
 package counseling.model.dto;
 
+import java.sql.Date;
+
 import common.Category;
 import common.Form;
+import common.OX;
 
 public class Counseling extends Form{
 	private String title;
 	private int views;
 	private int like;
 	private Category category;
+	private String limitGender;
+	private int limitAge;
+	private OX anonymous;
 	
 	public Counseling() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	public Counseling(int no, String writer, String content, Date regDate) {
+		super(no, writer, content, regDate);
+		// TODO Auto-generated constructor stub
+	}
 
-	public Counseling(String title, int views, int like, Category category) {
+	public Counseling(int no, String writer, String content, Date regDate, String title, int views, int like, Category category, String limitGender, int limitAge,
+			OX anonymous) {
+		super(no, writer, content, regDate);
+		this.title = title;
+		this.views = views;
+		this.like = like;
+		this.category = category;
+		this.limitGender = limitGender;
+		this.limitAge = limitAge;
+		this.anonymous = anonymous;
+	}
+	
+	public Counseling(String title, int views, int like, Category category, String limitGender, int limitAge,
+			OX anonymous) {
 		super();
 		this.title = title;
 		this.views = views;
 		this.like = like;
 		this.category = category;
+		this.limitGender = limitGender;
+		this.limitAge = limitAge;
+		this.anonymous = anonymous;
 	}
 
 	public String getTitle() {
@@ -54,10 +81,36 @@ public class Counseling extends Form{
 		this.category = category;
 	}
 
+	public String getLimitGender() {
+		return limitGender;
+	}
+
+	public void setLimitGender(String limitGender) {
+		this.limitGender = limitGender;
+	}
+
+	public int getLimitAge() {
+		return limitAge;
+	}
+
+	public void setLimitAge(int limitAge) {
+		this.limitAge = limitAge;
+	}
+
+	public OX getAnonymous() {
+		return anonymous;
+	}
+
+	public void setAnonymous(OX anonymous) {
+		this.anonymous = anonymous;
+	}
+
 	@Override
 	public String toString() {
 		return "Counseling [title=" + title + ", views=" + views + ", like=" + like + ", category=" + category
+				+ ", limitGender=" + limitGender + ", limitAge=" + limitAge + ", Anonymous=" + anonymous
 				+ ", toString()=" + super.toString() + "]";
 	}
+	
 	
 }
