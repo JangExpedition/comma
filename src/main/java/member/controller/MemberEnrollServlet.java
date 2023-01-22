@@ -22,23 +22,13 @@ import member.model.service.MemberService;
 public class MemberEnrollServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private MemberService memberService = new MemberService();
-	
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		try {
-			
-//			String saveDirectory = getServletContext().getRealPath("/profile");
-//			int maxPostSize = 10 * 1024 * 1024;
-//			String encoding = "utf-8";
-//			FileRenamePolicy policy = new CommaFileRenamePolicy();
-//			
-//			MultipartRequest multiReq = new MultipartRequest(request, saveDirectory, maxPostSize, encoding, policy);
-//			
-//			String originalFilename = multiReq.getOriginalFileName(imageFile.toString());
-//			String renamedFilename = multiReq.getFilesystemName(imageFile.toString());
 			
 			String nickname = request.getParameter("nickname");
 			String email = request.getParameter("email");
