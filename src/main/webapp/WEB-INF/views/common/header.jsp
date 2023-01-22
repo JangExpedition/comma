@@ -3,9 +3,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="member.model.dto.Member" %>
+<%@page import="java.sql.Connection" %>
+<%@page import="common.JdbcTemplate" %>
 <%
 	Member loginMember = (Member) session.getAttribute("loginMember");
 	String msg = (String) session.getAttribute("msg");
+	if(msg != null) session.removeAttribute("msg");
 	List<Friends> friendsList = (List<Friends>) session.getAttribute("friendsList");
 	System.out.println(loginMember);
 	System.out.println("friendsList = " + friendsList);
@@ -16,6 +19,11 @@
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 	<script src="<%= request.getContextPath() %>/js/jquery-3.6.1.js"></script>
+	<script>
+	<% if(msg != null) { %>
+		alert("<%= msg %>");
+	<% } %>
+	</script>
 	<title> 쉼표 ,</title>
 	<script>
 	/*
@@ -204,15 +212,26 @@
 	    document.querySelector("#toPost").addEventListener('click', (e) => {
 	    	location.href = "<%= request.getContextPath() %>/letter/letterList";
 	    });
-	    
+
 	    /*
-	    Date: 2023. 01. 21
-	    
-	    logout 기능 서블릿 이동 메소드
+	   	Date : 2023. 1. 22
+	   	@장원정
+	   	
+	    고민상담소jsp 이동 메서드
 	    */
-	    document.querySelector("#logoutBtn").addEventListener('click', (e) => {
-	    	location.href = '<%= request.getContextPath() %>/member/logout';
-	    });
+	    document.querySelector("#toQuestion").addEventListener("click", (e)=>{
+	    	location.href = "<%= request.getContextPath() %>/question";
+	    })
+	    
+	    
+		/*
+		Date : 2023. 1. 21
+		@장원정
+		로그아웃 메서드
+		*/
+		document.querySelector("#logoutBtn").addEventListener("click", (e)=>{
+			location.href = "<%= request.getContextPath() %>/member/logout";	
+		});
 	    
 	    </script>
 	    <% } %>

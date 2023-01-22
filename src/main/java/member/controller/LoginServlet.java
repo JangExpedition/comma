@@ -32,12 +32,12 @@ public class LoginServlet extends HttpServlet {
 		System.out.println(request);
 		HttpSession session = request.getSession();
 		String id = request.getParameter("memberId");
-		String pwd = request.getParameter("password");
-		System.out.println("id =" + id + ", pwd = " + pwd);
+		String password = CommaUtils.getEncryptedPassword(request.getParameter("password"), id);
+		System.out.println("id =" + id + ", password = " + password);
 		
 		Member member = memberService.selectOneMember(id);
 		
-		if(member != null && pwd.equals(member.getPassword())) {
+		if(member != null && password.equals(member.getPassword())) {
 			List<Friends> friendsList = friendsService.selectAllFriends(member.getNickname());
 			session.setAttribute("loginMember", member);
 			session.setAttribute("friendsList", friendsList);

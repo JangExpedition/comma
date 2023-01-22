@@ -16,6 +16,11 @@
 					<table>
 						<tbody>
 							<tr>
+								<td>
+									<img src="" alt="" />
+								</td>
+							</tr>
+							<tr>
 								<td class="labelTd fontStyle"><label for="nicknameId"></label></td>
 								<td></td>
 								<td></td>
