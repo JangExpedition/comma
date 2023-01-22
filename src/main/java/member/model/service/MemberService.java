@@ -11,9 +11,9 @@ public class MemberService {
 
 	private MemberDao memberDao = new MemberDao();
 	
-	public List<Member> selectAllNickname(){
+	public List<Member> selectAllMember(){
 		Connection conn = getConnection();
-		List<Member> memberList = memberDao.selectAllNickname(conn);
+		List<Member> memberList = memberDao.selectAllMember(conn);
 		close(conn);
 		return memberList;
 	}
@@ -32,8 +32,8 @@ public class MemberService {
 			result = memberDao.insertMember(conn, member);
 			commit(conn);
 		}catch (Exception e) {
-			e.printStackTrace();
 			rollback(conn);
+			throw e;
 		}finally {
 			close(conn);
 		}

@@ -99,8 +99,6 @@ create table member(
     renamed_filename varchar2(300),
     warning_count number default 0 not null
 );
-insert into member values('admin@gmail.com', 'admin', 1234, sysdate, 'M', default, 'A', default, 'sdf', default);
-insert into member values('admin1@gmail.com', 'admin1', 1234, sysdate, 'M', default, 'A', default, 'sdf', default);
 -- member 제약조건 추가
 alter table member
     add constraint pk_member_email primary key (email)

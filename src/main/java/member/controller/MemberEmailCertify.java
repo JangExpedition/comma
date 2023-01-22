@@ -24,8 +24,8 @@ public class MemberEmailCertify extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String clientMail = request.getParameter("clientMail");
-		String code = mail.sendMail(clientMail);
+		String clientEmail = request.getParameter("clientEmail");
+		String code = mail.sendMail(clientEmail);
 		
 		response.setContentType("application/jsp; charset=utf-8");
 		Gson gson = new Gson();

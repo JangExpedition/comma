@@ -18,17 +18,12 @@ public class JdbcTemplate {
 	
 	// 초기화 블럭
 	static {
-		final String datasourceConfigPath = JdbcTemplate.class.getResource("/datasource.properties").getPath();
-		Properties prop = new Properties();
-		try {
-			prop.load(new FileReader(datasourceConfigPath));
-			driverClass = prop.getProperty("driverClass");
-			url = prop.getProperty("url");
-			user = prop.getProperty("user");
-			password = prop.getProperty("password");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		
+		driverClass = "oracle.jdbc.OracleDriver";
+		url = "jdbc:oracle:thin:@KEKYC3K85TBQ8DZ9_high?TNS_ADMIN=/Users/jangcccci/dev/Wallet_KEKYC3K85TBQ8DZ9";
+		user = "ADMIN";
+		password = "Tnlavytnlavy1!";
+		
 		
 		try {
 			// 프로그램 실행 시 최초 1회만 처리

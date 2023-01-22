@@ -69,16 +69,6 @@
 			</div>
 		</div>
 	</section>
-	<script>
-		/*
-		Date : 2023. 1. 21
-		@장원정
-		로그아웃 메서드
-		*/
-		document.querySelector("#logoutBtn").addEventListener("click", (e)=>{
-			location.href = "<%= request.getContextPath() %>/member/logout";	
-		});
-	</script>
 	<% } %>
 	<!-- Modal-->
 	<!-- The Modal -->
@@ -92,7 +82,7 @@
 			
 			<!-- Modal body -->
 			<div id="modalBody">
-			  <form action="" id="enrollFrm" name="enrollFrm">
+			  <form action="<%= request.getContextPath() %>/member/memberEnroll" id="enrollFrm" name="enrollFrm" method="POST">
 				<fieldset id="firstEnrollFrm" class="enrollFset">
 					<div id="signUpTitle">회원가입</div>
 					<label for="nickname">닉네임</label>
@@ -122,10 +112,10 @@
 					<input type="text" id="birth" name="birth" placeholder="생년월일 8자리를 입력주세요. (예 : 19930803)" class="inputBar" required />
 					<span id="birthErrorMsg" class="errorMsg fontStyle"></span>
 					<label for="gender">성별</label>
-					<select name="gender" id="gender" class="inputBar" required >
+					<select name="gender" id="gender" name="gender" class="inputBar" required >
 						<option value="">성별</option>
-						<option value="남자">남자</option>
-						<option value="여자">여자</option>
+						<option value="M">남자</option>
+						<option value="F">여자</option>
 					</select>
 					<span id="genderErrorMsg" class="errorMsg fontStyle"></span>
 				</fieldset>
@@ -141,7 +131,8 @@
 	<script>	
 		let cnt = 0; // 회원가입 폼 페이지 번호 변수
 		const btn = document.querySelector("#nextBtn"); // 회원가입 폼 next 버튼
-		let nextBool = 0; // next버튼 활성화
+		let nextNum1 = 0; // next버튼 활성화
+		let nextNum2 = 0; // next버튼 활성화
 		let clientEmail = "";
 		
 		/*
@@ -162,6 +153,8 @@
 			e.target.value = "Next";
 			e.target.type = "button";
 			cnt = 0;
+			nextNum1 = 0;
+			nextNum2 = 0;
 		});
 	
 		/*
@@ -172,7 +165,6 @@
 		document.querySelector("#closeBtn").addEventListener("click", (e)=>{
 			document.querySelector("#enrollModal").style.display = "none";
 		});
-
 		document.querySelector("#enrollModal").addEventListener("click", (e)=>{
 			if(e.target !== e.currentTarget){
 				return;
@@ -192,10 +184,12 @@
 				document.querySelector("#thirdEnrollFrm").style.display = "none";
 				document.querySelector("#fourthEnrollFrm").style.display = "none";
 				cnt = cnt + 1;
+				nextNum1 = 0;
+				nextNum2 = 0;
 				return;
 			}
 			if(cnt === 1){
-				emailCertify(clientEmail);
+				/* emailCertify(clientEmail); */
 				/* btn.disabled = true; */
 				
 				document.querySelector("#firstEnrollFrm").style.display = "none";
@@ -203,6 +197,8 @@
 				document.querySelector("#thirdEnrollFrm").style.display = "none";
 				document.querySelector("#fourthEnrollFrm").style.display = "none";
 				cnt = cnt + 1;
+				nextNum1 = 0;
+				nextNum2 = 0;
 				return;
 			}
 			if(cnt === 2){
@@ -212,6 +208,8 @@
 				document.querySelector("#thirdEnrollFrm").style.display = "flex";
 				document.querySelector("#fourthEnrollFrm").style.display = "none";
 				cnt = cnt + 1;
+				nextNum1 = 0;
+				nextNum2 = 0;
 				return;
 			}
 			if(cnt === 3){
@@ -220,9 +218,11 @@
 				document.querySelector("#secondEnrollFrm").style.display = "none";
 				document.querySelector("#thirdEnrollFrm").style.display = "none";
 				document.querySelector("#fourthEnrollFrm").style.display = "flex";
-				e.target.value = "Submit";
+				e.target.value = "Sign up";
 				e.target.type = "submit";
 				cnt = cnt + 1;
+				nextNum1 = 0;
+				nextNum2 = 0;
 				return;
 			}
 			if(cnt === 4){
@@ -245,7 +245,7 @@
 			// 아이디 유효성검사
 			if(!/^[A-Za-z가-힣0-9]{4,12}$/.test(nickname)){
 				nicknameErrorMsg.innerHTML = "사용할 수 없는 닉네임입니다.";
-				nextBool = 0;
+				nextNum1 = 0;
 				return;
 			}
 			
@@ -272,18 +272,16 @@
 					if(bool){
 						// 성공 시
 						nicknameErrorMsg.style.color = "green";
-						nextBool = nextBool + 1;
-						console.log(nextBool);
 						nicknameErrorMsg.innerHTML = "사용가능한 닉네임입니다.";
+						nextNum1 = 1;
 					} else{
 						// 실패 시
 						nicknameErrorMsg.innerHTML = "이미 존재하는 닉네임입니다.";
-						nextBool = 0;
+						nextNum1 = 0;
 					}
 					
-					if(nextBool === 2){
+					if(nextNum1 === 1 && nextNum2 === 1){
 						btn.disabled = false;
-						nextBool = 0;
 					}
 					
 				},
@@ -328,18 +326,17 @@
 					if(bool){
 						// 성공 시
 						emailErrorMsg.style.color = "green";
-						nextBool = nextBool + 1;
 						emailErrorMsg.innerHTML = "사용가능한 이메일입니다.";
 						clientEmail = email;
+						nextNum2 = 1;
 					} else{
 						// 실패 시
 						emailErrorMsg.innerHTML = "이미 존재하는 이메일입니다.";
-						nextBool = 0;
+						nextNum2 = 0;
 					}
 					
-				    if(nextBool === 2){
+				    if(nextNum1 === 1 && nextNum2 === 1){
 						btn.disabled = false;
-						nextBool = 0;
 					}
 					
 				},
@@ -353,42 +350,40 @@
 			const password = e.target.value;
 			const pwdErrorMsg = document.querySelector("#pwdErrorMsg");
 			pwdErrorMsg.style.color = "tomato";
-			console.log(password);
 			
 		    // 숫자 검사
 		    if(!/\d/.test(password)){
 		    	pwdErrorMsg.innerHTML = "비밀번호는 하나 이상의 숫자를 반드시 포함해야 합니다.";
-		    	nextBool = 0;
+		    	nextNum1 = 0;
 		        return;
 		    }
 		    
 		    // 문자 검사
 		    if(!/[a-zㅏ-ㅣㄱ-ㅎ]/i.test(password)){
 		    	pwdErrorMsg.innerHTML = "비밀번호는 하나 이상의 문자를 반드시 포함해야 합니다.";
-		    	nextBool = 0;
+		    	nextNum1 = 0;
 		        return;
 		    }
 		    
 		    // 특수문자 검사
 		    if(!/[!@#$%^&*()]/.test(password)){
 		    	pwdErrorMsg.innerHTML = "비밀번호는 하나 이상의 특수문자를 반드시 포함해야 합니다.";
-		    	nextBool = 0;
+		    	nextNum1 = 0;
 		        return;
 		    }
 			
 			if(!/^[a-zㅏ-ㅣㄱ-ㅎ0-9!@#$%^&*()]{4,}$/i.test(password)){
 				pwdErrorMsg.innerHTML = "비밀번호는 영문자/숫자/특수문자로 구성된 4글자이상이어야합니다.";
-				nextBool = 0;
+				nextNum1 = 0;
 				return;
 			}
 			
 			pwdErrorMsg.style.color = "green";
-			nextBool = nextBool + 1;
 			pwdErrorMsg.innerHTML = "사용가능한 비밀번호입니다.";
+			nextNum1 = 1;
 			
-			if(nextBool === 2){
+			if(nextNum1 === 1 && nextNum2 === 1){
 				btn.disabled = false;
-				nextBool = 0;
 			}
 		}); // 비밀번호 검사 end
 		
@@ -401,17 +396,16 @@
 			
 			if(pwd !== pwdCheck){
 				pwdCErrorMsg.innerHTML = "비밀번호가 일치하지 않습니다.";
-				nextBool = 0;
+				nextNum2 = 0;
 				return;
 			}
 			
 			pwdCErrorMsg.style.color = "green";
-			nextBool = nextBool + 1;
 			pwdCErrorMsg.innerHTML = "비밀번호가 일치합니다.";
+			nextNum2 = 1;
 			
-			if(nextBool === 2){
+			if(nextNum1 === 1 && nextNum2 === 1){
 				btn.disabled = false;
-				nextBool = 0;
 			}
 		}); // 비밀번호 일치검사 end
 		
@@ -439,7 +433,6 @@
 					} else if ((birthMonth==4 || birthMonth==6 || birthMonth==9 || birthMonth==11) && birthDate==31) {
 						bool = false;
 					} else if (birthMonth == 2) {
-
 						const isleap = (birthYear % 4 == 0 && (birthYear % 100 != 0 || birthYear % 400 == 0));
 						if (birthDate>29 || (birthDate==29 && !isleap)) {
 							bool = false;
@@ -458,28 +451,35 @@
 				if(bool){
 					// 성공시
 					birthErrorMsg.style.color = "green";
-					nextBool = nextBool + 1;
 					birthErrorMsg.innerHTML = "유효한 생년월일입니다.";
+					nextNum1 = 1;
 				}else{
 					// 실패시	
 					birthErrorMsg.innerHTML = "유효하지 않는 생년월일입니다.";
-					nextBool = 0;
+					nextNum1 = 0;
 					return;
 				}
 				
-				if(nextBool === 2){
+				if(nextNum1 === 1 && nextNum2 === 1){
 					btn.disabled = false;
-					nextBool = 0;
 				}
 		}); // 생년월일 검사 end
 		
-		$("gender").focusout((e)=>{
-			const gender = e.target.value;
-			console.log(e.target);
-			
-			if(nextBool === 2){
-				btn.disabled = false;
-				nextBool = 0;
+		$("#gender").on("change", (e)=>{
+			const genderErrorMsg = document.querySelector("#genderErrorMsg");
+			genderErrorMsg.style.color = "tomato";
+			if(e.target.value === ""){
+				genderErrorMsg.innerHTML = "성별을 선택해주세요."
+				nextNum2 = 0;
+			}else{
+				genderErrorMsg.style.color = "green";
+				genderErrorMsg.innerHTML = "유효한 생년월일입니다.";
+				genderErrorMsg.innerHTML = "회원가입을 진행해주세요."
+				nextNum2 = 1;
+				
+				if(nextNum1 === 1 && nextNum2 === 1){
+					btn.disabled = false;
+				}
 			}
 		});
 		
@@ -501,16 +501,6 @@
     			},
     			error : console.log
 			});
-		};
-		
-		/*
-		Date : 2023. 1. 18
-		@장원정
-		회원가입 폼제출 메서드
-		*/
-		document.enrollFrm.onsubmit = (e) => {
-			e.preventDefault();
-			document.querySelector("#closeBtn").click();
 		};
 		
 	</script>

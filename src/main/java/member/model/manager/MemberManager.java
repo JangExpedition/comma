@@ -13,7 +13,7 @@ public class MemberManager {
 	private MemberService memberService = new MemberService();
 	
 	private MemberManager() {
-		memberList = memberService.selectAllNickname();
+		memberList = memberService.selectAllMember();
 	}
 	
 	public static MemberManager getInstance() {
