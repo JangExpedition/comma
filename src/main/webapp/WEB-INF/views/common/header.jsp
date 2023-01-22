@@ -213,6 +213,17 @@
 	    	location.href = "<%= request.getContextPath() %>/letter/letterList";
 	    });
 	    
+	    /*
+	   	Date : 2023. 1. 22
+	   	@장원정
+	   	
+	    고민상담소jsp 이동 메서드
+	    */
+	    document.querySelector("#toQuestion").addEventListener("click", (e)=>{
+	    	location.href = "<%= request.getContextPath() %>/question";
+	    })
+	    
+	    
 		/*
 		Date : 2023. 1. 21
 		@장원정
