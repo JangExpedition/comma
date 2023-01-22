@@ -30,9 +30,9 @@ public class MemberDao {
 	}
 	
 
-	public List<Member> selectAllNickname(Connection conn){
+	public List<Member> selectAllMember(Connection conn){
 		List<Member> memberList = new ArrayList<>();
-		String sql = prop.getProperty("selectAllNickname");
+		String sql = prop.getProperty("selectAllMember");
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
 			try(ResultSet rset = pstmt.executeQuery()){
 				while(rset.next()) {
@@ -85,18 +85,17 @@ public class MemberDao {
 		int result = 0;
 		String sql = prop.getProperty("insertMember");
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			
 			pstmt.setString(1, member.getEmail());
 			pstmt.setString(2, member.getNickname());
 			pstmt.setString(3, member.getPassword());
 			pstmt.setDate(4, member.getBirthday());
 			pstmt.setString(5, member.getGender().toString());
-			pstmt.setString(6, member.getOriginalFilename());
-			pstmt.setString(7, member.getRenamedFilename());
 			
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
-			throw new MemberException();
+			throw new MemberException("회원가입오류!", e);
 		}
 		return result;
 	}
