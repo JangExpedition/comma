@@ -39,6 +39,7 @@ public class LetterDao {
 		letter.setContent(rset.getString("content"));
 		letter.setRegDate(rset.getDate("reg_date"));
 		letter.setRead_check(OX.valueOf(rset.getString("read_check")));
+		letter.setAnonymous(OX.valueOf(rset.getString("anonymous")));
 		return letter;
 	} // handleLetterResultSet() end
 

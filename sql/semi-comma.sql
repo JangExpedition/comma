@@ -179,7 +179,8 @@ create table letter (
 	reg_date date default sysdate not null,
 	read_check char(1) default 'X' not null,
     limit_gender char(1) default 'X' not null,
-    limit_age number default 0 not null
+    limit_age number default 0 not null,
+    anonymous char(1)
 );
 -- letter 테이블 제약조건 추가
 alter table letter
@@ -190,7 +191,8 @@ alter table letter
     add constraint fk_letter_font_no foreign key (font_no) references font(no)
     add constraint ck_letter_read_check check (read_check in ('O', 'X'))
     add constraint ck_letter_limit_gender check (limit_gender in ('M', 'F', 'X'))
-    add constraint ck_letter_limit_age check (limit_age >= 0 and limit_age <= 5);
+    add constraint ck_letter_limit_age check (limit_age >= 0 and limit_age <= 5)
+    add constraint ck_counseling_anonymous check (anonymous in ('O', 'X'));
 
 -- seq_letter_no 시퀀스 생성
 create sequence seq_letter_no;
