@@ -136,6 +136,9 @@ alter table friends
 -- seq_friends_no 시퀀스 생성
 create sequence seq_friends_no;
 
+--insert into friends values (seq_friends_no.nextval, 'test1', 'test2', 'O');
+--insert into friends values (seq_friends_no.nextval, 'test1', 'test3', 'O');
+--insert into friends values (seq_friends_no.nextval, 'test2', 'test3', 'O');
 
 -- design 테이블 생성
 create table design (
@@ -153,6 +156,7 @@ alter table design
 -- seq_design_no 시퀀스 생성
 create sequence seq_design_no;
 
+--insert into design values (seq_design_no.nextval, 'L', null, null, default);
 
 -- font 테이블 생성
 create table font (
@@ -167,6 +171,7 @@ alter table font
 -- seq_font_no 시퀀스 생성
 create sequence seq_font_no;
 
+--insert into font values (seq_font_no.nextval, '테스트', '테스트');
 
 -- letter 테이블 생성
 create table letter (
