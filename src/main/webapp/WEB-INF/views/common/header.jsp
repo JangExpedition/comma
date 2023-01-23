@@ -212,7 +212,7 @@
 	    document.querySelector("#toPost").addEventListener('click', (e) => {
 	    	location.href = "<%= request.getContextPath() %>/letter/letterList";
 	    });
-	    
+
 	    /*
 	   	Date : 2023. 1. 22
 	   	@장원정

@@ -2,21 +2,24 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
+	<script>
+		const sendFriend = localStorage.getItem('friendNick');
+		console.log('sendFriend = ' + sendFriend);
+	</script>
 	<section>
 		<div id="letterTitle" class="fontStyle">편지쓰기</div>
 		<div id="writeLetter">
-		    <form action="" id="writeLetterFrm">
+		    <form action="<%= request.getContextPath() %>/letter/letterEnroll" id="writeLetterFrm">
 		        <fieldset>
-		        	
 		            <table id="writeLetterTable">
 			            <tbody>
 			                <tr>
 			                    <td id="labelTd" class="fontStyle">보내는 사람</td>
 			                    <td>
-			                    	<label><input type="checkbox" name="senderChoice" id="senderNick" value="senderNick" onclick="clickSenderChoice(this);" checked />닉네임으로 보내기</label>
+			                    	<label><input type="checkbox" name="senderChoice" id="senderNick" value="" onclick="clickSenderChoice(this);" checked />닉네임으로 보내기</label>
 			                    </td>
 			                    <td>
-			                    	<label><input type="checkbox" name="senderChoice" id="senderRandom" value="senderRandom" onclick="clickSenderChoice(this);" />익명으로 보내기</label>
+			                    	<label id="random"><input type="checkbox" name="senderChoice" id="senderRandom" value="익명" onclick="clickSenderChoice(this);" />익명으로 보내기</label>
 			                    </td>
 							</tr>
 			                <tr>
@@ -53,7 +56,9 @@
 			                </tr>
 						<% if (friendsList != null) { %>
 			                <tr id="friendsListTr" style="display: none;">
-			                    <td colspan="3">
+			                	<td></td>
+			                	<td></td>
+			                    <td>
 			                    	<input type="text" list="friendsList"/>
 			                        <datalist id="friendsList">
 			                    <% for (Friends friend : friendsList) { %>
@@ -73,10 +78,10 @@
 			                    </td>
 			                    <td colspan="2">
 			                    	<select name="fontChoice" id="fontChoice">
-			                    		<option value="font1">폰트1</option>
-			                    		<option value="font2">폰트2</option>
-			                    		<option value="font3">폰트3</option>
-			                    		<option value="font4">폰트4</option>
+			                    		<option value="1">폰트1</option>
+			                    		<option value="2">폰트2</option>
+			                    		<option value="3">폰트3</option>
+			                    		<option value="4">폰트4</option>
 			                    	</select>
 			                    </td>
 							</tr>
@@ -86,10 +91,10 @@
 			                    </td>
 			                    <td colspan="2">
 			                    	<select name="designChoice" id="designChoice">
-			                    		<option value="design1">디자인1</option>
-			                    		<option value="design2">디자인2</option>
-			                    		<option value="design3">디자인3</option>
-			                    		<option value="design4">디자인4</option>
+			                    		<option value="1">디자인1</option>
+			                    		<option value="2">디자인2</option>
+			                    		<option value="3">디자인3</option>
+			                    		<option value="4">디자인4</option>
 			                    	</select>
 			                    </td>
 							</tr>
@@ -98,7 +103,7 @@
 									<label for="imgChoice" id="labelTd" class="fontStyle">사진 첨부</label>
 								</td>
 								<td colspan="2">
-									<input type="file" name="imgChoice" id="imgChoice" />
+									<input type="file" name="imgChoice" id="imgChoice" accept=".jpg, .jpeg, .png" />
 								</td>
 								<!-- 
 								<td colspan="3" class="imgBtn">
@@ -110,10 +115,8 @@
 								 -->
 							</tr>
 							<tr id="letterImage" style="display: none;">
-								<td colspan="3">
-									<img class="letterImg" src="<%= request.getContextPath() %>/images/default.png" alt="" />
-									<img class="letterImg" src="<%= request.getContextPath() %>/images/default.png" alt="" />
-									<img class="letterImg" src="<%= request.getContextPath() %>/images/default.png" alt="" />
+								<td colspan="3" id="letterImg">
+								
 								</td>
 							</tr>
 							<tr id="letterContent" style="display: none;">
@@ -142,10 +145,26 @@
 			
 			const checkBox = document.querySelectorAll("input[type=checkbox]");
 			checkBox.forEach((box) => {
-				console.log(box);
 				box.classList.add('choiceDetail');
 			});
 		};
+		
+		/*
+		  친구에게 보내기 클릭 시 닉네임으로만 보낼 수 있도록 제한
+		*/
+		friend.addEventListener('click', (e) => {
+			random.style.display = 'none';
+			senderNick.checked = 'checked';
+		});
+		
+		/*
+		  임의의 누군가에게 보내는 경우 닉네임 또는 익명으로 보내기 선택 가능
+		*/
+		randomMember.addEventListener('click', (e) => {
+			random.style.display = '';
+			senderNick.checked = 'checked';
+			senderRandom.checked = '';
+		});
 	
 		/*
 		  받는 사람 체크박스 하나씩만 선택 가능
@@ -229,6 +248,71 @@
 			
 			target.checked = true;
 		}; // clickAgeChoice end
+		
+		
+		/*
+		  사진 3장까지만 첨부 가능하고 미리보기 띄워줌
+		*/
+		let uploadCnt = 0;
+		let uploadFiles = [];
+		const getImageFiles = (e) => {
+			const file = e.currentTarget.files;
+			const imagePreview = document.querySelector('#letterImg');
+			uploadCnt += 1;
+			
+			if (uploadFiles.length >= 4 || uploadCnt >= 4) {
+				alert('이미지는 최대 3장까지 업로드 가능합니다.');
+				uploadCnt -= 1;
+				return;
+			}
+
+			// 파일 타입 검사
+			if (!file[0].type.match("image/.*")) {
+				alert('이미지 파일만 업로드 가능합니다.');
+				return;
+			}
+
+			// 파일 갯수 검사
+			if (uploadFiles.length >= 4 || uploadCnt < 4) {
+				uploadFiles.push(file[0]);
+				const reader = new FileReader();
+				reader.onload = (e) => {
+					const preview = createElement(e, file[0]);
+					imagePreview.appendChild(preview);
+				};
+				reader.readAsDataURL(file[0]);
+				console.log(uploadFiles);
+			}
+		};
+		
+		const createElement = (e, file) => {
+			const img = document.createElement('img');
+			img.classList.add('letterImg');
+			img.src = e.target.result
+			return img;
+		};
+		
+		imgChoice.addEventListener('change', (e) => {
+			getImageFiles(e);
+			console.log(uploadCnt);
+		});
+		
+		
+		
+		/*
+		  사진 첨부 시 이미지 미리보기 띄우기
+		
+		imgChoice3.addEventListener('change', (e) => {
+			const files = e.target.files;
+			const reader = new FileReader();
+			reader.onload = ({target}) => {
+				const letterImg = document.querySelector('#letterImg3');
+				letterImg.src = target.result;
+				console.log(letterImg.src);
+			};
+			reader.readAsDataURL(files[0]);
+		});
+		*/
 	</script>
 </body>
 </html>
