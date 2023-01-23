@@ -9,7 +9,7 @@
 	<section>
 		<div id="letterTitle" class="fontStyle">편지쓰기</div>
 		<div id="writeLetter">
-		    <form id="writeLetterFrm" method="POST">
+		    <form id="writeLetterFrm" action="<%= request.getContextPath() %>/letter/writerLetter" method="POST" enctype="multipart/form-data">
 		        <fieldset>
 		            <table id="writeLetterTable">
 			            <tbody>
@@ -46,12 +46,12 @@
 			                    	<label for="ageChoice" id="labelTd" class="fontStyle">연령 선택</label>
 			                    </td>
 			                    <td colspan="2">
-			                    	<label><input type="checkbox" name="ageChoice" id="ageChoice" value="1" onclick="clickAgeChoice(this);" />10대</label>
-			                    	<label><input type="checkbox" name="ageChoice" id="ageChoice" value="2" onclick="clickAgeChoice(this);" />20대</label>
-			                    	<label><input type="checkbox" name="ageChoice" id="ageChoice" value="3" onclick="clickAgeChoice(this);" />30대</label>
-			                    	<label><input type="checkbox" name="ageChoice" id="ageChoice" value="4" onclick="clickAgeChoice(this);" />40대</label>
-			                    	<label><input type="checkbox" name="ageChoice" id="ageChoice" value="5" onclick="clickAgeChoice(this);" />50대 이상</label>
-			                    	<label><input type="checkbox" name="ageChoice" id="ageChoice" value="0" onclick="clickAgeChoice(this);" checked />무관</label>
+			                    	<label><input type="checkbox" name="ageChoice" id="ageChoice" value=1 onclick="clickAgeChoice(this);" />10대</label>
+			                    	<label><input type="checkbox" name="ageChoice" id="ageChoice" value=2 onclick="clickAgeChoice(this);" />20대</label>
+			                    	<label><input type="checkbox" name="ageChoice" id="ageChoice" value=3 onclick="clickAgeChoice(this);" />30대</label>
+			                    	<label><input type="checkbox" name="ageChoice" id="ageChoice" value=4 onclick="clickAgeChoice(this);" />40대</label>
+			                    	<label><input type="checkbox" name="ageChoice" id="ageChoice" value=5 onclick="clickAgeChoice(this);" />50대 이상</label>
+			                    	<label><input type="checkbox" name="ageChoice" id="ageChoice" value=0 onclick="clickAgeChoice(this);" checked />무관</label>
 			                    </td>
 			                </tr>
 						<% if (friendsList != null) { %>
@@ -78,10 +78,10 @@
 			                    </td>
 			                    <td colspan="2">
 			                    	<select name="fontChoice" id="fontChoice">
-			                    		<option value="1">폰트1</option>
-			                    		<option value="2">폰트2</option>
-			                    		<option value="3">폰트3</option>
-			                    		<option value="4">폰트4</option>
+			                    		<option value=1>폰트1</option>
+			                    		<option value=2>폰트2</option>
+			                    		<option value=3>폰트3</option>
+			                    		<option value=4>폰트4</option>
 			                    	</select>
 			                    </td>
 							</tr>
@@ -91,10 +91,10 @@
 			                    </td>
 			                    <td colspan="2">
 			                    	<select name="designChoice" id="designChoice">
-			                    		<option value="1">디자인1</option>
-			                    		<option value="2">디자인2</option>
-			                    		<option value="3">디자인3</option>
-			                    		<option value="4">디자인4</option>
+			                    		<option value=1>디자인1</option>
+			                    		<option value=2>디자인2</option>
+			                    		<option value=3>디자인3</option>
+			                    		<option value=4>디자인4</option>
 			                    	</select>
 			                    </td>
 							</tr>
@@ -149,10 +149,15 @@
 			});
 		};
 		
-		writeLetterFrm.addEventListener('submit', (e) => {
-			
-		});
 		
+		<%--
+		  폼 제출 시 uploadFiles 배열 넘기기
+		
+		writeLetterFrm.addEventListener('submit', (e) => {
+			imgChoice.value = uploadFiles;
+			location.href = "<%= request.getContextPath() %>/letter/writeLetter";
+		});
+		--%>
 		
 		/*
 		  친구에게 보내기 클릭 시 닉네임으로만 보낼 수 있도록 제한
