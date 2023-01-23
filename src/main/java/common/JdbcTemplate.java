@@ -20,7 +20,7 @@ public class JdbcTemplate {
 	static {
 		
 		driverClass = "oracle.jdbc.OracleDriver";
-		url = "jdbc:oracle:thin:@KEKYC3K85TBQ8DZ9_high?TNS_ADMIN=/Users/jangcccci/dev/Wallet_KEKYC3K85TBQ8DZ9";
+		url = "jdbc:oracle:thin:@KEKYC3K85TBQ8DZ9_high?TNS_ADMIN=C:\\Users\\doffl\\Desktop\\세미프로젝트\\Wallet_KEKYC3K85TBQ8DZ9";
 		user = "ADMIN";
 		password = "Tnlavytnlavy1!";
 		

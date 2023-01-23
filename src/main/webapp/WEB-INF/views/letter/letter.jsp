@@ -9,7 +9,7 @@
 	<section>
 		<div id="letterTitle" class="fontStyle">편지쓰기</div>
 		<div id="writeLetter">
-		    <form action="<%= request.getContextPath() %>/letter/letterEnroll" id="writeLetterFrm">
+		    <form id="writeLetterFrm" method="POST">
 		        <fieldset>
 		            <table id="writeLetterTable">
 			            <tbody>
@@ -148,6 +148,11 @@
 				box.classList.add('choiceDetail');
 			});
 		};
+		
+		writeLetterFrm.addEventListener('submit', (e) => {
+			
+		});
+		
 		
 		/*
 		  친구에게 보내기 클릭 시 닉네임으로만 보낼 수 있도록 제한
