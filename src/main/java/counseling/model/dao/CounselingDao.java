@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import common.Category;
@@ -50,10 +51,16 @@ public class CounselingDao {
 		return result;
 	}
 
-	public List<Counseling> selectAllCounseling(Connection conn) {
+	public List<Counseling> selectAllCounseling(Connection conn, Map<String, Object> param) {
 		List<Counseling> counselingList = new ArrayList<>();
 		String sql = prop.getProperty("selectAllCounseling");
+		int page = (int) param.get("page");
+		int limit = (int) param.get("limit");
+		int start = (page-1)*limit+1;
+		int end = page*limit;
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
 			try(ResultSet rset = pstmt.executeQuery()){
 				while(rset.next()) {
 					Counseling counseling = new Counseling();
@@ -76,5 +83,20 @@ public class CounselingDao {
 			throw new CounselingException("게시글 불러오기 오류!", e);
 		}
 		return counselingList;
+	}
+
+	public int getTotalCount(Connection conn) {
+		int result = 0;
+		String sql = prop.getProperty("getTotalCount");
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			try(ResultSet rset = pstmt.executeQuery()){
+				if(rset.next()) {
+					result = rset.getInt(1);
+				}
+			}
+		} catch (SQLException e) {
+			throw new CounselingException("게시물 총개수 조회 오류!", e);
+		}
+		return result;
 	}
 }
