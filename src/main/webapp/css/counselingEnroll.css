@@ -18,18 +18,36 @@
 	font-size: 30px;
 }
 
+<<<<<<< HEAD
 #counselingEnrollFrm{
 	display: flex;
 	align-items: center;
 	justify-content: center;
+=======
+#title-write{
+  	text-align: center;
+    justify-content: center;
+    color: #5350ac;
+    font-size: 20px;
+	
+>>>>>>> branch 'master' of https://github.com/Jangcccci/comma.git
 }
 
 table{
 	width: 100%;
 }
 
+<<<<<<< HEAD
 select{
 	width: 90%;
+=======
+#content-write{
+	text-align: center;
+    justify-content: center;
+    color: #5350ac;
+    font-size: 20px;
+	
+>>>>>>> branch 'master' of https://github.com/Jangcccci/comma.git
 }
 
 #content{
@@ -41,10 +59,20 @@ select{
 	resize: none;
 }
 
+<<<<<<< HEAD
 #content:focus{
 	outline: none;
+=======
+#age-choice{
+	text-align: center;
+    justify-content: center;
+    color: #5350ac;
+    font-size: 20px;
+	
+>>>>>>> branch 'master' of https://github.com/Jangcccci/comma.git
 }
 
+<<<<<<< HEAD
 #counselingTitle{
 	width: 100%;
 	height: 45px;
@@ -52,15 +80,32 @@ select{
 	padding: 10px 6px;
 	box-sizing: border-box;
 	border: none;
+=======
+#gender-choice{
+	text-align: center;
+    justify-content: center;
+    color: #5350ac;
+    font-size: 20px;
+	
+>>>>>>> branch 'master' of https://github.com/Jangcccci/comma.git
 }
 
 #counselingTitle:focus{
 	outline: none;
 }
 
+<<<<<<< HEAD
 #titleTd{
 	border-bottom: 1px solid lightGray;
 	border-top: 1px solid lightGray;
+=======
+#anonymous-choice{
+	text-align: center;
+    justify-content: center;
+    color: #5350ac;
+    font-size: 20px;
+	
+>>>>>>> branch 'master' of https://github.com/Jangcccci/comma.git
 }
 
 #write{
@@ -72,3 +117,23 @@ select{
 	color: #fff;
 	margin: auto;
 }
+<<<<<<< HEAD
+=======
+
+
+#category-choice{
+	text-align: center;
+    justify-content: center;
+    color: #5350ac;
+    font-size: 20px;
+	
+}
+
+#category{
+
+	
+}
+
+
+
+>>>>>>> branch 'master' of https://github.com/Jangcccci/comma.git
