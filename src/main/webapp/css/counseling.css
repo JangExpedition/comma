@@ -1,13 +1,20 @@
 @charset "UTF-8";
 
+#counselingSection{
+	width: 100%;
+	padding-left: 150px;
+	box-sizing: border-box;
+}
+
 #counselingTitle{
 	text-align : center;
-	color: #ffffff;
+	margin-top: 100px;
+	font-size: 30px;
 }
 
 #counseilingCategory
 {
-	text-align : center;
+	text-align : start;
 }
 
 #wrap {

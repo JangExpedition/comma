@@ -91,6 +91,7 @@ public class MemberDao {
 			pstmt.setString(3, member.getPassword());
 			pstmt.setDate(4, member.getBirthday());
 			pstmt.setString(5, member.getGender().toString());
+			pstmt.setInt(6, member.getAge());
 			
 			result = pstmt.executeUpdate();
 			
