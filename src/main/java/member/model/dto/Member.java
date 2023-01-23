@@ -14,6 +14,7 @@ public class Member {
 	private int warningCount;
 	private String originalFilename;
 	private String renamedFilename;
+	private int age;
 	
 	public Member() {
 		super();
@@ -21,7 +22,7 @@ public class Member {
 	}
 
 	public Member(String nickname, String password, Date birthday, Gender gender, String email, Date enrollDate,
-			MemberRole memberRole, int warningCount, String originalFilename, String renamedFilename) {
+			MemberRole memberRole, int warningCount, String originalFilename, String renamedFilename, int age) {
 		super();
 		this.nickname = nickname;
 		this.password = password;
@@ -33,6 +34,7 @@ public class Member {
 		this.warningCount = warningCount;
 		this.originalFilename = originalFilename;
 		this.renamedFilename = renamedFilename;
+		this.age = age;
 	}
 
 	public String getNickname() {
@@ -114,17 +116,21 @@ public class Member {
 	public void setRenamedFilename(String renamedFilename) {
 		this.renamedFilename = renamedFilename;
 	}
+	
+	public int getAge() {
+		return age;
+	}
+	
+	public void setAge(int age) {
+		this.age = age;
+	}
 
 	@Override
 	public String toString() {
 		return "Member [nickname=" + nickname + ", password=" + password + ", birthday=" + birthday + ", gender="
 				+ gender + ", email=" + email + ", enrollDate=" + enrollDate + ", memberRole=" + memberRole
 				+ ", warningCount=" + warningCount + ", originalFilename=" + originalFilename + ", renamedFilename="
-				+ renamedFilename + "]";
+				+ renamedFilename + ", age=" + age + ", toString()=" + super.toString() + "]";
 	}
 
-	public void setDefaultProfile() {
-		
-	}
-	
 }

@@ -2,6 +2,7 @@ package member.controller;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.time.LocalDate;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -39,9 +40,12 @@ public class MemberEnrollServlet extends HttpServlet {
 			String birthDate = _birth.substring(6);
 			String birthDay = birthYear + "-" + birthMonth + "-" + birthDate;
 			Date birth = Date.valueOf(birthDay);
+			int nowYear = LocalDate.now().getYear();
+			int age = nowYear - Integer.valueOf(birthYear) + 1;
+			
 			Gender gender = Gender.valueOf(request.getParameter("gender"));
 			
-			Member member = new Member(nickname, pwd, birth, gender, email, null, null, 0, null, null);
+			Member member = new Member(nickname, pwd, birth, gender, email, null, null, 0, null, null, age);
 			
 			
 			int result = memberService.insertMember(member);

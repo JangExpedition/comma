@@ -18,9 +18,9 @@ public class LeaveMember extends Member{
 	}
 
 	public LeaveMember(String nickname, String password, Date birthday, Gender gender, String email, Date enrollDate,
-			MemberRole memberRole, int warningCount, String originalFilename, String renamedFilename) {
+			MemberRole memberRole, int warningCount, String originalFilename, String renamedFilename, int age) {
 		super(nickname, password, birthday, gender, email, enrollDate, memberRole, warningCount, originalFilename,
-				renamedFilename);
+				renamedFilename, age);
 		// TODO Auto-generated constructor stub
 	}
 
