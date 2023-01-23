@@ -115,11 +115,10 @@
 								<td></td>
 							</tr>
 							<tr>
-							    <td colspan="6" id="info-change"><input type="button" value="정보수정" /></td>
+							    <td colspan="3" ><input type="button" value="정보수정" id="info-change" class="fontStyle"/></td>
+							    <td colspan="3"><input type="button" value="회원탈퇴" id="leave-member" class="fontStyle"/></td>
 							</tr>
-							<tr>
-								<td colspan="6" id="leave-member"><input type="button" value="회원탈퇴" /></td>
-							</tr>
+							
 						</tbody>
 					</table>
 				</fieldset>
