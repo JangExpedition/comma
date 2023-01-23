@@ -250,10 +250,12 @@
 		}; // clickAgeChoice end
 		
 		
+		/*
+		  사진 3장까지만 첨부 가능하고 미리보기 띄워줌
+		*/
 		let uploadCnt = 0;
 		let uploadFiles = [];
 		const getImageFiles = (e) => {
-			console.log(e.currentTarget);
 			const file = e.currentTarget.files;
 			const imagePreview = document.querySelector('#letterImg');
 			uploadCnt += 1;
@@ -272,7 +274,6 @@
 
 			// 파일 갯수 검사
 			if (uploadFiles.length >= 4 || uploadCnt < 4) {
-				console.log(file);
 				uploadFiles.push(file[0]);
 				const reader = new FileReader();
 				reader.onload = (e) => {
