@@ -11,7 +11,7 @@ alter user comma quota unlimited on users;
 
 grant connect, resource to comma;
 
-
+--select * from (select row_number()over(order by no desc) rnum, c.* from counseling c ) where rnum between ? and ?
 
 -- ======================================================================
 -- COMMA 계정
@@ -45,7 +45,7 @@ select * from chatting_log;
 -- ======================================================================
 -- 모든 테이블 drop
 -- ======================================================================
---drop table member;
+--drop table member cascade constraints;
 --drop table leave_member;
 --drop table friends;
 --drop table letter;
@@ -97,7 +97,8 @@ create table member(
     member_role char(1) default 'U' not null,
     original_filename varchar2(300) default 'default.png',
     renamed_filename varchar2(300),
-    warning_count number default 0 not null
+    warning_count number default 0 not null,
+    age number not null
 );
 -- member 제약조건 추가
 alter table member

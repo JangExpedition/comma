@@ -1,94 +1,74 @@
 @charset "UTF-8";
 
+#counselingEnrollSection{
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#counselingEnrollContainer{
+	width: 70%;
+	height: 80%;
+}
+
 #counselingEnrollTitle{
- 	text-align: center;
-    justify-content: center;
-    color: #5F5DA6;
-    font-size: 25px;
-    
-}
-
-#title-write{
-  	text-align: center;
-    justify-content: center;
-    color: #5350ac;
-    font-size: 20px;
-	
-}
-
-#title{
-	font-size: 15px;
-	
-}
-
-#content-write{
 	text-align: center;
-    justify-content: center;
-    color: #5350ac;
-    font-size: 20px;
-	
+	font-size: 30px;
+}
+
+#counselingEnrollFrm{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+table{
+	width: 100%;
+}
+
+select{
+	width: 90%;
 }
 
 #content{
-	font-size: 15px;
-	
+	width: 100%;
+	height: 500px;
+	padding: 6px;
+	box-sizing: border-box;
+	border: none;
+	resize: none;
 }
 
-#age-choice{
-	text-align: center;
-    justify-content: center;
-    color: #5350ac;
-    font-size: 20px;
-	
+#content:focus{
+	outline: none;
 }
 
-#gender-choice{
-	text-align: center;
-    justify-content: center;
-    color: #5350ac;
-    font-size: 20px;
-	
+#counselingTitle{
+	width: 100%;
+	height: 45px;
+	font-size: 25px;
+	padding: 10px 6px;
+	box-sizing: border-box;
+	border: none;
 }
 
-
-#gender{
-	
-	
+#counselingTitle:focus{
+	outline: none;
 }
 
-#anonymous-choice{
-	text-align: center;
-    justify-content: center;
-    color: #5350ac;
-    font-size: 20px;
-	
+#titleTd{
+	border-bottom: 1px solid lightGray;
+	border-top: 1px solid lightGray;
 }
-
-#anonymous{
-	
-}
-
-
-
 
 #write{
-	
-	
+	width: 50%;
+	height: 50px;
+	font-size: 25px;
+	border: none;
+	background-color: #454a7b;
+	color: #fff;
+	margin: auto;
 }
-
-
-#category-choice{
-	text-align: center;
-    justify-content: center;
-    color: #5350ac;
-    font-size: 20px;
-	
-}
-
-#category{
-
-	
-}
-
-
-
