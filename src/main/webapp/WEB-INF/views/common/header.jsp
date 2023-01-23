@@ -59,6 +59,9 @@
 	case "/comma/counseling/counselingList" :
 		link.href = "<%= request.getContextPath() %>/css/counseling.css";
 		break;
+	case "/comma/counseling/counselingEnroll" :
+		link.href = "<%= request.getContextPath() %>/css/counselingEnroll.css";
+		break;
 	case "/comma/question" :
 		link.href = "<%= request.getContextPath() %>/css/question.css";
 		break;
@@ -212,7 +215,7 @@
 	    document.querySelector("#toPost").addEventListener('click', (e) => {
 	    	location.href = "<%= request.getContextPath() %>/letter/letterList";
 	    });
-	    
+
 	    /*
 	   	Date : 2023. 1. 22
 	   	@장원정

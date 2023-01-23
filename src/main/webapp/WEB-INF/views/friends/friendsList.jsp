@@ -1,3 +1,4 @@
+<%@page import="common.OX"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
@@ -31,11 +32,17 @@
 						</td>
 						<td><%= friend.getNickname() %></td>
 						<td>
-							<input id="friends-send-letter" class="friendsBtn fontStyle" type="button" value="편지작성" />
+							<input id="friends-send-letter" class="friendsBtn fontStyle" type="button" data-friend-nick="<%= friend.getNickname() %>" value="편지작성" />
 						</td>
+					<% if (friend.getIsFriend() == OX.O) { %>
 						<td>
 							<input class="friendsBtn fontStyle" type="button" value="친구삭제" />
 						</td>
+					<% } else { %>
+						<td>
+							<input class="friendsBtn fontStyle" type="button" value="요청취소" />
+						</td>
+					<% } %>
 					</tr>
 		<%
 				}
@@ -53,7 +60,9 @@
 	</section>
 	
 	<script>
-		document.querySelector('#friends-send-letter').addEventListener('click', () => {
+		document.querySelector('#friends-send-letter').addEventListener('click', (e) => {
+			const friendNick = e.target.dataset.friendNick;
+			localStorage.setItem('friendNick', friendNick);
 			location.href = '<%= request.getContextPath() %>/letter/writeLetter';
 		});
 	</script>
