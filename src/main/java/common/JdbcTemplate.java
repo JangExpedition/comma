@@ -18,7 +18,6 @@ public class JdbcTemplate {
 	
 	// 초기화 블럭
 	static {
-		
 		final String datasourceConfigPath = JdbcTemplate.class.getResource("/datasource.properties").getPath();
 		Properties prop = new Properties();
 		

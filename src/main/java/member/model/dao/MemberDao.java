@@ -100,4 +100,24 @@ public class MemberDao {
 		}
 		return result;
 	}
+
+
+	public List<Member> selectAllMemberWithOutMe(Connection conn, String writer) {
+		List<Member> memberList = new ArrayList<>();
+		String sql = prop.getProperty("selectAllMemberWithOutMe");
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setString(1, writer);
+			try(ResultSet rset = pstmt.executeQuery()){
+				while(rset.next()) {
+					memberList.add(handleMemberResultSet(rset));
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new MemberException("본인을 제외한 회원 목록 조회 오류!", e);
+		}
+		
+		return memberList;
+	} // selectAllMemberWithOutMe() end
 }

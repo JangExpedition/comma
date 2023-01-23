@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import common.OX;
@@ -61,5 +62,27 @@ public class LetterDao {
 		}
 		return letterList;
 	} // selectAllLetter() end
+
+
+	public int insertLetter(Connection conn, Letter letter) {
+		int result = 0;
+		String sql = prop.getProperty("insertLetter");
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, letter.getWriter());
+			pstmt.setString(2, letter.getAddressee());
+			pstmt.setInt(3, letter.getDesignNo());
+			pstmt.setInt(4, letter.getFontNo());
+			pstmt.setString(5, letter.getContent());
+			pstmt.setString(6, letter.getGender());
+			pstmt.setInt(7, letter.getAge());
+			pstmt.setString(8, letter.getAnonymous().name());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new LetterException("편지 보내기 오류", e);
+		}
+		return result;
+	} // insertLetter() end
 	
 } // class end

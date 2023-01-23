@@ -39,4 +39,11 @@ public class MemberService {
 		}
 		return result;
 	}
+
+	public List<Member> selectAllMemberWithOutMe(String writer) {
+		Connection conn = getConnection();
+		List<Member> memberList = memberDao.selectAllMemberWithOutMe(conn, writer);
+		close(conn);
+		return memberList;
+	} // selectAllMemberWithOutMe() end
 }
