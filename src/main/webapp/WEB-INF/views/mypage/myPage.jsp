@@ -1,13 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>My Page</title>
-</head>
-<body>
+
 	<section>
 		<div id="enrollBox">
 			<h1 id="enrollTitle" class="pointColor fontStyle">마이페이지</h1>
@@ -21,7 +15,7 @@
 								</td>
 							</tr>
 							<tr>
-								<td class="labelTd fontStyle"><label for="nicknameId"></label></td>
+								<td class="labelTd fontStyle" id="enroll-box"><label for="nicknameId"></label></td>
 								<td></td>
 								<td></td>
 								<td></td>
@@ -42,7 +36,7 @@
 								<td></td>
 							</tr>
 							<tr>
-								<td class="labelTd fontStyle"><label for="password"></label></td>
+								<td class="labelTd fontStyle" id="enroll-box"><label for="password"></label></td>
 								<td></td>
 								<td></td>
 								<td></td>
@@ -63,7 +57,7 @@
 								<td></td>
 							</tr>
 							<tr>
-								<td class="labelTd fontStyle"><label for="birthDay"></label></td>
+								<td class="labelTd fontStyle" id="enroll-box"><label for="birthDay"></label></td>
 								<td></td>
 								<td></td>
 							</tr>
@@ -81,7 +75,7 @@
 								<td></td>
 							</tr>
 							<tr>
-								<td class="labelTd fontStyle"><label for="gender"></label></td>
+								<td class="labelTd fontStyle" id="enroll-box"><label for="gender"></label></td>
 								<td></td>
 								<td></td>
 								<td></td>
@@ -101,7 +95,7 @@
 								<td></td>
 							</tr>
 							<tr>
-								<td class="labelTd fontStyle"><label for="email"></label></td>
+								<td class="labelTd fontStyle" id="enroll-box"><label for="email"></label></td>
 								<td></td>
 								<td></td>
 								<td></td>
@@ -121,10 +115,10 @@
 								<td></td>
 							</tr>
 							<tr>
-							    <td colspan="6"><input type="button" value="정보수정" /></td>
+							    <td colspan="6" id="info-change"><input type="button" value="정보수정" /></td>
 							</tr>
 							<tr>
-								<td colspan="6"><input type="button" value="회원탈퇴" /></td>
+								<td colspan="6" id="leave-member"><input type="button" value="회원탈퇴" /></td>
 							</tr>
 						</tbody>
 					</table>

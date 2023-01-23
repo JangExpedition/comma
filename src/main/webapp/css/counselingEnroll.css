@@ -9,7 +9,10 @@
 }
 
 #title-write{
-	
+  	text-align: center;
+    justify-content: center;
+    color: #5350ac;
+    font-size: 20px;
 	
 }
 
@@ -19,7 +22,10 @@
 }
 
 #content-write{
-	
+	text-align: center;
+    justify-content: center;
+    color: #5350ac;
+    font-size: 20px;
 	
 }
 
@@ -29,12 +35,18 @@
 }
 
 #age-choice{
-	
+	text-align: center;
+    justify-content: center;
+    color: #5350ac;
+    font-size: 20px;
 	
 }
 
 #gender-choice{
-	
+	text-align: center;
+    justify-content: center;
+    color: #5350ac;
+    font-size: 20px;
 	
 }
 
@@ -45,7 +57,10 @@
 }
 
 #anonymous-choice{
-	
+	text-align: center;
+    justify-content: center;
+    color: #5350ac;
+    font-size: 20px;
 	
 }
 
@@ -63,12 +78,15 @@
 
 
 #category-choice{
-	
+	text-align: center;
+    justify-content: center;
+    color: #5350ac;
+    font-size: 20px;
 	
 }
 
 #category{
-	
+
 	
 }
 

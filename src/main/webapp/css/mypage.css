@@ -25,7 +25,7 @@ section{
 }
 
 #enrollTitle{
-    font-size: 60px;
+    font-size: 40px;
     margin: 80px 0 50px 0;
     display: flex;
     align-items: center;
@@ -67,33 +67,16 @@ td{
     height: 20px;
 }
 
-.genderTd select{
-    width: 100%;
-    height: 40px;
+
+
+
+#info-change{
+	
+	
 }
 
-.birth input{
-    width: 100%;
-    height: 40px;
-    box-sizing: border-box;
+#leave-member{
+	
+	
 }
 
-.birth select{
-    width: 200px;
-    height: 40px;
-    box-sizing: border-box;
-}
-
-label > span{
-    font-size: 15px;
-    color: #8e8e8e;
-}
-
-#authenBtn, #mypageBtn{
-    background-color: #454a7b;
-    border: 0;
-    cursor: pointer;
-    height: 30px;
-    width: 100;
-    
-}
