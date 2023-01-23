@@ -9,7 +9,7 @@
 	<section>
 		<div id="letterTitle" class="fontStyle">편지쓰기</div>
 		<div id="writeLetter">
-		    <form action="" id="writeLetterFrm">
+		    <form action="<%= request.getContextPath() %>/letter/letterEnroll" id="writeLetterFrm">
 		        <fieldset>
 		            <table id="writeLetterTable">
 			            <tbody>
