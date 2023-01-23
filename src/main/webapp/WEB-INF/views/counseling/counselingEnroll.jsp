@@ -77,8 +77,8 @@
 				<option value="CAREER">직장</option>
 				<option value="DARILY">일상</option>
 				<option value="FRIENDS">친구</option>
-		</select></td>
-		<input type="hidden" name="loginMember" value="<%= loginMember.getNickname() %>"/>
+		</select>
+		</td>
 	</tr>
 
 
