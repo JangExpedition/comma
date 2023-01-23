@@ -236,5 +236,17 @@
 			location.href = "<%= request.getContextPath() %>/member/logout";	
 		});
 	    
+	    
+	    /*
+	    Date : 2023. 1. 23
+	    @한혜진
+	    
+	    익명채팅방 개설jsp 메서드 (chat.jsp)
+	    */
+	    
+		document.querySelector("#toChat").addEventListener("click", (e)=>{
+			location.href = "<%= request.getContextPath() %>/chat/chat";	
+		});
+	    
 	    </script>
 	    <% } %>
