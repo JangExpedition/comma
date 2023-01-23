@@ -21,7 +21,6 @@ public class LeaveMember extends Member{
 			MemberRole memberRole, int warningCount, String originalFilename, String renamedFilename, int age) {
 		super(nickname, password, birthday, gender, email, enrollDate, memberRole, warningCount, originalFilename,
 				renamedFilename, age);
-		// TODO Auto-generated constructor stub
 	}
 
 	public Date getLeaveDate() {

@@ -30,8 +30,8 @@ public class InsertCounselingServlet extends HttpServlet {
 		try {
 			String writer = request.getParameter("loginMember");
 			String content = request.getParameter("content");
-			String title = request.getParameter("title");
-			Category category = Category.valueOf(request.getParameter("category"));
+			String title = request.getParameter("counselingTitle");
+			Category category = Category.valueOf(request.getParameter("counselingCategory"));
 			String limitGender = request.getParameter("gender");
 			int limitAge = Integer.valueOf(request.getParameter("age"));
 			OX anonymous = OX.valueOf(request.getParameter("anonymous"));

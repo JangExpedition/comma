@@ -2,58 +2,52 @@
 
 #counselingSection{
 	width: 100%;
-	padding-left: 150px;
-	box-sizing: border-box;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+#counselingContainer{
+	width: 70%;
+	height: 80%;
 }
 
 #counselingTitle{
 	text-align : center;
-	margin-top: 100px;
 	font-size: 30px;
 }
 
-#counseilingCategory
-{
-	text-align : start;
+#counseilingCategory{
+	margin: 20px 0;
 }
 
 #wrap {
-    width: 1000px;
-	margin:auto;
-	color: #5F5DA6;
+    width: 100%;
 }
+
 table{
     width: 100%;
     border-collapse: collapse;
     line-height: 24px;
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
 }
-table td,th {
-    border-top:1px solid black;
-    border-bottom:1px solid black;
+
+thead {
+	background: rgb(221, 221, 221);
+}
+
+th,td {
+    border-top:1px solid #000;
+    border-bottom:1px solid #000;
     border-collapse: collapse;
     text-align: center;
     padding: 10px;
 }
-th {
-	background: rgb(221, 221, 221);
-}
-a{
-    text-decoration: none;
-    color: black;
-}
 
-#category>div:not(#toCounseling)>i.selected{
-    display: none;
-}
-
-#category>div:not(#toCounseling)>i.disselected{
-    display: inline;
-}
-
-#toCounseling>i.selected{
-    display: inline;
-}
-
-#toCounseling>i.disselected{
-    display: none;
-}
+/*페이지바*/
+div#pagebar{margin-top:10px; text-align:center; background-color:rgb(221, 221, 221); }
+div#pagebar span.cPage{margin-right: 5px;}
+div#pagebar a{margin-right: 5px;}
