@@ -10,7 +10,7 @@
 <table>
 <form action="<%= request.getContextPath() %>/counseling/insertCounseling" method="POST">
 	<tr>
-		<td>제목작성 :</td>
+		<td id = "title-write">제목작성 :</td>
 
 		<td class="inputTd fontStyle"><input type="text" id="title"
 			name="title" placeholder="제목을 입력해 주세요."></td>
@@ -18,7 +18,7 @@
 
 
 	<tr>
-		<td>내용작성 :</td>
+		<td id = "content-write">내용작성 :</td>
 
 		<td class="inputTd fontStyle"><textarea name="content" cols="85"
 				rows="15" id="content" placeholder="내용을 입력해 주세요."></textarea></td>
@@ -27,7 +27,7 @@
 
 	<!-- 셀렉트 태그!  -->
 	<tr>
-		<td>공개 나이대 선택 :</td>
+		<td id="age-choice">공개 나이대 선택 :</td>
 
 		<td><select name="age">
 				<option value="1">10대 이상</option>
@@ -41,7 +41,7 @@
 
 	<!-- 라디오 박스 : 하나마 선택 -->
 	<tr>
-		<td>공개 성별 선택 :</td>
+		<td id="gender-choice">공개 성별 선택 :</td>
 
 		<td class="input fontsytle">
 			<select name="gender" id="gender" name="gender" class="inputBar" required >
@@ -53,7 +53,7 @@
 	</tr>
 	<!-- 익명설정  -->
 	<tr>
-		<td>익명 선택 :</td>
+		<td id="anonymous-choice">익명 선택 :</td>
 
 		<td class="input fontsytle">
 			<select name="anonymous" id="anonymous" name="anonymous" class="inputBar" required >
@@ -66,9 +66,9 @@
 
 	<!--d 전 화면에서 선택한 카테고리 받아오기 (어떻게하는지 몰라서 일단 셀렉트 폼 작성  -->
 	<tr>
-		<td>고민 카테고리 선택 :</td>
+		<td id="category-choice" >고민 카테고리 선택 :</td>
 
-		<td class="input fontsytle"><select name="category">
+		<td class="input fontsytle"  id="category"><select name="category">
 				<option value="" disabled selected>카테고리를 선택하세요.</option>
 				<option value="STUDY">진로</option>
 				<option value="LOVE">연애</option>
