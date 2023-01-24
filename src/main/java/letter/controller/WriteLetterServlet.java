@@ -1,7 +1,9 @@
 package letter.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,6 +17,7 @@ import com.oreilly.servlet.multipart.FileRenamePolicy;
 import common.Attachment;
 import common.CommaFileRenamePolicy;
 import common.OX;
+import letter.model.dto.AF;
 import letter.model.dto.Letter;
 import letter.model.service.LetterService;
 import member.model.dto.Member;
@@ -53,25 +56,34 @@ public class WriteLetterServlet extends HttpServlet {
 			// 사용자 입력값 처리
 			String writer = multiReq.getParameter("writer");
 			OX anonymous = OX.valueOf(multiReq.getParameter("senderChoice"));
-			String sendChoice = multiReq.getParameter("sendChoice");
+			int design = Integer.parseInt(multiReq.getParameter("designChoice"));
+			int font = Integer.parseInt(multiReq.getParameter("fontChoice"));
+			String content = multiReq.getParameter("content");
+			
+			AF sendWho = AF.valueOf(multiReq.getParameter("sendChoice"));
 			String addressee = "";
-			if ("sendRandom".equals(sendChoice)) {
-				List<Member> memberList = memberService.selectAllMemberWithOutMe(writer);
+			String gender = multiReq.getParameter("genderChoice");
+			int age = Integer.parseInt(multiReq.getParameter("ageChoice"));
+			
+			Map<String, Object> param = new HashMap<>();
+			param.put("writer", writer);
+			param.put("gender", gender);
+			param.put("age", age);
+			
+			// 익명의 누군가
+			if (sendWho == AF.A) {
+				List<Member> memberList = memberService.selectAllMemberWithOutMe(param);
+				System.out.println(memberList);
 				int limit = memberList.size();
 				System.out.println("limit = " + limit);
-				int ranNum = (int) Math.random() * limit;
+				int ranNum = (int) (Math.random() * limit);
 				System.out.println("ranNum = " + ranNum);
 				addressee = memberList.get(ranNum).getNickname();
 			} else {
 				addressee = multiReq.getParameter("friendsList");
 			}
-			int design = Integer.parseInt(multiReq.getParameter("designChoice"));
-			int font = Integer.parseInt(multiReq.getParameter("fontChoice"));
-			String content = multiReq.getParameter("content");
-			String gender = multiReq.getParameter("genderChoice");
-			int age = Integer.parseInt(multiReq.getParameter("ageChoice"));
 			
-			Letter letter = new Letter(0, writer, addressee, design, font, content, null, null, gender, age, anonymous);
+			Letter letter = new Letter(0, writer, addressee, design, font, content, null, null, gender, age, anonymous, sendWho);
 			
 			// 업로드한 파일 처리
 			if (multiReq.getFile("imgChoice1") != null) {
@@ -95,14 +107,15 @@ public class WriteLetterServlet extends HttpServlet {
 				letter.addAttachment(attach);
 			}
 			
-			System.out.println("senderChoice = " + anonymous);
-			System.out.println("sendChoice = " + sendChoice);
+			System.out.println("writer = " + writer);
+			System.out.println("sendWho = " + sendWho);
+			System.out.println("addressee = " + addressee);
+			System.out.println("designChoice = " + design);
+			System.out.println("fontChoice = " + font);
+			System.out.println("content = " + content);
 			System.out.println("genderChoice = " + gender);
 			System.out.println("ageChoice = " + age);
-			System.out.println("fontChoice = " + font);
-			System.out.println("designChoice = " + design);
-			System.out.println("content = " + content);
-			System.out.println("writer = " + writer);
+			System.out.println("senderChoice = " + anonymous);
 			
 			
 			// 업무로직
@@ -114,7 +127,7 @@ public class WriteLetterServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		response.sendRedirect(request.getContextPath() + "/letter/writerLetter");
+		response.sendRedirect(request.getContextPath() + "/letter/writeLetter");
 	} // doPost() end
 
 }
