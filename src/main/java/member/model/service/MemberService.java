@@ -48,4 +48,19 @@ public class MemberService {
 		close(conn);
 		return memberList;
 	} // selectAllMemberWithOutMe() end
+
+	public int updateMember(Map<String, String> param) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = memberDao.updateMember(conn, param);
+			commit(conn);
+		} catch(Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
 }

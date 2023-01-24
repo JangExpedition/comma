@@ -50,7 +50,7 @@
 	case "/comma/diary/diaryList" :
 		link.href = "<%= request.getContextPath() %>/css/diary.css";
 		break;
-	case "/comma/mypage/myPage" :
+	case "/comma/mypage/mypage" :
 		link.href = "<%= request.getContextPath() %>/css/mypage.css";
 		break;
 	case "/comma/friends/friendsList" :
@@ -184,7 +184,7 @@
 	    myPage.jsp 이동 메소드
 	    */
 	    document.querySelector("#toMypage").addEventListener('click', (e) => {
-	    	location.href = "<%= request.getContextPath() %>/mypage/myPage"; 
+	    	location.href = "<%= request.getContextPath() %>/mypage/mypage"; 
 	     });
 	    
 	    /*

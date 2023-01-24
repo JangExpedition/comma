@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class MyPageServlet
  */
-@WebServlet("/mypage/myPage")
+@WebServlet("/mypage/mypage")
 public class MyPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -18,13 +18,8 @@ public class MyPageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/views/mypage/myPage.jsp").forward(request, response);
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.getRequestDispatcher("/WEB-INF/views/mypage/myPage.jsp")
+			.forward(request, response);
 	}
 
 }
