@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
-<<<<<<< HEAD
 <section id="counselingEnrollSection" class="fontStyle">
 	<div id="counselingEnrollContainer">
 		<div id=counselingEnrollTitle class="pointColor">
