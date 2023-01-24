@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import letter.model.dto.Letter;
 import letter.model.service.LetterService;
+import member.model.dto.Member;
 
 /**
  * Servlet implementation class LetterListServlet
@@ -25,7 +26,9 @@ public class LetterListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 사용자 입력값
-		String nickname = "test";
+		Member member = (Member) request.getSession().getAttribute("loginMember");
+		String nickname = member.getNickname();
+		System.out.println(member);
 		
 		// 업무로직
 		List<Letter> letterList = letterService.selectAllLetter(nickname);
