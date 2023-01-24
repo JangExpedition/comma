@@ -1,13 +1,4 @@
-/*
-	websocket이란?
-	 - 클라이언트/서버간의 양방향 통신을 지원하는 표준 API
-	 - client-side : WebSocket객체
-	 - server-side : websocket.jar(tomcat)
-*/
-
-// location.host : localhost:8080
-// endpoint : 웹소켓접속이 처음 이루어지는 url /helloWebSocket
-const ws = new WebSocket(`ws://${location.host}/comma/CommaWebSocket`);
+const ws = new WebSocket(`ws://${location.host}/comma/commaWebSocket`);
 
 ws.addEventListener('open', (e) => {
 	console.log('open : ', e);
@@ -21,6 +12,16 @@ ws.addEventListener('message', (e) => {
 	console.log(message, messageType, datetime, sender, receiver);
 	
 	switch (messageType) {
+		case "NOTIFY_NEW_LETTER" :
+			const i = document.createElement("i");
+			i.classList.add('fa-regular', 'fa-bell', 'bell');
+			i.addEventListener('click', () => {
+				alert(message);
+				i.remove();
+			});
+			
+			notification.append(i);
+			break;
 		case "NOTIFY_NEW_COMMENT" :
 			const i = document.createElement("i");
 			i.classList.add('fa-regular', 'fa-bell', 'bell');
