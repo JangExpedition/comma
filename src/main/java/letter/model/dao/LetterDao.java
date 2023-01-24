@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import common.Attachment;
 import common.OX;
 import letter.model.dto.Letter;
 import letter.model.exception.LetterException;
@@ -77,6 +78,7 @@ public class LetterDao {
 			pstmt.setString(6, letter.getGender());
 			pstmt.setInt(7, letter.getAge());
 			pstmt.setString(8, letter.getAnonymous().name());
+			pstmt.setString(9, letter.getSendWho().name());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -84,5 +86,37 @@ public class LetterDao {
 		}
 		return result;
 	} // insertLetter() end
+
+
+	public int selectLastLetterNo(Connection conn) {
+		int letterNo = 0;
+		String sql = prop.getProperty("selectLastLetterNo");
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql);
+			 ResultSet rset = pstmt.executeQuery()) {
+			if (rset.next())
+				letterNo = rset.getInt(1);
+		} catch (SQLException e) {
+			throw new LetterException("편지 번호 조회 오류", e);
+		}
+		return letterNo;
+	} // selectLastLetterNo() end
+
+
+	public int insertAttachment(Connection conn, Attachment attach) {
+		int result = 0;
+		String sql = prop.getProperty("insertAttachment");
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, attach.getAttachNo());
+			pstmt.setString(2, attach.getOriginalFilename());
+			pstmt.setString(3, attach.getRenamedFilename());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new LetterException("편지 첨부파일 저장 오류", e);
+		}
+		return result;
+	} // insertAttachment() end
 	
 } // class end

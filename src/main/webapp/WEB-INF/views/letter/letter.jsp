@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
-
 	<script>
 		const sendFriend = localStorage.getItem('friendNick');
 		console.log('sendFriend = ' + sendFriend);
@@ -24,10 +23,10 @@
 		                <tr>
 		                    <td id="labelTd" class="fontStyle">받는 사람</td>
 		                    <td>
-		                    	<label for="sendRandom" id="random"><input type="checkbox" name="sendChoice" id="sendRandom" value="sendRandom" onclick="clickSendChoice(this);" />임의의 누군가에게 보내기</label>
+		                    	<label for="sendRandom" id="random"><input type="checkbox" name="sendChoice" id="sendRandom" value="A" onclick="clickSendChoice(this);" />임의의 누군가에게 보내기</label>
 		                    </td>
 		                    <td>
-		                    	<label for="sendFriend" id="friend"><input type="checkbox" name="sendChoice" id="sendFriend" value="sendFriend" onclick="clickSendChoice(this);" />친구에게 보내기</label>
+		                    	<label for="sendFriend" id="friend"><input type="checkbox" name="sendChoice" id="sendFriend" value="F" onclick="clickSendChoice(this);" />친구에게 보내기</label>
 		                    </td>
 						</tr>
 		                <tr id="genderChoiceTr" style="display: none;">
@@ -54,8 +53,8 @@
 		                	<td></td>
 		                	<td></td>
 		                    <td>
-		                    	<input type="text" list="friendsList"/>
-		                        <datalist id="friendsList" name="friendsList">
+		                    	<input type="text" list="friendsList" id="textFriendsList" name="friendsList" />
+		                        <datalist id="friendsList">
 		                    <% for (Friends friend : friendsList) { %>
 		                            <option value="<%= friend.getNickname() %>"><%= friend.getNickname() %></option>
 							<% } %>
@@ -135,18 +134,36 @@
 	</section>
 	<script>
 		window.onload = () => {
-			/*
-			const label = document.querySelectorAll("label[for]");			
-			label.forEach((la) => {
-				la.classList.add('fontStyle');
-			});
-			*/
-			
 			const checkBox = document.querySelectorAll("input[type=checkbox]");
 			checkBox.forEach((box) => {
 				box.classList.add('choiceDetail');
 			});
 		};
+		
+		/*
+		  폼 제출 시 내용 또는 친구를 선택하지 않은 경우 폼 제출 막는 이벤트
+		*/
+		writeLetterFrm.addEventListener('submit', (e) => {
+			const content = e.target.content;
+			const friendCheck = document.querySelector('#sendFriend');
+			
+			// 내용을 작성하지 않은 경우 폼 제출할 수 없음.
+			if (!/^(.|\n)+$/.test(content.value)) {
+				alert("내용을 작성해주세요.");
+				e.preventDefault();
+				content.select();
+				return;
+			}
+			
+			// 친구에게 보내는데 친구를 선택하지 않은 경우 폼 제출할 수 없음
+			if (friendCheck.checked && textFriendsList.value == '') {
+				alert("편지를 보낼 친구를 선택해주세요.");
+				e.preventDefault();
+				textFriendsList.select();
+				return;
+			}
+		});
+		
 		
 		/*
 		  친구에게 보내기 클릭 시 닉네임으로만 보낼 수 있도록 제한
@@ -179,7 +196,7 @@
 			target.checked = true;
 			
 			// 친구에게 보내는 경우 친구목록을 임의의 누군가에게 보내는 경우 성별 및 연령 선택 행만 보이기
-			if (target.value == 'sendFriend') {
+			if (target.value == 'F') {
 				genderChoiceTr.style.display = 'none';
 				ageChoiceTr.style.display = 'none';
 				friendsListTr.style.display = '';
@@ -252,7 +269,7 @@
 		
 		/*
 		  사진 3장까지만 첨부 가능하고 미리보기 띄워줌
-		*/
+		
 		let uploadCnt = 0;
 		let uploadFiles = [];
 		const getImageFiles = (e) => {
@@ -296,6 +313,7 @@
 			getImageFiles(e);
 			console.log(uploadCnt);
 		});
+		*/
 		
 		
 		/*

@@ -16,6 +16,7 @@ public class Letter extends Form{
 	private String gender;
 	private int age;
 	private OX anonymous;
+	private AF sendWho;
 	private int attachCnt;
 	private List<Attachment> attachments = new ArrayList<>();
 	
@@ -28,7 +29,7 @@ public class Letter extends Form{
 	}
 	
 	public Letter(int no, String writer, String addressee, int designNo, int fontNo, String content, Date regDate, 
-			OX read_check, String gender, int age, OX anonymous) {
+			OX read_check, String gender, int age, OX anonymous, AF sendWho) {
 		super(no, writer, content, regDate);
 		this.addressee = addressee;
 		this.designNo = designNo;
@@ -37,10 +38,11 @@ public class Letter extends Form{
 		this.gender = gender;
 		this.age = age;
 		this.anonymous = anonymous;
+		this.sendWho = sendWho;
 	}
 
 	public Letter(int no, String writer, String addressee, int designNo, int fontNo, String content, Date regDate, 
-			OX read_check, String gender, int age, OX anonymous, int attachCnt, List<Attachment> attachments) {
+			OX read_check, String gender, int age, OX anonymous, AF sendWho, int attachCnt, List<Attachment> attachments) {
 		super(no, writer, content, regDate);
 		this.addressee = addressee;
 		this.designNo = designNo;
@@ -49,6 +51,7 @@ public class Letter extends Form{
 		this.gender = gender;
 		this.age = age;
 		this.anonymous = anonymous;
+		this.sendWho = sendWho;
 		this.attachCnt = attachCnt;
 		this.attachments = attachments;
 	}
@@ -109,6 +112,14 @@ public class Letter extends Form{
 		this.anonymous = anonymous;
 	}
 
+	public AF getSendWho() {
+		return sendWho;
+	}
+
+	public void setSendWho(AF sendWho) {
+		this.sendWho = sendWho;
+	}
+
 	public int getAttachCnt() {
 		return attachCnt;
 	}
@@ -124,14 +135,15 @@ public class Letter extends Form{
 	public void setAttachments(List<Attachment> attachments) {
 		this.attachments = attachments;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Letter [addressee=" + addressee + ", designNo=" + designNo + ", fontNo=" + fontNo + ", read_check="
-				+ read_check + ", gender=" + gender + ", age=" + age + ", anonymous=" + anonymous + ", attachCnt="
-				+ attachCnt + ", attachments=" + attachments + ", toString()=" + super.toString() + "]";
+				+ read_check + ", gender=" + gender + ", age=" + age + ", anonymous=" + anonymous + ", sendWho="
+				+ sendWho + ", attachCnt=" + attachCnt + ", attachments=" + attachments + ", toString()="
+				+ super.toString() + "]";
 	}
-	
+
 	public void addAttachment(Attachment attach) {
 		this.attachments.add(attach);
 	} // addAttachment() end

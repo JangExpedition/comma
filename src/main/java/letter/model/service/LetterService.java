@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.util.List;
 import java.util.Map;
 
+import common.Attachment;
 import letter.model.dao.LetterDao;
 import letter.model.dto.Letter;
 
@@ -25,7 +26,24 @@ public class LetterService {
 		Connection conn = getConnection();
 		
 		try {
+			// 편지 전송
 			result = letterDao.insertLetter(conn, letter);
+			
+			// 방금 전송된 편지의 no컬럼 값 가져오기
+			int letterNo = letterDao.selectLastLetterNo(conn);
+			System.out.println("letterNo = " + letterNo);
+			
+			letter.setNo(letterNo);
+			
+			// 첨부파일 등록
+			List<Attachment> letterAttach = letter.getAttachments();
+			if (!letterAttach.isEmpty()) {
+				for (Attachment attach : letterAttach) {
+					attach.setAttachNo(letterNo);
+					result = letterDao.insertAttachment(conn, attach);
+				}
+			}
+			
 			commit(conn);
 		} catch (Exception e) {
 			rollback(conn);

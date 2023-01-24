@@ -2,6 +2,8 @@ package member.model.service;
 
 import java.sql.Connection;
 import java.util.List;
+import java.util.Map;
+
 import static common.JdbcTemplate.*;
 
 import member.model.dao.MemberDao;
@@ -40,9 +42,9 @@ public class MemberService {
 		return result;
 	}
 
-	public List<Member> selectAllMemberWithOutMe(String writer) {
+	public List<Member> selectAllMemberWithOutMe(Map<String, Object> param) {
 		Connection conn = getConnection();
-		List<Member> memberList = memberDao.selectAllMemberWithOutMe(conn, writer);
+		List<Member> memberList = memberDao.selectAllMemberWithOutMe(conn, param);
 		close(conn);
 		return memberList;
 	} // selectAllMemberWithOutMe() end

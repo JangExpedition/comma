@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import member.model.dto.Gender;
@@ -102,12 +103,28 @@ public class MemberDao {
 	}
 
 
-	public List<Member> selectAllMemberWithOutMe(Connection conn, String writer) {
+	public List<Member> selectAllMemberWithOutMe(Connection conn, Map<String, Object> param) {
 		List<Member> memberList = new ArrayList<>();
 		String sql = prop.getProperty("selectAllMemberWithOutMe");
+		// select * from member where nickname ^= ? and gender like ? and age between ? and ?
+		
+		String _gender = (String) param.get("gender");
+		String gender = "X".equals(_gender) ? "" : _gender;
+		System.out.println("_gender = " + _gender);
+		System.out.println("gender = " + gender);
+		
+		int age = (int) param.get("age");
+		int start = age != 0 ? age * 10 : 0;
+		int end = age != 0 ? start + 9 : 150;
+		System.out.println("age = " + age);
+		System.out.println("start = " + start + ", end = " + end);
 		
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
-			pstmt.setString(1, writer);
+			pstmt.setString(1, (String) param.get("writer"));
+			pstmt.setString(2, gender + '%');
+			pstmt.setInt(3, start);
+			pstmt.setInt(4, end);
+			
 			try(ResultSet rset = pstmt.executeQuery()){
 				while(rset.next()) {
 					memberList.add(handleMemberResultSet(rset));
