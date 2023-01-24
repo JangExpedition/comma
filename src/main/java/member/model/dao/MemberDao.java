@@ -137,4 +137,25 @@ public class MemberDao {
 		
 		return memberList;
 	} // selectAllMemberWithOutMe() end
+
+
+	public int updateMember(Connection conn, Map<String, String> param) {
+		int result = 0;
+		String sql = prop.getProperty("updateMember");
+		String updateType = param.get("updateType");
+		String updateData = param.get("updateData");
+		String who = param.get("who");
+		sql = sql.replace("#", updateType);
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setString(1, updateData);
+			pstmt.setString(2, who);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			throw new MemberException("회원정보 수정오류!", e);
+		}
+		return result;
+	}
 }

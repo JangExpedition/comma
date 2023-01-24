@@ -1,7 +1,6 @@
-package member.controller;
+package mypage.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,25 +10,26 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
-import member.model.dto.Member;
-import member.model.manager.MemberManager;
+import common.CommaUtils;
 
 /**
- * Servlet implementation class CheckOverlapNickname
+ * Servlet implementation class MemberPwdCheckServlet
  */
-@WebServlet("/member/selectAllMember")
-public class SelectAllMember extends HttpServlet {
+@WebServlet("/member/passwordCheck")
+public class MemberPwdCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Member> memberList = MemberManager.getInstance().getNicks();
+		String loginId = request.getParameter("loginId");
+		String checkInput = request.getParameter("checkInput");
+		String checkData = CommaUtils.getEncryptedPassword(checkInput, loginId);
 		
 		response.setContentType("application/jsp; charset=utf-8");
 		Gson gson = new Gson();
-		String jsonStr = gson.toJson(memberList);
+		String jsonStr = gson.toJson(checkData);
 		
 		response.getWriter().append(jsonStr);
 	}

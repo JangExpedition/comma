@@ -1,104 +1,220 @@
 @charset "UTF-8";
 
-
- body {
-        background-color: rgb(233, 233, 233);
- }
-
-
 section{
-    /* background-image: url(../images/mypage.jpeg);
-    background-size: cover;
-    background-position: center; */
-    background-color: #f5f6f7;
-    border: 10px solid #454a7b;
-    width: 25%;
+    background-color: #fff;
+    width: 100%;
     height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border-radius: 2em;
-    
-
 }
 
-#enrollBox{
-   height: 100%;
-   padding-top: 40px;
-   padding-bottom: 70px;
-   
-}
-
-#enrollTitle{
-    font-size: 40px;
-    margin: 60px 0 30px 0;
-    display: flex;
+#updateContainer{
+	width: 70%;
+	height: 70%;
+	display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-   
-    
 }
 
+#myPageTitle{
+	width: 100%;
+    display: flex;
+    text-align: start;
+}
 
+img{
+	border-radius: 50%;
+	border: 2px solid #454a7b;
+	width: 100px;
+	height: 100px;
+	cursor: pointer;
+}
+
+form{
+	width: 100%;
+	height: 80%;
+}
 
 fieldset{
     border: 0;
-    margin: 10px 5px 25px;
- 
-    
-    
-    
+    padding: 0;
 }
 
 table{
-    border-spacing: 4px;
-    height: 90%;
-   
-    
+	border-top: 2px solid lightgray;
+    border-collapse: collapse;
+    width: 100%;
+    height: 100%;
+}
+
+.tdDiv{
+	display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+tr{
+	border-bottom: 2px solid lightgray;
+}
+
+th{
+	background-color: rgb(233, 233, 233);
+	width: 100px;
 }
 
 td{
-    width: 200px;
-  
+	padding: 15px;
 }
 
-.labelTd{
-    color: #000;
-    height: 15px;
-    font-size: 17px;
-    margin: 10px 5px 25px;
+#errorMsg{
+	margin-top: 15px;
+	color: tomato;
+	display: none;
 }
 
-.inputTd input{
-    width: 100%;
+.updateInput{
+    width: 30%;
     height: 40px;
     box-sizing: border-box;
-    border-radius: 0.8em;
- 
+    border-radius: 10px;
+    padding: 6px;
 }
 
-.errorTd{
-    height: 20px;
-}
-
-#info-change{
+.button{
 	padding: 10px;
 	background-color: #454a7b;
 	color: #fff;
 	border: none;
-	border-radius: 10px;
-	font-size: 20px;
-
+	font-size: 15px;
+	cursor: pointer;
 }
 
-#leave-member{
-	padding: 10px;
+.button:not(:last-child){
+	margin-right: 20px;
+}
+
+#buttonContainer{
+	width: 100%;
+	margin-top: 20px;
+	display: flex;
+	justify-content: center;
+}
+
+#updateModal{
+	display: none;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100vh;
+	position: absolute;
+	left: 0;
+	top: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+#modalDialog{
+	width: 600px;
+	height: 450px;
+	background-color: #fff;
+	border: 1px solid #fff;
+	border-radius: 10px;
+	box-sizing: border-box;
+}
+
+#modalHeader{
+	height: 56px;
+	display: flex;
+	justify-content: flex-start;
+	padding: 8px;
+	box-sizing: border-box;
+}
+
+#closeBtn{
+	width: 40px;
+	height: 40px;
+	box-sizing: border-box;
+	border: 1px solid #fff;
+	border-radius: 50%;
+	font-size: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+}
+
+#closeBtn:hover{
+	background-color: #fafafa;
+}
+
+#modalBody{
+	height: 344px;
+}
+
+#updateFrm{
+	height: 338px;
+}
+
+#updatePwdFset{
+	margin: 0;
+	border: 0;
+	padding: 0 20px;
+	display: flex;
+	flex-direction: column;
+	height: 338px;
+}
+
+#updatePwdTitle{
+	font-size: 20px;
+	font-weight: bolder;
+}
+
+#modalFooter{
+	display: flex;
+	justify-content: flex-end;
+	border-top: 1px solid lightgrey;
+	box-sizing: border-box;
+	padding: 8px;
+}
+
+.btnStyle{
 	background-color: #454a7b;
 	color: #fff;
-	border: none;
-	border-radius: 10px;
-	font-size: 20px;
-
+	font-weight: bolder;
+	border-radius: 20px;
+	border: 0;
+	width: 70px;
+	height: 40px;
+	cursor: pointer;
 }
 
+.btnStyle:disabled{
+	background-color: #fafafa;
+	color: #454a7b;
+	pointer-events: none;
+}
+
+.errorMsg{
+	color: tomato;
+	font-size: 15px;
+	margin-top: 5px;
+}
+
+.modalLabel{
+	margin-top: 10px;
+	font-weight: bolder;
+}
+
+.inputBar{
+	height: 45px;
+	margin-top: 5px;
+	padding: 8px;
+	box-sizing: border-box;
+}
+
+#updateFile{
+	display: none;
+}
