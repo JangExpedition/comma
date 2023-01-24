@@ -8,11 +8,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 
 import common.Attachment;
 import common.OX;
+import letter.model.dto.AF;
 import letter.model.dto.Letter;
 import letter.model.exception.LetterException;
 
@@ -42,6 +42,7 @@ public class LetterDao {
 		letter.setRegDate(rset.getDate("reg_date"));
 		letter.setRead_check(OX.valueOf(rset.getString("read_check")));
 		letter.setAnonymous(OX.valueOf(rset.getString("anonymous")));
+		letter.setSendWho(AF.valueOf(rset.getString("send_who")));
 		return letter;
 	} // handleLetterResultSet() end
 
