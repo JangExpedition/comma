@@ -1,3 +1,4 @@
+<%@page import="common.OX"%>
 <%@page import="letter.model.dto.AF"%>
 <%@page import="letter.model.dto.Letter"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -13,30 +14,74 @@
 			<input type="button" id="letterSmallRandom" class="letterSmall fontStyle" value="익명에게 받은 편지" />
 			<input type="button" id="letterSmallFriends" class="letterSmall fontStyle" value="친구에게 받은 편지" />
 		</div>
-<% if (letterList == null) { %>
-		<div class="letterList">
-			받은 편지 내역이 존재하지 않습니다..
+		<div id="letterAllList">
+	<% if (letterList == null) { %>
+			<div class="letterList">
+				받은 편지 내역이 존재하지 않습니다..
+			</div>
+	<% } else { %>
+		<% 
+			for (Letter letter : letterList) {
+				System.out.println(letter.getSendWho());
+				if (letter.getSendWho() == AF.A) {
+		%>
+			<div class="letterList" data-letter-no="<%= letter.getNo() %>" onclick="letterDetail(this);">
+				<div id="letterListTitle">
+					<table>
+						<tr>
+							<td class="firstTd">
+								<p class="letterListInfo">
+									<span id="letterListWriter" class="fontStyle"><%= letter.getAnonymous() == OX.O ? "익명" : letter.getWriter() %></span>
+									&nbsp;님으로부터
+								</p>
+							</td>
+							<td class="secondTd">
+								<p id="complain"><img src="<%= request.getContextPath() %>/images/siren.png" id="complainImg" alt="신고아이콘" /></p>
+							</td>
+						</tr>
+					</table>
+					<hr />
+				</div>
+				<p id="letterListContent"><%= letter.getContent() %></p>
+			</div>
+		<%
+				} else {
+		%>
+			<div class="letterList" data-letter-no="<%= letter.getNo() %>" onclick="letterDetail(this);">
+				<div id="letterListTitle">
+					<table>
+						<tr>
+							<td class="firstTd">
+								<p class="letterListInfo">
+									<span id="letterListWriter" class="fontStyle"><%= letter.getAnonymous() == OX.O ? "익명" : letter.getWriter() %></span>
+									&nbsp;님으로부터
+								</p>
+							</td>
+							<td class="secondTd">
+								<p id="complain"><img src="<%= request.getContextPath() %>/images/siren.png" id="complainImg" alt="신고아이콘" /></p>
+							</td>
+						</tr>
+					</table>
+					<hr />
+				</div>
+				<p id="letterListContent"><%= letter.getContent() %></p>
+			</div>
+		<%
+				} // else end
+			} // for end
+		%>
+	<% } // else end %>
 		</div>
-<% } else { %>
-	<% 
-		for (Letter letter : letterList) {
-			System.out.println(letter.getSendWho());
-			if (letter.getSendWho() == AF.A) {
-	%>
-		<div id="anonyLetterList" class="letterList">
-			익명에게 받은 편지 내역이 존재합니다.
+	</section>
+	
+	<section id="detailLetterSection" style="display: none;">
+		<div id="detailLetter">
+			<table id="detailLetterTable">
+				<tr>
+					<td></td>
+				</tr>
+			</table>
 		</div>
-	<%
-			} else {
-	%>
-		<div id="friendLetterList" class="letterList">
-			친구에게 받은 편지 내역이 존재합니다.
-		</div>
-	<%
-			}
-		}
-	%>
-<% } %>
 	</section>
 	
 	<script>
@@ -59,6 +104,13 @@
 			letterSmallRandom.classList.remove('letterSmallClick');
 			letterSmallRandom.classList.add('letterSmall');
 		}); // letterSmallFriends(click) end
+		
+		/*
+		  편지 상세 내용 보기
+		*/
+		const letterDetail = (target) => {
+			
+		};
 	</script>
 </body>
 </html>

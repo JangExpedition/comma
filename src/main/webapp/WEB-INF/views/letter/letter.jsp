@@ -4,6 +4,9 @@
 	<script>
 		const sendFriend = localStorage.getItem('friendNick');
 		console.log('sendFriend = ' + sendFriend);
+		
+		const friendNick = localStorage.getItem('friendNick');
+		console.log(friendNick);
 	</script>
 	<section>
 		<div id="letterTitle" class="fontStyle">편지쓰기</div>

@@ -22,14 +22,14 @@ public class CommaWebSocketConfigurator extends Configurator {
 	public void modifyHandshake(ServerEndpointConfig sec, HandshakeRequest request, HandshakeResponse response) {
 		HttpSession session = (HttpSession) request.getHttpSession();
 		Member loginMember = (Member) session.getAttribute("loginMember");
-		String memberNickname = loginMember.getNickname();
+		String memberNick = loginMember.getNickname();
 		
 		// 채팅페이지에 접속하는 경우
 		String chatroomId = (String) session.getAttribute("chatroomId");
 		
 		// 설정 맵에 저장
 		Map<String, Object> userProp = sec.getUserProperties();
-		userProp.put("memberId", memberNickname);
+		userProp.put("memberNick", memberNick);
 		if (chatroomId != null) {
 			userProp.put("chatroomId", chatroomId);
 		}

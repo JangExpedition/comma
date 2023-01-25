@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import friends.model.dto.Friends;
 import friends.model.service.FriendsService;
+import member.model.dto.Member;
 
 /**
  * Servlet implementation class FriendsListServlet
@@ -25,7 +26,8 @@ public class FriendsListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 사용자 입력값
-		String nickname = "test";
+		Member member = (Member) request.getSession().getAttribute("loginMember");
+		String nickname = member.getNickname();
 		System.out.println("nickname = " + nickname);
 		
 		// 업무로직
