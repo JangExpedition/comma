@@ -52,7 +52,7 @@ th,td{
 	padding: 7px 10px;
 	background-color: rgba(0, 0, 0, 0);
 	color: #253759;
-	border: 3px solid #212E40;
+	border: 3px solid #454a7b;
 	border-radius: 50px;
 	font-size: 18px;
 	background:#fff;
@@ -61,4 +61,8 @@ th,td{
 
 #btntd{
 	text-align:center;
+	color: #454a7b !important; 
 }
+
+
+
