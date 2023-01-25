@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import common.Attachment;
+import common.CommaUtils;
 import letter.model.dto.Letter;
 import letter.model.service.LetterService;
 
@@ -29,6 +30,11 @@ public class LetterViewServlet extends HttpServlet {
 		// 업무로직
 		Letter letter = letterService.selectOneLetter(letterNo);
 		letter.setAttachments(letterService.selectAllAttachment(letterNo));
+		
+		letter.setContent(
+				CommaUtils.convertLineFeedToBr(
+						CommaUtils.escapeHTML(letter.getContent()))
+				);
 		
 		request.setAttribute("letter", letter);
 		

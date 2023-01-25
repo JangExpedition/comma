@@ -96,7 +96,6 @@
 		</div>
 	</section>
 	
-	
 	<script>
 		const anonyDiv = document.querySelectorAll('#letterListAnony');
 		const friendDiv = document.querySelectorAll('#letterListFriend');
@@ -142,12 +141,22 @@
 		  div 클릭 시 상세 편지 내용 페이지로 이동
 		*/
 		document.querySelectorAll('.letterListDiv').forEach((letterDiv) => {
-			letterDiv.style.display = 'none';
+			// letterDiv.style.display = 'none';
 			
 			letterDiv.addEventListener('click', (e) => {
 				document.querySelector('[name=letterViewFrm]').submit();
 			});
-		})
+		});
+		
+		document.querySelectorAll('#letterListContent').forEach((letterContent) => {
+			const allLength = letterContent.innerText.length;
+			console.log('letterContent length = ' + allLength);
+			
+			const content = letterContent.innerText.substr(0, 11);
+			console.log('content' + content);
+			letterContent.innerText = content + '  .....';
+		});
+		
 	</script>
 </body>
 </html>

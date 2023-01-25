@@ -1,3 +1,4 @@
+<%@page import="member.model.dto.MemberRole"%>
 <%@page import="complain.model.dto.Partition"%>
 <%@page import="friends.model.dto.Friends"%>
 <%@page import="java.util.List"%>
@@ -84,8 +85,9 @@
 	case "/comma/chat/chatList" :
 		link.href = "<%= request.getContextPath() %>/css/chatList.css";
 		break;
-		
-		
+	case "/comma/admin/adminMemberList" :
+		link.href = "<%= request.getContextPath() %>/css/admin.css";
+		break;
 	}; // switch end
 	document.querySelector("head").append(link);
 </script>
@@ -101,7 +103,34 @@
         </div>  
         <div id="centerBox">
 	        <div id="category" class="pointColor fontStyle">
+	        <% if (loginMember.getMemberRole() == MemberRole.U) { %>
 				<div id="toFriends" class="navBtn">친구</div>
+				<script>
+				 /*
+			      Date : 2023. 1. 25
+			      @최민경
+			    
+			      friendsList.jsp 이동 메서드
+			    */
+				document.querySelector("#toFriends").addEventListener("click", (e)=>{
+					location.href = "<%= request.getContextPath() %>/friends/friendsList";	
+				});
+			    
+				</script>
+			<% } else { %>
+				<div id="toAdminMemberList" class="navBtn">회원목록</div>
+				<script>
+				/*
+			      Date : 2023. 1. 25
+			      @최민경
+			    
+			      adminMemberList.jsp 이동 메서드
+			    */
+				document.querySelector("#toAdminMemberList").addEventListener("click", (e)=>{
+					location.href = "<%= request.getContextPath() %>/admin/adminMemberList";	
+				});
+				</script>
+			<% } %>
 				<div id="toDiary" class="navBtn">일기장</div>
 				<div id="toPost" class="navBtn">우편함</div>
 				<div id="toLetter" class="navBtn">편지쓰기</div>
@@ -266,14 +295,5 @@
 			location.href = "<%= request.getContextPath() %>/chat/chat";	
 		});
 	    
-	    /*
-	      Date : 2023. 1. 25
-	      @최민경
-	    
-	      friendsList.jsp 이동 메서드
-	    */
-		document.querySelector("#toFriends").addEventListener("click", (e)=>{
-			location.href = "<%= request.getContextPath() %>/friends/friendsList";	
-		});
 	    </script>
 	    <% } %>
