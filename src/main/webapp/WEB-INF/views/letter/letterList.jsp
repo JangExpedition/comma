@@ -78,9 +78,11 @@
 					</table>
 				</div>
 			</div>
-			<form action="<%= request.getContextPath() %>/letter/letterView" name="letterViewFrm">
-				<input type="hidden" name="no" value="<%= letter.getNo() %>" />
+			<%--
+			<form action="<%= request.getContextPath() %>/letter/letterView?no=<%= letter.getNo() %>" name="letterViewFrm">
+				<input type="hidden" name="no" value="<%= no %>" />
 			</form>
+			--%>
 			<form action="<%= request.getContextPath() %>/complain/complain" method="post" name="complainFrm">
 				<input type="hidden" name="my_nickname" value="<%= loginMember.getNickname() %>" />
 				<input type="hidden" name="v_nickname" value="<%= letter.getWriter() %>" />
@@ -144,7 +146,9 @@
 			// letterDiv.style.display = 'none';
 			
 			letterDiv.addEventListener('click', (e) => {
-				document.querySelector('[name=letterViewFrm]').submit();
+				const letterNo = e.target.dataset.letterNo;
+				location.href = "<%= request.getContextPath() %>/letter/letterView?no=" + letterNo;
+				// document.querySelector('[name=letterViewFrm]').submit();
 			});
 		});
 		
