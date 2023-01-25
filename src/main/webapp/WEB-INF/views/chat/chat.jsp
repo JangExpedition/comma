@@ -7,6 +7,8 @@
 
 <form action="<%=request.getContextPath()%>/chat/chatView" method="post" name="chatCreateFrm">
 
+
+
 <fieldset class="fontStyle" id="chatCreatepage">
 	<h2 id = "chatmake">채팅방 개설하기</h2>
 	<hr/>
@@ -71,10 +73,21 @@
          	onclick='alert("채팅방이 생성 되었습니다.")'/>
 			</td>
 		</tr>
+		
+		<tr>
+  			<td id=btntd colspan=2  ><input type="button" class="fontStyle"  id="chatroomList" value='채팅방 목록보기' />
+			</td>
+		</tr>
 
 	</table>
 </fieldset>
 </form>
+ <script>
+ chatroomList.addEventListener('click', (e) => {
+	 alert("채팅방 목록");
+	 location.href= "<%=request.getContextPath()%>/chat/chatList";
+ });
+</script>
 </body>
 </html>
 
