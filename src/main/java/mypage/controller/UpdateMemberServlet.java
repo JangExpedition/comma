@@ -74,7 +74,7 @@ public class UpdateMemberServlet extends HttpServlet {
 				
 			}
 			
-			if(!loginMember.getNickname().equals(newNickname)){
+			if(!member.getNickname().equals(newNickname)){
 				
 				param.put("updateType", "nickname");
 				param.put("updateData", newNickname);

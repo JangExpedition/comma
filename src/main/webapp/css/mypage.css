@@ -104,7 +104,7 @@ td{
 	justify-content: center;
 }
 
-#updateModal{
+.Modal{
 	display: none;
 	align-items: center;
 	justify-content: center;
@@ -116,7 +116,7 @@ td{
 	background-color: rgba(0, 0, 0, 0.5);
 }
 
-#modalDialog{
+#updateModalDialog{
 	width: 600px;
 	height: 450px;
 	background-color: #fff;
@@ -125,7 +125,16 @@ td{
 	box-sizing: border-box;
 }
 
-#modalHeader{
+#deleteModalDialog{
+	width: 600px;
+	height: 240px;
+	background-color: #fff;
+	border: 1px solid #fff;
+	border-radius: 10px;
+	box-sizing: border-box;
+}
+
+.modalHeader{
 	height: 56px;
 	display: flex;
 	justify-content: flex-start;
@@ -133,7 +142,7 @@ td{
 	box-sizing: border-box;
 }
 
-#closeBtn{
+.closeBtn{
 	width: 40px;
 	height: 40px;
 	box-sizing: border-box;
@@ -146,19 +155,27 @@ td{
 	cursor: pointer;
 }
 
-#closeBtn:hover{
+.closeBtn:hover{
 	background-color: #fafafa;
 }
 
-#modalBody{
+#updateModalBody{
 	height: 344px;
 }
 
-#updateFrm{
+#deleteModalBody{
+	height: 240px;
+}
+
+#updateFrm {
 	height: 338px;
 }
 
-#updatePwdFset{
+#deleteFrm {
+	height: 130px;
+}
+
+#updatePwdFset {
 	margin: 0;
 	border: 0;
 	padding: 0 20px;
@@ -167,12 +184,21 @@ td{
 	height: 338px;
 }
 
-#updatePwdTitle{
+#deleteFset{
+	margin: 0;
+	border: 0;
+	padding: 0 20px;
+	display: flex;
+	flex-direction: column;
+	height: 130px;
+}
+
+#updatePwdTitle, #deleteMemberTitle{
 	font-size: 20px;
 	font-weight: bolder;
 }
 
-#modalFooter{
+.modalFooter{
 	display: flex;
 	justify-content: flex-end;
 	border-top: 1px solid lightgrey;

@@ -158,4 +158,18 @@ public class MemberDao {
 		}
 		return result;
 	}
+
+
+	public int deleteMember(Connection conn, String email) {
+		int result = 0;
+		String sql = prop.getProperty("deleteMember");
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setString(1, email);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new MemberException("회원탈퇴 오류!", e);
+		}
+		return result;
+	}
 }
