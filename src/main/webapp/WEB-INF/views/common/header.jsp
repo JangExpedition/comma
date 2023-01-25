@@ -75,6 +75,15 @@
 	case "/comma/question/questionEnroll" :
 		link.href = "<%= request.getContextPath() %>/css/question/questionEnroll.css";
 		break;
+	case "/comma/chat/chat" :
+		link.href = "<%= request.getContextPath() %>/css/chat.css";
+		break;
+	case "/comma/chat/chatView" :
+		link.href = "<%= request.getContextPath() %>/css/chatView.css";
+		break;
+	case "/comma/chat/chatList" :
+		link.href = "<%= request.getContextPath() %>/css/chatList.css";
+		break;
 		
 		
 	}; // switch end
@@ -257,7 +266,6 @@
 			location.href = "<%= request.getContextPath() %>/chat/chat";	
 		});
 	    
-	    
 	    /*
 	      Date : 2023. 1. 25
 	      @최민경
@@ -267,6 +275,5 @@
 		document.querySelector("#toFriends").addEventListener("click", (e)=>{
 			location.href = "<%= request.getContextPath() %>/friends/friendsList";	
 		});
-	    
 	    </script>
 	    <% } %>
