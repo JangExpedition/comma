@@ -78,6 +78,9 @@
 	case "/comma/chat/chatView" :
 		link.href = "<%= request.getContextPath() %>/css/chatView.css";
 		break;
+	case "/comma/chat/chatList" :
+		link.href = "<%= request.getContextPath() %>/css/chatList.css";
+		break;
 		
 		
 	}; // switch end
