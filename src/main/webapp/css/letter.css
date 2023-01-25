@@ -29,7 +29,7 @@ input[type="checkbox"]:checked {
 }
 
 #writeLetterFrm {
-	padding-left: 200px;
+	padding: 0 30px;
 	margin: auto;
 	text-align: left;
 	background-color: #bebebe;

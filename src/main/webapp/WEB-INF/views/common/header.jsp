@@ -89,6 +89,7 @@
         </div>  
         <div id="centerBox">
 	        <div id="category" class="pointColor fontStyle">
+				<div id="toFriends" class="navBtn">친구</div>
 				<div id="toDiary" class="navBtn">일기장</div>
 				<div id="toPost" class="navBtn">우편함</div>
 				<div id="toLetter" class="navBtn">편지쓰기</div>
@@ -251,6 +252,17 @@
 	    
 		document.querySelector("#toChat").addEventListener("click", (e)=>{
 			location.href = "<%= request.getContextPath() %>/chat/chat";	
+		});
+	    
+	    
+	    /*
+	      Date : 2023. 1. 25
+	      @최민경
+	    
+	      friendsList.jsp 이동 메서드
+	    */
+		document.querySelector("#toFriends").addEventListener("click", (e)=>{
+			location.href = "<%= request.getContextPath() %>/friends/friendsList";	
 		});
 	    
 	    </script>
