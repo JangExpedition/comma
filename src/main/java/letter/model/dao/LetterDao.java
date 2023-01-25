@@ -47,6 +47,17 @@ public class LetterDao {
 	} // handleLetterResultSet() end
 
 	
+	public Attachment handleAttachResultSet(ResultSet rset) throws SQLException {
+		Attachment attach = new Attachment();
+		attach.setNo(rset.getInt("no"));
+		attach.setAttachNo(rset.getInt("letter_no"));
+		attach.setOriginalFilename(rset.getString("original_filename"));
+		attach.setRenamedFilename(rset.getString("renamed_filename"));
+		attach.setRegDate(rset.getDate("reg_date"));
+		return attach;
+	} // handleAttachResultSet() end
+
+	
 	public List<Letter> selectAllLetter(Connection conn, String nickname) {
 		String sql = prop.getProperty("selectAllLetter");
 		List<Letter> letterList = new ArrayList<>();
@@ -119,5 +130,43 @@ public class LetterDao {
 		}
 		return result;
 	} // insertAttachment() end
+
+
+	public Letter selectOneLetter(Connection conn, int letterNo) {
+		String sql = prop.getProperty("selectOneLetter");
+		Letter letter = null;
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, letterNo);
+			
+			try (ResultSet rset = pstmt.executeQuery()) {
+				if (rset.next()) {
+					letter = handleLetterResultSet(rset);
+				} // if() end
+			}
+		} catch (SQLException e) {
+			throw new LetterException("편지 한 건 조회 오류", e);
+		}
+		return letter;
+	} // selectOneLetter() end
+
+
+	public List<Attachment> selectAllAttachment(Connection conn, int letterNo) {
+		String sql = prop.getProperty("selectAllAttachment");
+		List<Attachment> attachList = new ArrayList<>();
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, letterNo);
+			
+			try (ResultSet rset = pstmt.executeQuery()) {
+				while (rset.next()) {
+					attachList.add(handleAttachResultSet(rset));
+				} // while() end
+			}
+		} catch (SQLException e) {
+			throw new LetterException("첨부파일 조회 오류", e);
+		}
+		return attachList;
+	} // selectAllAttachment() end
 	
 } // class end

@@ -65,7 +65,7 @@
 					</td>
 				</tr>
 				<tr>
-					<input type="hidden" name="loginMember" value="<%= loginMember.getNickname() %>"/>
+					<td><input type="hidden" name="loginMember" value="<%= loginMember.getNickname() %>"/></td>
 				</tr>
 				<tr>
 					<th colspan="4" id="submitTd"><input type="submit" id="write" class="fontStyle" value="고민 작성하기"></th>

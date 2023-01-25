@@ -137,6 +137,13 @@ alter table friends
 -- seq_friends_no 시퀀스 생성
 create sequence seq_friends_no;
 
+--insert into friends values (seq_friends_no.nextval, 'test1', 'test4', 'O');
+--insert into friends values (seq_friends_no.nextval, 'test2', 'test5', 'O');
+--insert into friends values (seq_friends_no.nextval, 'test4', 'test1', 'O');
+--insert into friends values (seq_friends_no.nextval, 'test5', 'test2', 'O');
+--insert into friends values (seq_friends_no.nextval, 'test1', 'test3', 'O');
+--insert into friends values (seq_friends_no.nextval, 'test3', 'test1', 'O');
+
 --insert into friends values (seq_friends_no.nextval, 'test1', 'test2', 'O');
 --insert into friends values (seq_friends_no.nextval, 'test1', 'test3', 'O');
 --insert into friends values (seq_friends_no.nextval, 'test2', 'test3', 'O');
@@ -156,7 +163,7 @@ alter table design
 
 -- seq_design_no 시퀀스 생성
 create sequence seq_design_no;
---insert into design values (1, 'L', null, null, default);
+--insert into design values (seq_design_no.nextval, 'L', null, null, default);
 --insert into design values (seq_design_no.nextval, 'L', null, null, default);
 
 -- font 테이블 생성
@@ -199,10 +206,7 @@ alter table letter
     add constraint ck_letter_read_check check (read_check in ('O', 'X'))
     add constraint ck_letter_limit_gender check (limit_gender in ('M', 'F', 'X'))
     add constraint ck_letter_limit_age check (limit_age >= 0 and limit_age <= 5)
-    add constraint ck_letter_anonymous check (anonymous in ('O', 'X'));
-
-alter table letter
-    add send_who char(1)
+    add constraint ck_letter_anonymous check (anonymous in ('O', 'X'))
     add constraint ck_letter_send_who check (send_who in ('A', 'F'));
     
 -- seq_letter_no 시퀀스 생성
@@ -514,19 +518,24 @@ comment on column member.birthday is '회원 생년월일(필수입력)';
 comment on column member.gender is '회원 성별(필수입력)';
 comment on column member.enroll_date is '회원가입일';
 comment on column member.member_role is '회원권한(CK in (U, M, A))';
+comment on column member.original_filename is '원본 파일 이름';
+comment on column member.renamed_filename is '저장 파일 이름';
 comment on column member.warning_count is '누적경고숫자(CK 0 <= count <= 3)';
+comment on column member.age is '회원 나이';
 
 -- leave_member 테이블
 comment on table leave_member is '탈퇴회원관리테이블';
-comment on column leave_member.email is '탈퇴회원이메일(PK, 변경불가)';
-comment on column leave_member.nickname is '탈퇴회원닉네임(UQ)';
-comment on column leave_member.password is '탈퇴회원비밀번호(필수입력)';
-comment on column leave_member.birthday is '탈퇴회원생년월일(필수입력)';
-comment on column leave_member.gender is '탈퇴회원성별(필수입력)';
-comment on column leave_member.email is '탈퇴회원이메일(PK, 변경불가)';
+comment on column leave_member.email is '탈퇴회원 이메일(PK, 변경불가)';
+comment on column leave_member.nickname is '탈퇴회원 닉네임(UQ)';
+comment on column leave_member.password is '탈퇴회원 비밀번호(필수입력)';
+comment on column leave_member.birthday is '탈퇴회원 생년월일(필수입력)';
+comment on column leave_member.gender is '탈퇴회원 성별(필수입력)';
 comment on column leave_member.enroll_date is '탈퇴회원가입일';
-comment on column leave_member.member_role is '탈퇴회원권한';
-comment on column leave_member.warning_count is '탈퇴누적경고숫자';
+comment on column leave_member.member_role is '탈퇴회원권한(CK in (U, M, A))';
+comment on column leave_member.original_filename is '탈퇴회원 원본 파일 이름';
+comment on column leave_member.renamed_filename is '탈퇴회원 저장 파일 이름';
+comment on column leave_member.warning_count is '탈퇴회원 누적경고숫자(CK 0 <= count <= 3)';
+comment on column leave_member.age is '탈퇴회원 나이';
 comment on column leave_member.leave_date is '회원탈퇴일';
 
 -- friends 테이블
@@ -548,6 +557,8 @@ comment on column letter.reg_date is '편지 작성일';
 comment on column letter.read_check is '편지수신여부(CK in (O, X))';
 comment on column letter.limit_gender is '편지 수신인 성별 선택(CK in (M, F, X))';
 comment on column letter.limit_age is '편지 수신인 연령 선택(CK 0 <= age <= 5)';
+comment on column letter.anonymous is '편지 발신인 익명 여부(CK in (O, X))';
+comment on column letter.send_who is '편지 수신인 여부(CK in (A, F))';
 
 -- attachment_letter 테이블
 comment on table attachment_letter is '편지첨부파일테이블';
@@ -594,6 +605,7 @@ comment on column counseling.category is '고민글 카테고리(CK in (DAILY, C
 comment on column counseling.reg_date is '고민글 작성한 날짜';
 comment on column counseling.limit_gender is '고민글 조회자 성별 제한(CK in (M, F, X))';
 comment on column counseling.limit_age is '고민글 조회자 연령 제한(CK 0 <= age <= 5)';
+comment on column counseling.anonymous is '고민글 발신인 익명 여부(CK in (O, X))';
 
 -- attachment_counseling 테이블
 comment on table attachment_counseling is '고민상담소 첨부파일테이블';

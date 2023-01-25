@@ -32,6 +32,7 @@ public class CounselingServlet extends HttpServlet {
 		int page = 1;
 		try {
 			page = Integer.parseInt(request.getParameter("page"));
+			System.out.println("page = " + page);
 		} catch(NumberFormatException e) {
 			e.printStackTrace();
 		}

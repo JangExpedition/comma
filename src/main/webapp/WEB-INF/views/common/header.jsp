@@ -1,3 +1,4 @@
+<%@page import="complain.model.dto.Partition"%>
 <%@page import="friends.model.dto.Friends"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -12,6 +13,7 @@
 	List<Friends> friendsList = (List<Friends>) session.getAttribute("friendsList");
 	System.out.println(loginMember);
 	System.out.println("friendsList = " + friendsList);
+	Partition partition = null;
 %>
 <!DOCTYPE html>
 <html>
@@ -48,6 +50,7 @@
 		break;
 	case "/comma/letter/writeLetter" :
 	case "/comma/letter/letterList" :
+	case "/comma/letter/letterView" :
 		link.href = "<%= request.getContextPath() %>/css/letter.css"; 
 		break;
 	case "/comma/diary/diaryList" :
@@ -98,6 +101,7 @@
         </div>  
         <div id="centerBox">
 	        <div id="category" class="pointColor fontStyle">
+				<div id="toFriends" class="navBtn">친구</div>
 				<div id="toDiary" class="navBtn">일기장</div>
 				<div id="toPost" class="navBtn">우편함</div>
 				<div id="toLetter" class="navBtn">편지쓰기</div>
@@ -262,6 +266,14 @@
 			location.href = "<%= request.getContextPath() %>/chat/chat";	
 		});
 	    
+	    /*
+	      Date : 2023. 1. 25
+	      @최민경
 	    
+	      friendsList.jsp 이동 메서드
+	    */
+		document.querySelector("#toFriends").addEventListener("click", (e)=>{
+			location.href = "<%= request.getContextPath() %>/friends/friendsList";	
+		});
 	    </script>
 	    <% } %>

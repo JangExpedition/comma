@@ -6,7 +6,7 @@
 		console.log('sendFriend = ' + sendFriend);
 		
 		const friendNick = localStorage.getItem('friendNick');
-		console.log(friendNick);
+		console.log('friendNick = ' + friendNick);
 	</script>
 	<section>
 		<div id="letterTitle" class="fontStyle">편지쓰기</div>
@@ -104,18 +104,12 @@
 								<input type="file" name="imgChoice2" id="imgChoice2" accept=".jpg, .jpeg, .png" />
 								<input type="file" name="imgChoice3" id="imgChoice3" accept=".jpg, .jpeg, .png" />
 							</td>
-							<!-- 
-							<td colspan="3" class="imgBtn">
-								<label for="imgChoice" id="labelTd" class="fontStyle">
-									<i id="enrollImageChoice" class="fa-regular fa-image"></i>
-								</label>
-								<input type="file" name="imgChoice" id="imgChoice" style="display: none;" />
-							</td>
-							 -->
 						</tr>
 						<tr id="letterImage" style="display: none;">
 							<td colspan="3" id="letterImg">
-							
+								<img src="#" alt="" id="img1" class="letterImg" />
+								<img src="#" alt="" id="img2" class="letterImg" />
+								<img src="#" alt="" id="img3" class="letterImg" />
 							</td>
 						</tr>
 						<tr id="letterContent" style="display: none;">
@@ -268,6 +262,73 @@
 			
 			target.checked = true;
 		}; // clickAgeChoice end
+		
+		
+		/*
+		  이미지 업로드 시 미리보기
+		*/
+		document.querySelector("#imgChoice1").addEventListener("change", (e)=>{
+			const reader = new FileReader();
+			const file = e.target;
+			
+			if(file.files[0]){
+				reader.readAsDataURL(file.files[0]);
+				reader.onload = (e) => {
+					document.querySelector("#img1").src = e.target.result;
+				};
+			} else{
+				document.querySelector("#img1").src = "#";
+			}
+		});
+
+		document.querySelector("#imgChoice2").addEventListener("change", (e)=>{
+			const reader = new FileReader();
+			const file = e.target;
+			
+			if(file.files[0]){
+				reader.readAsDataURL(file.files[0]);
+				reader.onload = (e) => {
+					document.querySelector("#img2").src = e.target.result;
+				};
+			} else{
+				document.querySelector("#img2").src = "#";
+			}
+		});
+
+		document.querySelector("#imgChoice3").addEventListener("change", (e)=>{
+			const reader = new FileReader();
+			const file = e.target;
+			
+			if(file.files[0]){
+				reader.readAsDataURL(file.files[0]);
+				reader.onload = (e) => {
+					document.querySelector("#img3").src = e.target.result;
+				};
+			} else{
+				document.querySelector("#img3").src = "#";
+			}
+		});
+		
+		
+		/*
+		  친구 목록에서 편지쓰기 클릭 시 자동으로 친구 띄워주기
+		*/
+		if (friendNick != null) {
+			const friend = document.querySelector('#sendFriend');
+			friend.checked = true;
+		
+			anony.style.display = 'none';
+			genderChoiceTr.style.display = 'none';
+			ageChoiceTr.style.display = 'none';
+			friendsListTr.style.display = '';
+			letterFont.style.display = '';
+			letterDesign.style.display = '';
+			letterImage.style.display = '';
+			letterImageBtn.style.display = '';
+			letterContent.style.display = '';
+			letterSubmit.style.display = '';
+			textFriendsList.value = friendNick;
+		}
 		
 		
 		/*
