@@ -75,6 +75,9 @@
 	case "/comma/chat/chat" :
 		link.href = "<%= request.getContextPath() %>/css/chat.css";
 		break;
+	case "/comma/chat/chatView" :
+		link.href = "<%= request.getContextPath() %>/css/chat/chatView/css";
+		break;
 		
 		
 	}; // switch end
@@ -255,6 +258,7 @@
 		document.querySelector("#toChat").addEventListener("click", (e)=>{
 			location.href = "<%= request.getContextPath() %>/chat/chat";	
 		});
+	    
 	    
 	    </script>
 	    <% } %>

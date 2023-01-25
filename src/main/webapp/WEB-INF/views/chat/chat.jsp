@@ -5,6 +5,7 @@
 
 <div id="chatCreate" class="fontStyle"><h1>채팅방 개설</h1></div>
 
+<form action="<%=request.getContextPath()%>/chat/chatView" method="post" name="chatCreateFrm">
 
 <fieldset class="fontStyle" id="chatCreatepage">
 	<h2 id = "chatmake">채팅방 개설하기</h2>
@@ -66,13 +67,14 @@
 		</tr>
 		
 		<tr>
-  			<td id=btntd colspan=2  ><input type='button' class="fontStyle"  id="chatroomCreate" value='채팅방 생성하기' 
+  			<td id=btntd colspan=2  ><input type="submit" class="fontStyle"  id="chatroomCreate" value='채팅방 생성하기' 
          	onclick='alert("채팅방이 생성 되었습니다.")'/>
 			</td>
 		</tr>
 
 	</table>
 </fieldset>
+</form>
 </body>
 </html>
 
