@@ -1,1 +1,63 @@
 @charset "UTF-8";
+
+body{
+	background:#ebebeb;
+
+
+}
+
+input{
+	border: 4px solid #454a7b;
+	border-radius: 2em;
+	margin:5px;
+}
+
+#categorySelect{
+	border: 4px solid #454a7b;
+	border-radius: 2em;
+	
+	
+}
+
+hr{
+	border: 2px solid #454a7b;
+}
+
+#chatCreate{
+  color: #454a7b !important; 
+	
+}
+
+#chatmake{
+	color: #000;
+	text-align:center;
+}
+
+#chatCreatepage{
+	 color: #454a7b !important;
+	font-size: 20px;
+	border: 7px solid #454a7b;
+	border-radius: 20px;
+	padding: 10px 5px;
+
+}
+
+th,td{
+	padding: 5px 2px;
+}
+
+#chatroomCreate{
+	margin: 0px 10px;
+	padding: 7px 10px;
+	background-color: rgba(0, 0, 0, 0);
+	color: #253759;
+	border: 3px solid #212E40;
+	border-radius: 50px;
+	font-size: 18px;
+	background:#fff;
+
+}
+
+#btntd{
+	text-align:center;
+}
