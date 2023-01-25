@@ -80,4 +80,20 @@ public class MemberService {
 		}
 		return result;
 	}
+
+	public int updateMemberRole(String memberNick, String memberRole) {
+		int result = 0;
+		Connection conn = getConnection();
+		
+		try {
+			result = memberDao.updateMemberRole(conn, memberNick, memberRole);
+			commit(conn);
+		} catch(Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	} // updateMemberRole() end
 }

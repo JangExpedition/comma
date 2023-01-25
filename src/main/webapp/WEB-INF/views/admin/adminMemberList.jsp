@@ -4,7 +4,7 @@
 <%
 	List<Member> memberList = (List<Member>) request.getAttribute("memberList");
 %>
-	<section class="fontStyle">
+	<section>
 		<div id="adminTitle" class="fontStyle">회원목록</div>
 		
 		<div id="search-container">
@@ -17,7 +17,7 @@
 		<div id="admin-list">
 			<table class="admin-list-table">
 				<tbody>
-					<tr>
+					<tr class="fontStyle"ㄴ>
 						<th>프로필</th>
 						<th>닉네임</th>
 						<th>이메일</th>
@@ -42,7 +42,12 @@
 						</td>
 						<td><%= member.getNickname() %></td>
 						<td><%= member.getEmail() %></td>
-						<td><%= member.getMemberRole() %></td>
+						<td>
+							<select class="member-role" data-member-nickname="<%= member.getNickname() %>">
+								<option value="<%= MemberRole.U %>" <%= member.getMemberRole() == MemberRole.U ? "selected" : "" %> >일반사용자</option>
+								<option value="<%= MemberRole.A %>" <%= member.getMemberRole() == MemberRole.A ? "selected" : "" %> >관리자</option>
+							</select>
+						</td>
 						<td><%= member.getBirthday() %></td>
 						<td><%= member.getAge() %></td>
 						<td><%= member.getGender() %></td>
@@ -63,6 +68,33 @@
 			</table>
 		</div>
 	</section>
+	
+	<form action="<%= request.getContextPath() %>/admin/updateMemberRole" method="post" name="memberRoleUpdateFrm">
+		<input type="hidden" name="memberNick" />
+		<input type="hidden" name="memberRole" />
+	</form>
 
+	<script>
+		document.querySelectorAll(".member-role").forEach((select) => {
+			select.addEventListener('change', (e) => {
+				console.log(e.target.value);
+				console.log(e.target.dataset.memberNickname);
+				
+				const memberNick = e.target.dataset.memberNickname;
+				const memberRole = e.target.value;
+	
+				if (confirm(`[\${memberNick}] 회원의 권한을 \${memberRole}로 변경하시겠습니까?`)) {
+					const frm = document.memberRoleUpdateFrm;
+					frm.memberNick.value = memberNick;
+					frm.memberRole.value = memberRole;
+					frm.submit();				
+				}
+				else {
+					e.target.querySelector("[selected]").selected = true;
+				}
+				
+			});
+		});
+	</script>
 </body>
 </html>
