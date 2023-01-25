@@ -72,6 +72,9 @@
 	case "/comma/question/questionEnroll" :
 		link.href = "<%= request.getContextPath() %>/css/question/questionEnroll.css";
 		break;
+	case "/comma/chat/chat" :
+		link.href = "<%= request.getContextPath() %>/css/chat.css";
+		break;
 		
 		
 	}; // switch end
