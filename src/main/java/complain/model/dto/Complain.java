@@ -25,6 +25,13 @@ public class Complain extends Form{
 		this.partitionNo = partitionNo;
 	}
 	
+	public Complain(int no, String writer, String villain, Partition partition, String content, int partitionNo, Date regDate) {
+		super(no, writer, content, regDate);
+		this.villain = villain;
+		this.partition = partition;
+		this.partitionNo = partitionNo;
+	}
+	
 	public String getVillain() {
 		return villain;
 	}

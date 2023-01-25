@@ -53,5 +53,19 @@ public class LetterService {
 		}
 		return result;
 	} // insertLetter() end
+
+	public Letter selectOneLetter(int letterNo) {
+		Connection conn = getConnection();
+		Letter letter = letterDao.selectOneLetter(conn, letterNo);
+		close(conn);
+		return letter;
+	} // selectOneLetter() end
+
+	public List<Attachment> selectAllAttachment(int letterNo) {
+		Connection conn = getConnection();
+		List<Attachment> attachList = letterDao.selectAllAttachment(conn, letterNo);
+		close(conn);
+		return attachList;
+	} // selectAllAttachment() end
 	
 } // class end

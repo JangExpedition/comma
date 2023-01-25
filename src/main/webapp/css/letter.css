@@ -168,3 +168,9 @@ input[type="checkbox"]:checked {
 #complainImg {
 	width: 20px;
 }
+
+
+/* detailLetterModal */
+.letterDetailImg {
+	width: 50%;
+}

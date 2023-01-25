@@ -1,3 +1,4 @@
+<%@page import="complain.model.dto.Partition"%>
 <%@page import="friends.model.dto.Friends"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -12,6 +13,7 @@
 	List<Friends> friendsList = (List<Friends>) session.getAttribute("friendsList");
 	System.out.println(loginMember);
 	System.out.println("friendsList = " + friendsList);
+	Partition partition = null;
 %>
 <!DOCTYPE html>
 <html>
@@ -48,6 +50,7 @@
 		break;
 	case "/comma/letter/writeLetter" :
 	case "/comma/letter/letterList" :
+	case "/comma/letter/letterView" :
 		link.href = "<%= request.getContextPath() %>/css/letter.css"; 
 		break;
 	case "/comma/diary/diaryList" :
