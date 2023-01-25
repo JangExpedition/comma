@@ -29,7 +29,6 @@ public class LetterViewServlet extends HttpServlet {
 		
 		// 업무로직
 		Letter letter = letterService.selectOneLetter(letterNo);
-		letter.setAttachments(letterService.selectAllAttachment(letterNo));
 		
 		letter.setContent(
 				CommaUtils.convertLineFeedToBr(

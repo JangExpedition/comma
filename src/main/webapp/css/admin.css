@@ -23,8 +23,7 @@ section {
 	font-size: 15px;
 }
 
-#admin-list table {
-	/* border: 1px solid #000; */
+.admin-list-table {
 	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
@@ -32,9 +31,15 @@ section {
     border-collapse: collapse;
 }
 
-#admin-list th, td {
+.admin-list-table th, td {
 	border: 1px solid #000;
 }
+
+.admin-list-table td {
+	text-align: center;
+}
+
 .adminImage {
 	width: 50px;
+	border-radius: 50%;
 }
