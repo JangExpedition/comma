@@ -138,8 +138,8 @@ public class CommaUtils {
 	} // escapeHTML() end
 
 
-	public static boolean isConnected(String memberId) {
-		return CommaWebSocket.clientMap.containsKey(memberId);
+	public static boolean isConnected(String memberNick) {
+		return CommaWebSocket.clientMap.containsKey(memberNick);
 	} // isConnected() end
 
 

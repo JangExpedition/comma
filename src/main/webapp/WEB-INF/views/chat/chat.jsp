@@ -1,15 +1,78 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-       
-<%@ include file="/WEB-INF/views/common/header.jsp" %>
+	pageEncoding="UTF-8"%>
 
-<div id="chatCreate" class="fontStyle">채팅방 개설</div>
+<%@ include file="/WEB-INF/views/common/header.jsp"%>
 
-<div id="chatTitle" class="fontStyle">채팅방 제목</div>
+<div id="chatCreate" class="fontStyle"><h1>채팅방 개설</h1></div>
 
 
+<fieldset class="fontStyle">
+	<h2>채팅방 개설</h2>
+	<hr />
+	<table>
+		<tr>
+			<th>채팅방 제목 :</th>
+			<td><input type="text" name="chatTitle" value="" />
+			</td>
+		</tr>
+		<tr>
+			<th><label for="chatpassword"><input type="checkbox" name="chatpassword" id="chatpassword" />채팅방 비밀번호 :</label></th>
+			<td><input type="text" name="chatPwd" value="" /></td>
+		</tr>
 
 
+		<tr>
+			<th>카테고리 선택 :</th>
+			<td><select name="category">
+					<option value="" disabled selected>카테고리를 선택하세요.</option>
+					<option value="all">전체</option>
+					<option value="study">진로</option>
+					<option value="love">연애</option>
+					<option value="family">가족</option>
+					<option value="childcare">육아</option>
+					<option value="career">직장</option>
+					<option value="daily">일상</option>
+					<option value="friends">친구</option>
+			</select>
+			</td>
+		</tr>
 
+
+		<th>참여 가능한 성별 : </th>
+		<td><input type="checkbox" name="gender" value="male" /> 남자
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			 <input type="checkbox" name="gender" value="female" /> 여자 
+			 &nbsp;&nbsp;&nbsp;&nbsp; 
+			 <input type="checkbox" name="gender" value="all" /> 성별무관</td>
+		</tr>
+		<tr>
+			<th>참여 연령대 :</th>
+			<td><input type="radio" name="age" value="1" /> 10대 이상
+			 <input type="radio" name="age" value="2" /> 20대 이상 
+			 <input type="radio" name="age" value="3" /> 30대 이상 
+			 <input type="radio" name="age" value="4" /> 40대 이상
+			 <input type="radio" name="age" value="5" /> 50대 이상 
+			 <input type="radio" name="age" value="0" /> 연령 무관
+			 </td>
+		</tr>
+
+		<tr>
+			<th>채팅방 최대 인원 : </th>
+			<td><input type="number" name="chattingPerson" min="1"
+				max="1000" value="1" /></td>
+		</tr>
+		
+		<tr>
+			<form action='chat_page.php'>
+  			<td><input type='button' 
+         	value='채팅방 생성하기' 
+         	onclick='alert("채팅방이 생성 되었습니다.")'/>
+			</form>
+			</td>
+		</tr>
+
+	</table>
+</fieldset>
 </body>
 </html>
+

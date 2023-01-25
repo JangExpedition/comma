@@ -132,6 +132,39 @@ input[type="checkbox"]:checked {
 	font-size: 20px;
 }
 
-#letterList {
-	padding-top: 20px;
+#letterAllList {
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.letterList {
+	margin-top: 20px;
+	padding: 10px 0px;
+	width: 50%;
+	background-color: #fdffb5;
+	border-radius: 20px;
+}
+
+#letterListTitle table td {
+	width: 100%;
+}
+
+.secondTd {
+	padding-right: 10px;
+	text-align: right;
+}
+
+.letterListInfo {
+	padding-left: 10px;
+	width: 100%;
+	text-align: left;
+}
+
+#letterListWriter {
+	font-size: 20px;
+}
+
+#complainImg {
+	width: 20px;
 }
