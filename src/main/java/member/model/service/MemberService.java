@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.jdt.internal.compiler.classfmt.ComponentInfoWithTypeAnnotation;
+
 import static common.JdbcTemplate.*;
 
 import member.model.dao.MemberDao;
@@ -54,6 +56,21 @@ public class MemberService {
 		Connection conn = getConnection();
 		try {
 			result = memberDao.updateMember(conn, param);
+			commit(conn);
+		} catch(Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
+	public int deleteMember(String email) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = memberDao.deleteMember(conn, email);
 			commit(conn);
 		} catch(Exception e) {
 			rollback(conn);

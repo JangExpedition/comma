@@ -56,14 +56,14 @@
 	</section>
 	<!-- Modal-->
 	<!-- The Modal -->
-	<div id="updateModal">
-		<div id="modalDialog">
+	<div class="Modal" id="updateModal" name="updateModal">
+		<div class="modalDialog" id="updateModalDialog" name="updateModalDialog">
 			<!-- Modal Header -->
-			<div id="modalHeader">
-			  <div id="closeBtn">X</div>
+			<div class="modalHeader" id="updateModalHeader" name="updateModalHeader">
+			  <div class="closeBtn" id="updateCloseBtn" name="updateCloseBtn">X</div>
 			</div>
 			<!-- Modal body -->
-			<div id="modalBody">
+			<div class="modalBody" id="updateModalBody" name="updateModalBody" >
 			  <form action="<%= request.getContextPath() %>/member/updateMemberPwd" id="updateFrm" name="updateFrm" method="POST">
 				<fieldset id="updatePwdFset">
 					<div id="updatePwdTitle">비밀번호 변경</div>
@@ -77,19 +77,94 @@
 					<input type="password" id="newpasswordCheck" name="newpasswordCheck" placeholder="새로운 비밀번호를 다시 입력해주세요." class="inputBar" required />
 					<span id="newPwdCErrorMsg" class="errorMsg fontStyle"></span>
 				</fieldset>
-				<div id="modalFooter">
-				  <button type="submit" id="submitBtn" name="submitBtn" class="btnStyle">변경</button>
+				<div class="modalFooter" id="updateModalFooter" name="updateModalFooter">
+				  <button type="submit" id="updateSubmitBtn" name="updateSubmitBtn" class="btnStyle">변경</button>
 				</div>
 			  </form>
 			</div>
 		</div>
-	  </div>
+	</div>
+	<!-- Modal-->
+	  
+	<!-- Modal-->
+	<!-- The Modal -->
+	<div class="Modal" id="deleteModal" name="deleteModal">
+		<div class="modalDialog" id="deleteModalDialog" name="deleteModalDialog">
+			<!-- Modal Header -->
+			<div class="modalHeader" id="deleteModalHeader" name="deleteModalHeader">
+			  <div class="closeBtn" id="deleteCloseBtn" name="deleteCloseBtn">X</div>
+			</div>
+			<!-- Modal body -->
+			<div class="modalBody" id="deleteModalBody" name="deleteModalBody">
+			  <form action="<%= request.getContextPath() %>/member/deleteMember" id="deleteFrm" name="deleteFrm" method="POST">
+				<fieldset id="deleteFset">
+					<div id="deleteMemberTitle">회원탈퇴</div>
+					<label for="deleteCheckPassword" class="modalLabel">비밀번호</label>
+					<input type="password" id="deleteCheckPassword" name="deleteCheckPassword" placeholder="비밀번호를 입력해주세요." class="inputBar" required />
+					<span id="deleteMemberErrorMsg" class="errorMsg fontStyle"></span>
+				</fieldset>
+				<div class="modalFooter" id="deleteModalFooter" name="deleteModalFooter">
+				  <button type="submit" id="deleteSubmitBtn" name="deleteSubmitBtn" class="btnStyle">탈퇴</button>
+				</div>
+			  </form>
+			</div>
+		</div>
+	</div>
+	<!-- Modal-->
 	<form action="" id="checkFrm" name="checkFrm">
 		<input type="hidden" id="checkInput" name="checkInput"/>
 	</form>
 	<script>
+	const leaveBtn = document.querySelector("#deleteSubmitBtn");
+	
+	/*
+	Date : 2023. 1. 18
+	@장원정
+	회원탈퇴 메서드
+	*/
+	
+	$("#deleteCheckPassword").focusout((e)=>{
+		cnt1 = 0;
+		const errorMsg = document.querySelector("#deleteMemberErrorMsg");
+		errorMsg.style.color = "tomato";
+		const checkInput = e.target.value;
+		const loginId = "<%= loginMember.getEmail() %>";
+		
+		$.ajax({
+			url : "<%= request.getContextPath() %>/member/passwordCheck",
+			data : {checkInput, loginId},
+			dataType : "json",
+			success(data){
+				if(data === "<%= loginMember.getPassword() %>"){
+					errorMsg.style.color = "green";
+					errorMsg.innerHTML = "현재 비밀번호와 일치합니다.";
+					leaveBtn.disabled = false;
+				} else{
+					errorMsg.innerHTML = "현재 비밀번호와 일치하지 않습니다.";
+					leaveBtn.disabled = true;
+				}
+			},
+			error : console.log
+		});
+		
+		if(cnt1 === 1 && cnt2 === 1 && cnt3 === 1){
+			updatePwdBtn.disabled = false;
+		}
+	}); // 현재 비밀번호 일치유무 검사 end
+	
+	/*
+	Date : 2023. 1. 18
+	@장원정
+	취소버튼 메서드
+	*/
+	document.querySelector("#resetBtn").addEventListener("click", (e)=>{
+		document.querySelector("#profileImg").src = "<%= request.getContextPath() %>/upload/profile/<%= loginMember.getRenamedFilename() %>";
+		document.querySelector("#nickname").value = "<%= loginMember.getNickname() %>";
+		document.querySelector("#errorMsg").style.display = "none";
+	});
+	
 	const updateBtn = document.querySelector("#updateBtn");
-	const updatePwdBtn = document.querySelector("#submitBtn");
+	const updatePwdBtn = document.querySelector("#updateSubmitBtn");
 	updateBtn.disabled = true;
 	
 	/*
@@ -186,6 +261,8 @@
 	@장원정
 	모달창 open 메서드
 	*/
+	
+	// 비밀번호 변경 모달
 	document.querySelector("#password").addEventListener("click", (e)=>{
 		document.querySelector("#updateModal").style.display = "flex";
 		
@@ -195,12 +272,24 @@
 		e.target.value = "비밀번호 변경";
 	});
 	
+	// 회원탈퇴 모달
+	document.querySelector("#leaveBtn").addEventListener("click", (e)=>{
+		alert("정말로 탈퇴하시겠습니까?");
+		document.querySelector("#deleteModal").style.display = "flex";
+		
+		$("#deleteFrm")[0].reset();
+		$(".errorMsg").html("");
+		leaveBtn.disabled = true;
+	});
+	
 	/*
 	Date : 2023. 1. 24
 	@장원정
 	모달창 close 메서드
 	*/
-	document.querySelector("#closeBtn").addEventListener("click", (e)=>{
+	
+	// 비밀번호 변경 모달
+	document.querySelector("#updateCloseBtn").addEventListener("click", (e)=>{
 		document.querySelector("#updateModal").style.display = "none";
 	});
 	document.querySelector("#updateModal").addEventListener("click", (e)=>{
@@ -208,6 +297,17 @@
 			return;
 		}
 		document.querySelector("#updateModal").style.display = "none";
+	});
+	
+	// 회원탈퇴 모달
+	document.querySelector("#deleteCloseBtn").addEventListener("click", (e)=>{
+		document.querySelector("#deleteModal").style.display = "none";
+	});
+	document.querySelector("#deleteModal").addEventListener("click", (e)=>{
+		if(e.target !== e.currentTarget){
+			return;
+		}
+		document.querySelector("#deleteModal").style.display = "none";
 	});
 	
 	/*

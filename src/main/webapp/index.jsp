@@ -128,6 +128,7 @@
 		</div>
 	  </div>
 	<script>	
+	
 		let cnt = 0; // 회원가입 폼 페이지 번호 변수
 		const btn = document.querySelector("#nextBtn"); // 회원가입 폼 next 버튼
 		let nextNum1 = 0; // next버튼 활성화
