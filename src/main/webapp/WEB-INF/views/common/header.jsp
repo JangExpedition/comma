@@ -20,6 +20,9 @@
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<script src="<%= request.getContextPath() %>/js/jquery-3.6.1.js"></script>
+<% if (loginMember != null) { %>
+	<script src="<%= request.getContextPath() %>/js/ws.js"></script>
+<% } %>
 	<script>
 	<% if(msg != null) { %>
 		alert("<%= msg %>");
@@ -81,6 +84,7 @@
         <div id="logo">
         	<div id="titleBox">
             	<h1 id="title" class="pointColor fontStyle">&nbsp;쉼표 ,</h1>
+            	<span id="notification"></span>
             </div>
         </div>  
         <div id="centerBox">
