@@ -7,6 +7,7 @@
 <%
 	List<Letter> letterList = (List<Letter>) request.getAttribute("letterList");
 	System.out.println("letterList = " + letterList);
+	int no = 0;
 %>
 	<section>
 		<div id="letterTitle" class="fontStyle">받은 편지함</div>
@@ -24,8 +25,9 @@
 			for (Letter letter : letterList) {
 				System.out.println(letter.getSendWho());
 				if (letter.getSendWho() == AF.A) {
+					no = letter.getNo();
 		%>
-			<div class="letterList" data-letter-no="<%= letter.getNo() %>" onclick="letterDetail(this);">
+			<div id="letterListAnony" class="letterList letterListDiv" data-letter-no="<%= no %>">
 				<div id="letterListTitle">
 					<table>
 						<tr>
@@ -35,19 +37,32 @@
 									&nbsp;님으로부터
 								</p>
 							</td>
-							<td class="secondTd">
-								<p id="complain"><img src="<%= request.getContextPath() %>/images/siren.png" id="complainImg" alt="신고아이콘" /></p>
+						</tr>
+						<tr>
+							<td>
+								<p id="letterListContent"><%= letter.getContent() %></p>
+							</td>
+						</tr>
+						<tr>
+							<td class="lastTd">
+								<a href="<%= request.getContextPath() %>/letter/letterView?no=<%= letter.getNo() %>" class="fontStyle contentMore">더 읽어보기 &lt;&lt;</a>
 							</td>
 						</tr>
 					</table>
-					<hr />
 				</div>
-				<p id="letterListContent"><%= letter.getContent() %></p>
 			</div>
+			<form action="<%= request.getContextPath() %>/complain/complain" method="post" name="complainFrm">
+				<input type="hidden" name="my_nickname" value="<%= loginMember.getNickname() %>" />
+				<input type="hidden" name="v_nickname" value="<%= letter.getWriter() %>" />
+				<input type="hidden" name="partition" value="<%= partition %>" />
+				<input type="hidden" name="content" value="<%= letter.getContent() %>" />
+				<input type="hidden" name="part_no" value="<%= letter.getNo() %>" />
+			</form>
 		<%
 				} else {
+					no = letter.getNo();
 		%>
-			<div class="letterList" data-letter-no="<%= letter.getNo() %>" onclick="letterDetail(this);">
+			<div id="letterListFriend" class="letterList letterListDiv" data-letter-no="<%= no %>">
 				<div id="letterListTitle">
 					<table>
 						<tr>
@@ -57,15 +72,27 @@
 									&nbsp;님으로부터
 								</p>
 							</td>
-							<td class="secondTd">
-								<p id="complain"><img src="<%= request.getContextPath() %>/images/siren.png" id="complainImg" alt="신고아이콘" /></p>
+						</tr>
+						<tr>
+							<td>
+								<p id="letterListContent"><%= letter.getContent() %></p>
+							</td>
+						</tr>
+						<tr>
+							<td class="lastTd">
+								<a href="<%= request.getContextPath() %>/letter/letterView?no=<%= letter.getNo() %>" class="fontStyle contentMore">더 읽어보기 &lt;&lt;</a>
 							</td>
 						</tr>
 					</table>
-					<hr />
 				</div>
-				<p id="letterListContent"><%= letter.getContent() %></p>
 			</div>
+			<form action="<%= request.getContextPath() %>/complain/complain" method="post" name="complainFrm">
+				<input type="hidden" name="my_nickname" value="<%= loginMember.getNickname() %>" />
+				<input type="hidden" name="v_nickname" value="<%= letter.getWriter() %>" />
+				<input type="hidden" name="partition" value="<%= partition %>" />
+				<input type="hidden" name="content" value="<%= letter.getContent() %>" />
+				<input type="hidden" name="part_no" value="<%= letter.getNo() %>" />
+			</form>
 		<%
 				} // else end
 			} // for end
@@ -74,17 +101,10 @@
 		</div>
 	</section>
 	
-	<section id="detailLetterSection" style="display: none;">
-		<div id="detailLetter">
-			<table id="detailLetterTable">
-				<tr>
-					<td></td>
-				</tr>
-			</table>
-		</div>
-	</section>
-	
 	<script>
+		const anonyDiv = document.querySelectorAll('#letterListAnony');
+		const friendDiv = document.querySelectorAll('#letterListFriend');
+		
 		// 익명에게 받은 편지 클릭 시 css 변경
 		letterSmallRandom.addEventListener('click', (e) => {
 			console.log(e.target.classList);
@@ -93,6 +113,14 @@
 			
 			letterSmallFriends.classList.remove('letterSmallClick');
 			letterSmallFriends.classList.add('letterSmall');
+			
+			anonyDiv.forEach((anony) => {
+				anony.style.display = '';
+			});
+			
+			friendDiv.forEach((friend) => {
+				friend.style.display = 'none';
+			});
 		}); // letterSmallRandom(click) end
 		
 		// 친구에게 받은 편지 클릭 시 css 변경
@@ -103,14 +131,28 @@
 			
 			letterSmallRandom.classList.remove('letterSmallClick');
 			letterSmallRandom.classList.add('letterSmall');
+			
+			anonyDiv.forEach((anony) => {
+				anony.style.display = 'none';
+			});
+			
+			friendDiv.forEach((friend) => {
+				friend.style.display = '';
+			});
 		}); // letterSmallFriends(click) end
 		
 		/*
-		  편지 상세 내용 보기
+		  게시글 내용 일정 글자 수 이상은 ...으로 변경
 		*/
-		const letterDetail = (target) => {
+		document.querySelectorAll('#letterListContent').forEach((letterContent) => {
+			const allLength = letterContent.innerText.length;
+			console.log('letterContent length = ' + allLength);
 			
-		};
+			const content = letterContent.innerText.substr(0, 11);
+			console.log('content' + content);
+			letterContent.innerText = content + '  .....';
+		});
+		
 	</script>
 </body>
 </html>

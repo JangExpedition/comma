@@ -60,10 +60,15 @@
 	</section>
 	
 	<script>
-		document.querySelector('#friends-send-letter').addEventListener('click', (e) => {
-			const friendNick = e.target.dataset.friendNick;
-			localStorage.setItem('friendNick', friendNick);
-			location.href = '<%= request.getContextPath() %>/letter/writeLetter';
+		/*
+		  편지 작성 버튼 클릭 시 펀지 작성 페이지로 이동하는 메소드
+		*/
+		document.querySelectorAll('#friends-send-letter').forEach((sendBtn) => {
+			sendBtn.addEventListener('click', (e) => {
+				const friendNick = e.target.dataset.friendNick;
+				localStorage.setItem('friendNick', friendNick);
+				location.href = '<%= request.getContextPath() %>/letter/writeLetter';				
+			});
 		});
 	</script>
 </body>

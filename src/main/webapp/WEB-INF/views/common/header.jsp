@@ -1,3 +1,5 @@
+<%@page import="member.model.dto.MemberRole"%>
+<%@page import="complain.model.dto.Partition"%>
 <%@page import="friends.model.dto.Friends"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -12,6 +14,7 @@
 	List<Friends> friendsList = (List<Friends>) session.getAttribute("friendsList");
 	System.out.println(loginMember);
 	System.out.println("friendsList = " + friendsList);
+	Partition partition = null;
 %>
 <!DOCTYPE html>
 <html>
@@ -48,6 +51,7 @@
 		break;
 	case "/comma/letter/writeLetter" :
 	case "/comma/letter/letterList" :
+	case "/comma/letter/letterView" :
 		link.href = "<%= request.getContextPath() %>/css/letter.css"; 
 		break;
 	case "/comma/diary/diaryList" :
@@ -66,16 +70,27 @@
 	case "/comma/counseling/counselingEnroll" :
 		link.href = "<%= request.getContextPath() %>/css/counselingEnroll.css";
 		break;
-	case "/comma/question" :
+	case "/comma/customer" :
 		link.href = "<%= request.getContextPath() %>/css/question.css";
 		break;
-	case "/comma/question/questionEnroll" :
+	case "/comma/customer/questionEnroll" :
 		link.href = "<%= request.getContextPath() %>/css/question/questionEnroll.css";
+		break;
+	case "/comma/chat/chat" :
+		link.href = "<%= request.getContextPath() %>/css/chat.css";
+		break;
+	case "/comma/chat/chatView" :
+		link.href = "<%= request.getContextPath() %>/css/chatView.css";
+		break;
+	case "/comma/chat/chatList" :
+		link.href = "<%= request.getContextPath() %>/css/chatList.css";
+		break;
+	case "/comma/admin/adminMemberList" :
+		link.href = "<%= request.getContextPath() %>/css/admin.css";
 		break;
 	case "/comma/counseling/CSView" :
 		link.href = "<%= request.getContextPath() %>/css/counselingViewer.css";
 		break;
-		
 	}; // switch end
 	document.querySelector("head").append(link);
 </script>
@@ -91,6 +106,34 @@
         </div>  
         <div id="centerBox">
 	        <div id="category" class="pointColor fontStyle">
+	        <% if (loginMember.getMemberRole() == MemberRole.U) { %>
+				<div id="toFriends" class="navBtn">친구</div>
+				<script>
+				 /*
+			      Date : 2023. 1. 25
+			      @최민경
+			    
+			      friendsList.jsp 이동 메서드
+			    */
+				document.querySelector("#toFriends").addEventListener("click", (e)=>{
+					location.href = "<%= request.getContextPath() %>/friends/friendsList";	
+				});
+			    
+				</script>
+			<% } else { %>
+				<div id="toAdminMemberList" class="navBtn">회원목록</div>
+				<script>
+				/*
+			      Date : 2023. 1. 25
+			      @최민경
+			    
+			      adminMemberList.jsp 이동 메서드
+			    */
+				document.querySelector("#toAdminMemberList").addEventListener("click", (e)=>{
+					location.href = "<%= request.getContextPath() %>/admin/adminMemberList";	
+				});
+				</script>
+			<% } %>
 				<div id="toDiary" class="navBtn">일기장</div>
 				<div id="toPost" class="navBtn">우편함</div>
 				<div id="toLetter" class="navBtn">편지쓰기</div>
@@ -161,17 +204,7 @@
 	    */
 	    document.querySelector("#toLetter").addEventListener("click", (e)=>{
 	    	location.href = "<%= request.getContextPath() %>/letter/writeLetter";
-	    })
-	    
-	    /*
-	   	Date : 2023. 1. 15
-	   	@장원정
-	   	
-	    고객센터jsp 이동 메서드
-	    */
-	    document.querySelector("#toQuestion").addEventListener("click", (e)=>{
-	    	location.href = "<%= request.getContextPath() %>/question";
-	    })
+	    });
 	    
 	    /*
 	      Date : 2023. 01. 15
@@ -200,7 +233,7 @@
 	    question.jsp 이동 메소드
 	    */
 	    document.querySelector("#toQuestion").addEventListener('click', (e) => {
-	    	location.href = "<%= request.getContextPath() %>/question"; 
+	    	location.href = "<%= request.getContextPath() %>/customer"; 
 	     });
 	    
 	    /*
@@ -222,16 +255,6 @@
 	    document.querySelector("#toPost").addEventListener('click', (e) => {
 	    	location.href = "<%= request.getContextPath() %>/letter/letterList";
 	    });
-
-	    /*
-	   	Date : 2023. 1. 22
-	   	@장원정
-	   	
-	    고민상담소jsp 이동 메서드
-	    */
-	    document.querySelector("#toQuestion").addEventListener("click", (e)=>{
-	    	location.href = "<%= request.getContextPath() %>/question";
-	    })
 	    
 	    
 		/*

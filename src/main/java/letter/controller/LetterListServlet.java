@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import common.CommaUtils;
 import letter.model.dto.Letter;
 import letter.model.service.LetterService;
 import member.model.dto.Member;
@@ -32,6 +33,14 @@ public class LetterListServlet extends HttpServlet {
 		
 		// 업무로직
 		List<Letter> letterList = letterService.selectAllLetter(nickname);
+
+		// 개행문자 변환처리
+		for (Letter letter : letterList) {			
+			letter.setContent(
+					CommaUtils.convertLineFeedToBr(
+							CommaUtils.escapeHTML(letter.getContent()))
+					);
+		}
 		
 		request.setAttribute("letterList", letterList);
 		

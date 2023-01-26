@@ -1,0 +1,45 @@
+@charset "UTF-8";
+
+section {
+	display: inline;
+	width: 70%;
+}
+
+#adminTitle {
+	padding-top: 50px;
+    text-align: center;
+    font-size: 40px;
+    height: 50px;
+    color: #454a7b;
+}
+
+#search-container {
+	padding-top: 20px;
+	text-align: center;
+}
+
+#admin-list {
+	margin: 20px 0px;
+	font-size: 15px;
+}
+
+.admin-list-table {
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	border: 1px solid #000;
+    border-collapse: collapse;
+}
+
+.admin-list-table th, td {
+	border: 1px solid #000;
+}
+
+.admin-list-table td {
+	text-align: center;
+}
+
+.adminImage {
+	width: 50px;
+	border-radius: 50%;
+}

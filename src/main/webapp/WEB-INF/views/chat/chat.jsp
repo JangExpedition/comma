@@ -5,25 +5,31 @@
 
 <div id="chatCreate" class="fontStyle"><h1>채팅방 개설</h1></div>
 
+<form action="<%=request.getContextPath()%>/chat/chatView" method="post" name="chatCreateFrm">
 
-<fieldset class="fontStyle">
-	<h2>채팅방 개설</h2>
-	<hr />
+
+
+<fieldset class="fontStyle" id="chatCreatepage">
+	<h2 id = "chatmake">채팅방 개설하기</h2>
+	<hr/>
 	<table>
 		<tr>
 			<th>채팅방 제목 :</th>
 			<td><input type="text" name="chatTitle" value="" />
 			</td>
 		</tr>
+	
+		
 		<tr>
-			<th><label for="chatpassword"><input type="checkbox" name="chatpassword" id="chatpassword" />채팅방 비밀번호 :</label></th>
+			<th><label for="chatpassword"><input type="checkbox" name="chatpassword" id="chatpassword" />
+			채팅방 비밀번호 : </label></th>
 			<td><input type="text" name="chatPwd" value="" /></td>
 		</tr>
 
 
 		<tr>
 			<th>카테고리 선택 :</th>
-			<td><select name="category">
+			<td><select name="category" id ="categorySelect">
 					<option value="" disabled selected>카테고리를 선택하세요.</option>
 					<option value="all">전체</option>
 					<option value="study">진로</option>
@@ -37,8 +43,8 @@
 			</td>
 		</tr>
 
-
-		<th>참여 가능한 성별 : </th>
+		<tr>
+		<th>   참여 가능한 성별 : </th>
 		<td><input type="checkbox" name="gender" value="male" /> 남자
 			&nbsp;&nbsp;&nbsp;&nbsp;
 			 <input type="checkbox" name="gender" value="female" /> 여자 
@@ -63,16 +69,25 @@
 		</tr>
 		
 		<tr>
-			<form action='chat_page.php'>
-  			<td><input type='button' 
-         	value='채팅방 생성하기' 
+  			<td id=btntd colspan=2  ><input type="submit" class="fontStyle"  id="chatroomCreate" value='채팅방 생성하기' 
          	onclick='alert("채팅방이 생성 되었습니다.")'/>
-			</form>
+			</td>
+		</tr>
+		
+		<tr>
+  			<td id=btntd colspan=2  ><input type="button" class="fontStyle"  id="chatroomList" value='채팅방 목록보기' />
 			</td>
 		</tr>
 
 	</table>
 </fieldset>
+</form>
+ <script>
+ chatroomList.addEventListener('click', (e) => {
+	 alert("채팅방 목록");
+	 location.href= "<%=request.getContextPath()%>/chat/chatList";
+ });
+</script>
 </body>
 </html>
 
