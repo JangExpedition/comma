@@ -1,6 +1,7 @@
 package counseling.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import common.CommaUtils;
 import counseling.model.dto.Counseling;
+import counseling.model.dto.CounselingComment;
 import counseling.model.service.CounselingService;
 
 /**
@@ -25,11 +27,6 @@ public class CounselingViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int no = Integer.valueOf(request.getParameter("no"));
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		System.out.println(no);
 		
 		Counseling counseling = counselingService.selectOneCS(no);
 		
@@ -38,7 +35,10 @@ public class CounselingViewServlet extends HttpServlet {
 			CommaUtils.escapeHTML(counseling.getContent()))
 		);
 		
+		List<CounselingComment> csComments = counselingService.selectCsComment(no);
+		
 		request.setAttribute("counseling", counseling);
+		request.setAttribute("comments", csComments);
 		request.getRequestDispatcher("/WEB-INF/views/counseling/counselingViewer.jsp")
 			.forward(request, response);
 	}

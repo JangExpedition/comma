@@ -9,6 +9,7 @@ import java.util.Map;
 import common.Attachment;
 import counseling.model.dao.CounselingDao;
 import counseling.model.dto.Counseling;
+import counseling.model.dto.CounselingComment;
 
 public class CounselingService {
 	private CounselingDao counselingDao = new CounselingDao();
@@ -67,6 +68,28 @@ public class CounselingService {
 		counseling.setAttachments(attachList);
 		close(conn);
 		return counseling;
+	}
+
+	public int insertCsComment(CounselingComment csComment) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = counselingDao.insertCsComment(conn, csComment);
+			commit(conn);
+		} catch(Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
+	public List<CounselingComment> selectCsComment(int no) {
+		Connection conn = getConnection();
+		List<CounselingComment> csComments = counselingDao.selectCsComment(conn, no);
+		close(conn);
+		return csComments;
 	}
 
 }
