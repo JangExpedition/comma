@@ -304,6 +304,7 @@ create table cs_comment (
 	ref_comment_no number default null,
 	reg_date date default sysdate not null
 );
+
 -- cs_comment 제약조건 추가
 alter table cs_comment
     add constraint pk_cs_comment_no primary key (no)
