@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.util.List;
 import java.util.Map;
 
+import common.Attachment;
 import counseling.model.dao.CounselingDao;
 import counseling.model.dto.Counseling;
 
@@ -17,6 +18,17 @@ public class CounselingService {
 		Connection conn = getConnection();
 		try {
 			result = counselingDao.insertCounseling(conn, counseling);
+			
+			int counselingNo = counselingDao.selectLastCSNo(conn); 
+			
+			
+			List<Attachment> counselingAttachList = counseling.getAttachments();
+			if (!counselingAttachList.isEmpty()) {
+				for (Attachment attach : counselingAttachList) {
+					attach.setAttachNo(counselingNo);
+					result = counselingDao.insertAttachment(conn, attach);
+				}
+			}
 			commit(conn);
 		} catch(Exception e) {
 			rollback(conn);
@@ -39,6 +51,22 @@ public class CounselingService {
 		int result = counselingDao.getTotalCount(conn);
 		close(conn);
 		return result;
+	}
+
+	public List<Attachment> selectAllCSAttachments() {
+		Connection conn = getConnection();
+		List<Attachment> attachList = counselingDao.selectAllCSAttachments(conn);
+		close(conn);
+		return attachList;
+	}
+
+	public Counseling selectOneCS(int no) {
+		Connection conn = getConnection();
+		Counseling counseling = counselingDao.selectOneCS(conn, no);
+		List<Attachment> attachList = counselingDao.selectAttachments(conn, no);
+		counseling.setAttachments(attachList);
+		close(conn);
+		return counseling;
 	}
 
 }

@@ -11,10 +11,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import common.Attachment;
 import common.Category;
 import common.OX;
 import counseling.model.dto.Counseling;
 import counseling.model.exception.CounselingException;
+import letter.model.exception.LetterException;
 import member.model.dao.MemberDao;
 
 public class CounselingDao {
@@ -63,18 +65,7 @@ public class CounselingDao {
 			pstmt.setInt(2, end);
 			try(ResultSet rset = pstmt.executeQuery()){
 				while(rset.next()) {
-					Counseling counseling = new Counseling();
-					counseling.setNo(rset.getInt("no"));
-					counseling.setWriter(rset.getString("writer"));
-					counseling.setTitle(rset.getString("title"));
-					counseling.setContent(rset.getString("content"));
-					counseling.setViews(rset.getInt("views"));
-					counseling.setLike(rset.getInt("cs_like"));
-					counseling.setCategory(Category.valueOf(rset.getString("category")));
-					counseling.setRegDate(rset.getDate("reg_date"));
-					counseling.setLimitGender(rset.getString("limit_gender"));
-					counseling.setLimitAge(rset.getInt("limit_age"));
-					counseling.setAnonymous(OX.valueOf(rset.getString("anonymous")));
+					Counseling counseling = handleCounselingResultSet(rset);
 					
 					counselingList.add(counseling);
 				}
@@ -83,6 +74,22 @@ public class CounselingDao {
 			throw new CounselingException("게시글 불러오기 오류!", e);
 		}
 		return counselingList;
+	}
+
+	private Counseling handleCounselingResultSet(ResultSet rset) throws SQLException {
+		Counseling counseling = new Counseling();
+		counseling.setNo(rset.getInt("no"));
+		counseling.setWriter(rset.getString("writer"));
+		counseling.setTitle(rset.getString("title"));
+		counseling.setContent(rset.getString("content"));
+		counseling.setViews(rset.getInt("views"));
+		counseling.setLike(rset.getInt("cs_like"));
+		counseling.setCategory(Category.valueOf(rset.getString("category")));
+		counseling.setRegDate(rset.getDate("reg_date"));
+		counseling.setLimitGender(rset.getString("limit_gender"));
+		counseling.setLimitAge(rset.getInt("limit_age"));
+		counseling.setAnonymous(OX.valueOf(rset.getString("anonymous")));
+		return counseling;
 	}
 
 	public int getTotalCount(Connection conn) {
@@ -98,5 +105,95 @@ public class CounselingDao {
 			throw new CounselingException("게시물 총개수 조회 오류!", e);
 		}
 		return result;
+	}
+
+	public int selectLastCSNo(Connection conn) {
+		int result = 0;
+		String sql = prop.getProperty("selectLastCSNo");
+		try(PreparedStatement pstmt = conn.prepareStatement(sql);
+			ResultSet rset = pstmt.executeQuery();) {
+			if (rset.next())
+				result = rset.getInt(1);
+		} catch (SQLException e) {
+			throw new CounselingException("게시글 번호 조회오류!", e);
+		}
+		return result;
+	}
+
+	public int insertAttachment(Connection conn, Attachment attach) {
+		int result = 0;
+		String sql = prop.getProperty("insertAttachment");
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, attach.getAttachNo());
+			pstmt.setString(2, attach.getOriginalFilename());
+			pstmt.setString(3, attach.getRenamedFilename());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new LetterException("고민게시글 첨부파일 저장 오류", e);
+		}
+		return result;
+	}
+
+	public List<Attachment> selectAllCSAttachments(Connection conn) {
+		List<Attachment> attachList = new ArrayList<>();
+		String sql = prop.getProperty("selectAllCSAttachments");
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			try(ResultSet rset = pstmt.executeQuery()){
+				while(rset.next()) {
+					Attachment attach = handleAttachmentResultSet(rset);
+					
+					attachList.add(attach);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return attachList;
+	}
+
+	private Attachment handleAttachmentResultSet(ResultSet rset) throws SQLException {
+		Attachment attach = new Attachment();
+		attach.setNo(rset.getInt("no"));
+		attach.setAttachNo(rset.getInt("cs_no"));
+		attach.setOriginalFilename(rset.getString("original_filename"));
+		attach.setRenamedFilename(rset.getString("renamed_filename"));
+		attach.setRegDate(rset.getDate("reg_date"));
+		return attach;
+	}
+
+	public Counseling selectOneCS(Connection conn, int no) {
+		Counseling counseling = null;
+		String sql = prop.getProperty("selectOneCS");
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setInt(1, no);
+			try(ResultSet rset = pstmt.executeQuery()){
+				if(rset.next()) {
+					counseling = handleCounselingResultSet(rset);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return counseling;
+	}
+
+	public List<Attachment> selectAttachments(Connection conn, int no) {
+		List<Attachment> attachList = new ArrayList<>();
+		String sql = prop.getProperty("selectAttachments");
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setInt(1, no);
+			try(ResultSet rset = pstmt.executeQuery()){
+				while(rset.next()) {
+					Attachment attach = handleAttachmentResultSet(rset);
+					attachList.add(attach);
+				}
+			}
+		} catch (SQLException e) {
+			throw new CounselingException("게시글 첨부파일 조회오류!", e);
+		}
+		return attachList;
 	}
 }
