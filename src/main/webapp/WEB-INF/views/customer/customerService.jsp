@@ -14,15 +14,14 @@
 		<div id="enrollTitle" class="pointColor fontStyle">고객센터</div>
 		<hr>
 		
-		<div id="questionButton" >
+		<div id="customerButton" >
 			<input type="button" value="FAQ" />
 			<input type="button" value="문의내역" />
 		</div>
 
 		<div id="search-container">
-			<form action="<%= request.getContextPath() %>/friends/friendsFinder">
-				<input type="hidden" name="memberNick" value="<%= loginMember.getNickname() %>" />
-				<input type="text" id="searchNick" name="searchNick" size="30" placeholder="검색할 내용을 입력해주세요." />
+			<form action="<%= request.getContextPath() %>/customer/questionFinder">
+				<input type="text" id="searchContent" name="searchContent" size="30" placeholder="검색할 내용을 입력해주세요." />
 				<input type="submit" id="searchBtn" class="fontStyle" value="검색" />
 			</form>
 		</div>
@@ -60,11 +59,13 @@
 			%>
 				</tbody>
 			</table>
+			
+			<div id="inputBtn">
+				<input type="button" id="writeBtn" class="fontStyle" value="질문작성" />
+			</div>
+			
 		</div>
 
-	<div id="inputBtn">
-		<input type="button" id="writeBtn" class="fontStyle" value="질문작성" />
-	</div>
 
 		
 		<div id="faqDiv">

@@ -183,3 +183,7 @@ input[type="checkbox"]:checked {
 #complainImg {
 	width: 20px;
 }
+
+.letterDetailImg {
+	width: 30%;
+}
