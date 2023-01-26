@@ -1,16 +1,16 @@
-package question.model.dto;
+package customer.model.dto;
 
-public class QuestionComment {
+public class FAQ {
 	private int no;
 	private String title;
 	private String content;
 	
-	public QuestionComment() {
+	public FAQ() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public QuestionComment(int no, String title, String content) {
+	public FAQ(int no, String title, String content) {
 		super();
 		this.no = no;
 		this.title = title;
@@ -43,7 +43,7 @@ public class QuestionComment {
 
 	@Override
 	public String toString() {
-		return "QuestionComment [no=" + no + ", title=" + title + ", content=" + content + "]";
+		return "FAQ [no=" + no + ", title=" + title + ", content=" + content + "]";
 	}
 	
 }

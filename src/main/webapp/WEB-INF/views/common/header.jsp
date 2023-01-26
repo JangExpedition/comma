@@ -70,10 +70,10 @@
 	case "/comma/counseling/counselingEnroll" :
 		link.href = "<%= request.getContextPath() %>/css/counselingEnroll.css";
 		break;
-	case "/comma/question" :
+	case "/comma/customer" :
 		link.href = "<%= request.getContextPath() %>/css/question.css";
 		break;
-	case "/comma/question/questionEnroll" :
+	case "/comma/customer/questionEnroll" :
 		link.href = "<%= request.getContextPath() %>/css/question/questionEnroll.css";
 		break;
 	case "/comma/chat/chat" :
@@ -201,17 +201,7 @@
 	    */
 	    document.querySelector("#toLetter").addEventListener("click", (e)=>{
 	    	location.href = "<%= request.getContextPath() %>/letter/writeLetter";
-	    })
-	    
-	    /*
-	   	Date : 2023. 1. 15
-	   	@장원정
-	   	
-	    고객센터jsp 이동 메서드
-	    */
-	    document.querySelector("#toQuestion").addEventListener("click", (e)=>{
-	    	location.href = "<%= request.getContextPath() %>/question";
-	    })
+	    });
 	    
 	    /*
 	      Date : 2023. 01. 15
@@ -240,7 +230,7 @@
 	    question.jsp 이동 메소드
 	    */
 	    document.querySelector("#toQuestion").addEventListener('click', (e) => {
-	    	location.href = "<%= request.getContextPath() %>/question"; 
+	    	location.href = "<%= request.getContextPath() %>/customer"; 
 	     });
 	    
 	    /*
@@ -262,16 +252,6 @@
 	    document.querySelector("#toPost").addEventListener('click', (e) => {
 	    	location.href = "<%= request.getContextPath() %>/letter/letterList";
 	    });
-
-	    /*
-	   	Date : 2023. 1. 22
-	   	@장원정
-	   	
-	    고민상담소jsp 이동 메서드
-	    */
-	    document.querySelector("#toQuestion").addEventListener("click", (e)=>{
-	    	location.href = "<%= request.getContextPath() %>/question";
-	    })
 	    
 	    
 		/*
