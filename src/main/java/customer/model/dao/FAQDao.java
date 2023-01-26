@@ -26,6 +26,16 @@ private Properties prop = new Properties();
 			e.printStackTrace();
 		}		
 	} // QuestionDao() end
+
+
+	public FAQ handleFaqResultSet(ResultSet rset) throws SQLException {
+		FAQ faq = new FAQ();
+		faq.setNo(rset.getInt("no"));
+		faq.setTitle(rset.getString("title"));
+		faq.setContent(rset.getString("content"));
+		return faq;
+	} // handleFaqResultSet() end
+	
 	
 	public int insertFaq(Connection conn, FAQ faq) {
 		int result =0;
@@ -49,10 +59,7 @@ private Properties prop = new Properties();
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			try (ResultSet rset = pstmt.executeQuery()){
 				while(rset.next()) {
-					FAQ faq = new FAQ();
-					faq.setNo(rset.getInt("no"));
-					faq.setTitle(rset.getString("title"));
-					faq.setContent(rset.getString("content"));
+					FAQ faq = handleFaqResultSet(rset);
 					faqList.add(faq);
 				}
 			}
@@ -62,5 +69,26 @@ private Properties prop = new Properties();
 		}
 		return faqList;
 	} // selectAllFAQ() end
+
+	public List<FAQ> selectFindFaq(Connection conn, String searchContent) {
+		List<FAQ> faqList = new ArrayList<>();
+		String sql = prop.getProperty("selectFindFaq");
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, '%' + searchContent + '%');
+			pstmt.setString(2, '%' + searchContent + '%');
+			
+			try (ResultSet rset = pstmt.executeQuery()){
+				while(rset.next()) {
+					FAQ faq = handleFaqResultSet(rset);
+					faqList.add(faq);
+				}
+			}
+			
+		} catch (SQLException e) {
+			throw new FAQException("FAQ 조회 오류", e);
+		}
+		return faqList;
+	} // selectFindFaq() end
 
 }

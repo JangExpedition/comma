@@ -82,6 +82,7 @@ public class QuestionEnrollServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		
+		request.setAttribute("type", "question");
 		response.sendRedirect(request.getContextPath() + "/customer" );
 	} // doPost() end
 	

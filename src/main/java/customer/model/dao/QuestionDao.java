@@ -216,4 +216,26 @@ private Properties prop = new Properties();
 		return result;
 	} // insertQuestionComment() end
 
+
+	public List<Question> selectFindQuestion(Connection conn, String nickname, String searchContent) {
+		List<Question> questionList = new ArrayList<>();
+		String sql = prop.getProperty("selectFindQuestion");
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, '%' + searchContent + '%');
+			pstmt.setString(2, nickname);
+			
+			try (ResultSet rset = pstmt.executeQuery()){
+				while(rset.next()) {
+					Question question = handleQuestionResultSet(rset);
+					questionList.add(question);
+				}
+			}
+			
+		} catch (SQLException e) {
+			throw new QuestionException("문의 내역 검색 결과 오류", e);
+		}
+		return questionList;
+	} // selectFindQuestion() end
+
 }

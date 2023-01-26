@@ -87,6 +87,14 @@ div {
 	border: none;
 }
 
+.questionDetailBtn {
+	padding: 5px 10px;
+	background-color: #212E40;
+	color: #fff;
+	border-radius: 50px;
+	border: none;
+}
+
 #faqAddBtn {
 	padding: 5px 10px;
 	background-color: #212E40;

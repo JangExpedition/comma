@@ -81,4 +81,11 @@ public class QuestionService {
 		return result; 
 	} // insertQueationComment() end
 
+	public List<Question> selectFindQuestion(String nickname, String searchContent) {
+		Connection conn = getConnection();
+		List<Question> questionList = questionDao.selectFindQuestion(conn, nickname, searchContent);
+		close(conn);
+		return questionList;
+	} // selectFindQuestion() end
+
 }
