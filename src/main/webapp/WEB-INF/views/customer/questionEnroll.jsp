@@ -1,46 +1,124 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ include file="/WEB-INF/views/common/header.jsp" %>
-	<section id="questionTotalList" class="fontStyle">
-	<h1 id="enrollTitle" class="pointColor fontStyle">고객센터</h1>
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
+
+	<section>
+		<div id="enrollTitle" class="pointColor fontStyle" onclick="history.back();">고객센터</div>
 	
-	<form method = "post" action = "<%= request.getContextPath() %>/question/questionEnroll">
-        <table style="padding-top:50px" align = center width=700 border=0 cellpadding=2 >
-                <tr>
-                <td height=25 align= center bgcolor=#5F5DA6 ><font color=white>질문 작성</font></td>
-                </tr>
-                <tr>
-                <br>
-                <td bgcolor=white>
-                <table class = "table2">
-                        <tr>
-                        <td>작성자</td>
-                        <td><input type = text name = name size=20> </td>
-                        </tr>
- 
-                        <tr>
-                        <td>제목</td>
-                        <td><input type = text name = title size=60></td>
-                        </tr>
- 
-                        <tr>
-                        <td>내용</td>
-                        <td><textarea name = content cols=85 rows=15></textarea></td>
-                        </tr>
- 
-                        <tr>
-                       <td><input type = "submit" id="Questionenroll" value="작성하기"></td>                   
-               		   </tr>
-               		   
-               		   <tr>
-                       <td><input type = "button" id="Questionenroll" value="목록"></td>
-               		   </tr>
-               		   
-               		   <tr>
-                       <td><input type = "button" id="Questionenroll" value="사진 첨부"></td>
-               		   </tr>
-         </table>
-       </table>
-     </form>
+		<form method="post" action="<%= request.getContextPath() %>/customer/questionEnroll" enctype="multipart/form-data">
+			<table id="questionEnrollTable">
+				<tr>
+					<th class="fontStyle">작성자</th>
+					<td><input type="text" id="writerInput" name="writer" value="<%= loginMember.getNickname() %>" /></td>
+				</tr>
+				<tr>
+					<th class="fontStyle">사진첨부</th>
+					<td>
+						<input type="file" name="file1" id="file1" />
+						<input type="file" name="file2" id="file2" />
+						<input type="file" name="file3" id="file3" />
+					</td>
+				</tr>
+				<tr>
+					<td id="titleTd" class="inputTd fontStyle" colspan="2">
+						<input type="text" id="questionTitle" name="questionTitle" placeholder="제목을 입력해 주세요." required>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<div id="imgDiv">
+							<img src="" alt="" id="img1" name="img1" class="img"/>
+							<img src="" alt="" id="img2" name="img2" class="img"/>
+							<img src="" alt="" id="img3" name="img3" class="img"/>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td id="contentTd" class="inputTd fontStyle" colspan="2">
+						<textarea name="content" id="content" cols="" rows=""></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<input type="submit" id="QuestionEnroll" class="questionBtn fontStyle" value="작성하기">                   
+					</td>
+				</tr>
+			</table>
+		</form>
+	</section>
+	
+	<script>
+		/*
+		  이미지 첨부
+		*/
+		document.querySelector("#file1").addEventListener("change", (e)=>{
+			const reader = new FileReader();
+			const file = e.target;
+			const img = document.querySelector("#img1");
+			const div = document.querySelector("#imgDiv");
+			
+			if(file.files[0]){
+				reader.readAsDataURL(file.files[0]);
+				reader.onload = (e) => {
+					div.style.height = "150px";
+					document.querySelector("#content").style.height = "350px";
+					img.src = e.target.result;
+					img.style.display = "inline";
+					div.style.display = "flex";
+				};
+			} else{
+				document.querySelector("#imgDiv").style.height = "0";
+				document.querySelector("#content").style.height = "500px";
+				img.src = "";
+				img.style.display = "none";
+			}
+		});
+		
+		document.querySelector("#file2").addEventListener("change", (e)=>{
+			const reader = new FileReader();
+			const file = e.target;
+			const img = document.querySelector("#img2");
+			const div = document.querySelector("#imgDiv");
+			
+			if(file.files[0]){
+				reader.readAsDataURL(file.files[0]);
+				reader.onload = (e) => {
+					div.style.height = "150px";
+					document.querySelector("#content").style.height = "350px";
+					img.src = e.target.result;
+					img.style.display = "inline";
+					div.style.display = "flex";
+				};
+			} else{
+				document.querySelector("#imgDiv").style.height = "0";
+				document.querySelector("#content").style.height = "500px";
+				img.src = "";
+				img.style.display = "none";
+			}
+		});
+		
+		document.querySelector("#file3").addEventListener("change", (e)=>{
+			const reader = new FileReader();
+			const file = e.target;
+			const img = document.querySelector("#img3");
+			const div = document.querySelector("#imgDiv");
+			
+			if(file.files[0]){
+				reader.readAsDataURL(file.files[0]);
+				reader.onload = (e) => {
+					div.style.height = "150px";
+					document.querySelector("#content").style.height = "350px";
+					img.src = e.target.result;
+					img.style.display = "inline";
+					div.style.display = "flex";
+				};
+			} else{
+				document.querySelector("#imgDiv").style.height = "0";
+				document.querySelector("#content").style.height = "500px";
+				img.src = "";
+				img.style.display = "none";
+			}
+		});
+	</script>
 </body>
 </html>

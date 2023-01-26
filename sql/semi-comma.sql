@@ -330,7 +330,7 @@ alter table question
     add constraint pk_question_no primary key (no)
     add constraint fk_question_writer foreign key (writer) references member(nickname) on delete cascade;
 
--- seq_question_no 시퀀스 생성
+-- a 시퀀스 생성
 create sequence seq_question_no;
 
 -- attachment_question 테이블 생성

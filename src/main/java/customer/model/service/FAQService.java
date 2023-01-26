@@ -19,4 +19,21 @@ public class FAQService {
 		return faqList;
 	} // selectAllFAQ() end
 
+	public int insertFaq(FAQ faq) {
+		int result = 0;
+		Connection conn = getConnection();
+		
+		try {
+			result = faqDao.insertFaq(conn, faq);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			e.printStackTrace();
+		} finally {
+			close(conn);
+		}
+		
+		return result;
+	} // insertFaq() end
+
 }
