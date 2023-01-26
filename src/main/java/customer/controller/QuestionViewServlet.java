@@ -1,6 +1,7 @@
 package customer.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import common.CommaUtils;
 import customer.model.dto.Question;
+import customer.model.dto.QuestionComment;
 import customer.model.service.QuestionService;
 
 /**
@@ -33,7 +35,10 @@ public class QuestionViewServlet extends HttpServlet {
 			CommaUtils.escapeHTML(question.getContent()))
 		);
 		
+		List<QuestionComment> qComments = questionService.selectQComment(questionNo);
+		
 		request.setAttribute("question", question);
+		request.setAttribute("questionComments", qComments);
 		
 		request.getRequestDispatcher("/WEB-INF/views/customer/questionView.jsp").forward(request, response);
 	} // doGet() end

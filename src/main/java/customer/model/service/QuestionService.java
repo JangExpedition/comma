@@ -7,6 +7,7 @@ import java.util.List;
 import common.Attachment;
 import customer.model.dao.QuestionDao;
 import customer.model.dto.Question;
+import customer.model.dto.QuestionComment;
 
 public class QuestionService {
 
@@ -58,5 +59,26 @@ public class QuestionService {
 		close(conn);
 		return question;
 	} // selectOneQuestion() end
+
+	public List<QuestionComment> selectQComment(int questionNo) {
+		Connection conn = getConnection();
+		List<QuestionComment> qComments = questionDao.selectQComment(conn, questionNo);
+		close(conn);
+		return qComments;
+	} // selectQComment() end
+
+	public int insertQuestionComment(QuestionComment qComment) {
+		int result = 0;
+		Connection conn = getConnection();
+		
+		try {
+			result= questionDao.insertQuestionComment(conn, qComment);
+			commit(conn);
+		} catch (Exception e){ 
+			rollback(conn);
+			throw e;
+		}
+		return result; 
+	} // insertQueationComment() end
 
 }

@@ -12,6 +12,7 @@ import java.util.Properties;
 
 import common.Attachment;
 import customer.model.dto.Question;
+import customer.model.dto.QuestionComment;
 import customer.model.exception.QuestionException;
 
 public class QuestionDao {
@@ -171,5 +172,48 @@ private Properties prop = new Properties();
 		}
 		return question;
 	} // selectOneQuestion() end
+
+
+	public List<QuestionComment> selectQComment(Connection conn, int questionNo) {
+		List<QuestionComment> qComments = new ArrayList<>();
+		String sql = prop.getProperty("selectQComment");
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, questionNo);
+			
+			try (ResultSet rset = pstmt.executeQuery()){
+				while(rset.next()) {
+					QuestionComment qComment = new QuestionComment();
+					qComment.setNo(rset.getInt("no"));
+					qComment.setQNo(rset.getInt("q_no"));
+					qComment.setWriter(rset.getString("writer"));
+					qComment.setContent(rset.getString("content"));
+					qComment.setRegDate(rset.getDate("reg_date"));
+					qComments.add(qComment);
+				}
+			}
+			
+		} catch (SQLException e) {
+			throw new QuestionException("특정 문의 내역 댓글 조회 오류", e);
+		}
+		return qComments;
+	} // selectQComment() end
+
+
+	public int insertQuestionComment(Connection conn, QuestionComment qComment) {
+		int result = 0;
+		String sql = prop.getProperty("insertQuestionComment");
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, qComment.getWriter());
+			pstmt.setInt(2, qComment.getQNo());
+			pstmt.setString(3, qComment.getContent());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new QuestionException("특정 문의 내역 댓글 등록 오류", e);
+		}
+		return result;
+	} // insertQuestionComment() end
 
 }

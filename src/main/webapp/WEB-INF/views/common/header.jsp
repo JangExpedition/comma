@@ -74,6 +74,9 @@
 	case "/comma/customer/questionEnroll" :
 		link.href = "<%= request.getContextPath() %>/css/questionEnroll.css";
 		break;
+	case "/comma/customer/questionView" :
+		link.href = "<%= request.getContextPath() %>/css/questionView.css";
+		break;
 	case "/comma/customer/faqEnroll" :
 		link.href = "<%= request.getContextPath() %>/css/faqEnroll.css";
 		break;

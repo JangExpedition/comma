@@ -1,6 +1,7 @@
 package customer.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -15,6 +16,7 @@ import customer.model.dto.Question;
 import customer.model.service.FAQService;
 import customer.model.service.QuestionService;
 import member.model.dto.Member;
+import member.model.dto.MemberRole;
 
 /**
  * Servlet implementation class CustomerServiceServlet
@@ -33,7 +35,14 @@ public class CustomerServiceServlet extends HttpServlet {
 		String nickname = member.getNickname();
 		System.out.println("memberNick = " + nickname);
 		
-		List<Question> questionList = questionService.selectMyAllQuestion(nickname);
+		List<Question> questionList = new ArrayList<>();
+		
+		if (member.getMemberRole() == MemberRole.A || member.getMemberRole() == MemberRole.M) {
+			questionList = questionService.selectAllQuestion();
+		} else {
+			questionList = questionService.selectMyAllQuestion(nickname);			
+		}
+		
 		List<FAQ> faqList = faqService.selectAllFAQ();
 		
 		for (FAQ faq : faqList) {

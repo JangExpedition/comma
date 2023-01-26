@@ -69,7 +69,7 @@
 		<div id="faqDiv" class="tableDiv" style="display: none;">
 		<% if (loginMember != null && loginMember.getMemberRole() == MemberRole.A) { %>
 			<div id="inputBtn">
-				<input type="button" id="faqAddBtn" class="fontStyle" value="추가" />
+				<input type="button" id="faqAddBtn" class="fontStyle" value="추가" onclick="location.href='<%= request.getContextPath() %>/customer/faqEnroll';" />
 			</div>
 		<% } %>
 		
@@ -107,13 +107,6 @@
 		 });
 		
 		
-		/*
-		  추가 버튼 클릭 시 faqEnroll.jsp로 넘어가게 하는 이벤트리스너
-		*/
-		document.querySelector("#faqAddBtn").addEventListener('click', (e) => {
-			location.href = "<%= request.getContextPath() %>/customer/faqEnroll";
-		});
-		
 		
 		/*
 		  문의내역 클릭 시 클래스 추가 및 div 숨기거나 보이게
@@ -143,14 +136,12 @@
 		});
 		
 
-        $('.faqDetailTitle').click((e) => {
-            console.log($(e.target));
-            $(e.target).next()
-                // .slideDown(200)
-                // .slideUp(300);
-                .slideToggle(300)
-                .siblings('.faqDetailContent').slideUp();
-        });
+		$('.faqDetailTitle').click((e) => {
+	        console.log($(e.target));
+	        $(e.target).next()
+	            .slideToggle(300)
+	            .siblings('.faqDetailContent').slideUp();
+	    });
 	</script>
 
 </body>
