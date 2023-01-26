@@ -1,20 +1,22 @@
 package customer.model.dto;
 
+import java.sql.Date;
+
 public class QuestionComment {
 	private int no;
-	private String title;
 	private String content;
+	private Date regDate;
 	
+	public QuestionComment(int no, String content, Date regDate) {
+		super();
+		this.no = no;
+		this.content = content;
+		this.regDate = regDate;
+	}
+
 	public QuestionComment() {
 		super();
 		// TODO Auto-generated constructor stub
-	}
-
-	public QuestionComment(int no, String title, String content) {
-		super();
-		this.no = no;
-		this.title = title;
-		this.content = content;
 	}
 
 	public int getNo() {
@@ -25,14 +27,6 @@ public class QuestionComment {
 		this.no = no;
 	}
 
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
 	public String getContent() {
 		return content;
 	}
@@ -41,9 +35,17 @@ public class QuestionComment {
 		this.content = content;
 	}
 
+	public Date getRegDate() {
+		return regDate;
+	}
+
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
+	}
+
 	@Override
 	public String toString() {
-		return "QuestionComment [no=" + no + ", title=" + title + ", content=" + content + "]";
+		return "QuestionComment [no=" + no + ", content=" + content + ", reg_date=" + regDate + "]";
 	}
 	
 }

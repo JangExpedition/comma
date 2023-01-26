@@ -15,6 +15,7 @@ import common.Attachment;
 import common.Category;
 import common.OX;
 import counseling.model.dto.Counseling;
+import counseling.model.dto.CounselingComment;
 import counseling.model.exception.CounselingException;
 import letter.model.exception.LetterException;
 import member.model.dao.MemberDao;
@@ -195,5 +196,49 @@ public class CounselingDao {
 			throw new CounselingException("게시글 첨부파일 조회오류!", e);
 		}
 		return attachList;
+	}
+
+	public int insertCsComment(Connection conn, CounselingComment csComment) {
+		int result = 0;
+		String sql = prop.getProperty("insertCsComment");
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setString(1, csComment.getWriter());
+			pstmt.setInt(2, csComment.getNo());
+			pstmt.setString(3, csComment.getContent());
+			pstmt.setString(4, csComment.getCommentLevel().toString());
+			pstmt.setInt(5, csComment.getRefCommentNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			throw new CounselingException("댓글등록 오류!", e);
+		}
+		return result;
+	}
+
+	public List<CounselingComment> selectCsComment(Connection conn, int no) {
+		List<CounselingComment> csComments = new ArrayList<>();
+		String sql = prop.getProperty("selectCsComment");
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setInt(1, no);
+			try(ResultSet rset = pstmt.executeQuery()){
+				while(rset.next()) {
+					CounselingComment csComment = new CounselingComment();
+					csComment.setCommentNo(rset.getInt("no"));
+					csComment.setNo(rset.getInt("cs_no"));
+					csComment.setWriter(rset.getString("writer"));
+					csComment.setContent(rset.getString("content"));
+					csComment.setChoice(OX.valueOf(rset.getString("choice")));
+					csComment.setCommentLevel(OX.valueOf(rset.getString("comment_level")));
+					csComment.setRegDate(rset.getDate("reg_date"));
+					csComment.setRefCommentNo(rset.getInt("ref_comment_no"));
+					
+					csComments.add(csComment);
+				}
+			}
+		} catch (SQLException e) {
+			throw new CounselingException("게시글 댓글 조회 오류!", e);
+		}
+		return csComments;
 	}
 }
