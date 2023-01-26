@@ -9,6 +9,14 @@
 	Counseling counseling = (Counseling)request.getAttribute("counseling");
 	List<Attachment> attachList = counseling.getAttachments();
 	List<CounselingComment> comments = (List<CounselingComment>) request.getAttribute("comments");
+	boolean adopt = false;
+	CounselingComment adoptComment = null;
+	for(CounselingComment comment : comments){
+		if(comment.getChoice() == OX.O){
+			adoptComment = comment;
+			adopt = true;
+		}
+	}
 %>
 <section id="csViewerSection">
 	<div id="csContainer">
@@ -54,7 +62,7 @@
 			<%= counseling.getContent() %>
 		</div>
 		<div id="likeBox">
-			<button id="likeBtn"><i class="fa-regular fa-heart"></i> 공감</button>
+			<button id="likeBtn"><i id="clickLike" class="fa-solid fa-heart"></i><i id="unClickLike" class="fa-regular fa-heart"></i> 공감</button>
 		</div>
 		<div id="commentBox">
 			<div class="comment-editor">
@@ -70,6 +78,21 @@
 	                </div>
 	            </form>
 	        </div>
+	        <% if(adoptComment != null){ %>
+	        <div id="adoptComment">
+	        	<div id="adoptCommentData">
+		       		<sub class=comment-writer><%= adoptComment.getWriter() %></sub>
+		            <sub class=comment-date><%= adoptComment.getRegDate() %></sub>
+		            <br />
+		            <%= adoptComment.getContent() %>
+		        </div>
+		        <% if(!adoptComment.getWriter().equals(loginMember.getNickname())){ %> 
+	            <div id="btnContainer">
+	            	<button class="buttonStyle btn-adopt" data-cs-comment-no="<%= adoptComment.getCommentNo() %>" data-cs-no="<%= adoptComment.getNo() %>" data-choice="X">채택취소</button>
+	            </div>
+	            <% } %>
+	        </div>
+	        <% } %>
 	        <!--table#tbl-comment-->
 	        <%
 	        	if(!comments.isEmpty()){
@@ -79,16 +102,21 @@
 	        	for(CounselingComment comment : comments){
 	        		if(comment.getCommentLevel() == OX.X){
 	        %>
-	            <%-- 댓글인 경우 tr.level1 --%>
 	            <tr class="level1">
 	                <td>
 	                    <sub class=comment-writer><%= comment.getWriter() %></sub>
 	                    <sub class=comment-date><%= comment.getRegDate() %></sub>
 	                    <br />
-	                    <%-- 댓글내용 --%>
 	                    <%= comment.getContent() %>
 	                </td>
 	                <td class="btnDiv">
+	                	<% if(!comment.getWriter().equals(loginMember.getNickname()) && counseling.getWriter().equals(loginMember.getNickname())) { %>
+	                	<% if(!adopt){ %>
+	                	<button class="buttonStyle btn-adopt" data-cs-comment-no="<%= comment.getCommentNo() %>" data-cs-no="<%= comment.getNo() %>" data-choice="O">채택</button>
+	                	<% 
+	                			}
+	                		}
+	                	%>
 	                    <button class="buttonStyle btn-reply" value="<%= comment.getCommentNo() %>">답글</button>
 	                    <% 
 	                    	if(comment.getWriter().equals(loginMember.getNickname()) || loginMember.getMemberRole() == MemberRole.A || loginMember.getMemberRole() == MemberRole.M) {
@@ -131,10 +159,41 @@
 	   	<input type="hidden" name="no"/>
 	   	<input type="hidden" name="csNo"/>
 	</form>
+	<form action="<%= request.getContextPath() %>/counseling/comentAdopt" name="comentAdoptFrm" method="POST">
+		<input type="hidden" name="no" />
+	   	<input type="hidden" name="csNo"/>
+		<input type="hidden" name="choice" />
+	</form>
 	<script>
+	document.querySelectorAll(".btn-adopt").forEach((button) => {
+		button.onclick = (e) => {
+			const no = e.target.dataset.csCommentNo;
+			const csNo = e.target.dataset.csNo;
+			const choice = e.target.dataset.choice;
+			const frm = document.comentAdoptFrm;
+			if(choice == "O"){
+				if(confirm("댓글을 채택하시겠습니까?")){
+					frm.no.value = no;
+					frm.choice.value = choice;
+					frm.csNo.value = csNo;
+					frm.submit();
+				}
+			}else {
+				if(confirm("댓글채택을 취소하시겠습니까?")){
+					frm.no.value = no;
+					frm.choice.value = choice;
+					frm.csNo.value = csNo;
+					frm.submit();
+				}
+			}	
+		};
+	});
+	
+	// 뒤로가기 메서드
 	document.querySelector("#goBack").addEventListener("click", (e)=>{
 		location.href = "<%= request.getContextPath() %>/counseling/counselingList";
 	});
+	
 	// 댓글 삭제
 	document.querySelectorAll(".btn-delete").forEach((button) => {
 		button.onclick = (e) => {
@@ -209,6 +268,7 @@
 				document.counselingDeleteFrm.submit();
 			}	
 		};
+		
 	</script>
 	<% } %>
 </section>
