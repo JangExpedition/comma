@@ -12,12 +12,34 @@
 %>
 <section id="csViewerSection">
 	<div id="csContainer">
+		<div>
+			<button id="goBack" class="buttonStyle">뒤로가기</button>
+		</div>
 		<div id="titleContainer">
 			<span id="csCategory"><%= counseling.getCategory() %></span>
 			<h1 id="csTitle"><%= counseling.getTitle() %></h1>
 			<div id="smallBox">
-				<p><%= counseling.getWriter() %></p>
-				<p><%= counseling.getRegDate() %></p>
+				<% if(counseling.getAnonymous() == OX.X) { %>
+				<div id="p1"><%= counseling.getWriter() %></div>
+				<% }else{ %>
+				<div id="p1">익명</div>
+				<% } %>
+				<div id="p2"><%= counseling.getRegDate() %></div>
+				<%
+					boolean canEdit = loginMember != null && 
+										(loginMember.getMemberRole() == MemberRole.A ||
+											loginMember.getNickname().equals(counseling.getWriter()) ||
+											loginMember.getMemberRole() == MemberRole.M);
+					if(canEdit){
+				%>
+				
+				<div id="editBox">
+					<input id="editBtn" type="button" value="수정하기" onclick="updateCounseling()" class="buttonStyle">
+					<input type="button" value="삭제하기" onclick="deleteCounseling()" class="buttonStyle">
+				</div>
+				<%
+					}
+				%>
 			</div>
 		</div>
 		<div id="csContent" >
@@ -67,11 +89,11 @@
 	                    <%= comment.getContent() %>
 	                </td>
 	                <td class="btnDiv">
-	                    <button class="btn-reply" value="<%= comment.getCommentNo() %>">답글</button>
+	                    <button class="buttonStyle btn-reply" value="<%= comment.getCommentNo() %>">답글</button>
 	                    <% 
 	                    	if(comment.getWriter().equals(loginMember.getNickname()) || loginMember.getMemberRole() == MemberRole.A || loginMember.getMemberRole() == MemberRole.M) {
 	                    %>
-	                    		<button class="btn-delete" data-csComment-no="<%= comment.getCommentNo() %>" data-cs-No="<%= comment.getNo() %>">삭제</button>
+	                    		<button class="buttonStyle btn-delete" data-cs-comment-no="<%= comment.getCommentNo() %>" data-cs-no="<%= comment.getNo() %>">삭제</button>
 	                    <%
 	                    	}
 	                    %>
@@ -80,20 +102,18 @@
 	           <%
 	        		} else{
 	           %>
-	            <%-- 대댓글인 경우 tr.level2 --%>
 	            <tr class="level2">
 	                <td>
 	                    <sub class=comment-writer><%= comment.getWriter() %></sub>
 	                    <sub class=comment-date><%= comment.getRegDate() %></sub>
 	                <br />
-	                    <%-- 대댓글 내용 --%>
 	                    <%= comment.getContent() %>
 	                </td>
 	                <td>
 	                <% 
 	                if(comment.getWriter().equals(loginMember.getNickname()) || loginMember.getMemberRole() == MemberRole.A || loginMember.getMemberRole() == MemberRole.M) {
 	                    %>
-	                		<button class="btn-delete" data-csComment-no="<%= comment.getCommentNo() %>" data-cs-No="<%= comment.getNo() %>">삭제</button>
+	                		<button class="buttonStyle btn-delete" data-cs-comment-no="<%= comment.getCommentNo() %>" data-cs-no="<%= comment.getNo() %>">삭제</button>
 	                <%
 	                    }
 	                %>
@@ -106,9 +126,30 @@
 	        </table>
 	        <% } %>
 		</div>
-		
 	</div>
+	<form action="<%= request.getContextPath() %>/counseling/csCommentDelete" name="csCommentDeleteFrm" method="POST">
+	   	<input type="hidden" name="no"/>
+	   	<input type="hidden" name="csNo"/>
+	</form>
 	<script>
+	document.querySelector("#goBack").addEventListener("click", (e)=>{
+		location.href = "<%= request.getContextPath() %>/counseling/counselingList";
+	});
+	// 댓글 삭제
+	document.querySelectorAll(".btn-delete").forEach((button) => {
+		button.onclick = (e) => {
+				const no = e.target.dataset.csCommentNo;
+				const csNo = e.target.dataset.csNo;
+				const frm = document.csCommentDeleteFrm;
+			if(confirm("정말로 삭제하시겠습니까?")){
+				frm.no.value = no;
+				frm.csNo.value = csNo;
+				frm.submit();
+			}
+		}
+	});
+	
+	// 대댓글 달기
 	document.querySelectorAll(".btn-reply").forEach((button) => {
 		button.onclick = (e) => {
 			console.log(e.target.value);
@@ -121,7 +162,7 @@
 		                <input type="hidden" name="commentLevel" value="O" />
 		                <input type="hidden" name="commentRef" value="\${e.target.value}" />    
 		                <textarea id="cocoment" name="commentContent" cols="58" rows="1"></textarea>
-		                <button type="submit" id="btn-comment-enroll2">등록</button>
+		                <button type="submit" class="buttonStyle">등록</button>
 		            </form>
 	            </td>
 	         </tr>
@@ -154,6 +195,22 @@
 		}
 	}); 
 	</script>
+	<% if(canEdit) { %>
+	<form action="<%= request.getContextPath() %>/counseling/counselingDelete" name="counselingDeleteFrm" method="POST">
+		<input type="hidden" name="no" value="<%= counseling.getNo() %>"/>
+	</form>
+	<script>
+		const updateCounseling = () => {
+			location.href = "<%= request.getContextPath() %>/counseling/counselingUpdate?no=<%= counseling.getNo() %>";	
+		};
+	
+		const deleteCounseling = () => {
+			if(confirm("정말 게시글을 삭제하겠습니까?")){
+				document.counselingDeleteFrm.submit();
+			}	
+		};
+	</script>
+	<% } %>
 </section>
 </body>
 </html>

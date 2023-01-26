@@ -3,6 +3,9 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <section id="counselingEnrollSection" class="fontStyle">
 	<div id="counselingEnrollContainer">
+		<div>
+			<button id="goBack" class="buttonStyle">뒤로가기</button>
+		</div>
 		<div id=counselingEnrollTitle class="pointColor">
 			<h1>고민 작성</h1>
 		</div>
@@ -12,7 +15,7 @@
 					<th class="lableTd pointColor">카테고리 선택</th>
 					<td class="input fontsytle"  id="categoryTd">
 						<select id="counselingCategory" name="counselingCategory" required>
-								<option value="" selected>카테고리를 선택해주세요.</option>
+								<option value="" selected disabled hidden>카테고리를 선택해주세요.</option>
 								<option value="STUDY">진로</option>
 								<option value="LOVE">연애</option>
 								<option value="FAMILY">가족</option>
@@ -25,7 +28,7 @@
 					<th class="lableTd pointColor">익명 선택</th>
 					<td class="input fontsytle">
 						<select name="anonymous" id="anonymous" name="anonymous" class="inputBar" required >
-							<option value="" selected>작성자 공개 설정</option>
+							<option value="" selected disabled hidden>작성자 공개 설정</option>
 							<option value="X">닉네임으로 작성하기</option>
 							<option value="O">익명으로 작성하기</option>
 						</select>
@@ -35,7 +38,7 @@
 					<th class="lableTd pointColor">성별 선택</th>
 					<td class="input fontsytle">
 						<select name="gender" id="gender" name="gender" class="inputBar" required >
-							<option value="" selected>공개할 성별을 선택해주세요.</option>
+							<option value="" selected disabled hidden>공개할 성별을 선택해주세요.</option>
 							<option value="A">전체</option>
 							<option value="M">남자</option>
 							<option value="F">여자</option>
@@ -44,7 +47,7 @@
 					<th class="lableTd pointColor">나이대 선택</th>
 					<td>
 						<select name="age" required >
-							<option value="" selected>공개할 나이대를 선택해주세요.</option>
+							<option value="" selected disabled hidden>공개할 나이대를 선택해주세요.</option>
 							<option value="1">10대 이상</option>
 							<option value="2">20대 이상</option>
 							<option value="3">30대 이상</option>
@@ -92,6 +95,9 @@
 	</div>
 </section>
 <script>
+document.querySelector("#goBack").addEventListener("click", (e)=>{
+	location.href = "<%= request.getContextPath() %>/counseling/counselingList";
+});
 /*
 Date : 2023. 1. 25
 @장원정
@@ -171,4 +177,3 @@ document.querySelector("#file3").addEventListener("change", (e)=>{
 </script>
 </body>
 </html>
-<!-- crtl shift f 줄맞춤  -->
