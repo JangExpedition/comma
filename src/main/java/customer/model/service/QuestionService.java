@@ -1,11 +1,11 @@
-package question.model.service;
+package customer.model.service;
 
 import static common.JdbcTemplate.*;
 import java.sql.Connection;
 import java.util.List;
 
-import question.model.dao.QuestionDao;
-import question.model.dto.Question;
+import customer.model.dao.QuestionDao;
+import customer.model.dto.Question;
 
 public class QuestionService {
 

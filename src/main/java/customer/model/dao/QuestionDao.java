@@ -1,4 +1,4 @@
-package question.model.dao;
+package customer.model.dao;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import question.model.dto.Question;
-import question.model.exception.QuestionException;
+import customer.model.dto.Question;
+import customer.model.exception.QuestionException;
 
 public class QuestionDao {
 

@@ -1,4 +1,4 @@
-package question.model.exception;
+package customer.model.exception;
 
 public class QuestionException extends RuntimeException {
 

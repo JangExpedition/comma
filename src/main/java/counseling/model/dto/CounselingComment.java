@@ -1,7 +1,7 @@
 package counseling.model.dto;
 
 import common.OX;
-import question.model.dto.QuestionComment;
+import customer.model.dto.QuestionComment;
 
 public class CounselingComment extends QuestionComment{
 	private OX choice;

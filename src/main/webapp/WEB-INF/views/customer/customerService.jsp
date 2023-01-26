@@ -1,4 +1,5 @@
-<%@page import="question.model.dto.Question"%>
+<%@page import="customer.model.dto.FAQ"%>
+<%@page import="customer.model.dto.Question"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -6,10 +7,11 @@
 
 <%
 	List<Question> questionList = (List<Question>) request.getAttribute("questionList");
+	List<FAQ> faqList = (List<FAQ>) request.getAttribute("faqList");
 %>
 
 	<section id="questionTotalList" class="fontStyle">
-		<div id="enrollTitle" class="pointColor fontStyle">받은 편지함</div>
+		<div id="enrollTitle" class="pointColor fontStyle">고객센터</div>
 		<hr>
 		
 		<div id="questionButton" >
@@ -71,24 +73,24 @@
 					<tr>
 						<th>번호</th>
 						<th>제목</th>
-						<th>등록일</th>
+						<th>내용</th>
 					</tr>
 				</thead>
 				<tbody>
 			<%
-				if (questionList != null) {
+				if (faqList != null) {
 			%>
 					<tr>
 						<td>조회된 문의 내역이 없습니다..</td>
 					</tr>
 			<%
 				} else {
-					for (Question question : questionList) {
+					for (FAQ faq : faqList) {
 			%>
 					<tr>
-						<td><%= question.getNo() %></td>
-						<td><%= question.getTitle() %></td>
-						<td><%= question.getRegDate() %></td>
+						<td><%= faq.getNo() %></td>
+						<td><%= faq.getTitle() %></td>
+						<td><%= faq.getContent() %></td>
 					</tr>
 			<%
 					} // for end
