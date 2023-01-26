@@ -9,10 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import common.CommaUtils;
 import customer.model.dto.FAQ;
 import customer.model.dto.Question;
 import customer.model.service.FAQService;
 import customer.model.service.QuestionService;
+import member.model.dto.Member;
 
 /**
  * Servlet implementation class CustomerServiceServlet
@@ -27,8 +29,19 @@ public class CustomerServiceServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Question> questionList = questionService.selectAllQuestion();
+		Member member = (Member) request.getSession().getAttribute("loginMember");
+		String nickname = member.getNickname();
+		System.out.println("memberNick = " + nickname);
+		
+		List<Question> questionList = questionService.selectMyAllQuestion(nickname);
 		List<FAQ> faqList = faqService.selectAllFAQ();
+		
+		for (FAQ faq : faqList) {
+			faq.setContent(
+					CommaUtils.convertLineFeedToBr(
+							CommaUtils.escapeHTML(faq.getContent()))
+					);			
+		}
 		
 		request.setAttribute("questionList", questionList);
 		request.setAttribute("faqList", faqList);

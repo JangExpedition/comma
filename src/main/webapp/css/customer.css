@@ -1,5 +1,14 @@
 @charset "UTF-8";
 
+section {
+	width: 70%;
+	text-align: center;
+}
+
+div {
+	margin: auto;
+}
+
 #enrollTitle{
 	font-size: 30px;
     margin: 30px 0 30px 0;
@@ -11,45 +20,113 @@
 	
 
 #customerButton{
+	width: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-	background-color: #5F5DA6;
-	border: 2px solid #000;
+    align-items: flex-end;
+	/* background-color: #5F5DA6; */
+	border: 2px solid #212E40;
 	border-radius: 50px;
 }
 
+.customerBtn {
+	width: 100%;
+	padding: 5px 0;
+	background-color: rgba(0, 0, 0, 0);
+    color: #909090;
+    border: none;
+    font-size: 15px;
+}
 
-#questionList{
-	 align-items: center;
+.customerBtnClick {
+    color: #212E40;
+}
 
+#questionBtn {
+	border-right: 2px solid #212E40;
 }
 
 
-#board-search{
- align-items: center;
-
+#search-container {
+	padding-top: 20px;
+	text-align: center;
 }
 
-container{
- align-items: center;
+#searchContent {
+	height: 20px;
 }
 
-search-window{
-	 align-items: center;
+#searchBtn {
+	/*
+	background-color: #fff;
+	color: #454a7b;
+	border: 3px solid #454a7b;
+	border-radius: 5px;
+	*/
+	font-size: 15px;
+	padding: 5px 12px;
+}
 
+.tableDiv {
+	margin: 10px auto;
+	width: 100%;
+	text-align: center;
+}
+
+#inputBtn {
+	margin: 10px;
+	text-align: right;
+}
+
+#writeBtn {
+	padding: 5px 10px;
+	background-color: #212E40;
+	color: #fff;
+	border-radius: 50px;
+	border: none;
+}
+
+#faqAddBtn {
+	padding: 5px 10px;
+	background-color: #212E40;
+	color: #fff;
+	border-radius: 50px;
+	border: none;
 }
 
 
-#no-title-date{
+table {
+	width: 100%;
+}
+
+table td {
+	height: 30px;
+}
+
+.content {
+	color: #000;
+	text-decoration: none;
+}
+
+
+.faqDetailTitle {
+    width: 100%;
+    height: 30px;
+    border-radius: 10px;
+    text-align: left;
+    border: 1px solid #212E40;
+    padding: 5px 15px;
+    display: flex;
     align-items: center;
-
 }
 
-#question{
-    align-items: center;
-    justify-content: center;
-    color: #5F5DA6;
+.faqDetailContent {
+    width: 100%;
+    border-radius: 10px;
+    text-align: left;
+    border: 1px solid #212E40;
+    background-color: #f0f0f0;
+    padding: 5px 15px;
+    display: none;
 }
-
-

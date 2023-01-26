@@ -27,12 +27,12 @@ private Properties prop = new Properties();
 		}		
 	} // QuestionDao() end
 	
-	public int insertfaq(Connection conn, String title, String content) {
+	public int insertFaq(Connection conn, FAQ faq) {
 		int result =0;
-		String sql = prop.getProperty("insertQuestion");
+		String sql = prop.getProperty("insertFaq");
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setString(1, title);
-			pstmt.setString(2, content);
+			pstmt.setString(1, faq.getTitle());
+			pstmt.setString(2, faq.getContent());
 			
 			result = pstmt.executeUpdate();
 			
@@ -40,7 +40,7 @@ private Properties prop = new Properties();
 			throw new FAQException("FAQ 등록 오류", e);
 		}
 		return result;
-	} // insertfaq() end
+	} // insertFaq() end
 
 	public List<FAQ> selectAllFAQ(Connection conn) {
 		List<FAQ> faqList = new ArrayList<>();
