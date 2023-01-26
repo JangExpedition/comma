@@ -117,12 +117,20 @@ header{
 	color: #454a7b !important;
 }
 
-/* footer{
-    position: fixed;
-    top: 90vh;
-    width: 100%;
-    height: 10vh;
-    display: flex;
-    align-items: center;
-    background-color : #000;
-} */
+/* 알림흔들림 효과처리 */
+.bell {
+  transform-origin: top;
+  animation: bell 2s infinite linear;
+}
+
+@keyframes bell{
+  0%, 50%{
+    transform: rotate(0deg);
+	}
+  5%, 15%, 25%, 35%, 45% {
+    transform: rotate(13deg);
+  }
+  10%, 20%, 30%, 40% {
+    transform: rotate(-13deg);
+  }
+}

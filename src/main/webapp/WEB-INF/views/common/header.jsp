@@ -110,11 +110,11 @@
         <div id="logo">
         	<div id="titleBox">
             	<h1 id="title" class="pointColor fontStyle">&nbsp;쉼표 ,</h1>
-            	<span id="notification"></span>
             </div>
         </div>  
         <div id="centerBox">
 	        <div id="category" class="pointColor fontStyle">
+	        	<div id="notification"></div>
 	        <% if (loginMember.getMemberRole() == MemberRole.U) { %>
 				<div id="toFriends" class="navBtn">친구</div>
 				<script>
@@ -280,11 +280,11 @@
 	    Date : 2023. 1. 23
 	    @한혜진
 	    
-	    익명채팅방 개설jsp 메서드 (chat.jsp)
+	    익명채팅방 메서드
 	    */
 	    
 		document.querySelector("#toChat").addEventListener("click", (e)=>{
-			location.href = "<%= request.getContextPath() %>/chat/chat";	
+			location.href = "<%= request.getContextPath() %>/chat/chatList";	
 		});
 	    
 	    </script>

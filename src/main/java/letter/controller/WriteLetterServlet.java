@@ -22,6 +22,7 @@ import letter.model.dto.Letter;
 import letter.model.service.LetterService;
 import member.model.dto.Member;
 import member.model.service.MemberService;
+import notification.model.service.NotificationService;
 
 /**
  * Servlet implementation class WriteLetterServlet
@@ -31,6 +32,7 @@ public class WriteLetterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private LetterService letterService = new LetterService();
 	private MemberService memberService = new MemberService();
+	private NotificationService notificationService = new NotificationService();
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -120,6 +122,15 @@ public class WriteLetterServlet extends HttpServlet {
 			
 			// 업무로직
 			int result = letterService.insertLetter(letter);
+			
+			
+			// 알람발송
+			System.out.println();
+			System.out.println();
+			System.out.println();
+			System.out.println();
+			System.out.println(letter.getNo());
+			notificationService.notifyNewLetter(letter);
 			
 			request.getSession().setAttribute("msg", "편지 보내기 성공!");
 		} catch (Exception e) {

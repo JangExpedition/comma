@@ -1,47 +1,52 @@
 package counseling.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import common.OX;
-import counseling.model.dto.Counseling;
 import counseling.model.dto.CounselingComment;
 import counseling.model.service.CounselingService;
-import notification.model.service.NotificationService;
 
 /**
- * Servlet implementation class csCommentEnrollServlet
+ * Servlet implementation class AdoptCounselingComment
  */
-@WebServlet("/counseling/csCommentEnroll")
-public class csCommentEnrollServlet extends HttpServlet {
+@WebServlet("/counseling/comentAdopt")
+public class AdoptCounselingComment extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private CounselingService counselingService = new CounselingService();
-	private NotificationService notificationService = new NotificationService();
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		int csNo = Integer.valueOf(request.getParameter("csNo"));
-		String writer = request.getParameter("writer");
-		OX commentLevel = OX.valueOf(request.getParameter("commentLevel"));
-		int commentRef = Integer.valueOf(request.getParameter("commentRef"));
-		String content = request.getParameter("commentContent");
-		
 		try {
-			CounselingComment csComment = new CounselingComment(csNo, content, null, 0, writer, null, commentLevel, commentRef);
-			int result = counselingService.insertCsComment(csComment);
+			int no = Integer.valueOf(request.getParameter("no"));
+			OX choice = OX.valueOf(request.getParameter("choice"));
 			
-			Counseling counseling = counselingService.selectOneCS(csNo);
-			notificationService.notifyNewComment(counseling);
+			int result = counselingService.adoptComment(no, choice);
 			
+			List<CounselingComment> csComments = counselingService.selectCsComment(no);
+			
+				
+			
+			if(choice == OX.O) {
+				session.setAttribute("msg", "댓글이 채택됐습니다!");
+			} else{
+				session.setAttribute("msg", "댓글채택이 취소됐습니다!");
+			}
+			request.setAttribute("comments", csComments);
 			
 		} catch(Exception e) {
+			session.setAttribute("msg", "댓글채택 실패!");
 			e.printStackTrace();
 		}
 		

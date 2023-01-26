@@ -179,6 +179,9 @@ alter table font
 -- seq_font_no 시퀀스 생성
 create sequence seq_font_no;
 
+select seq_cs_no.currval from dual;
+select seq_letter_no.currval from dual;
+
 --insert into font values (seq_font_no.nextval, '테스트', '테스트');
 
 -- letter 테이블 생성
@@ -459,7 +462,25 @@ alter table chatting_log
 -- seq_chatting_log_no 시퀀스 생성
 create sequence seq_chatting_log_no;
 
+-- notification 테이블 생성
+create table notification (
+    no number,
+    mem_nick varchar2(50),
+    not_type varchar2(50),
+    not_content_pk number,
+    not_message varchar2(100),
+    not_datetime timestamp default systimestamp,
+    check_read char(1)
+);
 
+-- notification 제약조건 추가
+alter table notification
+    add constraint pk_notification_no primary key(no)
+    add constraint fk_notification_mem_nick foreign key (mem_nick) references member(nickname) on delete cascade
+    add constraint ck_notification_check_read check (check_read in ('O', 'X'));
+
+-- seq_notification_no 시퀀스 생성
+create sequence seq_notification_no;
 
 -- ======================================================================
 -- 트리거 생성 (create)
@@ -696,6 +717,15 @@ comment on column chatting_log.original_filename is '채팅 첨부파일 원본�
 comment on column chatting_log.renamed_filename is '채팅 첨부파일 저장명';
 comment on column chatting_log.reg_date is '채팅시간';
 
+-- notification 테이블
+comment on table notification is '알람 테이블';
+comment on column notification.no is '알람 번호 테이블(PK, 변경불가)';
+comment on column notification.mem_nick is '알람 받을 회원 닉네임(FK member.nickname on delete cascade)';
+comment on column notification.not_type is '알람 받은 컨텐츠';
+comment on column notification.not_content_pk is '알람 받은 컨텐츠 pk';
+comment on column notification.not_message is '알람 메세지';
+comment on column notification.not_datetime is '알람 발송 시간';
+comment on column notification.check_read is '알람 확인여부(CK in (O,X))';
 
 -- ======================================================================
 -- member 테이블 insert

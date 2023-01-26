@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import common.Attachment;
+import common.OX;
 import counseling.model.dao.CounselingDao;
 import counseling.model.dto.Counseling;
 import counseling.model.dto.CounselingComment;
@@ -179,6 +180,21 @@ public class CounselingService {
 		Connection conn = getConnection();
 		try {
 			result = counselingDao.deleteCounseling(conn, no);
+			commit(conn);
+		} catch(Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
+	public int adoptComment(int no, OX choice) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = counselingDao.adoptComment(conn, no, choice);
 			commit(conn);
 		} catch(Exception e) {
 			rollback(conn);
