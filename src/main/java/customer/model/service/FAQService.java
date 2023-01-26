@@ -36,4 +36,11 @@ public class FAQService {
 		return result;
 	} // insertFaq() end
 
+	public List<FAQ> selectFindFaq(String searchContent) {
+		Connection conn = getConnection();
+		List<FAQ> faqList = faqDao.selectFindFaq(conn, searchContent);
+		close(conn);
+		return faqList;
+	} // selectFindFaq() end
+
 }

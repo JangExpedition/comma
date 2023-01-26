@@ -37,6 +37,7 @@ public class FAQEnrollServlet extends HttpServlet {
 		    FAQ faq = new FAQ(0, title, content);
 		    
 		    int result = faqService.insertFaq(faq);
+		    
 		    request.getSession().setAttribute("msg", "FAQ 추가 성공!");
 		}
 		catch(Exception e) {
@@ -44,6 +45,7 @@ public class FAQEnrollServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		
+		request.setAttribute("type", "faq");
 		response.sendRedirect(request.getContextPath() + "/customer" );
 	}
 
