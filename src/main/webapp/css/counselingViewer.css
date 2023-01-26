@@ -12,6 +12,13 @@
 	width: 70%;
 	height: 80%;
 	overflow-y: auto;
+	
+	-ms-overflow-style: none; /* IE 스크롤 숨기기 */
+	scrollbar-width: none; /* 파이어폭스 스크롤 숨기기 */
+}
+
+#csContainer::-webkit-scrollbar {
+	display: none; /* 크롬, 사파리, 오페라, 엣지 스크롤 숨기기 */
 }
 
 #titleContainer{
