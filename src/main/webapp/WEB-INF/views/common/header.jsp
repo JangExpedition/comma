@@ -72,7 +72,9 @@
 	case "/comma/question/questionEnroll" :
 		link.href = "<%= request.getContextPath() %>/css/question/questionEnroll.css";
 		break;
-		
+	case "/comma/counseling/CSView" :
+		link.href = "<%= request.getContextPath() %>/css/counselingViewer.css";
+		break;
 		
 	}; // switch end
 	document.querySelector("head").append(link);

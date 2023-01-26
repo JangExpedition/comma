@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import common.Attachment;
 import common.CommaUtils;
 import counseling.model.dto.Counseling;
 import counseling.model.service.CounselingService;
@@ -33,13 +34,13 @@ public class CounselingServlet extends HttpServlet {
 		try {
 			page = Integer.parseInt(request.getParameter("page"));
 		} catch(NumberFormatException e) {
-			e.printStackTrace();
 		}
 		Map<String, Object> param = new HashMap<>();
 		param.put("limit", limit);
 		param.put("page", page);
 		
 		List<Counseling> counselingList = counselingService.selectAllCounseling(param);
+		List<Attachment> attachList = counselingService.selectAllCSAttachments();
 		
 		int totalCount = counselingService.getTotalCount();
 		String url = request.getRequestURI();
@@ -47,6 +48,7 @@ public class CounselingServlet extends HttpServlet {
 		
 		request.setAttribute("pagebar", pagebar);
 		request.setAttribute("counselingList", counselingList);
+		request.setAttribute("attachList", attachList);
 		
 		request.getRequestDispatcher("/WEB-INF/views/counseling/counseling.jsp")
 			.forward(request, response);

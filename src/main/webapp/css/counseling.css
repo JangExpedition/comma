@@ -27,7 +27,7 @@
     width: 100%;
 }
 
-table{
+.table{
     width: 100%;
     border-collapse: collapse;
     line-height: 24px;
@@ -35,16 +35,41 @@ table{
     border-right: 1px solid #000;
 }
 
-thead {
+#thead {
 	background: rgb(221, 221, 221);
 }
 
-th,td {
-    border-top:1px solid #000;
-    border-bottom:1px solid #000;
+.tr{
+	width:100%;
+	display: flex;
+	border-top:1px solid #000;
+}
+
+.tr:last-child{
+	width:100%;
+	display: flex;
+	border-top:1px solid #000;
+	border-bottom:1px solid #000;
+}
+
+.tr:hover{
+	cursor: pointer;
+	background: rgb(221, 221, 221);
+}
+
+.th, .td {
     border-collapse: collapse;
     text-align: center;
     padding: 10px;
+    width: 25%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+img{
+	width: 100px;
+	height: 100px;
 }
 
 /*페이지바*/
