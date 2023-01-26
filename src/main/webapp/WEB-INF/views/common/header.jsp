@@ -85,7 +85,6 @@
 		link.href = "<%= request.getContextPath() %>/css/chatList.css";
 		break;
 		
-		
 	}; // switch end
 	document.querySelector("head").append(link);
 </script>
