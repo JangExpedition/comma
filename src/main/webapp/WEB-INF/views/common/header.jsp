@@ -89,6 +89,9 @@
 	case "/comma/counseling/CSView" :
 		link.href = "<%= request.getContextPath() %>/css/counselingViewer.css";
 		break;
+	case "/comma/counseling/counselingUpdate" :
+		link.href = "<%= request.getContextPath() %>/css/counselingUpdate.css";
+		break;
 	}; // switch end
 	document.querySelector("head").append(link);
 </script>

@@ -87,3 +87,15 @@ imgDiv{
 	width: 150px;
 	height: 150px;
 }
+
+.buttonStyle {
+	background-color: #fff;
+	border: 1px solid #454a7b;
+	border-radius: 5px;
+	width: 80px;
+	height: 25px;
+}
+
+.buttonStyle:hover {
+	cursor: pointer;
+}

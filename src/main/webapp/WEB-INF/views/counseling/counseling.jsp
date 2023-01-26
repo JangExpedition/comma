@@ -7,8 +7,8 @@
 <%
 	List<Counseling> counselingList = (List<Counseling>)request.getAttribute("counselingList");
 	System.out.println(counselingList);
-	List<Attachment> attachList = (List<Attachment>)request.getAttribute("attachList");
 	int counselingNo = 0;
+	List<Attachment> attachList = (List<Attachment>)request.getAttribute("attachList");
 %>
 	<section id="counselingSection">
 		<div id="counselingContainer">
@@ -35,6 +35,7 @@
 			    			<div class="th">작성자</div>
 			    			<div class="th">작성날짜</div>
 			    			<div class="th">조회수</div>
+			    			<div class="th">공감수</div>
 			    		</div>
 			    		<% if(counselingList.isEmpty()) {%>
 			    			<div class="tr">
@@ -45,17 +46,20 @@
 			    		for(Counseling counseling : counselingList){
 			    			counselingNo = counseling.getNo();
 			    		%>
-							<div class="tr" data-counseling-no="<%= counseling.getNo() %>">
+							<div class="tr" data-counseling-no="<%= counselingNo %>">
 								<div class="td">
-								<img src=<% for(Attachment attach : attachList){
-												if(attach.getAttachNo() == counseling.getNo()){ %>
-											"<%= request.getContextPath() %>/upload/counseling/<%= attach.getRenamedFilename() %>"
-									<% }else{ %>
-										"<%= request.getContextPath() %>/images/default.png"
-									<% 	} 
-												}%>
-									 alt="" />
-									</div>
+								<%
+								for(Attachment attach : attachList){
+								if(counseling.getNo() == attach.getAttachNo()) {
+								%>
+									<img src="<%= request.getContextPath() %>/upload/counseling/<%= attach.getRenamedFilename() %>" alt="" />
+								<% } else{ %>
+									<img src="<%= request.getContextPath() %>/images/default.png" alt="" />
+								<% 
+									} 
+								}
+								%>
+								</div>
 								<div class="td"><%= counseling.getTitle() %></div>
 								<% if("O" == counseling.getAnonymous().toString()) { %>
 								<div class="td">익명</div>
@@ -64,6 +68,7 @@
 								<% } %>
 								<div class="td"><%= counseling.getRegDate() %></div>
 								<div class="td"><%= counseling.getViews() %></div>
+								<div class="td"><%= counseling.getLike() %></div>
 							</div>
 						<% } 
 						} %>

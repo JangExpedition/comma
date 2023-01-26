@@ -241,4 +241,94 @@ public class CounselingDao {
 		}
 		return csComments;
 	}
+
+	public int deleteCsComment(Connection conn, int csCommentNo) {
+		int result = 0;
+		String sql = prop.getProperty("deleteCsComment");
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setInt(1, csCommentNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new CounselingException("댓글삭제 오류!", e);
+		}
+		return result;
+	}
+
+	public int readCountUp(Connection conn, int no) {
+		int result = 0;
+		String sql = prop.getProperty("readCountUp");
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setInt(1, no);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new CounselingException("조회수 상승 오류!", e);
+		}
+		return result;
+	}
+
+	public int updateCounseling(Connection conn, Counseling counseling) {
+		int result = 0;
+		String sql = prop.getProperty("updateCounseling");
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setString(1, counseling.getTitle());
+			pstmt.setString(2, counseling.getContent());
+			pstmt.setString(3, counseling.getCategory().toString());
+			pstmt.setString(4, counseling.getLimitGender().toString());
+			pstmt.setInt(5, counseling.getLimitAge());
+			pstmt.setString(6, counseling.getAnonymous().toString());
+			pstmt.setInt(7, counseling.getNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			throw new CounselingException("게시물 수정 오류!", e);
+		}
+		return result;
+	}
+
+	public Attachment selectOneAttachment(Connection conn, int attachNo) {
+		Attachment attach = null;
+		String sql = prop.getProperty("selectOneAttachment");
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setInt(1, attachNo);
+			try(ResultSet rset = pstmt.executeQuery()){
+				if(rset.next()) {
+					attach = handleAttachmentResultSet(rset);
+				}
+			}
+		} catch (SQLException e) {
+			throw new CounselingException("첨부파일 가져오기 오류!", e);
+		}
+		return attach;
+	}
+
+	public int deleteAttachment(Connection conn, int attachNo) {
+		int result = 0;
+		String sql = prop.getProperty("deleteAttachment");
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setInt(1, attachNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			throw new CounselingException("첨부파일 삭제 오류!", e);
+		}
+		return result;
+	}
+
+	public int deleteCounseling(Connection conn, int no) {
+		int result = 0;
+		String sql = prop.getProperty("deleteCounseling");
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setInt(1, no);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			throw new CounselingException("게시글 삭제 오류!", e);
+		}
+		return result;
+	}
 }
