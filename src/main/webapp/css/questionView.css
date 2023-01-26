@@ -1,15 +1,15 @@
 @charset "UTF-8";
 
-#csViewerSection{
-	width: 100%;
+section{
+	width: 70%;
 	height: 100vh;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 }
 
-#csContainer{
-	width: 70%;
+#questionDiv{
+	width: 100%;
 	height: 80%;
 	overflow-y: auto;
 	
@@ -17,7 +17,7 @@
 	scrollbar-width: none; /* 파이어폭스 스크롤 숨기기 */
 }
 
-#csContainer::-webkit-scrollbar {
+#questionDiv::-webkit-scrollbar {
 	display: none; /* 크롬, 사파리, 오페라, 엣지 스크롤 숨기기 */
 }
 
@@ -29,12 +29,7 @@
 	border-bottom: 2px solid #454a7b;
 }
 
-#csCategory{
-	font-weight: bold;
-	font-size: 16px
-}
-
-#csTitle{
+#questionTitle{
 	color: #454a7b;
 	font-size: 35px;
 	margin: 10px 0;
@@ -45,33 +40,17 @@
 	height: 18px;
 }
 
-#p1{
+p{
 	font-size: 14px;
 	margin: 0;
-	width: 8%;
+	margin-right: 10px;
 }
 
-#p2{
-	font-size: 14px;
-	margin: 0;
-	width: 12%;
-}
-
-#editBox{
-	width: 80%;
-	display: flex;
-	justify-content: flex-end;
-	align-items: center;
-}
-
-#editBtn{
-	margin-right: 5px;
-}
-
-#csContent{
+#questionContent{
 	width: 100%;
 	padding: 20px;
 	box-sizing: border-box;
+	border-bottom: 2px solid #454a7b;
 }
 
 #imgDiv{
@@ -80,27 +59,12 @@
 	margin: 10px 0;
 }
 
-#img{
+.img{
 	width: 250px;
 }
 
-#likeBox{
-	margin: 10px 0;
-	padding: 20px;
-	box-sizing: border-box;
-	border-bottom: 2px solid #454a7b;
-}
-
-#likeBtn{
-	background-color: #fff;
-	border: 1px solid #454a7b;
-	border-radius: 5px;
-	width: 80px;
-	height: 25px;
-}
-
-#likeBtn:hover{
-	cursor: pointer;	
+#commentBox {
+	padding-top: 20px;
 }
 
 #commentContent{
@@ -140,7 +104,7 @@
 	text-align: end;
 }
 
-.buttonStyle {
+.btn-delete, #btn-comment-enroll2{
 	background-color: #fff;
 	border: 1px solid #454a7b;
 	border-radius: 5px;
@@ -148,37 +112,6 @@
 	height: 25px;
 }
 
-.buttonStyle:hover {
+.btn-delete:hover, #btn-comment-enroll2:hover{
 	cursor: pointer;
-}
-
-#cocomentEnrollFrm{
-	text-align:left;
-	display: flex;
-	align-items: center;
-	justify-content: flex-end;
-	width: 100%;
-}
-
-#cocoment{
-	width: 80%;
-	height: 30px;
-	resize: none;
-	margin-right: 20px;
-}
-
-#tbl-comment{
-	border-collapse:collapse;
-}
-
-#spaceBox{
-	width: 100px;
-}
-
-.level2 td:first-of-type{
-	padding-left: 100px;
-}
-
-.level2 td:last-of-type{
-	text-align: center;
 }

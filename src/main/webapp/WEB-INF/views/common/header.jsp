@@ -69,10 +69,17 @@
 		link.href = "<%= request.getContextPath() %>/css/counselingEnroll.css";
 		break;
 	case "/comma/customer" :
+	case "/comma/customer/customerFinder" :
 		link.href = "<%= request.getContextPath() %>/css/customer.css";
 		break;
 	case "/comma/customer/questionEnroll" :
-		link.href = "<%= request.getContextPath() %>/css/question/questionEnroll.css";
+		link.href = "<%= request.getContextPath() %>/css/questionEnroll.css";
+		break;
+	case "/comma/customer/questionView" :
+		link.href = "<%= request.getContextPath() %>/css/questionView.css";
+		break;
+	case "/comma/customer/faqEnroll" :
+		link.href = "<%= request.getContextPath() %>/css/faqEnroll.css";
 		break;
 	case "/comma/chat/chat" :
 		link.href = "<%= request.getContextPath() %>/css/chat.css";

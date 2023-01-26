@@ -20,7 +20,7 @@ import member.model.dto.MemberRole;
 /**
  * Servlet Filter implementation class AdminLoginFilter
  */
-@WebFilter({"/admin/*", "/complain/*"})
+@WebFilter({"/admin/*", "/complain/*", "/customer/faqEnroll"})
 public class AdminLoginFilter extends HttpFilter implements Filter {
 
 	/**
