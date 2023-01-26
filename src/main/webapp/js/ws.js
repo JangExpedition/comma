@@ -23,14 +23,15 @@ ws.addEventListener('message', (e) => {
 			notification.append(i);
 			break;
 		case "NOTIFY_NEW_COMMENT" :
-			const i = document.createElement("i");
-			i.classList.add('fa-regular', 'fa-bell', 'bell');
-			i.addEventListener('click', () => {
+			const notification = document.querySelector("#notification");
+			const i1 = document.createElement("i");
+			i1.classList.add('fa-solid', 'fa-bell', 'bell');
+			i1.addEventListener('click', () => {
 				alert(message);
-				i.remove();
+				i1.remove();
 			});
 			
-			notification.append(i);
+			notification.append(i1);
 			break;
 		case "CHATROOM_ENTER" :
 			wrapper.insertAdjacentHTML('beforeend', `<li class="line">${sender}님이 입장했습니다.</li>`);
@@ -45,7 +46,7 @@ ws.addEventListener('message', (e) => {
 	} // switch end
 	
 	// 스크롤 처리
-	wrapper.scrollTop = wrapper.scrollHeight;
+	//wrapper.scrollTop = wrapper.scrollHeight;
 });
 ws.addEventListener('error', (e) => {
 	console.log('error : ', e);

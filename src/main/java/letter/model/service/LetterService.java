@@ -65,5 +65,20 @@ public class LetterService {
 		close(conn);
 		return letter;
 	} // selectOneLetter() end
+
+	public int selectLastLetterNo() {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = letterDao.selectLastLetterNo(conn);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
 	
 } // class end

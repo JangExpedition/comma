@@ -331,4 +331,19 @@ public class CounselingDao {
 		}
 		return result;
 	}
+
+	public int adoptComment(Connection conn, int no, OX choice) {
+		int result = 0;
+		String sql = prop.getProperty("adoptComment");
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setString(1, choice.toString());
+			pstmt.setInt(2, no);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			throw new CounselingException("댓글채택 오류!", e);
+		}
+		return result;
+	}
 }
