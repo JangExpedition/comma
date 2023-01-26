@@ -45,10 +45,27 @@
 	height: 18px;
 }
 
-p{
+#p1{
 	font-size: 14px;
 	margin: 0;
-	margin-right: 10px;
+	width: 8%;
+}
+
+#p2{
+	font-size: 14px;
+	margin: 0;
+	width: 12%;
+}
+
+#editBox{
+	width: 80%;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+#editBtn{
+	margin-right: 5px;
 }
 
 #csContent{
@@ -123,7 +140,7 @@ p{
 	text-align: end;
 }
 
-.btn-delete, .btn-reply, #btn-comment-enroll2{
+.buttonStyle {
 	background-color: #fff;
 	border: 1px solid #454a7b;
 	border-radius: 5px;
@@ -131,7 +148,7 @@ p{
 	height: 25px;
 }
 
-.btn-delete:hover, .btn-reply:hover, #btn-comment-enroll2:hover{
+.buttonStyle:hover {
 	cursor: pointer;
 }
 
