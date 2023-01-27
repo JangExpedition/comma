@@ -110,6 +110,7 @@
 	case "/comma/admin/adminDesignList" :
 		link.href = "<%= request.getContextPath() %>/css/adminDesign.css";
 		break;
+		
 	}; // switch end
 	document.querySelector("head").append(link);
 </script>
