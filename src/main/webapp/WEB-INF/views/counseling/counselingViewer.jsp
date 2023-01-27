@@ -28,10 +28,15 @@
 			<h1 id="csTitle"><%= counseling.getTitle() %></h1>
 			<div id="smallBox">
 				<% if(counseling.getAnonymous() == OX.X) { %>
-				<div id="p1"><%= counseling.getWriter() %></div>
+				<div id="p1" class="writerNickname">
+					<%= counseling.getWriter() %>
+				</div>
 				<% }else{ %>
 				<div id="p1">익명</div>
 				<% } %>
+				<div id="friendship" data-writer="<%= counseling.getWriter() %>" data-login-member="<%= loginMember.getNickname() %>">
+					친구신청
+				</div>
 				<div id="p2"><%= counseling.getRegDate() %></div>
 				<%
 					boolean canEdit = loginMember != null && 
@@ -164,7 +169,45 @@
 	   	<input type="hidden" name="csNo"/>
 		<input type="hidden" name="choice" />
 	</form>
+	<form action="<%= request.getContextPath() %>/friend/friendship" name="toFriendshipFrm" method="POST">
+		<input type="hidden" name="fNick" value="<%= counseling.getWriter() %>"/>
+		<input type="hidden" name="myNick" value="<%= loginMember.getNickname() %>"/>
+	</form>
 	<script>
+	<%-- $("#friendship").click((e)=>{
+		if(confirm(`\${e.target.dataset.writer}에게 친구요청을 보내시겠습니까?`)){
+			if(e.target.dataset.writer === "<%= loginMember.getNickname() %>"){
+				alert("본인에게는 친구신청이 불가합니다.")
+				return;
+			}
+			document.toFriendshipFrm.submit();
+		}
+	});
+	
+	document.toFriendshipFrm.addEventListener("submit", (e)=>{
+		e.preventDefault();
+		
+		const formData = new FormData(e.target);
+		
+		$.ajax({
+			url: "<%= request.getContextPath() %>/friend/friendship",
+			method: "POST",
+			data: formData,
+			dataType: "json",
+			contentType : false,
+			processData : false,
+			success(data){
+				alert("data.result");
+			},
+			error : console.log,
+		});
+	}); --%>
+	
+	$(".writerNickname").click((e)=>{
+		document.querySelector("#friendship").style.display = "flex";
+	});
+	
+	
 	document.querySelectorAll(".btn-adopt").forEach((button) => {
 		button.onclick = (e) => {
 			const no = e.target.dataset.csCommentNo;

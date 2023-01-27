@@ -8,9 +8,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import chat.model.dto.Chat;
+import chat.model.dto.ChatMember;
 import chat.model.exception.ChatException;
 import member.model.dao.MemberDao;
 import member.model.dto.Gender;
@@ -73,11 +75,53 @@ public class ChatDao {
 		int chatNo = 0;
 		String sql = prop.getProperty("selectLastChatNo");
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
-			
+			try(ResultSet rset = pstmt.executeQuery()){
+				if (rset.next())
+					chatNo = rset.getInt(1);
+			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new ChatException("채팅방 번호 불러오기 오류!");
 		}
 		return chatNo;
+	}
+
+	public int insertChatMember(Connection conn, ChatMember chatmem) {
+		int result = 0;
+		String sql = prop.getProperty("insertChatMember");
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			int chatNo = chatmem.getChatNo();
+			String nickname = chatmem.getNickname();
+			
+			pstmt.setInt(1, chatNo);
+			pstmt.setString(2, nickname);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			throw new ChatException("채팅방 멤버추가 오류!");
+		}
+		return result;
+	}
+
+	public int insertChatLog(Connection conn, Map<String, Object> data) {
+		int result = 0;
+		String sql = prop.getProperty("insertChatLog");
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			/**
+			 * no number, -- 채팅로그 별 고유 번호
+		    chat_no number,
+		    member_no number,
+		    content varchar2(1000),
+		    original_filename varchar2(300),
+		    renamed_filename varchar2(300),
+		    reg_date timestamp default systimestamp
+			 */
+			
+			
+		} catch (SQLException e) {
+			throw new ChatException("채팅방 로그추가 오류!");
+		}
+		return result;
 	}
 
 }

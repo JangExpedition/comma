@@ -15,9 +15,17 @@
 }
 
 section {
-	display: inline;
+	display: flex;
 	width: 100%;
+	height: 100vh;
+	justify-content: center;
+	align-items: center;
 	/* color: #454a7b; */
+}
+
+#diaryContainer{
+	width: 70%;
+	height: 100%;
 }
 
 #diaryTitle {
@@ -35,24 +43,41 @@ section {
 #inputBtn {
 	display: flex;
 	justify-content: flex-end;
-	padding-right: 150px;
+}
+
+.yearContainer{
+	width: 100%;
+	height: 40px;
+	font-size: 20px;
+	display: flex;
+	align-items: center;
+	padding: 10px;
+	box-sizing: border-box;
+	border-radius: 10px;
+	background-color:#454a7b;
+	margin-top: 20px;
+	color: #fff;
+}
+
+.yearContainer:hover{
+	cursor: pointer;
 }
 
 #writeBtn {
-	/* display: flex; */
+	display: flex;
 	padding: 10px;
 	background-color: #454a7b;
 	color: #fff;
 	border: none;
 	border-radius: 10px;
-	font-size: 20px;
+	font-size: 15px;
 }
 
 #writeBtn:hover {
 	cursor: pointer;
 }
 
-#diaryList {
+/* #diaryList {
 	padding: 0px 20%;
 	display: flex;
 	flex-direction: column;
@@ -71,21 +96,20 @@ section {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-}
+} */
 
 #diary {
-	width: 250px;
-	height: 270px;
-	margin: 5px 5px;
+	width: 100%;
+	height: 200px;
+	margin: 5px 0;
 	padding: 15px;
 	display: flex;
-	flex-direction: column;
-	border: 5px solid #454a7b;
+	border: 2px solid #454a7b;
 	border-radius: 20px;
-	overflow-y: scroll;
+	box-sizing: border-box;
 	
-	-ms-overflow-style: none; /* IE 스크롤 숨기기 */
-	scrollbar-width: none; /* 파이어폭스 스크롤 숨기기 */
+	/* -ms-overflow-style: none; IE 스크롤 숨기기
+	scrollbar-width: none; 파이어폭스 스크롤 숨기기 */
 }
 
 #diary::-webkit-scrollbar {
@@ -98,10 +122,17 @@ section {
 
 #imgBox {
 	text-align: center;
+	height: 80%;
+}
+
+#diaryContent{
+	width: 647px;
+	padding: 10px;
+	box-sizing: border-box;
 }
 
 .writeImg {
-	width: 200px;
+	width: 166px;
 }
 
 .writeDate {
@@ -115,12 +146,12 @@ section {
 
 .writeContent {
 	margin: 0px;
+	height: 20%;
 	font-size: 20px;
 	text-align: left;
 	padding: 5px 0px;
 	color: #636363;
 }
-
 
 /* diaryEnroll */
 #diaryEnrollBack {
@@ -136,7 +167,7 @@ section {
 }
 
 #diaryEnrollModal {
-	/*position: relative;*/
+	position: relative;
 	display: inline-block;
 	width: 700px;
 	height: 700px;
@@ -154,7 +185,7 @@ section {
 	font-size: 30px;
 	margin: 0px;
 	font-weight: bold;
-	/*color: #454a7b;*/
+	color: #454a7b;
 	color: #454a7b;
 }
 
@@ -174,7 +205,7 @@ section {
 }
 
 #diaryEnroll {
-	/*padding: 0px 2%;*/
+	padding: 0px 2%;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -224,7 +255,7 @@ section {
 	text-align: left;
 }
 
-/*
+
 #diaryEnrollFrm td:first-child {
 	color: #fff;
 }
@@ -235,18 +266,18 @@ section {
 	color: #fff;
 	font-size: 15px;
 }
-*/
+
 
 #diaryEnrollFrm textarea {
 	border: none;
     resize: none;
 }
 
-/*
+
 #diaryEnrollFrm tr:last-child td {
 	text-align: center;
 }
-*/
+
 
 #diaryEnrollFrm tr:last-child td input:hover {
 	cursor: pointer;
@@ -259,11 +290,11 @@ section {
 	padding: 10px 0px;
 }
 
-/*
+
 #designTitle {
 	padding: 10px 0px;
 }
-*/
+
 
 #designChoiceContent {
 	display: flex;
@@ -280,7 +311,7 @@ section {
 
 
 /* designChoiceModal */
-/*
+
 #designChoiceModalBack {
 	display: none;
 	align-items: center;
@@ -292,7 +323,7 @@ section {
 	top: 0;
 	background-color: rgba(0, 0, 0, 0.5);
 }
-*/
+
 
 #designChoiceModal {
 	position: absolute;
@@ -377,4 +408,22 @@ section {
 	border: 1px solid #363c61;
 	border-radius: 5px;
 	box-shadow: 1px 1px 1px #272b45;
+} 
+
+#diarySec{
+	display: flex;
+}
+
+#yearFilter{
+	width: 20%;
+	padding: 20px;
+	box-sizing: border-box;
+}
+
+.yFilter:hover{
+	cursor: pointer;
+}
+
+#didiary{
+	width: 80%;
 }

@@ -1,6 +1,8 @@
 package chat.model.dto;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import member.model.dto.Gender;
 
@@ -13,6 +15,8 @@ public class Chat {
 	private int ableAge;
 	private int ableCount;
 	private Date regDate;
+	private List<ChatMember> chatMembers = new ArrayList<>();
+	private List<ChatLog> chatLogs = new ArrayList<>();
 	
 	public Chat() {
 		super();
@@ -84,6 +88,22 @@ public class Chat {
 
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
+	}
+
+	public List<ChatMember> getChatMembers() {
+		return chatMembers;
+	}
+
+	public void setChatMembers(List<ChatMember> chatMembers) {
+		this.chatMembers = chatMembers;
+	}
+
+	public List<ChatLog> getChatLogs() {
+		return chatLogs;
+	}
+
+	public void setChatLogs(List<ChatLog> chatLogs) {
+		this.chatLogs = chatLogs;
 	}
 
 	@Override

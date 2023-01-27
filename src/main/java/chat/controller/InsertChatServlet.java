@@ -41,11 +41,12 @@ public class InsertChatServlet extends HttpServlet {
 			
 			int result = chatService.insertChat(chat);
 			
+			response.sendRedirect(request.getContextPath() + "/chat/chatView?chatNo=" + chat.getNo());
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 		
-		response.sendRedirect(request.getContextPath() + "/chat/chatView");
 	}
 
 }

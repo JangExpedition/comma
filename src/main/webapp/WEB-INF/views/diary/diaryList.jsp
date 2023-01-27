@@ -1,5 +1,7 @@
+<%@page import="javax.swing.plaf.basic.BasicInternalFrameTitlePane.SystemMenuBar"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="java.time.LocalDateTime"%>
+<%@page import="diary.model.dto.Diary"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
@@ -8,62 +10,62 @@
 	LocalDateTime today = LocalDateTime.now();
 	String formatToday = today.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 	System.out.println(formatToday);
+	List<Diary> diaryList = (List<Diary>)request.getAttribute("diaryList");
+	System.out.println("diaryList = " + diaryList);
+	String yFilter = formatToday.substring(0, 4);
 %>
 	
 	<section id="diaryTotalList" class="fontStyle">
-		<div id="diaryTitle">일기장</div>
-		<div id="inputBtn"><input type="button" id="writeBtn" class="fontStyle" value="일기 작성하기" /></div>
+	<div id="diaryContainer">
+	<div id="diaryTitle">일기장</div>
+	<div id="inputBtn"><input type="button" id="writeBtn" class="fontStyle" value="일기 작성하기" /></div>
+	<div id="diarySec">
+		<div id="yearFilter">
+		<p class="yFilter">#2023</p>
+		<p class="yFilter">#2022</p>
+		<p class="yFilter">#2021</p>
+		<p class="yFilter">#2020</p>
+		<p class="yFilter">#2019</p>
+		<p class="yFilter">#2018</p>
+		<p class="yFilter">#2017</p>
+		</div>
 		
-		<article id="diaryList">
-			<div id="diaryListTitle">
-				<p class="title">2023년</p>
+		<% if(diaryList.isEmpty()) {%>
+			<div>
+				일기를 작성해보세요!
 			</div>
-			<div id="diaryListContent">
-				<div id="diary">
-					<div id="imgBox">
-						<img src="<%= request.getContextPath() %>/images/default.png" alt="" class="writeImg" />
+		<% }else{ %>
+		<div id="didiary">
+			<div class="yearContainer">2023</div>
+		<% for(Diary diary : diaryList){ 
+			if(diary.getRegDate().toString().substring(0, 4).equals(yFilter)) %>
+					<div id="diary">
+						<div id="imgBox">
+						<% if(diary.getOriginalFilename() != null){ %>
+							<img src="<%= request.getContextPath() %>/upload/diary/<%= diary.getRenamedFilename() %>" alt="" class="writeImg" />
+						<% } else{ %>
+							<img src="<%= request.getContextPath() %>/images/default.png" alt="" class="writeImg" />
+						<% } %>
+						</div>
+						<div id="diaryContent">
+							<p class="writeDate"><%= diary.getRegDate() %></p>
+							<% if(diary.getContent().length() > 20) {%>
+							<p class="writeContent"><%= diary.getContent().substring(0, 20) + "..." %></p>
+							<% } else{ %>
+							<p class="writeContent"><%= diary.getContent() %></p>
+							<% } %>
+							<div>
+								<% if(diary.getRegDate().toString().equals(formatToday)){  %>
+								<button id="updateBtn">수정하기</button>
+								<% } %>
+							</div>
+						</div>
 					</div>
-					<p class="writeDate">2023. 01. 15</p>
-					<p class="writeContent">선거와 국민투표의 공정한 관리 및 정당에 관한 사무를 처리하기 위하여 선거관리위원회를 둔다. 국가원로자문회의의 조직·직무범위 기타 필요한 사항은 법률로 정한다. 각급 선거관리위원회는 선거인명부의 작성등 선거사무와 국민투표사무에 관하여 관계 행정기관에 필요한 지시를 할 수 있다. 국가원로자문회의의 의장은 직전대통령이 된다. 다만, 직전대통령이 없을 때에는 대통령이 지명한다.</p>
-				</div>
-				<div id="diary">
-					<div id="imgBox">
-						<img src="<%= request.getContextPath() %>/images/default.png" alt="" class="writeImg" />
-					</div>
-					<p class="writeDate">2023. 01. 05</p>
-					<p class="writeContent">국회는 국정을 감사하거나 특정한 국정사안에 대하여 조사할 수 있으며, 이에 필요한 서류의 제출 또는 증인의 출석과 증언이나 의견의 진술을 요구할 수 있다. 탄핵결정은 공직으로부터 파면함에 그친다. 그러나, 이에 의하여 민사상이나 형사상의 책임이 면제되지는 아니한다. 헌법개정안은 국회가 의결한 후 30일 이내에 국민투표에 붙여 국회의원선거권자 과반수의 투표와 투표자 과반수의 찬성을 얻어야 한다.</p>
-				</div>
-			</div>
-		</article>
-			
-		<article id="diaryList">
-			<div id="diaryListTitle">
-				<p class="title">2022년</p>
-			</div>
-			<div id="diaryListContent">
-				<div id="diary">
-					<div id="imgBox">
-						<img src="<%= request.getContextPath() %>/images/default.png" alt="" class="writeImg" />
-					</div>
-					<p class="writeDate">2022. 06. 22</p>
-					<p class="writeContent">농업생산성의 제고와 농지의 합리적인 이용을 위하거나 불가피한 사정으로 발생하는 농지의 임대차와 위탁경영은 법률이 정하는 바에 의하여 인정된다. 대통령은 헌법과 법률이 정하는 바에 의하여 공무원을 임면한다. 모든 국민은 근로의 권리를 가진다. 국가는 사회적·경제적 방법으로 근로자의 고용의 증진과 적정임금의 보장에 노력하여야 하며, 법률이 정하는 바에 의하여 최저임금제를 시행하여야 한다.</p>
-				</div>
-				<div id="diary">
-					<div id="imgBox">
-						<img src="<%= request.getContextPath() %>/images/default.png" alt="" class="writeImg" />
-					</div>
-					<p class="writeDate">2022. 11. 09</p>
-					<p class="writeContent">선거와 국민투표의 공정한 관리 및 정당에 관한 사무를 처리하기 위하여 선거관리위원회를 둔다. 국가원로자문회의의 조직·직무범위 기타 필요한 사항은 법률로 정한다. 각급 선거관리위원회는 선거인명부의 작성등 선거사무와 국민투표사무에 관하여 관계 행정기관에 필요한 지시를 할 수 있다. 국가원로자문회의의 의장은 직전대통령이 된다. 다만, 직전대통령이 없을 때에는 대통령이 지명한다.</p>
-				</div>
-				<div id="diary">
-					<div id="imgBox">
-						<img src="<%= request.getContextPath() %>/images/default.png" alt="" class="writeImg" />
-					</div>
-					<p class="writeDate">2022. 12. 05</p>
-					<p class="writeContent">국회는 국정을 감사하거나 특정한 국정사안에 대하여 조사할 수 있으며, 이에 필요한 서류의 제출 또는 증인의 출석과 증언이나 의견의 진술을 요구할 수 있다. 탄핵결정은 공직으로부터 파면함에 그친다. 그러나, 이에 의하여 민사상이나 형사상의 책임이 면제되지는 아니한다. 헌법개정안은 국회가 의결한 후 30일 이내에 국민투표에 붙여 국회의원선거권자 과반수의 투표와 투표자 과반수의 찬성을 얻어야 한다.</p>
-				</div>
-			</div>
-		</article>
+		<% } %>
+		</div>
+		<% } %>
+		</div>
+	</div>
 	</section>
 	
 	<!-- 일기 작성 모달 -->
@@ -73,7 +75,8 @@
 			<span id="diaryEnrollClose" onclick="modalClose(this);">X</span>
 			<div id="diaryEnrollDiv">
 				<div id="diaryEnroll">
-					<form id="diaryEnrollFrm" name="diaryEnrollFrm">
+					<form id="diaryEnrollFrm" name="diaryEnrollFrm" action="<%= request.getContextPath() %>/diary/insertDiary" method="POST" enctype="multipart/form-data">
+					<input type="hidden" name="writer" value="<%= loginMember.getNickname() %>" />
 						<table>
 							<tbody>
 								<tr>
@@ -108,7 +111,7 @@
 								</tr>
 								<tr>
 									<td colspan="2">
-										<input id="diaryEnrollFrmSubmit" class="fontStyle" type="button" value="등록하기" />
+										<input id="diaryEnrollFrmSubmit" class="fontStyle" type="submit" value="등록하기" />
 									</td>
 								</tr>
 							</tbody>
@@ -162,41 +165,52 @@
 	</div>
 	
 	<script>
-		const modal = document.querySelector('#diaryEnrollBack');
+	document.querySelector("#updateBtn").addEventListener("click", (e)=>{
 		
-		/*
-		  일기쓰기 버튼 클릭 시 모달 창 띄우기
-		*/
-		document.querySelector("#writeBtn").addEventListener('click', () => {
-			console.log(modal);
-			modal.style.display = 'flex';
-		});
-		
-		/*
-		  모달 창 이외의 부분 클릭 시 창 닫기
-		*/
-		modal.addEventListener('click', (e) => {
-			if(e.target !== e.currentTarget) return;
+		modal.style.display = 'flex';
+	});
+	/*
+		일기년도 필터 메서드
+	*/
+	$(".yFilter").click((e)=>{
+		console.log("sadfsadfd");
+	});
+	
+	const modal = document.querySelector('#diaryEnrollBack');
+	
+	/*
+	  일기쓰기 버튼 클릭 시 모달 창 띄우기
+	*/
+	document.querySelector("#writeBtn").addEventListener('click', () => {
+		console.log(modal);
+		modal.style.display = 'flex';
+	});
+	
+	/*
+	  모달 창 이외의 부분 클릭 시 창 닫기
+	*/
+	modal.addEventListener('click', (e) => {
+		if(e.target !== e.currentTarget) return;
+		modal.style.display = 'none';
+		designChoiceModal.style.display = 'none';
+	});
+	
+	/*
+	  X 클릭 시 창 닫기
+	*/
+	const modalClose = (target) => {
+		console.log(target.id);
+		if (target.id != '') {
 			modal.style.display = 'none';
+		} else {
 			designChoiceModal.style.display = 'none';
-		});
-		
-		/*
-		  X 클릭 시 창 닫기
-		*/
-		const modalClose = (target) => {
-			console.log(target.id);
-			if (target.id != '') {
-				modal.style.display = 'none';
-			} else {
-				designChoiceModal.style.display = 'none';
-			}
-		};
-		
-		// 디자인 이미지 클릭하면 디자인 선택창 띄움
-		enrollDesignChoice.addEventListener('click', () => {
-			designChoiceModal.style.display = 'inline-block';
-		});
+		}
+	};
+	
+	// 디자인 이미지 클릭하면 디자인 선택창 띄움
+	enrollDesignChoice.addEventListener('click', () => {
+		designChoiceModal.style.display = 'inline-block';
+	});
 	</script>
 
 </body>

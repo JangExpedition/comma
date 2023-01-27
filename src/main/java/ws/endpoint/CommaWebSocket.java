@@ -49,12 +49,12 @@ public class CommaWebSocket {
 	 * 채팅방에 사용자 추가
 	 *  - 처음 채팅방에 입장하는 경우, chatroomId와 사용자Set을 초기화해야 한다.
 	 */
-	private void addToChatroom(String chatroomId, String memberId) {
-		Set<String> participantSet = chatParticipantMap.get(chatroomId);
+	private void addToChatroom(String chatNo, String memberId) {
+		Set<String> participantSet = chatParticipantMap.get(chatNo);
 		
 		if (participantSet == null) {
 			participantSet = new HashSet<>();
-			chatParticipantMap.put(chatroomId, participantSet);
+			chatParticipantMap.put(chatNo, participantSet);
 		} // if() end
 		participantSet.add(memberId);
 	} // addToChatroom() end
@@ -65,19 +65,19 @@ public class CommaWebSocket {
 	 * @param chatroomId
 	 * @param memberId
 	 */
-	private void removeFromChatroom(String chatroomId, String memberNick) {
-		Set<String> participantSet = chatParticipantMap.get(chatroomId);
+	private void removeFromChatroom(String chatNo, String memberNick) {
+		Set<String> participantSet = chatParticipantMap.get(chatNo);
 		participantSet.remove(memberNick);
 		
 		// 마지막 사용자인 경우
 		if (participantSet.size() == 0) {
-			chatParticipantMap.remove(chatroomId); // 관리하는 채팅방에서 제거
+			chatParticipantMap.remove(chatNo); // 관리하는 채팅방에서 제거
 		}
 	} // removeFromChatroom() end
 	
-	private void sendChatroomEnterMsg(String chatroomId, String memberNick, Session session) {
+	private void sendChatroomEnterMsg(String chatNo, String memberNick, Session session) {
 		Map<String, Object> data = new HashMap<>();
-		data.put("chatroomId", chatroomId);
+		data.put("chatNo", chatNo);
 		data.put("sender", memberNick);
 		data.put("messageType", MessageType.CHATROOM_ENTER);
 		data.put("datetime", System.currentTimeMillis());
@@ -85,9 +85,9 @@ public class CommaWebSocket {
 		onMessage(new Gson().toJson(data), session);
 	} // sendChatroomEnterMsg() end
 
-	private void sendChatroomLeaveMsg(String chatroomId, String memberNick, Session session) {
+	private void sendChatroomLeaveMsg(String chatNo, String memberNick, Session session) {
 		Map<String, Object> data = new HashMap<>();
-		data.put("chatroomId", chatroomId);
+		data.put("chatNo", chatNo);
 		data.put("sender", memberNick);
 		data.put("messageType", MessageType.CHATROOM_LEAVE);
 		data.put("datetime", System.currentTimeMillis());
@@ -99,7 +99,7 @@ public class CommaWebSocket {
 	public void onOpen(EndpointConfig config, Session session) {
 		Map<String, Object> userProp = config.getUserProperties();
 		String memberNick = (String) userProp.get("memberNick");
-		String chatroomId = (String) userProp.get("chatroomId");
+		String chatNo = (String) userProp.get("chatNo");
 		
 		// 웹소켓 세션 관리 맵에 추가
 		clientMap.put(memberNick, session);
@@ -108,10 +108,10 @@ public class CommaWebSocket {
 		Map<String, Object> sessionUserProp = session.getUserProperties();
 		sessionUserProp.put("memberNick", memberNick);
 		
-		if (chatroomId != null) {
-			sessionUserProp.put("chatroomId", chatroomId);
-			addToChatroom(chatroomId, memberNick);
-			sendChatroomEnterMsg(chatroomId, memberNick, session);
+		if (chatNo != null) {
+			sessionUserProp.put("chatNo", chatNo);
+			addToChatroom(chatNo, memberNick);
+			sendChatroomEnterMsg(chatNo, memberNick, session);
 		}
 		
 		log();
@@ -126,7 +126,7 @@ public class CommaWebSocket {
 		Map<String, Object> data = new Gson().fromJson(msg, Map.class);
 		// { "messageType" : "CHAT", "message" : "ㅋㅋㅋ", "datetime" : 13415154312, ... }
 		
-		String chatroomId = (String) data.get("chatroomId");
+		String chatNo = (String) data.get("chatNo");
 		MessageType messageType = MessageType.valueOf((String) data.get("messageType"));		
 		
 		switch (messageType) {
@@ -144,7 +144,7 @@ public class CommaWebSocket {
 		case CHAT_MSG :
 		case CHATROOM_ENTER :
 		case CHATROOM_LEAVE :
-			Set<String> participantSet = chatParticipantMap.get(chatroomId);
+			Set<String> participantSet = chatParticipantMap.get(chatNo);
 			for (String participant : participantSet) {
 				Session sess = clientMap.get(participant);
 				Basic basic = sess.getBasicRemote();
@@ -167,13 +167,13 @@ public class CommaWebSocket {
 	public void onClose(Session session) {
 		Map<String, Object> sessionUserProp = session.getUserProperties();
 		String memberNick = (String) sessionUserProp.get("memberNick");
-		String chatroomId = (String) sessionUserProp.get("chatroomId");
+		String chatNo = (String) sessionUserProp.get("chatNo");
 		
 		// 웹소켓 세션 관리 맵에서 제거
 		clientMap.remove(memberNick);
-		if (chatroomId != null) {
-			removeFromChatroom(chatroomId, memberNick);
-			sendChatroomLeaveMsg(chatroomId, memberNick, session);
+		if (chatNo != null) {
+			removeFromChatroom(chatNo, memberNick);
+			sendChatroomLeaveMsg(chatNo, memberNick, session);
 		}
 		
 		log();

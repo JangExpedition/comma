@@ -1,5 +1,5 @@
 const ws = new WebSocket(`ws://${location.host}/comma/commaWebSocket`);
-
+console.log(`ws://${location.host}/comma/commaWebSocket`);
 ws.addEventListener('open', (e) => {
 	console.log('open : ', e);
 });

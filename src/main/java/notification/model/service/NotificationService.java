@@ -9,6 +9,7 @@ import java.util.Map;
 import common.CommaUtils;
 import common.OX;
 import counseling.model.dto.Counseling;
+import friends.model.dto.Friends;
 import letter.model.dto.Letter;
 import notification.model.dao.NotificationDao;
 import notification.model.dto.Notification;
@@ -56,6 +57,31 @@ public class NotificationService {
 			data.put("message", message);
 			data.put("datatime", System.currentTimeMillis());
 			CommaUtils.sendNotification(addressee, data);
+		} // if() end
+	} // notifyNewLetter() end
+	
+	public void notifyNewFriend(Friends friends) {
+		Connection conn = getConnection();
+		String receiver = friends.getfNickname();
+		int attachNo = friends.getNo();
+		String message = "[" + friends.getMyNickname() + "] 님께서 친구신청을 했습니다.";
+		MessageType messageType = MessageType.NOTIFY_FRIENDS;
+		
+		Notification notification = new Notification(0, receiver, messageType, attachNo, message, null, OX.X);
+		
+		try {
+			int result = notificationDao.insertNotification(conn, notification);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		if (CommaUtils.isConnected(receiver)) {
+			Map<String, Object> data = new HashMap<>();
+			data.put("receiver", receiver);
+			data.put("messageType", messageType);
+			data.put("message", message);
+			data.put("datatime", System.currentTimeMillis());
+			CommaUtils.sendNotification(receiver, data);
 		} // if() end
 	} // notifyNewLetter() end
 }

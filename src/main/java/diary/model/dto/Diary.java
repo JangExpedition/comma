@@ -1,5 +1,7 @@
 package diary.model.dto;
 
+import java.sql.Date;
+
 import common.Form;
 
 public class Diary extends Form{
@@ -16,6 +18,14 @@ public class Diary extends Form{
 
 	public Diary(int designNo, int fontNo, String originalFilename, String renamedFilename) {
 		super();
+		this.designNo = designNo;
+		this.fontNo = fontNo;
+		this.originalFilename = originalFilename;
+		this.renamedFilename = renamedFilename;
+	}
+	
+	public Diary(int no, String writer, String content, Date regDate, int designNo, int fontNo, String originalFilename, String renamedFilename) {
+		super(no, writer, content, regDate);
 		this.designNo = designNo;
 		this.fontNo = fontNo;
 		this.originalFilename = originalFilename;
