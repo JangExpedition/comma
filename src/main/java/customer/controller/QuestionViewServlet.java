@@ -35,20 +35,12 @@ public class QuestionViewServlet extends HttpServlet {
 			CommaUtils.escapeHTML(question.getContent()))
 		);
 		
-		List<QuestionComment> qComments = questionService.selectQComment(questionNo);
+		QuestionComment qComment = questionService.selectQComment(questionNo);
 		
 		request.setAttribute("question", question);
-		request.setAttribute("questionComments", qComments);
+		request.setAttribute("questionComment", qComment);
 		
 		request.getRequestDispatcher("/WEB-INF/views/customer/questionView.jsp").forward(request, response);
 	} // doGet() end
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
 
 }
