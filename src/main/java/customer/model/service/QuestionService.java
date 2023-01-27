@@ -88,4 +88,18 @@ public class QuestionService {
 		return questionList;
 	} // selectFindQuestion() end
 
+	public int updateQuestion(Question question) {
+		int result = 0;
+		Connection conn = getConnection();
+		
+		try {
+			result= questionDao.updateQuestion(conn, question);
+			commit(conn);
+		} catch (Exception e){ 
+			rollback(conn);
+			throw e;
+		}
+		return result; 
+	} // updateQuestion() end
+
 }

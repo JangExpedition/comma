@@ -60,10 +60,6 @@
 							<a href="<%= request.getContextPath() %>/customer/questionView?no=<%= question.getNo() %>" class="content"><%= question.getTitle() %></a>
 						</td>
 						<td><%= question.getRegDate() %></td>
-						<td>
-							<input type="button" value="수정" class="updateBtn fontStyle questionDetailBtn" onclick="location.href='<%= request.getContextPath() %>/customer/queationUpdate';" />
-							<input type="button" value="삭제" class="deleteBtn fontStyle questionDetailBtn" onclick="location.href='<%= request.getContextPath() %>/customer/queationDelete';" />
-						</td>
 					</tr>
 			<%
 					} // for end

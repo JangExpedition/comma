@@ -16,7 +16,21 @@
 				<div id="smallBox">
 					<p><%= question.getWriter() %></p>
 					<p><%= question.getRegDate() %></p>
+			<%
+				boolean canEdit = loginMember != null && 
+							(loginMember.getMemberRole() == MemberRole.A ||
+								loginMember.getNickname().equals(question.getWriter()) ||
+								loginMember.getMemberRole() == MemberRole.M);
+				if(canEdit){
+			%>
+					<div id="editBox">
+						<input id="editBtn" type="button" value="수정하기" onclick="updateQuestion()" class="buttonStyle">
+						<input type="button" value="삭제하기" onclick="deleteQuestion()" class="buttonStyle">
+					</div>
 				</div>
+			<%
+				}
+			%>
 			</div>
 			<div id="questionContent" >
 				<% if(questionAttachList == null){ %>
@@ -80,6 +94,24 @@
 		</div>
 		
 	</section>
+	
+<% if(canEdit) { %>
+	<form action="<%= request.getContextPath() %>/customer/questionDelete" name="questionDeleteFrm" method="POST">
+		<input type="hidden" name="no" value="<%= question.getNo() %>"/>
+	</form>
+	<script>
+		const updateQuestion = () => {
+			location.href = "<%= request.getContextPath() %>/customer/questionUpdate?no=<%= question.getNo() %>";	
+		};
+	
+		const deleteQuestion = () => {
+			if(confirm("정말 게시글을 삭제하겠습니까?")){
+				document.questionDeleteFrm.submit();
+			}	
+		};
+		
+	</script>
+<% } %>
 
 </body>
 </html>

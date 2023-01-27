@@ -238,4 +238,21 @@ private Properties prop = new Properties();
 		return questionList;
 	} // selectFindQuestion() end
 
+
+	public int updateQuestion(Connection conn, Question question) {
+		int result = 0;
+		String sql = prop.getProperty("updateQuestion");
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, question.getTitle());
+			pstmt.setString(2, question.getContent());
+			pstmt.setInt(3, question.getNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new QuestionException("문의 내역 수정 오류", e);
+		}
+		return result;
+	} // updateQuestion() end
+
 }
