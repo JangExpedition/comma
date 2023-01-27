@@ -18,7 +18,7 @@ import notification.model.service.NotificationService;
  * Servlet implementation class csCommentEnrollServlet
  */
 @WebServlet("/counseling/csCommentEnroll")
-public class csCommentEnrollServlet extends HttpServlet {
+public class CsCommentEnrollServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private CounselingService counselingService = new CounselingService();
 	private NotificationService notificationService = new NotificationService();

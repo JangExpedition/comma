@@ -86,7 +86,7 @@
    	고민게시글 작성버튼 메서드
     */
     document.querySelector("#CounselingEnroll").addEventListener('click', (e) => {
-    	location.href = "<%= request.getContextPath() %>/counseling/counselingEnroll"
+    	location.href = "<%= request.getContextPath() %>/counseling/counselingEnroll";
      });
     /*
     Date : 2023. 1. 25
