@@ -90,6 +90,7 @@
 	case "/comma/chat/chatList" :
 		link.href = "<%= request.getContextPath() %>/css/chatList.css";
 		break;
+
 	case "/comma/admin/adminMemberList" :
 		link.href = "<%= request.getContextPath() %>/css/admin.css";
 		break;
