@@ -46,7 +46,7 @@
 					</td>
 					<th class="lableTd pointColor">나이대 선택</th>
 					<td>
-						<select name="age" required >
+						<select name="age" required id="age">
 							<option value="" selected disabled hidden>공개할 나이대를 선택해주세요.</option>
 							<option value="1">10대 이상</option>
 							<option value="2">20대 이상</option>
@@ -58,7 +58,7 @@
 					</td>
 				</tr>
 				<tr>
-					<th class="lableTd pointColor">사진첨부</th>
+					<th class="lableTd pointColor" >사진첨부</th>
 					<td colspan="3">
 						<input type="file" name="file1" id="file1" />
 						<input type="file" name="file2" id="file2" />
