@@ -160,7 +160,7 @@
 				</script>
 			<% } %>
 			
-			<% if (loginMember.getMemberRole() == MemberRole.A) { %>
+			<% if (loginMember.getMemberRole() == MemberRole.A || loginMember.getMemberRole() == MemberRole.M) { %>
 				<div id="toFontList" class="navBtn">폰트 목록</div>
 				<script>
 				/*

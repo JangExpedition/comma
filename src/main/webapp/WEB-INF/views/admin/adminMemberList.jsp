@@ -17,7 +17,7 @@
 		<div id="admin-list">
 			<table class="admin-list-table">
 				<tbody>
-					<tr class="fontStyle"ㄴ>
+					<tr class="fontStyle">
 						<th>프로필</th>
 						<th>닉네임</th>
 						<th>이메일</th>
@@ -27,6 +27,7 @@
 						<th>성별</th>
 						<th>누적경고횟수</th>
 						<th>가입일</th>
+						<td></td>
 					</tr>
 		<%
 			if (memberList != null && !memberList.isEmpty()) {
@@ -46,6 +47,7 @@
 							<select class="member-role" data-member-nickname="<%= member.getNickname() %>">
 								<option value="<%= MemberRole.U %>" <%= member.getMemberRole() == MemberRole.U ? "selected" : "" %> >일반사용자</option>
 								<option value="<%= MemberRole.A %>" <%= member.getMemberRole() == MemberRole.A ? "selected" : "" %> >관리자</option>
+								<option value="<%= MemberRole.M %>" <%= member.getMemberRole() == MemberRole.M ? "selected" : "" %> >매니저</option>
 							</select>
 						</td>
 						<td><%= member.getBirthday() %></td>
@@ -53,6 +55,12 @@
 						<td><%= member.getGender() %></td>
 						<td><%= member.getWarningCount() %></td>
 						<td><%= member.getEnrollDate() %></td>
+						<td>
+							<form action="<%= request.getContextPath() %>/admin/deleteMember" method="post" name="memberDeleteFrm">
+								<input type="hidden" name="memberEmail" value="<%= member.getEmail() %>" />
+								<input type="submit" id="delMemberBtn" class="delMemberBtn" value="탈퇴" />
+							</form>
+						</td>
 					</tr>
 		<%
 				}
@@ -75,6 +83,11 @@
 	</form>
 
 	<script>
+		
+		
+		/*
+		  회원 권한 변경 시 DB도 변경
+		*/
 		document.querySelectorAll(".member-role").forEach((select) => {
 			select.addEventListener('change', (e) => {
 				console.log(e.target.value);
@@ -95,6 +108,7 @@
 				
 			});
 		});
+		
 	</script>
 </body>
 </html>
