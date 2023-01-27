@@ -124,7 +124,6 @@
 			}
 		};
 		
-		
 		const questionBtnClick = (e) => {
 			e.target.classList.add('customerBtnClick');
 			faqBtn.classList.remove('customerBtnClick');
