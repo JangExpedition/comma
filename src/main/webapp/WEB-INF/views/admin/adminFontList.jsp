@@ -7,29 +7,30 @@
 	List<Font> fontList = (List<Font>) request.getAttribute("fontList");
 %>
 	<section>
-		<div id="adminTitle" class="fontStyle"><h1>폰트 목록</h1></div>
+		<div id="adminTitle" class="fontStyle pointColor">폰트 목록</div>
 	
-		<form action="<%= request.getContextPath() %>/admin/adminFontFinder">
-			<input type="text" id="searchFont" name="searchFont" size="30" placeholder="검색할 폰트를 입력 해주세요." />
+		<form action="<%= request.getContextPath() %>/admin/adminFontFinder" class="fontStyle">
+			<input type="text" id="searchFont" class="fontStyle" name="searchFont" size="30" placeholder="검색할 폰트를 입력 해주세요." />
 			<input type="submit" id="searchBtn" class="fontStyle" value="검색" />
 		</form>
 
-		<div>
-			<input type="submit" class="fontStyle" id="fontplus" value="폰트 추가" />
+		<div id="fontPlusDiv">
+			<input type="button" class="fontStyle" id="fontplus" value="폰트 추가" onclick="<%= request.getContextPath() %>/admin/adminFontEnroll"/>
 		</div>
 		
-		<div class="board">
+		<div class="fontContainer">
 		    <table class="table">
 		        <thead class="thead">
 		            <tr>
-		                <td>번호</td>
-		                <td>폰트 이름</td>
-		                <td>폰트 링크</td>
+		                <th>번호</th>
+		                <th>폰트 이름</th>
+		                <th>폰트 링크</th>
+		                <th></th>
 		            </tr>
 		        </thead>
 		        <tbody class="tbody">
         <%
-	        if (fontList.isEmpty()) {
+	        if (!fontList.isEmpty()) {
 	        	for (Font font : fontList) {
 	    %>
 		            <tr>
@@ -37,7 +38,7 @@
 						<td><%= font.getName() %></td>
 						<td><%= font.getLink() %></td>
 						<td>
-							<form action="<%= request.getContextPath() %>/admin/adminFontUpdate" name="fontUpdateFrm" method="post">
+							<form action="<%= request.getContextPath() %>/admin/adminFontUpdate" name="fontUpdateFrm">
 								<input type="hidden" name="no" value=<%= font.getNo() %> />
 								<input type="submit" class="fontStyle" id="fontchange" value="폰트 수정" />							
 							</form>
