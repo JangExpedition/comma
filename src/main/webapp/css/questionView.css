@@ -40,6 +40,29 @@ section{
 	height: 18px;
 }
 
+#editBox{
+	width: 80%;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+#editBtn{
+	margin-right: 5px;
+}
+
+.buttonStyle {
+	background-color: #fff;
+	border: 1px solid #454a7b;
+	border-radius: 5px;
+	width: 80px;
+	height: 25px;
+}
+
+.buttonStyle:hover {
+	cursor: pointer;
+}
+
 p{
 	font-size: 14px;
 	margin: 0;
@@ -104,7 +127,7 @@ p{
 	text-align: end;
 }
 
-.btn-delete, #btn-comment-enroll2{
+.btn-delete, .btn-update, #btn-comment-enroll2{
 	background-color: #fff;
 	border: 1px solid #454a7b;
 	border-radius: 5px;
@@ -112,6 +135,6 @@ p{
 	height: 25px;
 }
 
-.btn-delete:hover, #btn-comment-enroll2:hover{
+.btn-delete:hover, .btn-update, #btn-comment-enroll2:hover{
 	cursor: pointer;
 }
