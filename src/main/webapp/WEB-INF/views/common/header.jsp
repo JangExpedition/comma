@@ -104,6 +104,12 @@
 	case "/comma/chat/chatList" :
 		link.href = "<%= request.getContextPath() %>/css/chatList.css";
 		break;
+	case "/comma/admin/adminFontList" :
+		link.href = "<%= request.getContextPath() %>/css/adminFont.css";
+		break;
+	case "/comma/admin/adminDesignList" :
+		link.href = "<%= request.getContextPath() %>/css/adminDesign.css";
+		break;
 	}; // switch end
 	document.querySelector("head").append(link);
 </script>
