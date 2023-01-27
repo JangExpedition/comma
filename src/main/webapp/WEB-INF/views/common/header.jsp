@@ -96,6 +96,8 @@
 		break;
 	case "/comma/admin/adminMemberList" :
 	case "/comma/admin/adminMemberFinder" :
+	case "/comma/complain/complain" :
+	case "/comma/complain/complainFinder" :
 		link.href = "<%= request.getContextPath() %>/css/admin.css";
 		break;
 	case "/comma/counseling/CSView" :
@@ -172,6 +174,7 @@
 				});
 				
 				</script>
+				
 				<div id="toDesignList" class="navBtn">디자인 목록</div>
 				<script>
 				/*
@@ -183,7 +186,19 @@
 				document.querySelector("#toDesignList").addEventListener("click", (e)=>{
 					location.href = "<%= request.getContextPath() %>/admin/adminDesignList";	
 				});
+				</script>
 				
+				<div id="toComplainList" class="navBtn">신고 목록</div>
+				<script>
+				/*
+			      Date : 2023. 1. 27
+			      @최민경
+			    
+			      adminComplainList.jsp 이동 메서드
+			    */
+				document.querySelector("#toComplainList").addEventListener("click", (e)=>{
+					location.href = "<%= request.getContextPath() %>/complain/complain";	
+				});
 				</script>
 			<% } %>
 				<div id="toDiary" class="navBtn">일기장</div>

@@ -103,4 +103,20 @@ public class MemberService {
 		close(conn);
 		return memberList;
 	} // selectFindMember() end
+
+	public int updateWarningCount(Map<String, Object> param) {
+		int result = 0;
+		Connection conn = getConnection();
+		
+		try {
+			result = memberDao.updateWarningCount(conn, param);
+			commit(conn);
+		} catch(Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	} // updateWarningCount() end
 }

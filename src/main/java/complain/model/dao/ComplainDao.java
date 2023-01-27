@@ -4,10 +4,14 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import complain.model.dto.Complain;
+import complain.model.dto.Partition;
 import complain.model.exception.ComplainException;
 import letter.model.dao.LetterDao;
 
@@ -25,6 +29,21 @@ public class ComplainDao {
 		}
 	} // ComplainDao() end
 
+	
+	public Complain handleComplainResultSet(ResultSet rset) throws SQLException {
+		Complain complain = new Complain();
+		complain.setNo(rset.getInt("no"));
+		complain.setWriter(rset.getString("writer"));
+		complain.setVillain(rset.getString("villain"));
+		complain.setPartition(Partition.valueOf(rset.getString("partition")));
+		complain.setContent(rset.getString("content"));
+		complain.setPartitionNo(rset.getInt("partition_no"));
+		complain.setWarningCnt(rset.getInt("warning_count"));
+		complain.setRegDate(rset.getDate("reg_date"));
+		return complain;
+	} // handleComplainResultSet() end
+
+	
 	public int insertComplain(Connection conn, Complain complain) {
 		int result = 0;
 		String sql = prop.getProperty("insertComplain");
@@ -42,5 +61,21 @@ public class ComplainDao {
 		}
 		return result;
 	} // insertComplain() end
+
+	public List<Complain> selectAllComplain(Connection conn) {
+		List<Complain> complainList = new ArrayList<>();
+		String sql = prop.getProperty("selectAllComplain");
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql);
+			 ResultSet rset = pstmt.executeQuery()) {
+			while (rset.next()) {
+				Complain complain = handleComplainResultSet(rset);
+				complainList.add(complain);
+			}
+		} catch (SQLException e) {
+			throw new ComplainException("신고 목록 조회 오류", e);
+		}
+		return complainList;
+	} // selectAllComplain() end
 	
 }

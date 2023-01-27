@@ -30,7 +30,7 @@ public class FAQDeleteServlet extends HttpServlet {
 			request.getSession().setAttribute("msg", "FAQ 삭제 실패!");
 			e.printStackTrace();
 		}
-		request.getSession().setAttribute("type", "faq");
+		request.setAttribute("type", "faq");
 		response.sendRedirect(request.getContextPath() + "/customer");
 	} // doPost() end
 

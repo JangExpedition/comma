@@ -211,4 +211,20 @@ public class MemberDao {
 		
 		return memberList;
 	} // selectFindMember() end
+
+
+	public int updateWarningCount(Connection conn, Map<String, Object> param) {
+		int result = 0;
+		String sql = prop.getProperty("updateWarningCount");
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setInt(1, (int) param.get("warningCnt"));
+			pstmt.setString(2, (String) param.get("memberNick"));
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new MemberException("회원 누적 신고 횟수 변경 오류!", e);
+		}
+		return result;
+	} // updateWarningCount() end
 }
