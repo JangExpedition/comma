@@ -3,12 +3,55 @@
 .body{
 color: #454a7b;
 
-
 }
 #designList{
 	font-family: Hanna !important;
 	color: #454a7b;
 	padding: 20px;
+}
+
+#design-name{
+	color: #454a7b;
+	font-family: Hanna !important;
+	font-size: 16px;
+}
+
+#design-num{
+	color: #454a7b;
+	font-family: Hanna !important;
+	font-size: 16px
+}
+
+#write{
+	font-family: Hanna !important;	
+}
+
+#searchDesign{
+	font-family: Hanna !important;
+	background-color: #fff;
+	color: #474680;
+	border: 4px solid lightgray;
+	font-size: 18px;
+	padding: 5px 10px;
+	border-radius: 10px;
+}
+
+#searchBtn{
+	font-family: Hanna !important;
+	background-color:rgb(238, 238, 238);
+	color: #474680;
+	border: 4px solid #474680;
+	font-size: 18px;
+	padding: 5px 10px;
+	border-radius: 10px;
+}
+
+#design-btn{
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	margin: 10px 5px 5px 3px;
+	
 }
 .con {
 	margin: 0 auto;
@@ -53,7 +96,6 @@ color: #454a7b;
 .line-height-0-ch-only>* {
 	line-height: normal;
 }
-
 
 .con {
 	max-width: 900px;
@@ -108,7 +150,9 @@ html, body {
 }
 
 .article-detail {
-    border:2px solid lightgray;
+    border:7px solid #454a7b;
+    margin-top: 30px;
+   border-radius: 20px;
 }
 
 .article-detail > table {
@@ -118,10 +162,11 @@ html, body {
 
 .article-detail > table th, .article-detail > table td {
     border:none;
+   
 }
 
 .article-detail > table tr:not(:last-child) {
-    border-bottom:2px solid lightgray;
+    border-bottom:2px solid #454a7b;
 }
 
 .article-detail > table tr:not(.article-body), .article-detail > table tr:not(.article-body) > td{
@@ -143,9 +188,11 @@ html, body {
     width:100px;
     height:102px;
     background-color:lightgray;
-    border-bottom:2px solid lightgray;
+    border-bottom:2px solid #454a7b;
     text-align:center;
+    border-radius: 10px;
 }
+
 
 
 

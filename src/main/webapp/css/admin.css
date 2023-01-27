@@ -6,8 +6,6 @@ section {
 
 }
 
-
-
 #adminTitle {
 	padding-top: 50px;
     text-align: center;
@@ -35,7 +33,7 @@ section {
 }
 
 .admin-list-table th, td {
-	border: 1px solid #000;
+	border: 3px solid #000;
 }
 
 .admin-list-table td {

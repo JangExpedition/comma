@@ -17,7 +17,12 @@
 				<input type="submit" id="searchBtn" class="fontStyle" value="검색" />
 			</form>
 		</div>
-
+		
+		
+	<div id="design-btn">
+		<input type="submit"  class="fontStyle" value="디자인 추가" />
+		<input type="submit"  class="fontStyle" value="디자인 수정" />
+	</div>	
 
 
     <section class="article-detail table-common con row">
@@ -30,17 +35,17 @@
                 <col width="100px">
             </colgroup>
             <tbody>
-                <tr class="article-title">
-                    <th>디자인 이름</th>
+                <tr class="article-title" id="design-name">
+                    <th>디자인 이름 : </th>
                     <td colspan="3">구름</td>
                 </tr>
-                <tr class="article-info">
+                <tr class="article-info" id="design-num">
                     <th>디자인 번호</th>
                     <td>5</td>
                     <th>디자인 링크</th>
-                    <td>www.dadafnsds</td>
+                      <td><a href="">www.sdfsdahbfv</a></td>
                 </tr>
-                <tr class="article-body">
+                <tr class="article-body" id="write">
                     <td colspan="4">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sunt deleniti
                      repellat aliquam quis labore est error iste obcaecati laborum illo? Distinctio dolorem quis at 
                      assumenda! Perferendis, libero earum! Ducimus, ratione!</td>
@@ -52,7 +57,7 @@
     
         <section class="article-detail table-common con row">
         <div class="article-writer cell">
-                <div class="writer-icon">디자인</div>
+                <div class="writer-icon" >디자인</div>
      
         </div>
         <table class="cell" border="1">
@@ -60,17 +65,17 @@
                 <col width="100px">
             </colgroup>
             <tbody>
-                <tr class="article-title">
-                    <th>디자인 이름</th>
+                <tr class="article-title" id="design-name">
+                    <th>디자인 이름 : </th>
                     <td colspan="3">구름</td>
                 </tr>
-                <tr class="article-info">
+                <tr class="article-info" id="design-num">
                     <th>디자인 번호</th>
                     <td>4</td>
                     <th>디자인 링크</th>
-                    <td>www.dadafnsds</td>
+                     <td><a href="">www.sdfsdahbfv</a></td>
                 </tr>
-                <tr class="article-body">
+                <tr class="article-body" id="write">
                     <td colspan="4">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sunt deleniti
                      repellat aliquam quis labore est error iste obcaecati laborum illo? Distinctio dolorem quis at 
                      assumenda! Perferendis, libero earum! Ducimus, ratione!</td>
@@ -84,7 +89,7 @@
     
         <section class="article-detail table-common con row">
         <div class="article-writer cell">
-                <div class="writer-icon">디자인</div>
+                <div class="writer-icon" >디자인</div>
      
         </div>
         <table class="cell" border="1">
@@ -92,17 +97,17 @@
                 <col width="100px">
             </colgroup>
             <tbody>
-                <tr class="article-title">
-                    <th>디자인 이름</th>
+                <tr class="article-title" id="design-name">
+                    <th>디자인 이름 : </th>
                     <td colspan="3">구름</td>
                 </tr>
-                <tr class="article-info">
+                <tr class="article-info" id="design-num">
                     <th>디자인 번호</th>
                     <td>3</td>
                     <th>디자인 링크</th>
-                    <td>www.dadafnsds</td>
+                     <td><a href="">www.sdqwfhbfv</a></td>
                 </tr>
-                <tr class="article-body">
+                <tr class="article-body" id="write">
                     <td colspan="4">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sunt deleniti
                      repellat aliquam quis labore est error iste obcaecati laborum illo? Distinctio dolorem quis at 
                      assumenda! Perferendis, libero earum! Ducimus, ratione!</td>
@@ -116,7 +121,7 @@
     
         <section class="article-detail table-common con row">
         <div class="article-writer cell">
-                <div class="writer-icon">디자인</div>
+                <div class="writer-icon" >디자인</div>
      
         </div>
         <table class="cell" border="1">
@@ -124,17 +129,18 @@
                 <col width="100px">
             </colgroup>
             <tbody>
-                <tr class="article-title">
-                    <th>디자인 이름</th>
+                <tr class="article-title" id="design-name">
+                    <th>디자인 이름 : </th>
                     <td colspan="3">구름</td>
                 </tr>
-                <tr class="article-info">
+                
+                <tr class="article-info" id="design-num">
                     <th>디자인 번호</th>
                     <td>2</td>
                     <th>디자인 링크</th>
-                    <td>www.dadafnsds</td>
+                      <td><a href="">www.sdfhbfdfv</a></td>
                 </tr>
-                <tr class="article-body">
+                <tr class="article-body" id="write">
                     <td colspan="4">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sunt deleniti
                      repellat aliquam quis labore est error iste obcaecati laborum illo? Distinctio dolorem quis at 
                      assumenda! Perferendis, libero earum! Ducimus, ratione!</td>
@@ -148,7 +154,7 @@
     
         <section class="article-detail table-common con row">
         <div class="article-writer cell">
-                <div class="writer-icon">디자인</div>
+                <div class="writer-icon" >디자인</div>
      
         </div>
         <table class="cell" border="1">
@@ -156,17 +162,17 @@
                 <col width="100px">
             </colgroup>
             <tbody>
-                <tr class="article-title">
-                    <th>디자인 이름</th>
+                <tr class="article-title" id="design-name">
+                    <th>디자인 이름 : </th>
                     <td colspan="3">구름</td>
                 </tr>
-                <tr class="article-info">
+                <tr class="article-info" id="design-num">
                     <th>디자인 번호</th>
                     <td>1</td>
                     <th>디자인 링크</th>
-                    <td>www.dadafnsds</td>
+                      <td><a href="">www.sdasfdfhbfv</a></td>
                 </tr>
-                <tr class="article-body">
+                <tr class="article-body" id="write">
                     <td colspan="4">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sunt deleniti
                      repellat aliquam quis labore est error iste obcaecati laborum illo? Distinctio dolorem quis at 
                      assumenda! Perferendis, libero earum! Ducimus, ratione!</td>
