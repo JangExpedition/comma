@@ -39,6 +39,17 @@ private Properties prop = new Properties();
 		question.setRegDate(rset.getDate("reg_date"));
 		return question;
 	} // handleQuestionResultSet() end
+
+
+	public Attachment handleAttachmentResultSet(ResultSet rset) throws SQLException {
+		Attachment attach = new Attachment();
+		attach.setNo(rset.getInt("no"));
+		attach.setAttachNo(rset.getInt("q_no"));
+		attach.setOriginalFilename(rset.getString("original_filename"));
+		attach.setRenamedFilename(rset.getString("renamed_filename"));
+		attach.setRegDate(rset.getDate("reg_date"));
+		return attach;
+	} // handleAttachmentResultSet() end
 	
 	
 	public int insertQuestion(Connection conn, Question question) {
@@ -139,12 +150,7 @@ private Properties prop = new Properties();
 			
 			try (ResultSet rset = pstmt.executeQuery()){
 				while(rset.next()) {
-					Attachment attach = new Attachment();
-					attach.setNo(rset.getInt("no"));
-					attach.setAttachNo(rset.getInt("q_no"));
-					attach.setOriginalFilename(rset.getString("original_filename"));
-					attach.setRenamedFilename(rset.getString("renamed_filename"));
-					attach.setRegDate(rset.getDate("reg_date"));
+					Attachment attach = handleAttachmentResultSet(rset);
 					attachList.add(attach);
 				}
 			}
@@ -174,29 +180,28 @@ private Properties prop = new Properties();
 	} // selectOneQuestion() end
 
 
-	public List<QuestionComment> selectQComment(Connection conn, int questionNo) {
-		List<QuestionComment> qComments = new ArrayList<>();
+	public QuestionComment selectQComment(Connection conn, int questionNo) {
+		QuestionComment qComment = null;
 		String sql = prop.getProperty("selectQComment");
 		
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setInt(1, questionNo);
 			
 			try (ResultSet rset = pstmt.executeQuery()){
-				while(rset.next()) {
-					QuestionComment qComment = new QuestionComment();
+				if (rset.next()) {
+					qComment = new QuestionComment();
 					qComment.setNo(rset.getInt("no"));
 					qComment.setQNo(rset.getInt("q_no"));
 					qComment.setWriter(rset.getString("writer"));
 					qComment.setContent(rset.getString("content"));
 					qComment.setRegDate(rset.getDate("reg_date"));
-					qComments.add(qComment);
 				}
 			}
 			
 		} catch (SQLException e) {
 			throw new QuestionException("특정 문의 내역 댓글 조회 오류", e);
 		}
-		return qComments;
+		return qComment;
 	} // selectQComment() end
 
 
@@ -254,5 +259,102 @@ private Properties prop = new Properties();
 		}
 		return result;
 	} // updateQuestion() end
+
+
+	public Attachment selectOneAttachment(Connection conn, int attachNo) {
+		Attachment attach = null;
+		String sql = prop.getProperty("selectOneAttachment");
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, attachNo);
+			
+			try (ResultSet rset = pstmt.executeQuery()) {
+				if (rset.next())
+					attach = handleAttachmentResultSet(rset);
+			 }
+		} catch (SQLException e) {
+			throw new QuestionException("특정 첨부파일 조회 오류", e);
+		}
+		return attach;
+	} // selectOneAttachment() end
+
+
+	public int deleteAttachment(Connection conn, int attachNo) {
+		int result = 0;
+		String sql = prop.getProperty("deleteAttachment");
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, attachNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new QuestionException("특정 펌부파일 삭제 오류", e);
+		}
+		return result;
+	} // deleteAttachment() end
+
+
+	public int updateAttachment(Connection conn, Attachment attach) {
+		int result =0;
+		String sql = prop.getProperty("updateAttachment");
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, attach.getOriginalFilename());
+			pstmt.setString(2, attach.getRenamedFilename());
+			pstmt.setInt(3, attach.getNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new QuestionException("문의 사항 첨부파일 수정 오류", e);
+		}
+		return result;
+	} // updateAttachment() end
+
+
+	public int deleteQuestion(Connection conn, int no) {
+		int result = 0;
+		String sql = prop.getProperty("deleteQuestion");
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, no);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new QuestionException("문의 내역 삭제 오류", e);
+		}
+		return result;
+	} // deleteQuestion() end
+
+
+	public int updateQuestionComment(Connection conn, QuestionComment qComment) {
+		int result = 0;
+		String sql = prop.getProperty("updateQuestionComment");
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, qComment.getWriter());
+			pstmt.setString(2, qComment.getContent());
+			pstmt.setInt(3, qComment.getNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new QuestionException("문의 내역 댓글 수정 오류", e);
+		}
+		return result;
+	} // updateQuestionComment() end
+
+
+	public int deleteQuestionComment(Connection conn, int qNo) {
+		int result = 0;
+		String sql = prop.getProperty("deleteQuestionComment");
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, qNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new QuestionException("문의 내역 댓글 삭제 오류", e);
+		}
+		return result;
+	} // deleteQuestionComment() end
 
 }

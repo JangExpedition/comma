@@ -91,4 +91,56 @@ private Properties prop = new Properties();
 		return faqList;
 	} // selectFindFaq() end
 
+
+	public int deleteFaq(Connection conn, int no) {
+		int result =0;
+		String sql = prop.getProperty("deleteFaq");
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, no);
+			
+			result = pstmt.executeUpdate();	
+		} catch (SQLException e) {
+			throw new FAQException("FAQ 삭제 오류", e);
+		}
+		return result;
+	} // deleteFaq() end
+
+
+	public FAQ selectOneFaq(Connection conn, int no) {
+		FAQ faq = null;
+		String sql = prop.getProperty("selectOneFaq");
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, no);
+			
+			try (ResultSet rset = pstmt.executeQuery()){
+				if (rset.next()) {
+					faq = handleFaqResultSet(rset);
+				}
+			}
+			
+		} catch (SQLException e) {
+			throw new FAQException("FAQ 한 건 조회 오류", e);
+		}
+		return faq;
+	} // selectOneFaq() end
+
+
+	public int updateFaq(Connection conn, FAQ faq) {
+		int result =0;
+		String sql = prop.getProperty("updateFaq");
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, faq.getTitle());
+			pstmt.setString(2, faq.getContent());
+			pstmt.setInt(3, faq.getNo());
+			
+			result = pstmt.executeUpdate();	
+		} catch (SQLException e) {
+			throw new FAQException("FAQ 수정 오류", e);
+		}
+		return result;
+	} // updateFaq() end
+
 }

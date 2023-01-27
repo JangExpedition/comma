@@ -5,37 +5,27 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%
 	Question question = (Question) request.getAttribute("question");
-	List<Attachment> attachList = (List<Attachment>) request.getAttribute("attachList");
+	List<Attachment> attachList = question.getAttachments();
 %>
 	<section class="fontStyle">
-		<div id="questionEnrollContainer">
+		<div id="counselingEnrollContainer">
 			<div>
 				<button id="goBack" class="buttonStyle">뒤로가기</button>
 			</div>
-			<div id=questionEnrollTitle class="pointColor">
+			<div id=counselingEnrollTitle class="pointColor">
 				<h1>게시글 수정</h1>
 			</div>
+			<%--
+			<form id="questionUpdateFrm" name="questionUpdateFrm" enctype="multipart/form-data">
+			--%>
 			<form id="questionUpdateFrm" name="questionUpdateFrm" action="<%= request.getContextPath() %>/customer/questionUpdate" method="POST" enctype="multipart/form-data">
 				<table>
 					<tr>
 						<th class="lableTd pointColor">사진첨부</th>
 						<td colspan="3">
-					<%
-					if(!attachList.isEmpty()){
-						for(int i = 0; i < attachList.size(); i++){
-							Attachment attach = attachList.get(i);
-					%>
-							<img class="alreadyImg" src="<%= request.getContextPath() %>/upload/question/<%= attach.getRenamedFilename() %>" alt=""/>
-							<input type="checkbox" name="delFile" id="delFile<%= i %>" value="<%= attach.getNo() %>" />
-	                  	 		<label for="delFile<%= i %>">삭제</label>
-					<% 
-						}
-					} else {
-					%>
 							<input type="file" name="file1" id="file1" />
 							<input type="file" name="file2" id="file2" />
 							<input type="file" name="file3" id="file3" />
-					<% } %>
 						</td>
 					</tr>
 					<tr>
@@ -46,9 +36,32 @@
 					<tr>
 						<td colspan="4">
 							<div id="imgDiv">
-									<img src="" alt="" id="img1" name="img1" class="img"/>
-									<img src="" alt="" id="img2" name="img2" class="img"/>
-									<img src="" alt="" id="img3" name="img3" class="img"/>
+						<%
+						if(!attachList.isEmpty()){
+							int size = attachList.size();
+							for(int i = 0; i < size; i++){
+								Attachment attach = attachList.get(i);
+						%>
+								<img id="img<%= (i + 1) %>" class="img" src="<%= request.getContextPath() %>/upload/question/<%= attach.getRenamedFilename() %>" alt=""/>
+								<%--
+								<input type="checkbox" name="delFile" id="delFile<%= i %>" value="<%= attach.getNo() %>" />
+								<label for="delFile<%= i %>">삭제</label><br />
+								 --%>
+						<% 
+							}
+							if (size != 3) {
+								for (int j = size; j < 3; j++) {
+						%>
+								<img id="img<%= (j + 1) %>" class="img" src="" alt="" style="display: none;" />
+						<%
+								}
+							}
+						} else {
+						%>
+								<img src="" alt="" id="img1" name="img1" class="img"/>
+								<img src="" alt="" id="img2" name="img2" class="img"/>
+								<img src="" alt="" id="img3" name="img3" class="img"/>
+						<% } %>
 							</div>
 						</td>
 					</tr>
@@ -62,12 +75,13 @@
 					</tr>
 					<tr>
 						<th colspan="4" id="submitTd"><input type="submit" id="write" class="fontStyle" value="수정하기"></th>
-					<tr>
+					</tr>
 				</table>
 				<input type="hidden" name="no" value="<%= question.getNo() %>"/>
 			</form>
 		</div>
 	</section>
+	
 	<script>
 		// 사진 변경 이벤트
 		document.querySelector("#file1").addEventListener("change", (e)=>{
@@ -75,6 +89,7 @@
 			const file = e.target;
 			const img = document.querySelector("#img1");
 			const div = document.querySelector("#imgDiv");
+			console.log(img);
 			
 			if(file.files[0]){
 				reader.readAsDataURL(file.files[0]);
@@ -101,10 +116,12 @@
 			const div = document.querySelector("#imgDiv");
 			
 			if(file.files[0]){
+				console.log(file.files[0]);
 				reader.readAsDataURL(file.files[0]);
 				reader.onload = (e) => {
 					div.style.height = "150px";
 					document.querySelector("#content").style.height = "350px";
+					console.log(e.target.result);
 					img.src = e.target.result;
 					img.style.display = "inline";
 					div.style.display = "flex";
@@ -125,10 +142,12 @@
 			const div = document.querySelector("#imgDiv");
 			
 			if(file.files[0]){
+				console.log(file.files[0]);
 				reader.readAsDataURL(file.files[0]);
 				reader.onload = (e) => {
 					div.style.height = "150px";
 					document.querySelector("#content").style.height = "350px";
+					console.log(e.target.result);
 					img.src = e.target.result;
 					img.style.display = "inline";
 					div.style.display = "flex";
@@ -142,12 +161,12 @@
 			
 		});
 		
-		
 		// 뒤로가기 클릭 이벤트리스너
 		document.querySelector("#goBack").addEventListener("click", (e)=>{
 			location.href = "<%= request.getContextPath() %>/customer/questionView?no=<%= question.getNo() %>";
 		});
 	
+		
 		// questionUpdate 폼 제출
 		document.questionUpdateFrm.onsubmit = (e) => {
 			const frm = e.target;
@@ -170,6 +189,31 @@
 				return false;
 			}
 		};
+		
+		<%--
+		// 비동기 폼 제출
+		document.questionUpdateFrm.addEventListener('submit', (e) => {
+    		// 폼 제출 방지
+    		e.preventDefault();
+    		
+    		// FormData 객체 생성
+    		const frmData = new FormData(e.target);
+    		
+    		$.ajax({
+    			url : "<%= request.getContextPath() %>/customer/questionUpdate",
+    			method : 'POST',
+    			data : frmData,
+    			dataType : 'json',
+    			contentType : false,
+    			processData : false,
+    			success(data){
+    				console.log(data);
+    				alert(data.result);
+    			},
+    			error : console.log
+    		});
+    	});
+    	--%>
 	</script>
 </body>
 </html>

@@ -127,7 +127,7 @@ p{
 	text-align: end;
 }
 
-.btn-delete, #btn-comment-enroll2{
+.btn-delete, .btn-update, #btn-comment-enroll2{
 	background-color: #fff;
 	border: 1px solid #454a7b;
 	border-radius: 5px;
@@ -135,6 +135,6 @@ p{
 	height: 25px;
 }
 
-.btn-delete:hover, #btn-comment-enroll2:hover{
+.btn-delete:hover, .btn-update, #btn-comment-enroll2:hover{
 	cursor: pointer;
 }

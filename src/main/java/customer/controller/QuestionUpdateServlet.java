@@ -2,12 +2,16 @@ package customer.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.FileRenamePolicy;
 
@@ -34,7 +38,7 @@ public class QuestionUpdateServlet extends HttpServlet {
 		
 		request.setAttribute("question", question);
 		
-		request.getRequestDispatcher("/WEB-INF/views/counseling/questionUpdate.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/customer/questionUpdate.jsp").forward(request, response);
 		
 	} // doGet() end
 
@@ -44,7 +48,7 @@ public class QuestionUpdateServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			// MultipartRequest객체 생성
-			String saveDirectory = getServletContext().getRealPath("/upload/counseling");
+			String saveDirectory = getServletContext().getRealPath("/upload/question");
 			int maxPostSize = 10 * 1024 * 1024;
 			String encoding = "utf-8";
 			FileRenamePolicy policy = new CommaFileRenamePolicy();
@@ -57,6 +61,7 @@ public class QuestionUpdateServlet extends HttpServlet {
 			String[] delFiles = multiReq.getParameterValues("delFile");
 			
 			Question question = new Question(no, writer, title, content, null);
+
 
 			// 업로드한 파일 처리
 			if (multiReq.getFile("file1") != null) {
@@ -85,7 +90,7 @@ public class QuestionUpdateServlet extends HttpServlet {
 			if(delFiles != null) {
 				for(String temp : delFiles) {
 					int attachNo = Integer.parseInt(temp);
-					Attachment attach = questionService.selectAttachment(no);
+					Attachment attach = questionService.selectOneAttachment(attachNo);
 					
 					File delFile = new File(saveDirectory, attach.getRenamedFilename());
 					if(delFile.exists())
@@ -94,15 +99,16 @@ public class QuestionUpdateServlet extends HttpServlet {
 				}
 			}
 			
-			if(result > 0) {
-				request.getSession().setAttribute("msg", "게시글이 정상적으로 수정되었습니다.");
-				response.sendRedirect(request.getContextPath() + "/customer/questionView?no=" + no);
-			}
+			request.getSession().setAttribute("msg", "게시글이 정상적으로 수정되었습니다.");
+			response.sendRedirect(request.getContextPath() + "/customer/questionView?no=" + no);
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 			request.getSession().setAttribute("msg", "게시글 수정실패!");
 			response.sendRedirect(request.getContextPath() + "/customer");
 		}
-	}
+		
+		
+	} // doPost() end
 
 }

@@ -71,7 +71,7 @@
 
 
 		<div id="faqDiv" class="tableDiv" style="display: none;">
-		<% if (loginMember != null && loginMember.getMemberRole() == MemberRole.A) { %>
+		<% if (loginMember.getMemberRole() == MemberRole.A || loginMember.getMemberRole() == MemberRole.M) { %>
 			<div id="inputBtn">
 				<input type="button" id="faqAddBtn" class="fontStyle" value="추가" onclick="location.href='<%= request.getContextPath() %>/customer/faqEnroll';" />
 			</div>
@@ -90,7 +90,19 @@
 				for (FAQ faq : faqList) {
 		%>
 				<div id="faqDetail">
-					<div class="faqDetailTitle"><%= faq.getTitle() %></div>
+					<div class="faqDetailTitle">
+						<%= faq.getTitle() %>
+					
+					<% if (loginMember.getMemberRole() == MemberRole.A || loginMember.getMemberRole() == MemberRole.M) { %>
+						<div class="faqDetailBtn">
+							<form action="<%= request.getContextPath() %>/customer/faqDelete" method="post">
+								<input type="hidden" name="faqNo" value=<%= faq.getNo() %> />
+								<input type="submit" id="faqDelBtn" class="fontStyle" value="삭제" />
+							</form>
+							<input type="button" id="faqUpBtn" class="fontStyle" value="수정" onclick="location.href='<%= request.getContextPath() %>/customer/faqUpdate?no=<%= faq.getNo() %>';" />
+						</div>
+					<% } %>
+					</div>
 					<div class="faqDetailContent"><%= faq.getContent() %></div>
 				</div>
 		<%

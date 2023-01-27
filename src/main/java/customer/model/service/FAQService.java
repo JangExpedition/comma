@@ -43,4 +43,45 @@ public class FAQService {
 		return faqList;
 	} // selectFindFaq() end
 
+	public int deleteFaq(int no) {
+		int result = 0;
+		Connection conn = getConnection();
+		
+		try {
+			result = faqDao.deleteFaq(conn, no);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			e.printStackTrace();
+		} finally {
+			close(conn);
+		}
+		
+		return result;
+	} // deleteFaq() end
+
+	public FAQ selectOneFaq(int no) {
+		Connection conn = getConnection();
+		FAQ faq = faqDao.selectOneFaq(conn, no);
+		close(conn);
+		return faq;
+	} // selectOneFaq() end
+
+	public int updateFaq(FAQ faq) {
+		int result = 0;
+		Connection conn = getConnection();
+		
+		try {
+			result = faqDao.updateFaq(conn, faq);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			e.printStackTrace();
+		} finally {
+			close(conn);
+		}
+		
+		return result;
+	} // updateFaq() end
+
 }

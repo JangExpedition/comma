@@ -95,7 +95,7 @@ div {
 	border: none;
 }
 
-#faqAddBtn {
+#faqAddBtn, #faqDelBtn, #faqUpBtn {
 	padding: 5px 10px;
 	background-color: #212E40;
 	color: #fff;
@@ -137,4 +137,9 @@ table td {
     background-color: #f0f0f0;
     padding: 5px 15px;
     display: none;
+}
+
+.faqDetailBtn {
+	margin-right: 0;
+	display: flex;
 }
