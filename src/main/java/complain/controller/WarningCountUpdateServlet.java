@@ -27,10 +27,12 @@ public class WarningCountUpdateServlet extends HttpServlet {
 		try {
 			String memberNick = request.getParameter("memberNick");
 			int warningCnt = Integer.parseInt(request.getParameter("warningCnt"));
+			String content = request.getParameter("letterContent");
 			
 			Map<String, Object> param = new HashMap<>();
 			param.put("memberNick", memberNick);
 			param.put("warningCnt", warningCnt);
+			param.put("content", content);
 			
 			int result = memberService.updateWarningCount(param);
 			request.getSession().setAttribute("msg", "누적 신고 횟수 수정 성공!");
