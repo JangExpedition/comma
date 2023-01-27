@@ -39,7 +39,7 @@
 					<td class="input fontsytle">
 						<select name="gender" id="gender" name="gender" class="inputBar" required >
 							<option value="" selected disabled hidden>공개할 성별을 선택해주세요.</option>
-							<option value="A">전체</option>
+							<option value="X">전체</option>
 							<option value="M">남자</option>
 							<option value="F">여자</option>
 						</select>

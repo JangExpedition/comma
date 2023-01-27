@@ -13,7 +13,7 @@ import counseling.model.service.CounselingService;
  * Servlet implementation class csCommentDelteServlet
  */
 @WebServlet("/counseling/csCommentDelete")
-public class csCommentDelteServlet extends HttpServlet {
+public class CsCommentDelteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private CounselingService counselingService = new CounselingService();
 

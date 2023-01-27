@@ -1,11 +1,14 @@
 package chat.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import chat.model.service.ChatService;
 
 /**
  * Servlet implementation class ChatViewServlet
@@ -13,21 +16,29 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/chat/chatView")
 public class ChatViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private ChatService chatService = new ChatService();
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String chatroomId = request.getParameter("chatNo");
+		if(chatroomId == null || "".equals(chatroomId)) {
+			throw new IllegalArgumentException("채팅방 아이디가 유효하지 않습니다.");
+		}
+		
+		request.getSession().setAttribute("chatroomId", chatroomId);
+//		
 		request.getRequestDispatcher("/WEB-INF/views/chat/chatView.jsp")
 		.forward(request, response);
+		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+//		
 	}
 
 }
