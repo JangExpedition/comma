@@ -24,7 +24,12 @@ public class ChatListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//List<Chat> chatList = chatService.selectAllChat();
+		List<Chat> chatList = chatService.selectAllChat();
+		
+		request.setAttribute("chatList", chatList);
+		
+		request.getRequestDispatcher("/WEB-INF/views/chat/chatList.jsp")
+			.forward(request, response);;
 	}
 
 }
