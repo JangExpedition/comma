@@ -1,6 +1,8 @@
 package complain.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,8 +25,11 @@ public class ComplainServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		List<Complain> complainList = complainService.selectAllComplain();
+		
+		request.setAttribute("complainList", complainList);
+		
+		request.getRequestDispatcher("/WEB-INF/views/admin/adminComplainList.jsp").forward(request, response);
 	} // doGet() end
 
 	/**

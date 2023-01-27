@@ -28,7 +28,7 @@ public class FAQUpdateServlet extends HttpServlet {
 		
 		request.setAttribute("faq", faq);
 
-		request.getSession().setAttribute("type", "faq");
+		request.setAttribute("type", "faq");
 		request.getRequestDispatcher("/WEB-INF/views/customer/faqUpdate.jsp").forward(request, response);
 	} // doGet() end
 
@@ -51,7 +51,7 @@ public class FAQUpdateServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		request.getSession().setAttribute("type", "faq");
+		request.setAttribute("type", "faq");
 		response.sendRedirect(request.getContextPath() + "/customer");
 	} // doPost() end
 
