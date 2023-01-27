@@ -190,4 +190,25 @@ public class MemberDao {
 		}
 		return result;
 	} // updateMemberRole() end
+
+
+	public List<Member> selectFindMember(Connection conn, String searchNick) {
+		List<Member> memberList = new ArrayList<>();
+		String sql = prop.getProperty("selectFindMember");
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setString(1, '%' + searchNick + '%');
+			
+			try(ResultSet rset = pstmt.executeQuery()){
+				while(rset.next()) {
+					memberList.add(handleMemberResultSet(rset));
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new MemberException("관리자 닉네임 조회 오류!", e);
+		}
+		
+		return memberList;
+	} // selectFindMember() end
 }

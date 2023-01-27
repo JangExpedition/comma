@@ -96,4 +96,11 @@ public class MemberService {
 		}
 		return result;
 	} // updateMemberRole() end
+
+	public List<Member> selectFindMember(String searchNick) {
+		Connection conn = getConnection();
+		List<Member> memberList = memberDao.selectFindMember(conn, searchNick);
+		close(conn);
+		return memberList;
+	} // selectFindMember() end
 }
