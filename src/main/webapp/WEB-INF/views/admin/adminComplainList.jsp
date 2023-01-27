@@ -76,7 +76,6 @@
 					frm.letterContent.value = `부적절한 내용으로 경고 횟수가 증가되어 [\${warningCnt}]입니다.\n경고 3번 누적 시 회원 탈퇴되오니 이 점 유의하시기 바랍니다.`;
 					frm.submit();				
 				}
-				
 			});
 		});
 	</script>
