@@ -1,163 +1,243 @@
 @charset "UTF-8";
 
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-section.notice {
-  padding: 80px 0;
+html {
+	font-family: "Noto Sans KR", sans-serif;
 }
 
-.page-title {
-  margin-bottom: 60px;
-}
-.page-title h3 {
-	
-  font-size: 28px;
-  color: #333333;
-  font-weight: 400;
-  text-align: center;
+/* 노말라이즈 */
+body, ul, li, h1, h2, h3, h4, h5, h6 {
+	margin: 0;
+	padding: 0;
+	list-style: none;
 }
 
-#adminTitle{
-	font-family: Hanna !important;
-    text-align: center;
-    font-size: 40px;
-    height: 50px;
-    color: #454a7b;
-    margin: 10px 10px 30px;
-	
-}
-#board-search .search-window {
-  padding: 15px 0;
-  background-color: #f9f7f9;
-  font-family: Hanna !important;
-}
-#board-search .search-window .search-wrap {
-  position: relative;
-/*   padding-right: 124px; */
-  margin: 0 auto;
-  width: 80%;
-  max-width: 564px;
-}
-#board-search .search-window .search-wrap input {
-  height: 40px;
-  width: 100%;
-  font-size: 14px;
-  padding: 7px 14px;
-  border: 1px solid #ccc;
-}
-#board-search .search-window .search-wrap input:focus {
-  border-color: #333;
-  outline: 0;
-  border-width: 1px;
-}
-#board-search .search-window .search-wrap .btn {
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 108px;
-  padding: 0;
-  font-size: 16px;
+a:link {
+	color: lightblue;
 }
 
-.board-table {
-  font-size: 13px;
-  width: 100%;
-  border-top: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
-  margin: 25px 25px 30px;
+/* 라이브러리 */
+.con {
+	margin: 0 auto;
 }
 
-.board-table a {
-  color: #333;
-  display: inline-block;
-  line-height: 1.4;
-  word-break: break-all;
-  vertical-align: middle;
-}
-.board-table a:hover {
-  text-decoration: underline;
-}
-.board-table th {
-  text-align: center;
+.img-box>img {
+	width: 100%;
+	display: block;
 }
 
-.board-table .th-num {
-  width: 100px;
-  text-align: center;
+.row::after {
+	content: "";
+	display: block;
+	clear: both;
 }
 
-.board-table .th-date {
-  width: 200px;
+.cell {
+	float: left;
+	box-sizing: border-box;
 }
 
-.board-table th, .board-table td {
-  padding: 14px 0;
+.cell-right {
+	float: right;
+	box-sizing: border-box;
 }
 
-.board-table tbody td {
-  border-top: 1px solid #e7e7e7;
-  text-align: center;
+.margin-0-auto {
+	margin: 0 auto;
 }
 
-.board-table tbody th {
-  padding-left: 28px;
-  padding-right: 14px;
-  border-top: 1px solid #e7e7e7;
-  text-align: left;
+.block {
+	display: block;
 }
 
-.board-table tbody th p{
-  display: none;
+.inline-block {
+	display: inline-block;
 }
 
-.btn-dark {
-  background: #555;
-  color: #fff;
+.text-align-center {
+	text-align: center;
 }
 
-.btn-dark:hover, .btn-dark:focus {
-  background: #373737;
-  border-color: #373737;
-  color: #fff;
+.line-height-0-ch-only {
+	line-height: 0;
 }
 
-.btn-dark {
-  background: #555;
-  color: #fff;
+.line-height-0-ch-only>* {
+	line-height: normal;
 }
 
-.btn-dark:hover, .btn-dark:focus {
-  background: #373737;
-  border-color: #373737;
-  color: #fff;
+.relative {
+	position: relative;
 }
 
-/* reset */
+.absolute-left {
+	position: absolute;
+	left: 0;
+}
 
-* {
-  list-style: none;
-  text-decoration: none;
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
+.absolute-right {
+	position: absolute;
+	right: 0;
 }
-.clearfix:after {
-  content: '';
-  display: block;
-  clear: both;
+
+.absolute-middle {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
 }
-.container {
-  width: 1100px;
-  margin: 0 auto;
+
+/* 커스텀 */
+/* 반응형 레이아웃 */
+.con {
+	max-width: 950px;
 }
-.blind {
-  position: absolute;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  margin: -1px;
-  width: 1px;
-  height: 1px;
+
+.con-min-width {
+	min-width: 320px;
+}
+
+.top-menu a {
+	text-decoration: none;
+	color: gray;
+	font-weight: bold;
+	font-size: 1.2rem;
+}
+
+html, body { 
+	overflow-x: hidden;
+}
+
+.table-common>table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.table-common .btn-box {
+	text-align:center;
+}
+
+.table-common>table th, .table-common>table td {
+	border: 1px solid black;
+	padding: 10px;
+}
+
+.article-list table {
+    border:none;   
+    border-top:2px solid lightgray;
+    border-bottom:2px solid lightgray;
+}
+
+.article-list > table th, .article-list > table td {
+    border:none;
+}
+
+.article-list > table td {
+    border-bottom:1px solid lightgray;
+}
+
+.article-list > table thead {
+    border-bottom:2px solid lightgray;
+    background-color:#F5F5F5;
+}
+
+.article-detail {
+    border:2px solid lightgray;
+}
+
+.article-detail > table {
+    border:none;
+    width:calc(100% - 100px);
+}
+
+.article-detail > table th, .article-detail > table td {
+    border:none;
+}
+
+.article-detail > table tr:not(:last-child) {
+    border-bottom:1px solid lightgray;
+}
+
+.article-detail > table tr:not(.article-body), .article-detail > table tr:not(.article-body) > td{
+    height:20px;
+    font-size:0.8rem;
+}
+
+.article-detail > table tr.article-title > td {
+    height:40px;
+    font-weight:bold;
+    font-size:1.2rem;
+}
+
+.article-detail > table td:last-child {
+    padding-right:100px;
+}
+
+.article-detail > .article-writer {
+    width:100px;
+    height:102px;
+    background-color:lightgray;
+    border-bottom:1px solid lightgray;
+    text-align:center;
+}
+
+.article-detail > .article-writer .writer-icon {
+    margin:0 auto;
+    background-color:white;
+    width:80px;
+    height:80px;
+    border-radius:50%;
+}
+
+.reply {
+    margin-top:20px;
+    border:2px solid lightgray;
+    padding:15px;
+    box-sizing:border-box;
+}
+
+.reply-form {
+    padding:10px;
+}
+
+.reply-form > form input[type="text"] {
+    width:200px;
+}
+
+.reply-form > form textarea {
+    width:calc(100% - 100px);
+    min-height:40px;
+}
+
+.reply-form > form input[type="submit"] {
+    width:80px;
+    height:40px;
+    transform:translatey(-40%);
+}
+
+.reply-form > form > div:not(:last-child) {
+    margin-bottom:5px;
+}
+
+.reply-list > table {
+    border:none;
+}
+
+.reply-list > table th {
+    display:none;
+}
+
+.reply-list > table td {
+    border:none;
+}
+
+.reply-list > table tr:nth-child(2n+1) {
+    background-color:rgba(0,0,0,0.06);
+}
+
+.reply-list > table td:first-child {
+    font-weight:bold;
+}
+
+.reply-list > table td:first-child::after {
+    content:" : ";
+    font-weight:bold;
 }
