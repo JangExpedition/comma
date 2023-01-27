@@ -1,32 +1,43 @@
 @charset "UTF-8";
 
+.main{
+	font-family: Hanna !important;
+}
 #adminTitle{
 	 font-family: Hanna !important;
 	 color: #454a7b 
 }
 
+#searchFont{
+	font-family: Hanna !important;
+	background-color: #fff;
+	color: #474680;
+	border: 4px solid lightgray;
+	font-size: 18px;
+	padding: 5px 10px;
+	border-radius: 10px;
+}
+
+#searchBtn{
+	font-family: Hanna !important;
+	background-color:rgb(238, 238, 238);
+	color: #474680;
+	border: 4px solid #474680;
+	font-size: 18px;
+	padding: 5px 10px;
+	border-radius: 10px;
+	 margin: 20px;
+}
 
 #design{
 	 font-family: Hanna !important;
 }
 
-html{
-    height:100%;
-}
 
-body{
-    margin: 0px;
-    height:100%;
-}
-
-.main{
-    height:100%;
-    width: 100%;
-}
-
- 
 .d-none{
     display: none;
+ 
+    
 }
 
 .board{
@@ -36,20 +47,22 @@ body{
     margin: auto;
     
 }
- 
+
 
 .table{
     font-size :19px;
-    border-collapse: collapse;
+   border-radius: 20px;
     width: 1200px;
     margin-top:200px;
     border: 7px solid #454a7b;    
     text-align: center;
     display: center;    
+    margin: 35px;
 }
 
 .thead td {
     background: #B2B2B2;
+    border-radius: 6px;
 }
 
 
@@ -67,13 +80,12 @@ tr td:nth-child(2){
 
 .page-nation li{ 
     list-style: none;
-
+    display: center;
 } 
 
 .page-wrap {
     text-align:center;
     font-size:0;
-
  }
 
 .page-nation  {
@@ -81,7 +93,6 @@ tr td:nth-child(2){
     justify-content: center;
     align-items: center;
     margin-top:20px;
-
 }
  
 
@@ -99,13 +110,30 @@ tr td:nth-child(2){
     color:black;
     text-decoration:none;
     font-weight:bold;
-
 }
 
 .page-nation a:hover{
     background-color:gray;
     color:white;
-
 }
 
+#fontplus{
+	font-family: Hanna !important;
+	background-color:rgb(238, 238, 238);
+	color: #474680;
+	border: 4px solid #474680;
+	font-size: 18px;
+	padding: 5px 10px;
+	border-radius: 10px;
+}
+
+#fontchange{
+	font-family: Hanna !important;
+	background-color:rgb(238, 238, 238);
+	color: #474680;
+	border: 4px solid #474680;
+	font-size: 18px;
+	padding: 5px 10px;
+	border-radius: 10px;
+}
 

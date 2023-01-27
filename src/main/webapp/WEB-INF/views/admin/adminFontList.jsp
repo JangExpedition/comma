@@ -8,16 +8,19 @@
 %>
  <div id="adminTitle" class="fontStyle"><h1>폰트 목록</h1></div>
  
- 	<div id="search-window">
+ 	
 			<form action="<%= request.getContextPath() %>/admin/adminMemberFinder">
-				<input type="text" id="searchFonrt" name="searchFont" size="30" placeholder="검색할 폰트를 입력 해주세요." />
+				<input type="text" id="searchFont" name="searchFont" size="30" placeholder="검색할 폰트를 입력 해주세요." />
 				<input type="submit" id="searchBtn" class="fontStyle" value="검색" />
 			</form>
-		</div>
+			
+	<div>
+		<input type="submit"  class="fontStyle" id="fontchange" value="폰트 수정" />
+		<input type="submit"  class="fontStyle" id="fontplus" value="폰트 추가" />
+	</div>	
  
  <section class="main">
-
-        <h1 class="d-none">게시판</h1>
+ 
             <div class="board">
                 <table class="table">
                     <thead class="thead">
