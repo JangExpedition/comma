@@ -71,4 +71,19 @@ select{
 	background-color: #454a7b;
 	color: #fff;
 	margin: auto;
+	cursor: pointer;
+}
+
+imgDiv{
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 0;
+	display: none;
+}
+
+.img{
+	display: none;
+	width: 150px;
+	height: 150px;
 }

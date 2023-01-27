@@ -31,7 +31,7 @@
 								</th>
 								<td class="inputTd fontStyle">
 									<div class="tdDiv">
-										<input type="text" id="nickname" name="nickname" value="<%= loginMember.getNickname() %>" class="updateInput" />
+										<input type="text" id="nickname" name="nickname" value="<%= loginMember.getNickname() %>" class="updateInput" readonly/>
 										<span id="errorMsg"></span>
 									</div>
 								</td>
@@ -196,65 +196,6 @@
 		}
 		
 	});
-	
-	
-	/*
-	Date : 2023. 1. 24
-	@장원정
-	닉네임 유효성검사
-	*/
-	
-	$("#nickname").focusout((e)=>{
-		let bool = false;
-		const nickname = e.target.value;
-		const errorMsg = document.querySelector("#errorMsg"); 
-		errorMsg.style.color = "tomato";
-		
-		// 아이디 유효성검사
-		if(!/^[A-Za-z가-힣0-9]{4,12}$/.test(nickname)){
-			errorMsg.style.display = "inline";
-			errorMsg.innerHTML = "사용할 수 없는 닉네임입니다.";
-			return;
-		}
-		
-		
-		$.ajax({
-			url : "<%= request.getContextPath() %>/member/selectAllMember",
-			dataType: "json",
-			success(data){
-				const nicks = [];
-				let bool = true;
-				
-				// 아이디 중복검사
-				for(let i = 0; i < data.length; i++){
-					nicks[i] = data[i].nickname;
-				}
-				
-				nicks.forEach((nick)=>{
-					console.log(nickname, typeof nickname, nick, typeof nick);
-					if(nick === nickname){
-						bool = false;
-					} 
-				}); // forEach end
-				
-				if(bool){
-					// 성공 시
-					errorMsg.style.color = "green";
-					errorMsg.style.display = "inline";
-					errorMsg.innerHTML = "사용가능한 닉네임입니다.";
-					updateBtn.disabled = false;
-				} else{
-					// 실패 시
-					errorMsg.style.display = "inline";
-					errorMsg.innerHTML = "이미 존재하는 닉네임입니다.";
-					updateBtn.disabled = true;
-				}
-				
-			},
-			error : console.log
-		}); // ajax end
-		
-	}); // 아이디검사 end
 	
 	/*
 	Date : 2023. 1. 24

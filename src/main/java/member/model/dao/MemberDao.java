@@ -50,15 +50,17 @@ public class MemberDao {
 	
 	private Member handleMemberResultSet(ResultSet rset) throws SQLException {
 		Member member = new Member();
+		member.setEmail(rset.getString("email"));
 		member.setNickname(rset.getString("nickname"));
 		member.setPassword(rset.getString("password"));
+		member.setBirthday(rset.getDate("birthday"));
 		member.setGender(Gender.valueOf(rset.getString("gender")));
-		member.setEmail(rset.getString("email"));
 		member.setEnrollDate(rset.getDate("enroll_date"));
 		member.setMemberRole(MemberRole.valueOf(rset.getString("member_role")));
-		member.setWarningCount(rset.getInt("warning_count"));
 		member.setOriginalFilename(rset.getString("original_filename"));
 		member.setRenamedFilename(rset.getString("renamed_filename"));
+		member.setWarningCount(rset.getInt("warning_count"));
+		member.setAge(rset.getInt("age"));
 		
 		return member;
 	}
@@ -172,4 +174,20 @@ public class MemberDao {
 		}
 		return result;
 	}
+
+
+	public int updateMemberRole(Connection conn, String memberNick, String memberRole) {
+		int result = 0;
+		String sql = prop.getProperty("updateMemberRole");
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setString(1, memberRole);
+			pstmt.setString(2, memberNick);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new MemberException("회원 권한 변경 오류!", e);
+		}
+		return result;
+	} // updateMemberRole() end
 }

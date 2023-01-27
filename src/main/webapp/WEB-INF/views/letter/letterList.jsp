@@ -10,7 +10,7 @@
 	int no = 0;
 %>
 	<section>
-		<div id="letterTitle" class="fontStyle">받은 편지함</div>
+		<div id="letterTitle" class="fontStyle" onclick="location.href='<%= request.getContextPath() %>/letter/letterList';">받은 편지함</div>
 		<div id="letterSmallTitle">
 			<input type="button" id="letterSmallRandom" class="letterSmall fontStyle" value="익명에게 받은 편지" />
 			<input type="button" id="letterSmallFriends" class="letterSmall fontStyle" value="친구에게 받은 편지" />
@@ -24,10 +24,10 @@
 		<% 
 			for (Letter letter : letterList) {
 				System.out.println(letter.getSendWho());
-				no = letter.getNo();
 				if (letter.getSendWho() == AF.A) {
+					no = letter.getNo();
 		%>
-			<div id="letterListAnony" class="letterList letterListDiv" data-letter-no="<%= letter.getNo() %>">
+			<div id="letterListAnony" class="letterList letterListDiv" data-letter-no="<%= no %>">
 				<div id="letterListTitle">
 					<table>
 						<tr>
@@ -43,12 +43,14 @@
 								<p id="letterListContent"><%= letter.getContent() %></p>
 							</td>
 						</tr>
+						<tr>
+							<td class="lastTd">
+								<a href="<%= request.getContextPath() %>/letter/letterView?no=<%= letter.getNo() %>" class="fontStyle contentMore">더 읽어보기 &lt;&lt;</a>
+							</td>
+						</tr>
 					</table>
 				</div>
 			</div>
-			<form action="<%= request.getContextPath() %>/letter/letterView" name="letterViewFrm">
-				<input type="hidden" name="no" value="<%= letter.getNo() %>" />
-			</form>
 			<form action="<%= request.getContextPath() %>/complain/complain" method="post" name="complainFrm">
 				<input type="hidden" name="my_nickname" value="<%= loginMember.getNickname() %>" />
 				<input type="hidden" name="v_nickname" value="<%= letter.getWriter() %>" />
@@ -58,8 +60,9 @@
 			</form>
 		<%
 				} else {
+					no = letter.getNo();
 		%>
-			<div id="letterListFriend" class="letterList letterListDiv" data-letter-no="<%= letter.getNo() %>">
+			<div id="letterListFriend" class="letterList letterListDiv" data-letter-no="<%= no %>">
 				<div id="letterListTitle">
 					<table>
 						<tr>
@@ -75,12 +78,14 @@
 								<p id="letterListContent"><%= letter.getContent() %></p>
 							</td>
 						</tr>
+						<tr>
+							<td class="lastTd">
+								<a href="<%= request.getContextPath() %>/letter/letterView?no=<%= letter.getNo() %>" class="fontStyle contentMore">더 읽어보기 &lt;&lt;</a>
+							</td>
+						</tr>
 					</table>
 				</div>
 			</div>
-			<form action="<%= request.getContextPath() %>/letter/letterView" name="letterViewFrm">
-				<input type="hidden" name="no" value="<%= letter.getNo() %>" />
-			</form>
 			<form action="<%= request.getContextPath() %>/complain/complain" method="post" name="complainFrm">
 				<input type="hidden" name="my_nickname" value="<%= loginMember.getNickname() %>" />
 				<input type="hidden" name="v_nickname" value="<%= letter.getWriter() %>" />
@@ -95,7 +100,6 @@
 	<% } // else end %>
 		</div>
 	</section>
-	
 	
 	<script>
 		const anonyDiv = document.querySelectorAll('#letterListAnony');
@@ -137,17 +141,18 @@
 			});
 		}); // letterSmallFriends(click) end
 		
-		
 		/*
-		  div 클릭 시 상세 편지 내용 페이지로 이동
+		  게시글 내용 일정 글자 수 이상은 ...으로 변경
 		*/
-		document.querySelectorAll('.letterListDiv').forEach((letterDiv) => {
-			letterDiv.style.display = 'none';
+		document.querySelectorAll('#letterListContent').forEach((letterContent) => {
+			const allLength = letterContent.innerText.length;
+			console.log('letterContent length = ' + allLength);
 			
-			letterDiv.addEventListener('click', (e) => {
-				document.querySelector('[name=letterViewFrm]').submit();
-			});
-		})
+			const content = letterContent.innerText.substr(0, 11);
+			console.log('content' + content);
+			letterContent.innerText = content + '  .....';
+		});
+		
 	</script>
 </body>
 </html>

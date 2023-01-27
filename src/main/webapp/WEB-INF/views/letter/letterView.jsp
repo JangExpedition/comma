@@ -28,17 +28,17 @@
 							</td>
 						</tr>
 						<tr>
+							<td colspan="3">
 						<%
 							if (attachList != null) {
 								for (Attachment attach : attachList) {
 						%>
-							<td>
 								<img src="<%= request.getContextPath() %>/upload/letter/<%= attach.getRenamedFilename() %>" alt="" class="letterDetailImg" />
-							</td>
 						<%
 								}
 							}
 						%>
+							</td>
 						</tr>
 						<tr>
 							<td colspan="3">

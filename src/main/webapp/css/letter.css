@@ -146,6 +146,10 @@ input[type="checkbox"]:checked {
 	border-radius: 20px;
 }
 
+#letterListTitle table {
+	width: 100%;
+}
+
 #letterListTitle table td {
 	width: 100%;
 }
@@ -153,6 +157,17 @@ input[type="checkbox"]:checked {
 .secondTd {
 	padding-right: 10px;
 	text-align: right;
+}
+
+.contentMore {
+	text-decoration: none;
+	color: #000;
+}
+
+.lastTd {
+	width: 100%;
+	text-align: right;
+	padding: 0px 20px;
 }
 
 .letterListInfo {
@@ -169,8 +184,6 @@ input[type="checkbox"]:checked {
 	width: 20px;
 }
 
-
-/* detailLetterModal */
 .letterDetailImg {
-	width: 50%;
+	width: 30%;
 }

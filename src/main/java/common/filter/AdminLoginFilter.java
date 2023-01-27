@@ -15,37 +15,39 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import member.model.dto.Member;
+import member.model.dto.MemberRole;
 
 /**
- * Servlet Filter implementation class LoginFilter
+ * Servlet Filter implementation class AdminLoginFilter
  */
-@WebFilter()
-//@WebFilter({"/member/*", "/letter/*", "/diary/*", "/counseling/*", "/friends/*", "/question/*", "/chat/*", "/mypage/*"})
-public class LoginFilter extends HttpFilter implements Filter {
+@WebFilter({"/admin/*", "/complain/*"})
+public class AdminLoginFilter extends HttpFilter implements Filter {
 
 	/**
 	 * @see Filter#destroy()
 	 */
 	public void destroy() {
-		
+		// TODO Auto-generated method stub
 	}
 
 	/**
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+		// downcasting
 		HttpServletRequest httpReq = (HttpServletRequest) request;
 		HttpServletResponse httpRes = (HttpServletResponse) response;
 		
+		// login 여부 확인
 		HttpSession session = httpReq.getSession();
-		Member loginMember = (Member) session.getAttribute("loginMember");
+		Member member = (Member) session.getAttribute("loginMember");
 		
-		if (loginMember == null) {
-			session.setAttribute("msg", "로그인 후 이용하실 수 있습니다.");
+		if (member == null || member.getMemberRole() != MemberRole.A) {
+			session.setAttribute("msg", "관리자로 로그인 후 이용 가능합니다.");
 			httpRes.sendRedirect(httpReq.getContextPath() + "/");
-			return; // 조기리턴. 하위 코드 실행 안함.
+			return;
 		}
-		
+
 		// pass the request along the filter chain
 		chain.doFilter(request, response);
 	}
@@ -54,7 +56,7 @@ public class LoginFilter extends HttpFilter implements Filter {
 	 * @see Filter#init(FilterConfig)
 	 */
 	public void init(FilterConfig fConfig) throws ServletException {
-		
+		// TODO Auto-generated method stub
 	}
 
-} // class end
+}

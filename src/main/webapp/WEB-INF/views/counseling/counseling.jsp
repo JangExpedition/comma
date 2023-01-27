@@ -3,9 +3,12 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%@ page import="java.util.List" %>
 <%@ page import="counseling.model.dto.Counseling" %>
+<%@ page import="common.Attachment" %>
 <%
 	List<Counseling> counselingList = (List<Counseling>)request.getAttribute("counselingList");
 	System.out.println(counselingList);
+	List<Attachment> attachList = (List<Attachment>)request.getAttribute("attachList");
+	int counselingNo = 0;
 %>
 	<section id="counselingSection">
 		<div id="counselingContainer">
@@ -25,40 +28,46 @@
 			   	<input type = "button" id="CounselingEnroll" value="고민 게시하기">
 			</div>
 			<div id="wrap">
-		    	<table class="pointColor">
-			    	<thead>
-			    		<tr>
-			    			<th>글번호</th>
-			    			<th>글제목</th>
-			    			<th>작성자</th>
-			    			<th>작성날짜</th>
-			    			<th>조회수</th>
-			    		</tr>
-			    	</thead>
-			    	<tbody>
+		    	<div class="table fontStyle">
+			    		<div id="thead" class="tr pointColor">
+			    			<div class="th">글번호</div>
+			    			<div class="th">글제목</div>
+			    			<div class="th">작성자</div>
+			    			<div class="th">작성날짜</div>
+			    			<div class="th">조회수</div>
+			    		</div>
 			    		<% if(counselingList.isEmpty()) {%>
-			    			<tr>
-			    				<td colspan="5">등록된 게시물이 없습니다.</td>
-			    			</tr>
+			    			<div class="tr">
+			    				<div class="td">등록된 게시물이 없습니다.</div>
+			    			</div>
 			    		<% 
 			    		} else{ 
 			    		for(Counseling counseling : counselingList){
+			    			counselingNo = counseling.getNo();
 			    		%>
-							<tr>
-								<td><%= counseling.getNo() %></td>
-								<td><%= counseling.getTitle() %></td>
+							<div class="tr" data-counseling-no="<%= counseling.getNo() %>">
+								<div class="td">
+								<img src=<% for(Attachment attach : attachList){
+												if(attach.getAttachNo() == counseling.getNo()){ %>
+											"<%= request.getContextPath() %>/upload/counseling/<%= attach.getRenamedFilename() %>"
+									<% }else{ %>
+										"<%= request.getContextPath() %>/images/default.png"
+									<% 	} 
+												}%>
+									 alt="" />
+									</div>
+								<div class="td"><%= counseling.getTitle() %></div>
 								<% if("O" == counseling.getAnonymous().toString()) { %>
-								<td>익명</td>
+								<div class="td">익명</div>
 								<% }else{ %>
-								<td><%= counseling.getWriter() %></td>
+								<div class="td"><%= counseling.getWriter() %></div>
 								<% } %>
-								<td><%= counseling.getRegDate() %></td>
-								<td><%= counseling.getViews() %></td>
-							</tr>
+								<div class="td"><%= counseling.getRegDate() %></div>
+								<div class="td"><%= counseling.getViews() %></div>
+							</div>
 						<% } 
 						} %>
-					</tbody>
-		    	</table>
+				</div>
 		    </div>
 		    <div id='pagebar' class="pointColor">
 				<%= request.getAttribute("pagebar") %>
@@ -74,6 +83,15 @@
     document.querySelector("#CounselingEnroll").addEventListener('click', (e) => {
     	location.href = "<%= request.getContextPath() %>/counseling/counselingEnroll"
      });
+    /*
+    Date : 2023. 1. 25
+    @장원정
+    게시글 조회 메서드
+    */
+    $(".tr").click((e)=>{
+    	location.href = "<%= request.getContextPath() %>/counseling/CSView?no=" + $(event.target).parent('.tr').data('counselingNo');
+    });
+    
     </script>
 </body>
 </html>

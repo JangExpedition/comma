@@ -1,7 +1,11 @@
 package counseling.model.dto;
 
+import java.sql.Connection;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
+import common.Attachment;
 import common.Category;
 import common.Form;
 import common.OX;
@@ -14,6 +18,7 @@ public class Counseling extends Form{
 	private String limitGender;
 	private int limitAge;
 	private OX anonymous;
+	private List<Attachment> attachments = new ArrayList<>();
 	
 	public Counseling() {
 		super();
@@ -105,12 +110,23 @@ public class Counseling extends Form{
 		this.anonymous = anonymous;
 	}
 
+	public List<Attachment> getAttachments() {
+		return attachments;
+	}
+
+	public void setAttachments(List<Attachment> attachments) {
+		this.attachments = attachments;
+	}
+	
+	public void addAttachment(Attachment attach) {
+		this.attachments.add(attach);
+	}
+
 	@Override
 	public String toString() {
 		return "Counseling [title=" + title + ", views=" + views + ", like=" + like + ", category=" + category
-				+ ", limitGender=" + limitGender + ", limitAge=" + limitAge + ", Anonymous=" + anonymous
-				+ ", toString()=" + super.toString() + "]";
+				+ ", limitGender=" + limitGender + ", limitAge=" + limitAge + ", anonymous=" + anonymous
+				+ ", attachments=" + attachments + ", toString()=" + super.toString() + "]";
 	}
-	
-	
+
 }
