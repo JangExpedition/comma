@@ -1,15 +1,18 @@
 package counseling.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import common.CommaUtils;
 import counseling.model.dto.Counseling;
+import counseling.model.dto.CounselingComment;
 import counseling.model.service.CounselingService;
 
 /**
@@ -25,20 +28,46 @@ public class CounselingViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int no = Integer.valueOf(request.getParameter("no"));
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		System.out.println(no);
 		
-		Counseling counseling = counselingService.selectOneCS(no);
+		// board 쿠키처리 board="[84][22]"
+		String csCookieVal = "";
+		boolean hasRead = false;
+		Cookie[] cookies = request.getCookies();
+		if(cookies != null) {
+			for(Cookie cookie : cookies) {
+				String name = cookie.getName();
+				String value = cookie.getValue();
+				
+				if("counseling".equals(name)) {
+					csCookieVal = value;
+					if(value.contains("[" + no + "]")) {
+						hasRead = true;
+					}
+				}
+			}
+		}
+		
+		// 응답쿠키
+		if(!hasRead) {
+			Cookie cookie = new Cookie("board", csCookieVal + "[" + no + "]");
+			cookie.setMaxAge(365 * 24 * 60 * 60); // 365일
+			cookie.setPath(request.getContextPath() + "/board/boardView");
+			response.addCookie(cookie);
+		}
+		
+		
+		
+		Counseling counseling = counselingService.selectOneCS(no, hasRead);
 		
 		counseling.setContent(
 			CommaUtils.convertLineFeedToBr(
 			CommaUtils.escapeHTML(counseling.getContent()))
 		);
 		
+		List<CounselingComment> csComments = counselingService.selectCsComment(no);
+		
 		request.setAttribute("counseling", counseling);
+		request.setAttribute("comments", csComments);
 		request.getRequestDispatcher("/WEB-INF/views/counseling/counselingViewer.jsp")
 			.forward(request, response);
 	}

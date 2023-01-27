@@ -12,8 +12,6 @@
 	String msg = (String) session.getAttribute("msg");
 	if(msg != null) session.removeAttribute("msg");
 	List<Friends> friendsList = (List<Friends>) session.getAttribute("friendsList");
-	System.out.println(loginMember);
-	System.out.println("friendsList = " + friendsList);
 	Partition partition = null;
 %>
 <!DOCTYPE html>
@@ -71,10 +69,17 @@
 		link.href = "<%= request.getContextPath() %>/css/counselingEnroll.css";
 		break;
 	case "/comma/customer" :
+	case "/comma/customer/customerFinder" :
 		link.href = "<%= request.getContextPath() %>/css/customer.css";
 		break;
 	case "/comma/customer/questionEnroll" :
-		link.href = "<%= request.getContextPath() %>/css/question/questionEnroll.css";
+		link.href = "<%= request.getContextPath() %>/css/questionEnroll.css";
+		break;
+	case "/comma/customer/questionView" :
+		link.href = "<%= request.getContextPath() %>/css/questionView.css";
+		break;
+	case "/comma/customer/faqEnroll" :
+		link.href = "<%= request.getContextPath() %>/css/faqEnroll.css";
 		break;
 	case "/comma/chat/chat" :
 		link.href = "<%= request.getContextPath() %>/css/chat.css";
@@ -92,6 +97,9 @@
 	case "/comma/counseling/CSView" :
 		link.href = "<%= request.getContextPath() %>/css/counselingViewer.css";
 		break;
+	case "/comma/counseling/counselingUpdate" :
+		link.href = "<%= request.getContextPath() %>/css/counselingUpdate.css";
+		break;
 	}; // switch end
 	document.querySelector("head").append(link);
 </script>
@@ -102,11 +110,11 @@
         <div id="logo">
         	<div id="titleBox">
             	<h1 id="title" class="pointColor fontStyle">&nbsp;쉼표 ,</h1>
-            	<span id="notification"></span>
             </div>
         </div>  
         <div id="centerBox">
 	        <div id="category" class="pointColor fontStyle">
+	        	<div id="notification"></div>
 	        <% if (loginMember.getMemberRole() == MemberRole.U) { %>
 				<div id="toFriends" class="navBtn">친구</div>
 				<script>
@@ -272,11 +280,11 @@
 	    Date : 2023. 1. 23
 	    @한혜진
 	    
-	    익명채팅방 개설jsp 메서드 (chat.jsp)
+	    익명채팅방 메서드
 	    */
 	    
 		document.querySelector("#toChat").addEventListener("click", (e)=>{
-			location.href = "<%= request.getContextPath() %>/chat/chat";	
+			location.href = "<%= request.getContextPath() %>/chat/chatList";	
 		});
 	    
 	    </script>
