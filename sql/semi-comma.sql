@@ -51,7 +51,7 @@ select * from chatting_log;
 --drop table friends;
 --drop table letter;
 --drop table attachment_letter;
---drop table diary;
+--drop table diary cascade constraints;
 --drop table design;
 --drop table font;
 --drop table complain;
@@ -62,8 +62,8 @@ select * from chatting_log;
 --drop table attachment_question;
 --drop table q_comment;
 --drop table faq;
---drop table chatting;
---drop table chatting_member;
+--drop table chatting cascade constraints;
+--drop table chatting_member cascade constraints;
 --drop table chatting_log;
 --drop sequence seq_friends_no;
 --drop sequence seq_letter_no;
@@ -247,9 +247,9 @@ create table diary (
 -- diary 제약조건 추가
 alter table diary
     add constraint pk_diary_no primary key (no)
-    add constraint fk_diary_writer foreign key (writer) references member(nickname) on delete cascade
-    add constraint fk_diary_design_no foreign key (design_no) references design(no)
-    add constraint fk_diary_font_no foreign key (font_no) references font(no);
+    add constraint fk_diary_writer foreign key (writer) references member(nickname) on delete cascade;
+--    add constraint fk_diary_design_no foreign key (design_no) references design(no)
+--    add constraint fk_diary_font_no foreign key (font_no) references font(no);
 
 -- seq_diary_no 시퀀스 생성
 create sequence seq_diary_no;

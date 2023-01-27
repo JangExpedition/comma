@@ -21,7 +21,7 @@ document.chatMsgFrm.addEventListener("submit", (e)=>{
 	
 	const msg = {
 		messageType : "CHAT_MSG",
-		chatroomId : "<%= request.getParameter("chatroomId") %>",
+		chatNo : "<%= request.getParameter("chatNo") %>",
 		sender : "<%= loginMember.getNickname() %>",
 		message : e.target.msg.value,
 		datetime : Date.now()

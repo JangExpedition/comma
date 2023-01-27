@@ -125,10 +125,6 @@ public class WriteLetterServlet extends HttpServlet {
 			
 			
 			// 알람발송
-			System.out.println();
-			System.out.println();
-			System.out.println();
-			System.out.println();
 			System.out.println(letter.getNo());
 			notificationService.notifyNewLetter(letter);
 			

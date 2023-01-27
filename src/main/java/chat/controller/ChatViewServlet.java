@@ -22,12 +22,12 @@ public class ChatViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String chatroomId = request.getParameter("chatNo");
-		if(chatroomId == null || "".equals(chatroomId)) {
+		String chatNo = request.getParameter("chatNo");
+		if(chatNo == null || "".equals(chatNo)) {
 			throw new IllegalArgumentException("채팅방 아이디가 유효하지 않습니다.");
 		}
 		
-		request.getSession().setAttribute("chatroomId", chatroomId);
+		request.getSession().setAttribute("chatNo", chatNo);
 //		
 		request.getRequestDispatcher("/WEB-INF/views/chat/chatView.jsp")
 		.forward(request, response);

@@ -32,7 +32,7 @@ public class FriendsDao {
 	public Friends handleFriendsResultSet(ResultSet rset) throws SQLException {
 		Friends friends = new Friends();
 		friends.setNo(rset.getInt("no"));
-		friends.setNickname(rset.getString("f_nickname"));
+		friends.setfNickname(rset.getString("f_nickname"));
 		friends.setIsFriend(OX.valueOf(rset.getString("is_friend")));
 		friends.setOriginalFileName(rset.getString("original_filename"));
 		friends.setRenamedFileName(rset.getString("renamed_filename"));
@@ -82,5 +82,36 @@ public class FriendsDao {
 		
 		return friendsList;
 	} // searchFriends() end
+
+
+	public int insertFriend(Connection conn, Friends friends) {
+		int result = 0;
+		String sql = prop.getProperty("insertFriend");
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setString(1, friends.getMyNickname());
+			pstmt.setString(2, friends.getfNickname());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new FriendsException("친구등록 오류!", e);
+		}
+		return result;
+	}
+
+
+	public int getLastFNo(Connection conn) {
+		int lastNo = 0;
+		String sql = prop.getProperty("getLastFNo");
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			try(ResultSet rset = pstmt.executeQuery()){
+				if(rset.next()) {
+					lastNo = rset.getInt(1);
+				}
+			}
+		} catch (SQLException e) {
+			throw new FriendsException("친구번호 조회오류", e);
+		}
+		return lastNo;
+	}
 	
 } // class end

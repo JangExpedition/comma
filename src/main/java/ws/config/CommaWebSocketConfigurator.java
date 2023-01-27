@@ -25,13 +25,13 @@ public class CommaWebSocketConfigurator extends Configurator {
 		String memberNick = loginMember.getNickname();
 		
 		// 채팅페이지에 접속하는 경우
-		String chatroomId = (String) session.getAttribute("chatroomId");
+		String chatNo = (String) session.getAttribute("chatNo");
 		
 		// 설정 맵에 저장
 		Map<String, Object> userProp = sec.getUserProperties();
 		userProp.put("memberNick", memberNick);
-		if (chatroomId != null) {
-			userProp.put("chatroomId", chatroomId);
+		if (chatNo != null) {
+			userProp.put("chatNo", chatNo);
 		}
 	} // modifyHandshake() end
 } // class end

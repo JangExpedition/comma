@@ -23,7 +23,6 @@ public class CounselingService {
 			
 			int counselingNo = counselingDao.selectLastCSNo(conn); 
 			
-			
 			List<Attachment> counselingAttachList = counseling.getAttachments();
 			if (!counselingAttachList.isEmpty()) {
 				for (Attachment attach : counselingAttachList) {
