@@ -110,6 +110,7 @@ public class MemberService {
 		
 		try {
 			result = memberDao.updateWarningCount(conn, param);
+			
 			commit(conn);
 		} catch(Exception e) {
 			rollback(conn);

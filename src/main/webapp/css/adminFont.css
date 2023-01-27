@@ -1,15 +1,24 @@
 @charset "UTF-8";
 
-.main{
-	font-family: Hanna !important;
+section{
+	width: 70%;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }
+
+.fontContainer{
+	width: 100%;
+}
+
 #adminTitle{
-	 font-family: Hanna !important;
-	 color: #454a7b 
+	text-align : center;
+	font-size: 30px;
 }
 
 #searchFont{
-	font-family: Hanna !important;
 	background-color: #fff;
 	color: #474680;
 	border: 4px solid lightgray;
@@ -19,62 +28,52 @@
 }
 
 #searchBtn{
-	font-family: Hanna !important;
 	background-color:rgb(238, 238, 238);
 	color: #474680;
 	border: 4px solid #474680;
 	font-size: 18px;
 	padding: 5px 10px;
 	border-radius: 10px;
-	 margin: 20px;
+	margin: 20px;
 }
-
-#design{
-	 font-family: Hanna !important;
-}
-
-
-.d-none{
-    display: none;
- 
-    
-}
-
-.board{
-	border-top:2px solid lightgray;
-    width: 1200px;
-    height: 100%;
-    margin: auto;
-    
-}
-
 
 .table{
+	width: 100%;
     font-size :19px;
-   border-radius: 20px;
-    width: 1200px;
-    margin-top:200px;
-    border: 7px solid #454a7b;    
+	border-radius: 20px;
+    /*border: 4px solid #454a7b;*/
     text-align: center;
     display: center;    
-    margin: 35px;
 }
 
-.thead td {
-    background: #B2B2B2;
-    border-radius: 6px;
-}
-
-
-td{
-    height: 40px;
+th {
     border-bottom:2px solid black;
 }
 
-tr td:nth-child(2){
-    width: 750px;
-
+#fontPlusDiv {
+	width: 100%;
+	text-align: right;
+	padding: 10px 0;
 }
+
+#fontplus{
+	background-color:rgb(238, 238, 238);
+	color: #474680;
+	border: 4px solid #474680;
+	font-size: 18px;
+	padding: 5px 10px;
+	border-radius: 10px;
+}
+
+#fontchange{
+	background-color:rgb(238, 238, 238);
+	color: #474680;
+	border: 4px solid #474680;
+	font-size: 18px;
+	padding: 5px 10px;
+	border-radius: 10px;
+}
+
 
 /* ********페이징******** */
 
@@ -115,25 +114,5 @@ tr td:nth-child(2){
 .page-nation a:hover{
     background-color:gray;
     color:white;
-}
-
-#fontplus{
-	font-family: Hanna !important;
-	background-color:rgb(238, 238, 238);
-	color: #474680;
-	border: 4px solid #474680;
-	font-size: 18px;
-	padding: 5px 10px;
-	border-radius: 10px;
-}
-
-#fontchange{
-	font-family: Hanna !important;
-	background-color:rgb(238, 238, 238);
-	color: #474680;
-	border: 4px solid #474680;
-	font-size: 18px;
-	padding: 5px 10px;
-	border-radius: 10px;
 }
 

@@ -1,4 +1,4 @@
-package font;
+package style.model.dto;
 
 public class Font {
 	private int no;

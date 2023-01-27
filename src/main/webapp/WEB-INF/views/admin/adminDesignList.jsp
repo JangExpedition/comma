@@ -1,184 +1,68 @@
-<%@page import="design.Design"%>
+<%@page import="style.model.dto.Part"%>
+<%@page import="style.model.dto.Design"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 <%
-	List<Design> DesignList = (List<Design>) request.getAttribute("DesignList");
+	List<Design> designList = (List<Design>) request.getAttribute("designList");
 %>
 
-<link rel="stylesheet" type="text/css" href="adminDesign.css">
+    <section>
+		<div id="adminTitle" class="fontStyle pointColor">디자인 목록</div>
 
-<h1 class="con" class="fontStyle"  id="designList">디자인 목록</h1>
-
-	<div id="search-window">
-			<form action="<%= request.getContextPath() %>/admin/adminMemberFinder">
-				<input type="text" id="searchDesign" name="searchDesign" size="30" placeholder="검색할 디자인을 입력 해주세요." />
-				<input type="submit" id="searchBtn" class="fontStyle" value="검색" />
-			</form>
+		<form action="<%= request.getContextPath() %>/admin/adminDesignFinder">
+			<input type="text" id="searchDesign" class="fontStyle" name="searchDesign" size="30" placeholder="검색할 디자인을 입력 해주세요." />
+			<input type="submit" id="searchBtn" class="fontStyle" value="검색" />
+		</form>
+		
+		<div id="designBtn">
+			<input type="button" id="designPlus" class="fontStyle" value="디자인 추가" onclick="<%= request.getContextPath() %>/admin/adminDesignEnroll" />
 		</div>
 		
-		
-	<div id="design-btn">
-		<input type="submit"  class="fontStyle" value="디자인 추가" />
-		<input type="submit"  class="fontStyle" value="디자인 수정" />
-	</div>	
-
-
-    <section class="article-detail table-common con row">
-        <div class="article-writer cell">
-                <div class="writer-icon">디자인</div>
-     
-        </div>
-        <table class="cell" border="1">
-            <colgroup>
-                <col width="100px">
-            </colgroup>
-            <tbody>
-                <tr class="article-title" id="design-name">
-                    <th>디자인 이름 : </th>
-                    <td colspan="3">구름</td>
-                </tr>
-                <tr class="article-info" id="design-num">
-                    <th>디자인 번호</th>
-                    <td>5</td>
-                    <th>디자인 링크</th>
-                      <td><a href="">www.sdfsdahbfv</a></td>
-                </tr>
-                <tr class="article-body" id="write">
-                    <td colspan="4">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sunt deleniti
-                     repellat aliquam quis labore est error iste obcaecati laborum illo? Distinctio dolorem quis at 
-                     assumenda! Perferendis, libero earum! Ducimus, ratione!</td>
-                </tr>
-            </tbody>
-        </table>
-    </section>
-    
-    
-        <section class="article-detail table-common con row">
-        <div class="article-writer cell">
-                <div class="writer-icon" >디자인</div>
-     
-        </div>
-        <table class="cell" border="1">
-            <colgroup>
-                <col width="100px">
-            </colgroup>
-            <tbody>
-                <tr class="article-title" id="design-name">
-                    <th>디자인 이름 : </th>
-                    <td colspan="3">구름</td>
-                </tr>
-                <tr class="article-info" id="design-num">
-                    <th>디자인 번호</th>
-                    <td>4</td>
-                    <th>디자인 링크</th>
-                     <td><a href="">www.sdfsdahbfv</a></td>
-                </tr>
-                <tr class="article-body" id="write">
-                    <td colspan="4">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sunt deleniti
-                     repellat aliquam quis labore est error iste obcaecati laborum illo? Distinctio dolorem quis at 
-                     assumenda! Perferendis, libero earum! Ducimus, ratione!</td>
-                </tr>
-            </tbody>
-        </table>
-    </section>
-    
-    
-    
-    
-        <section class="article-detail table-common con row">
-        <div class="article-writer cell">
-                <div class="writer-icon" >디자인</div>
-     
-        </div>
-        <table class="cell" border="1">
-            <colgroup>
-                <col width="100px">
-            </colgroup>
-            <tbody>
-                <tr class="article-title" id="design-name">
-                    <th>디자인 이름 : </th>
-                    <td colspan="3">구름</td>
-                </tr>
-                <tr class="article-info" id="design-num">
-                    <th>디자인 번호</th>
-                    <td>3</td>
-                    <th>디자인 링크</th>
-                     <td><a href="">www.sdqwfhbfv</a></td>
-                </tr>
-                <tr class="article-body" id="write">
-                    <td colspan="4">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sunt deleniti
-                     repellat aliquam quis labore est error iste obcaecati laborum illo? Distinctio dolorem quis at 
-                     assumenda! Perferendis, libero earum! Ducimus, ratione!</td>
-                </tr>
-            </tbody>
-        </table>
-    </section>
-    
-    
-    
-    
-        <section class="article-detail table-common con row">
-        <div class="article-writer cell">
-                <div class="writer-icon" >디자인</div>
-     
-        </div>
-        <table class="cell" border="1">
-            <colgroup>
-                <col width="100px">
-            </colgroup>
-            <tbody>
-                <tr class="article-title" id="design-name">
-                    <th>디자인 이름 : </th>
-                    <td colspan="3">구름</td>
-                </tr>
-                
-                <tr class="article-info" id="design-num">
-                    <th>디자인 번호</th>
-                    <td>2</td>
-                    <th>디자인 링크</th>
-                      <td><a href="">www.sdfhbfdfv</a></td>
-                </tr>
-                <tr class="article-body" id="write">
-                    <td colspan="4">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sunt deleniti
-                     repellat aliquam quis labore est error iste obcaecati laborum illo? Distinctio dolorem quis at 
-                     assumenda! Perferendis, libero earum! Ducimus, ratione!</td>
-                </tr>
-            </tbody>
-        </table>
-    </section>
-    
-    
-    
-    
-        <section class="article-detail table-common con row">
-        <div class="article-writer cell">
-                <div class="writer-icon" >디자인</div>
-     
-        </div>
-        <table class="cell" border="1">
-            <colgroup>
-                <col width="100px">
-            </colgroup>
-            <tbody>
-                <tr class="article-title" id="design-name">
-                    <th>디자인 이름 : </th>
-                    <td colspan="3">구름</td>
-                </tr>
-                <tr class="article-info" id="design-num">
-                    <th>디자인 번호</th>
-                    <td>1</td>
-                    <th>디자인 링크</th>
-                      <td><a href="">www.sdasfdfhbfv</a></td>
-                </tr>
-                <tr class="article-body" id="write">
-                    <td colspan="4">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sunt deleniti
-                     repellat aliquam quis labore est error iste obcaecati laborum illo? Distinctio dolorem quis at 
-                     assumenda! Perferendis, libero earum! Ducimus, ratione!</td>
-                </tr>
-            </tbody>
-        </table>
+        <div id="designContainer">
+	        <table class="table">
+	        	<thead>
+	        		<tr>
+	        			<th>구분</th>
+	        			<th>디자인</th>
+	        			<th></th>
+	        		</tr>
+	        	</thead>
+	            <tbody>
+		<%
+			if (!designList.isEmpty()) {
+				for (Design design : designList) {
+		%>
+	                <tr>
+	                	<td><%= design.getPart() == Part.D ? "일기장" : "편지" %></td>
+	                	<td>
+	                <%
+	                	if (design.getRenamedFilename() != null) {
+	                %>
+	                		<img src="<%= request.getContextPath() %>/upload/design/<%= design.getRenamedFilename() %>" class="img" alt="" />
+	                <%
+	                	} else {
+	                %>
+	                		<img src="<%= request.getContextPath() %>/images/default.png" class="img" alt="" />
+	                <%
+	                	}
+	                %>
+	                	</td>
+	                	<td>
+	                		<form action="<%= request.getContextPath() %>/admin/adminDesignUpdate" name="designUpdateFrm">
+	                			<input type="hidden" name="no" value="<%= design.getNo() %>" />
+								<input type="submit" id="designChange" class="fontStyle" value="디자인 수정" />
+	                		</form>
+	                	</td>
+	                </tr>
+		<%
+				}
+			}
+		%>
+	            </tbody>
+	        </table>
+		</div>
     </section>
 
 </body>
