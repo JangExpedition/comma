@@ -5,7 +5,7 @@
 
 <div id="chatCreate" class="fontStyle"><h1>채팅방 개설</h1></div>
 
-<form action="<%=request.getContextPath()%>/chat/chatView" method="post" name="chatCreateFrm">
+<form action="<%=request.getContextPath()%>/chat/insertChat" method="post" name="chatCreateFrm">
 
 
 
@@ -20,11 +20,11 @@
 		</tr>
 	
 		
-		<tr>
+		<!-- <tr>
 			<th><label for="chatpassword"><input type="checkbox" name="chatpassword" id="chatpassword" />
 			채팅방 비밀번호 : </label></th>
 			<td><input type="text" name="chatPwd" value="" /></td>
-		</tr>
+		</tr> -->
 
 
 		<tr>
@@ -45,11 +45,14 @@
 
 		<tr>
 		<th>   참여 가능한 성별 : </th>
-		<td><input type="checkbox" name="gender" value="male" /> 남자
-			&nbsp;&nbsp;&nbsp;&nbsp;
-			 <input type="checkbox" name="gender" value="female" /> 여자 
-			 &nbsp;&nbsp;&nbsp;&nbsp; 
-			 <input type="checkbox" name="gender" value="all" /> 성별무관</td>
+		<td>
+			<select name="gender" id="gender" name="gender" class="inputBar" required >
+				<option value="" selected disabled hidden>공개할 성별을 선택해주세요.</option>
+				<option value="X">전체</option>
+				<option value="M">남자</option>
+				<option value="F">여자</option>
+			</select>
+		</td>
 		</tr>
 		<tr>
 			<th>참여 연령대 :</th>
@@ -69,8 +72,7 @@
 		</tr>
 		
 		<tr>
-  			<td id=btntd colspan=2  ><input type="submit" class="fontStyle"  id="chatroomCreate" value='채팅방 생성하기' 
-         	onclick='alert("채팅방이 생성 되었습니다.")'/>
+  			<td id=btntd colspan=2  ><input type="submit" class="fontStyle"  id="chatroomCreate" value='채팅방 생성하기' />
 			</td>
 		</tr>
 		
@@ -84,7 +86,6 @@
 </form>
  <script>
  chatroomList.addEventListener('click', (e) => {
-	 alert("채팅방 목록");
 	 location.href= "<%=request.getContextPath()%>/chat/chatList";
  });
 </script>

@@ -90,6 +90,7 @@
 	case "/comma/chat/chatList" :
 		link.href = "<%= request.getContextPath() %>/css/chatList.css";
 		break;
+
 	case "/comma/admin/adminMemberList" :
 	case "/comma/admin/adminMemberFinder" :
 		link.href = "<%= request.getContextPath() %>/css/admin.css";
@@ -99,6 +100,9 @@
 		break;
 	case "/comma/counseling/counselingUpdate" :
 		link.href = "<%= request.getContextPath() %>/css/counselingUpdate.css";
+		break;
+	case "/comma/chat/chatList" :
+		link.href = "<%= request.getContextPath() %>/css/chatList.css";
 		break;
 	}; // switch end
 	document.querySelector("head").append(link);
