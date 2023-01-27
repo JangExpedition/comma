@@ -26,10 +26,14 @@
 
 table{
 	width: 100%;
+	padding: 10px 6px;
 }
 
 select{
+	
 	width: 90%;
+	padding:4px;
+	
 }
 
 #content{
@@ -52,6 +56,7 @@ select{
 	padding: 10px 6px;
 	box-sizing: border-box;
 	border: none;
+	font-family: Hanna !important;
 }
 
 #counselingTitle:focus{
@@ -90,12 +95,42 @@ imgDiv{
 
 .buttonStyle {
 	background-color: #fff;
-	border: 1px solid #454a7b;
+	border: 3px solid #454a7b;
 	border-radius: 5px;
 	width: 80px;
 	height: 25px;
+	font-family: Hanna !important;
+
 }
 
 .buttonStyle:hover {
 	cursor: pointer;
+}
+
+#file1{
+	font-family: Hanna !important;
+}
+
+#file2{
+	font-family: Hanna !important;
+}
+
+#file3{
+	font-family: Hanna !important;
+}
+
+#counselingCategory{
+	font-family: Hanna !important;
+}
+
+#anonymous{
+	font-family: Hanna !important;
+}
+
+#gender{
+	font-family: Hanna !important;
+}
+
+#age{
+	font-family: Hanna !important;
 }
