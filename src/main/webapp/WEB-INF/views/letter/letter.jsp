@@ -56,7 +56,7 @@
 		                    	<input type="text" list="friendsList" id="textFriendsList" name="friendsList" />
 		                        <datalist id="friendsList">
 		                    <% for (Friends friend : friendsList) { %>
-		                            <option value="<%= friend.getNickname() %>"><%= friend.getNickname() %></option>
+		                            <%-- <option value="<%= friend.getNickname() %>"><%= friend.getNickname() %></option> --%>
 							<% } %>
 		                        </datalist>
 		                    </td>

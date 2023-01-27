@@ -1,6 +1,7 @@
 package ws.endpoint;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -18,6 +19,7 @@ import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
 import com.google.gson.Gson;
+
 import ws.MessageType;
 import ws.config.CommaWebSocketConfigurator;
 
@@ -39,7 +41,11 @@ public class CommaWebSocket {
 	 *  - Value: Set<String> chatMembers
 	 */
 	public static Map<String, Set<String>> chatParticipantMap = Collections.synchronizedMap(new HashMap<>());
-	
+	static Map<Session, String> sessionNickname = new HashMap<>();
+
+	static Map<String, Object> conCntMap = new HashMap<>();
+	static Map<String, Object> disConCntMap = new HashMap<>();
+	static Map<String, ArrayList<Object>> sessionSaveList = new HashMap<>();
 	public void log() {
 		System.out.printf("[현재 접속자 (%d명)] : %s%n", clientMap.size(), clientMap.keySet());
 		System.out.printf("[현재 채팅방 수 (%d개)] : %s%n", chatParticipantMap.size(), chatParticipantMap);
@@ -94,17 +100,58 @@ public class CommaWebSocket {
 		
 		onMessage(new Gson().toJson(data), session);
 	} // sendChatroomLeaveMsg() end
-	
+	void connectionCntSet(String memberNick) {
+		Object cnt = conCntMap.get(memberNick);
+		int temp = 0;
+//		System.out.println("현재 커넥션 카운트 상태 :" + conCntMap.get(memberNick).toString());
+		
+		if(cnt == null) {
+			temp = 1;
+			conCntMap.put(memberNick, temp);
+		}
+		else {
+		    temp = (int)(cnt) + 1;
+			conCntMap.put(memberNick, temp);
+		}
+	}
+	void DisconnectionCntSet(String memberNick) {
+		Object cnt = disConCntMap.get(memberNick);
+		int temp = 0;
+		if(cnt == null) {
+			temp = 1;
+			disConCntMap.put(memberNick, temp);
+		}
+		else {
+		    temp = (int)(cnt) + 1;
+		    disConCntMap.put(memberNick, temp);
+		}
+	}
+	int connetionCompare(String memberNick) {
+		int conCnt = conCntMap.get(memberNick) == null ? 0 :(int)conCntMap.get(memberNick);
+		int disConCnt = disConCntMap.get(memberNick)== null ? 0 :(int)disConCntMap.get(memberNick);
+		System.out.println("ret =====" + (conCnt - disConCnt));
+		return conCnt - disConCnt;
+		
+	}
 	@OnOpen
 	public void onOpen(EndpointConfig config, Session session) {
 		Map<String, Object> userProp = config.getUserProperties();
 		String memberNick = (String) userProp.get("memberNick");
 		String chatNo = (String) userProp.get("chatNo");
+		ArrayList<Object> tempSession =  new ArrayList<>();
 		
+		connectionCntSet(memberNick);
 		// 웹소켓 세션 관리 맵에 추가
 		clientMap.put(memberNick, session);
+		sessionNickname.put(session, memberNick);
+		tempSession = sessionSaveList.get(memberNick) == null ? tempSession : sessionSaveList.get(memberNick);
 		
+		tempSession.add(session);
+		sessionSaveList.put(memberNick, tempSession);
+		
+		System.out.println("사용자 추가"+conCntMap.get(memberNick).toString());
 		// session 설정맵에 사용자아이디 추가 (close 때 사용)
+
 		Map<String, Object> sessionUserProp = session.getUserProperties();
 		sessionUserProp.put("memberNick", memberNick);
 		
@@ -143,17 +190,70 @@ public class CommaWebSocket {
 			break;
 		case CHAT_MSG :
 		case CHATROOM_ENTER :
-		case CHATROOM_LEAVE :
+		{
 			Set<String> participantSet = chatParticipantMap.get(chatNo);
+			// 방법1)
+			 Map<String, Session> nicknameSession = new HashMap<>();
+			for (Session key : sessionNickname.keySet() ) {
+			    nicknameSession.put(sessionNickname.get(key),key);
+			}
 			for (String participant : participantSet) {
 				Session sess = clientMap.get(participant);
-				Basic basic = sess.getBasicRemote();
-				try {
-					basic.sendText(msg);
-				} catch (IOException e) {
-					e.printStackTrace();
+				if(sessionNickname.get(sess) == participant)
+				{
+					Basic basic = sess.getBasicRemote();
+					try {
+						basic.sendText(msg);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 				}
+				else {
+					sess = nicknameSession.get(participant);
+					Basic basic = sess.getBasicRemote();
+					try {
+						basic.sendText(msg);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			
 			} // for each end
+		}
+			break;
+		case CHATROOM_LEAVE :
+		try {
+			Set<String> participantSet = chatParticipantMap.get(chatNo);
+			// 방법1)
+			 Map<String, Session> nicknameSession = new HashMap<>();
+			for (Session key : sessionNickname.keySet() ) {
+			    nicknameSession.put(sessionNickname.get(key),key);
+			}
+			for (String participant : participantSet) {
+				Session sess = clientMap.get(participant);
+				if(sessionNickname.get(sess) == participant)
+				{
+					Basic basic = sess.getBasicRemote();
+					try {
+						basic.sendText(msg);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+				else {
+					sess = nicknameSession.get(participant);
+					Basic basic = sess.getBasicRemote();
+					try {
+						basic.sendText(msg);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				} 
+			
+			} // for each end
+		}catch(Exception e){
+			System.out.println("마지막 사람 나감");
+		}
 			break;
 		} // switch end
 	} // onMessage() end
@@ -162,15 +262,27 @@ public class CommaWebSocket {
 	public void onError(Throwable e) {
 		e.printStackTrace();
 	} // onError() end
-	
+
 	@OnClose
 	public void onClose(Session session) {
 		Map<String, Object> sessionUserProp = session.getUserProperties();
 		String memberNick = (String) sessionUserProp.get("memberNick");
 		String chatNo = (String) sessionUserProp.get("chatNo");
-		
+		DisconnectionCntSet(memberNick);
+		System.out.println("사용자 제거"+disConCntMap.get(memberNick).toString());
 		// 웹소켓 세션 관리 맵에서 제거
-		clientMap.remove(memberNick);
+		
+		if(connetionCompare(memberNick) > 0) {
+			clientMap.put(memberNick, session);
+		}
+		else {
+			clientMap.remove(memberNick);
+		}
+		
+		ArrayList<Object> tempSession =  new ArrayList<>();
+		tempSession.add(session);
+		sessionSaveList.put(memberNick, tempSession);
+		sessionNickname.remove(session);
 		if (chatNo != null) {
 			removeFromChatroom(chatNo, memberNick);
 			sendChatroomLeaveMsg(chatNo, memberNick, session);
