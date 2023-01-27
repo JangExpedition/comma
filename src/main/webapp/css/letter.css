@@ -6,12 +6,15 @@ section {
 	padding-top: 50px;
 }
 
+
+ 
 #letterTitle{
     text-align: center;
     font-size: 40px;
     height: 50px;
     color: #454a7b;
     border-bottom: 1px solid #fff;
+    font-family: Hanna !important;
 }
 
 input[type="checkbox"]:checked {
