@@ -45,3 +45,8 @@ section {
 	width: 50px;
 	border-radius: 50%;
 }
+
+
+input[type=number]::-webkit-inner-spin-button {
+   opacity: 1;
+}

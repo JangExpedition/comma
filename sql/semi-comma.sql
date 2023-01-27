@@ -495,16 +495,17 @@ begin
     insert into
         leave_member
     values(
-        :old.member_id,
+        :old.email,
         :old.nickname,
         :old.password,
         :old.birthday,
         :old.gender,
-        :old.phone,
-        :old.email,
         :old.enroll_date,
         :old.member_role,
+        :old.original_filename,
+        :old.renamed_filename,
         :old.warning_count,
+        :old.age,
         sysdate
     );
 end;

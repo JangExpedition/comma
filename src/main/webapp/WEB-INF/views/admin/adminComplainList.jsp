@@ -34,7 +34,7 @@
 						<td><%= complain.getWriter() %></td>
 						<td><%= complain.getVillain() %></td>
 						<td>
-							<input class="warning-cnt" type="number" min=0 max=3 value="<%= complain.getWarningCnt() %>" data-member-nick="<%= complain.getVillain() %>" />
+							<input class="warning-cnt" type="number" min=<%= complain.getWarningCnt() %> max=3 value="<%= complain.getWarningCnt() %>" data-member-nick="<%= complain.getVillain() %>" />
 						</td>
 						<td><%= complain.getPartition() %></td>
 						<td><%= complain.getContent() %></td>
@@ -56,6 +56,7 @@
 		<form action="<%= request.getContextPath() %>/complain/warningCountUpdate" name="complainUpdateFrm" method="post">
 			<input type="hidden" name="memberNick" />
 			<input type="hidden" name="warningCnt" />
+			<input type="hidden" name="letterContent" />
 		</form>
 	</section>
 
@@ -72,9 +73,9 @@
 					const frm = document.complainUpdateFrm;
 					frm.memberNick.value = memberNick;
 					frm.warningCnt.value = warningCnt;
+					frm.letterContent.value = `부적절한 내용으로 경고 횟수가 증가되어 [\${warningCnt}]입니다.\n경고 3번 누적 시 회원 탈퇴되오니 이 점 유의하시기 바랍니다.`;
 					frm.submit();				
 				}
-				
 			});
 		});
 	</script>

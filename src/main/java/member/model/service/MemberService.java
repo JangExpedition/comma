@@ -6,6 +6,11 @@ import java.util.Map;
 
 import org.eclipse.jdt.internal.compiler.classfmt.ComponentInfoWithTypeAnnotation;
 
+import common.OX;
+import letter.model.dao.LetterDao;
+import letter.model.dto.AF;
+import letter.model.dto.Letter;
+
 import static common.JdbcTemplate.*;
 
 import member.model.dao.MemberDao;
@@ -110,6 +115,8 @@ public class MemberService {
 		
 		try {
 			result = memberDao.updateWarningCount(conn, param);
+			
+			result = new LetterDao().insertLetter(conn, new Letter(0, "admin1", (String) param.get("memberNick"), 1, 1, (String) param.get("content"), null, null, "X", 0, OX.X, AF.F));
 			
 			commit(conn);
 		} catch(Exception e) {
