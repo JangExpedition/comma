@@ -107,6 +107,13 @@
 	case "/comma/chat/chatList" :
 		link.href = "<%= request.getContextPath() %>/css/chatList.css";
 		break;
+	case "/comma/admin/adminFontList" :
+		link.href = "<%= request.getContextPath() %>/css/adminFont.css";
+		break;
+	case "/comma/admin/adminDesignList" :
+		link.href = "<%= request.getContextPath() %>/css/adminDesign.css";
+		break;
+		
 	}; // switch end
 	document.querySelector("head").append(link);
 </script>
@@ -148,6 +155,35 @@
 				document.querySelector("#toAdminMemberList").addEventListener("click", (e)=>{
 					location.href = "<%= request.getContextPath() %>/admin/adminMemberList";	
 				});
+				</script>
+			<% } %>
+			
+			<% if (loginMember.getMemberRole() == MemberRole.A) { %>
+				<div id="toFontList" class="navBtn">폰트 목록</div>
+				<script>
+				/*
+			      Date : 2023. 1. 27
+			      @한혜진
+			    
+			      adminFontList.jsp 이동 메서드
+			    */
+				document.querySelector("#toFontList").addEventListener("click", (e)=>{
+					location.href = "<%= request.getContextPath() %>/admin/adminFontList";	
+				});
+				
+				</script>
+				<div id="toDesignList" class="navBtn">디자인 목록</div>
+				<script>
+				/*
+			      Date : 2023. 1. 27
+			      @한혜진
+			    
+			      adminDesignList.jsp 이동 메서드
+			    */
+				document.querySelector("#toDesignList").addEventListener("click", (e)=>{
+					location.href = "<%= request.getContextPath() %>/admin/adminDesignList";	
+				});
+				
 				</script>
 			<% } %>
 				<div id="toDiary" class="navBtn">일기장</div>
