@@ -55,11 +55,8 @@ section {
 	justify-content: center;
 }
 
-.btnFrm form {
-	padding: 2px;
-}
-
 .memberBtn {
+	margin: 2px;
 	padding: 5px 10px;
 	background-color: #212E40;
 	color: #fff;

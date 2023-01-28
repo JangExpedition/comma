@@ -5,14 +5,22 @@
 
 <%
 	List<Font> fontList = (List<Font>) request.getAttribute("fontList");
+	String searchKeyword = request.getParameter("searchKeyword");
 %>
+	
 	<section>
 		<div id="adminTitle" class="fontStyle pointColor">폰트 목록</div>
 	
-		<form action="<%= request.getContextPath() %>/admin/adminFontFinder" class="fontStyle">
-			<input type="text" id="searchFont" class="fontStyle" name="searchFont" size="30" placeholder="검색할 폰트를 입력 해주세요." />
-			<input type="submit" id="searchBtn" class="fontStyle" value="검색" />
-		</form>
+		<div id="search-container" class="fontStyle">
+	        <div id="search-name" class="search-type">
+	            <form action="<%=request.getContextPath()%>/admin/findStyle">
+	                <input type="hidden" name="type" value="font"/>
+	                <input type="text" name="searchKeyword"  size="25" placeholder="검색할 폰트를 입력하세요."
+	                	value="<%= searchKeyword != null ? searchKeyword : "" %>" />
+	                <button type="submit">검색</button>            
+	            </form>    
+	        </div>
+	    </div>
 
 		<div id="fontPlusDiv">
 			<input type="button" class="fontStyle" id="fontplus" value="폰트 추가" onclick="<%= request.getContextPath() %>/admin/adminFontEnroll"/>

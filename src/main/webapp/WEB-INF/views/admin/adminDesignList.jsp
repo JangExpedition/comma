@@ -6,15 +6,25 @@
 
 <%
 	List<Design> designList = (List<Design>) request.getAttribute("designList");
+	String searchKeyword = request.getParameter("searchKeyword");
 %>
 
     <section>
 		<div id="adminTitle" class="fontStyle pointColor">디자인 목록</div>
 
-		<form action="<%= request.getContextPath() %>/admin/adminDesignFinder">
-			<input type="text" id="searchDesign" class="fontStyle" name="searchDesign" size="30" placeholder="검색할 디자인을 입력 해주세요." />
-			<input type="submit" id="searchBtn" class="fontStyle" value="검색" />
-		</form>
+		<div id="search-container">
+			<label for="searchType">검색타입 : </label> 
+			<input type="text" name="searchType" id="searchType" value="구분" readOnly />
+	        
+	        <div id="search-part" class="search-type">
+	            <form action="<%=request.getContextPath()%>/admin/findStyle">
+	                <input type="hidden" name="type" value="design"/>
+	                <input type="radio" id="letterDesign" name="searchKeyword" value="L" <%= "L".equals(searchKeyword) ? "checked" : "" %>><label for="letterDesign"> 편지</label>
+	                <input type="radio" id="diaryDesign" name="searchKeyword" value="D" <%= "D".equals(searchKeyword) ? "checked" : "" %>><label for="diaryDesign"> 일기장</label>
+	                <button type="submit">검색</button>
+	            </form>
+			</div>
+	    </div>
 		
 		<div id="designBtn">
 			<input type="button" id="designPlus" class="fontStyle" value="디자인 추가" onclick="<%= request.getContextPath() %>/admin/adminDesignEnroll" />
@@ -58,8 +68,12 @@
 	                </tr>
 		<%
 				}
-			}
+			} else {
 		%>
+					<tr>
+						<td colspan="3">조회된 디자인 목록이 없습니다.</td>
+					</tr>
+		<%  } %>
 	            </tbody>
 	        </table>
 		</div>

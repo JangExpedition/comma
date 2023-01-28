@@ -1,0 +1,170 @@
+@charset "UTF-8";
+
+section{
+	width: 70%;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.fontContainer{
+	width: 100%;
+}
+
+#adminTitle{
+	text-align : center;
+	font-size: 30px;
+}
+
+#search-container {
+	width: 100%;
+	padding-top: 20px;
+	justify-content: center;
+	display: flex;
+}
+
+#search-container button {
+	padding: 5px 10px;
+	background-color: #212E40;
+	color: #fff;
+	border-radius: 50px;
+	border: none;
+}
+
+#searchBtn{
+	background-color:rgb(238, 238, 238);
+	color: #474680;
+	border: 4px solid #474680;
+	font-size: 18px;
+	padding: 5px 10px;
+	border-radius: 10px;
+	margin: 20px;
+}
+
+.table{
+	width: 100%;
+    font-size :19px;
+	border-radius: 20px;
+    text-align: center;
+    display: center;    
+}
+
+th {
+    border-bottom:2px solid black;
+}
+
+#fontPlusDiv {
+	width: 100%;
+	text-align: right;
+	padding: 10px 0;
+}
+
+#fontplus{
+	background-color:rgb(238, 238, 238);
+	color: #474680;
+	border: 4px solid #474680;
+	font-size: 18px;
+	padding: 5px 10px;
+	border-radius: 10px;
+}
+
+#fontchange{
+	background-color:rgb(238, 238, 238);
+	color: #474680;
+	border: 4px solid #474680;
+	font-size: 18px;
+	padding: 5px 10px;
+	border-radius: 10px;
+}
+
+
+/* ********페이징******** */
+
+.page-nation li{ 
+    list-style: none;
+    display: center;
+} 
+
+.page-wrap {
+    text-align:center;
+    font-size:0;
+ }
+
+.page-nation  {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top:20px;
+}
+ 
+
+.page-nation a {
+    display:block;
+    margin:0 3px;
+    float:left;
+    border:1px solid #e6e6e6;
+    width:28px;
+    height:28px;
+    line-height:28px;
+    text-align:center;
+    background-color:#fff;
+    font-size:13px;
+    color:black;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.page-nation a:hover{
+    background-color:gray;
+    color:white;
+}
+
+
+/* adminDesign */
+label[for=searchType] {
+	padding-top: 3px;
+	font-size: 15px;
+}
+
+#searchType {
+	margin-left: 2px;
+	width: 50px;
+	border: 1px solid #bebebe;
+	border-radius: 5px;
+	text-align: center;
+	font-size: 15px;
+}
+
+#designContainer {
+	width: 100%;
+}
+
+#designBtn {
+	width: 100%;
+	text-align: right;
+	padding: 10px 0;
+}
+
+#designPlus{
+	background-color:rgb(238, 238, 238);
+	color: #474680;
+	border: 4px solid #474680;
+	font-size: 18px;
+	padding: 5px 10px;
+	border-radius: 10px;
+}
+
+#designChange{
+	background-color:rgb(238, 238, 238);
+	color: #474680;
+	border: 4px solid #474680;
+	font-size: 18px;
+	padding: 5px 10px;
+	border-radius: 10px;
+}
+
+.img {
+	width: 50%;
+}
