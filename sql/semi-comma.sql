@@ -113,12 +113,14 @@ alter table member
 -- leave_member 테이블 생성
 create table leave_member
 as
-(select m.*, sysdate leave_date from member m);
+(select 1 no, m.*, sysdate leave_date from member m where 1 = 0);
 -- leave_member 제약조건 추가
 alter table leave_member
-    add constraint pk_leave_member_email primary key (email)
+    add constraint pk_leave_member_no primary key (no)
     modify leave_date default sysdate
     modify original_filename default 'default.png';
+
+create sequence seq_leave_member_no;
     
 
 -- friends 테이블 생성
@@ -146,6 +148,7 @@ create sequence seq_friends_no;
 --insert into friends values (seq_friends_no.nextval, 'test3', 'test1', 'O');
 
 --insert into friends values (seq_friends_no.nextval, 'test1', 'test2', 'O');
+--insert into friends values (seq_friends_no.nextval, 'test2', 'test1', 'O');
 --insert into friends values (seq_friends_no.nextval, 'test1', 'test3', 'O');
 --insert into friends values (seq_friends_no.nextval, 'test2', 'test3', 'O');
 
@@ -495,6 +498,7 @@ begin
     insert into
         leave_member
     values(
+        seq_leave_member_no.nextval,
         :old.email,
         :old.nickname,
         :old.password,
