@@ -113,10 +113,9 @@
 		link.href = "<%= request.getContextPath() %>/css/chatList.css";
 		break;
 	case "/comma/admin/adminFontList" :
-		link.href = "<%= request.getContextPath() %>/css/adminFont.css";
-		break;
 	case "/comma/admin/adminDesignList" :
-		link.href = "<%= request.getContextPath() %>/css/adminDesign.css";
+	case "/comma/admin/findStyle" :
+		link.href = "<%= request.getContextPath() %>/css/adminStyle.css";
 		break;
 		
 	}; // switch end

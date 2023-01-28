@@ -32,6 +32,7 @@ public class FriendsDao {
 	public Friends handleFriendsResultSet(ResultSet rset) throws SQLException {
 		Friends friends = new Friends();
 		friends.setNo(rset.getInt("no"));
+		friends.setMyNickname(rset.getString("my_nickname"));
 		friends.setfNickname(rset.getString("f_nickname"));
 		friends.setIsFriend(OX.valueOf(rset.getString("is_friend")));
 		friends.setOriginalFileName(rset.getString("original_filename"));

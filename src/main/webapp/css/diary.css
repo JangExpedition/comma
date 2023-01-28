@@ -174,7 +174,7 @@ section {
 
 /* diaryEnroll */
 #diaryEnrollBack {
-	display: flex;
+	display: none;
 	align-items: center;
 	justify-content: center;
 	width: 100%;
@@ -255,10 +255,10 @@ section {
 	text-align: left;
 }
 
-#diaryEnrollFrmSubmit {
+#diaryUpdateFrmSubmit, #diaryDeleteFrmSubmit {
 	padding: 10px 20px;
 	background-color: rgba(0, 0, 0, 0);
-	font-size: 20px;
+	font-size: 16px;
 	color: #454a7b;
 	border: 1px solid #363c61;
 	border-radius: 5px;

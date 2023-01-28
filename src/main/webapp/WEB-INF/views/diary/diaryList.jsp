@@ -22,7 +22,7 @@
 			canWrite = false;
 		}
 	}
-	
+	boolean canEdit = true;
 %>
 	
 	<section id="diaryTotalList" class="fontStyle">
@@ -83,47 +83,11 @@
 					<% } else{ %>
 					<p class="writeContent"><%= diary.getContent() %></p>
 					<% } %>
-					<div>
-						<% if(diary.getRegDate().toString().equals(formatToday)){  %>
-						<button id="updateBtn">수정하기</button>
-						<% } %>
-					</div>
 				</div>
 			</div>
 		<% } %>
 		</div>
-		<script>
-		/*
-		  버튼 클릭 시 모달 창 띄우기
-		*/
-		$(".onediary").click((e)=>{
-			const diaryNo = $(event.target).parent('.onediary').data('diaryNo');
-			$.ajax({
-				url : "<%= request.getContextPath() %>/diary/diaryView",
-				data : {diaryNo},
-				dataType: "json",
-				success(data){
-					
-					const{no, writer, content, designNo, fontNo, originalFilename, renamedFilename, regDate} = data;
-					
-					diaryEnrollTitle.innerHTML = regDate;
-					if(originalFilename === null){
-						diaryViewImg.src = "<%= request.getContextPath() %>/images/default.png";
-					} else{
-						diaryViewImg.src = `<%= request.getContextPath() %>/upload/diary/\${renamedFilename}`;
- 					}
-					
-					nowContent.innerHTML = content;
-					
-					diaryEnrollBack.style.display = "flex";
-					
-				}
-			});
-		});
-		</script>
-		<% } %>
 		</div>
-	</div>
 	</section>
 	<!-- 일기 작성 모달 -->
 	<div id="diaryEnrollBack">
@@ -140,6 +104,7 @@
 						<div id="nowContent" name="nowContent"></div>
 					</div>
 				</div>
+				<% if(canEdit) { %>
 				<div id="editItemBox">
 					<label for="enrollImage">
 						<i id="enrollImageChoice" class="fa-regular fa-image"></i>
@@ -149,8 +114,10 @@
 					<i id="enrollDesignChoice" class="fa-solid fa-brush"></i>
 				</div>
 				<div id="updateDiaryBtn">
-					<input id="diaryEnrollFrmSubmit" class="fontStyle" type="submit" value="등록하기" />
+					<input id="diaryUpdateFrmSubmit" class="fontStyle" type="submit" value="수정하기" />
+					<input id="diaryDeleteFrmSubmit" class="fontStyle" type="submit" value="삭제하기" />
 				</div>
+				<% } %>
 			</form>
 		</div>
 	</div>
@@ -196,6 +163,45 @@
 			</table>
 		</div>
 	</div>
+		<script>
+		/*
+		  버튼 클릭 시 모달 창 띄우기
+		*/
+		$(".onediary").click((e)=>{
+			const diaryNo = $(event.target).parent('.onediary').data('diaryNo');
+			$.ajax({
+				url : "<%= request.getContextPath() %>/diary/diaryView",
+				data : {diaryNo},
+				dataType: "json",
+				success(data){
+					
+					const{no, writer, content, designNo, fontNo, originalFilename, renamedFilename, regDate} = data;
+					
+					diaryEnrollTitle.innerHTML = regDate;
+					if(originalFilename === null){
+						diaryViewImg.src = "<%= request.getContextPath() %>/images/default.png";
+					} else{
+						diaryViewImg.src = `<%= request.getContextPath() %>/upload/diary/\${renamedFilename}`;
+ 					}
+					
+					nowContent.innerHTML = content;
+					
+					diaryEnrollBack.style.display = "flex";
+					
+					const now = "<%= formatToday %>";
+					
+					if(regDate != now){
+						document.querySelector("#editItemBox").style.display = "none";
+						document.querySelector("#updateDiaryBtn").style.display = "none";
+					}
+					
+				}
+			});
+		});
+		</script>
+		<% } %>
+		</div>
+	
 	<form action="<%= request.getContextPath() %>/diary/diaryList" name="filterFrm">
 		<input type="hidden" id="yearFilter" name="yearFilter"/>
 	</form>
