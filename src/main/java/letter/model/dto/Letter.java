@@ -7,6 +7,7 @@ import java.util.List;
 import common.Attachment;
 import common.Form;
 import common.OX;
+import member.model.dto.MemberRole;
 
 public class Letter extends Form{
 	private String addressee;
@@ -19,6 +20,7 @@ public class Letter extends Form{
 	private AF sendWho;
 	private int attachCnt;
 	private List<Attachment> attachments = new ArrayList<>();
+	private MemberRole writerRole;
 	
 	public Letter() {
 		super();
@@ -54,6 +56,39 @@ public class Letter extends Form{
 		this.sendWho = sendWho;
 		this.attachCnt = attachCnt;
 		this.attachments = attachments;
+	}
+
+	public Letter(String addressee, int designNo, int fontNo, OX read_check, String gender, int age, OX anonymous,
+			AF sendWho, int attachCnt, List<Attachment> attachments, MemberRole writerRole) {
+		super();
+		this.addressee = addressee;
+		this.designNo = designNo;
+		this.fontNo = fontNo;
+		this.read_check = read_check;
+		this.gender = gender;
+		this.age = age;
+		this.anonymous = anonymous;
+		this.sendWho = sendWho;
+		this.attachCnt = attachCnt;
+		this.attachments = attachments;
+		this.writerRole = writerRole;
+	}
+
+	public Letter(int no, String writer, String content, Date regDate, String addressee, int designNo, int fontNo,
+			OX read_check, String gender, int age, OX anonymous, AF sendWho, int attachCnt,
+			List<Attachment> attachments, MemberRole writerRole) {
+		super(no, writer, content, regDate);
+		this.addressee = addressee;
+		this.designNo = designNo;
+		this.fontNo = fontNo;
+		this.read_check = read_check;
+		this.gender = gender;
+		this.age = age;
+		this.anonymous = anonymous;
+		this.sendWho = sendWho;
+		this.attachCnt = attachCnt;
+		this.attachments = attachments;
+		this.writerRole = writerRole;
 	}
 
 	public String getAddressee() {
@@ -136,12 +171,20 @@ public class Letter extends Form{
 		this.attachments = attachments;
 	}
 	
+	public MemberRole getWriterRole() {
+		return writerRole;
+	}
+
+	public void setWriterRole(MemberRole writerRole) {
+		this.writerRole = writerRole;
+	}
+
 	@Override
 	public String toString() {
 		return "Letter [addressee=" + addressee + ", designNo=" + designNo + ", fontNo=" + fontNo + ", read_check="
 				+ read_check + ", gender=" + gender + ", age=" + age + ", anonymous=" + anonymous + ", sendWho="
-				+ sendWho + ", attachCnt=" + attachCnt + ", attachments=" + attachments + ", toString()="
-				+ super.toString() + "]";
+				+ sendWho + ", attachCnt=" + attachCnt + ", attachments=" + attachments + ", writerRole=" + writerRole
+				+ ", toString()=" + super.toString() + "]";
 	}
 
 	public void addAttachment(Attachment attach) {

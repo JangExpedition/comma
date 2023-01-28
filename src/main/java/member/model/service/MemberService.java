@@ -102,9 +102,9 @@ public class MemberService {
 		return result;
 	} // updateMemberRole() end
 
-	public List<Member> selectFindMember(String searchNick) {
+	public List<Member> selectFindMember(Map<String, Object> param) {
 		Connection conn = getConnection();
-		List<Member> memberList = memberDao.selectFindMember(conn, searchNick);
+		List<Member> memberList = memberDao.selectFindMember(conn, param);
 		close(conn);
 		return memberList;
 	} // selectFindMember() end

@@ -30,24 +30,44 @@ public class StyleDao {
 		}
 	} // FontDao() end
 
+	public Font handleFontResultSet(ResultSet rset) throws SQLException {
+		Font font = new Font();
+		font.setNo(rset.getInt("no"));
+		font.setName(rset.getString("name"));
+		font.setLink(rset.getString("link"));
+		return font;
+	} // handleFontResultSet() end
+
 	public List<Font> selectAllFont(Connection conn) {
 		List<Font> fontList = new ArrayList<>();
 		String sql = prop.getProperty("selectAllFont");
 		
 		try (PreparedStatement pstmt = conn.prepareStatement(sql);
 			 ResultSet rset = pstmt.executeQuery()) {
-			while (rset.next()) {
-				Font font = new Font();
-				font.setNo(rset.getInt("no"));
-				font.setName(rset.getString("name"));
-				font.setLink(rset.getString("link"));
-				fontList.add(font);
-			}
+			while (rset.next())
+				fontList.add(handleFontResultSet(rset));
 		} catch (SQLException e) {
 			throw new StyleException("폰트 전체 조회 오류", e);
 		}
 		return fontList;
 	} // selectAllFont() end
+
+	public List<Font> selectFindFont(Connection conn, String searchKeyword) {
+		List<Font> fontList = new ArrayList<>();
+		String sql = prop.getProperty("selectFindFont");
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, '%' + searchKeyword + '%');
+			
+			try (ResultSet rset = pstmt.executeQuery()) {
+				while (rset.next())
+					fontList.add(handleFontResultSet(rset));
+			}
+		} catch (SQLException e) {
+			throw new StyleException("폰트 목록 검색 오류", e);
+		}
+		return fontList;
+	} // selectFindFont() end
 
 	public int insertFont(Connection conn, Font font) {
 		int result = 0;
@@ -80,6 +100,16 @@ public class StyleDao {
 		return result;
 	} // updateFont() end
 
+	
+	public Design handleDesignResultSet(ResultSet rset) throws SQLException {
+		Design design = new Design();
+		design.setNo(rset.getInt("no"));
+		design.setPart(Part.valueOf(rset.getString("part")));
+		design.setOriginalFilename(rset.getString("original_filename"));
+		design.setRenamedFilename(rset.getString("renamed_filename"));
+		design.setRegDate(rset.getDate("reg_date"));
+		return design;
+	} // handleDesignResultSet() end
 
 	public List<Design> selectAllDesign(Connection conn) {
 		List<Design> designList = new ArrayList<>();
@@ -87,20 +117,30 @@ public class StyleDao {
 		
 		try (PreparedStatement pstmt = conn.prepareStatement(sql);
 			 ResultSet rset = pstmt.executeQuery()) {
-			while (rset.next()) {
-				Design design = new Design();
-				design.setNo(rset.getInt("no"));
-				design.setPart(Part.valueOf(rset.getString("part")));
-				design.setOriginalFilename(rset.getString("original_filename"));
-				design.setRenamedFilename(rset.getString("renamed_filename"));
-				design.setRegDate(rset.getDate("reg_date"));
-				designList.add(design);
-			}
+			while (rset.next())
+				designList.add(handleDesignResultSet(rset));
 		} catch (SQLException e) {
 			throw new StyleException("디자인 전체 조회 오류", e);
 		}
 		return designList;
 	} // selectAllDesign() end
+
+	public List<Design> selectFindDesign(Connection conn, String searchKeyword) {
+		List<Design> designList = new ArrayList<>();
+		String sql = prop.getProperty("selectFindDesign");
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, searchKeyword);
+			
+			try (ResultSet rset = pstmt.executeQuery()) {
+				while (rset.next())
+					designList.add(handleDesignResultSet(rset));
+			}
+		} catch (SQLException e) {
+			throw new StyleException("디자인 목록 검색 오류", e);
+		}
+		return designList;
+	} // selectFindDesign() end
 
 	public int insertDesign(Connection conn, Design design) {
 		int result = 0;

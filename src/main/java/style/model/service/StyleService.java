@@ -23,6 +23,13 @@ public class StyleService {
 		close(conn);
 		return fontList;
 	} // selectAllFont() end
+
+	public List<Font> selectFindFont(String searchKeyword) {
+		Connection conn = getConnection();
+		List<Font> fontList = styleDao.selectFindFont(conn, searchKeyword);
+		close(conn);
+		return fontList;
+	} // selectFindFont() end
 	
 	public int insertFont(Font font) {
 		int result = 0;
@@ -65,6 +72,13 @@ public class StyleService {
 		close(conn);
 		return designList;
 	} // selectAllDesign() end
+
+	public List<Design> selectFindDesign(String searchKeyword) {
+		Connection conn = getConnection();
+		List<Design> designList = styleDao.selectFindDesign(conn, searchKeyword);
+		close(conn);
+		return designList;
+	} // selectFindDesign() end
 	
 	public int insertDesign(Design design) {
 		int result = 0;

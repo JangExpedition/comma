@@ -15,6 +15,7 @@ import common.OX;
 import letter.model.dto.AF;
 import letter.model.dto.Letter;
 import letter.model.exception.LetterException;
+import member.model.dto.MemberRole;
 
 public class LetterDao {
 
@@ -43,6 +44,7 @@ public class LetterDao {
 		letter.setRead_check(OX.valueOf(rset.getString("read_check")));
 		letter.setAnonymous(OX.valueOf(rset.getString("anonymous")));
 		letter.setSendWho(AF.valueOf(rset.getString("send_who")));
+		letter.setWriterRole(MemberRole.valueOf(rset.getString("member_role")));
 		return letter;
 	} // handleLetterResultSet() end
 

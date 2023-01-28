@@ -38,9 +38,15 @@
 				<thead>
 					<tr>
 						<th>번호</th>
-						<th>제목</th>
+					<% if (loginMember.getMemberRole() != MemberRole.U) { %>
+						<th>작성자</th>
+						<th>
+					<% } else { %>
+						<th colspan="2">
+					<% } %>
+							제목
+						</th>
 						<th>등록일</th>
-						<td></td>
 					</tr>
 				</thead>
 				<tbody>
@@ -56,7 +62,12 @@
 			%>
 					<tr>
 						<td><%= question.getNo() %></td>
+					<% if (loginMember.getMemberRole() != MemberRole.U) { %>
+						<td><%= question.getWriter() %></td>
 						<td>
+					<% } else { %>
+						<td colspan="2">
+					<% } %>
 							<a href="<%= request.getContextPath() %>/customer/questionView?no=<%= question.getNo() %>" class="content"><%= question.getTitle() %></a>
 						</td>
 						<td><%= question.getRegDate() %></td>

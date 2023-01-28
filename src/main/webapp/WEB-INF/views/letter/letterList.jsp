@@ -33,7 +33,23 @@
 						<tr>
 							<td class="firstTd">
 								<p class="letterListInfo">
-									<span id="letterListWriter" class="fontStyle"><%= letter.getAnonymous() == OX.O ? "익명" : letter.getWriter() %></span>
+						<%
+							if (letter.getWriterRole() == MemberRole.U) {
+								if (letter.getAnonymous() == OX.O) {
+						%>
+									<span id="letterListWriter" class="fontStyle">익명</span>
+						<%
+								} else {
+						%>
+									<span id="letterListWriter" class="fontStyle"><%= letter.getWriter() %></span>
+						<%
+								}
+							} else {
+						%>
+									<span id="letterListWriter" class="fontStyle">관리자</span>
+						<%	
+							}
+						%>
 									&nbsp;님으로부터
 								</p>
 							</td>
@@ -68,7 +84,23 @@
 						<tr>
 							<td class="firstTd">
 								<p class="letterListInfo">
-									<span id="letterListWriter" class="fontStyle"><%= letter.getAnonymous() == OX.O ? "익명" : letter.getWriter() %></span>
+						<%
+							if (letter.getWriterRole() == MemberRole.U) {
+								if (letter.getAnonymous() == OX.O) {
+						%>
+									<span id="letterListWriter" class="fontStyle">익명</span>
+						<%
+								} else {
+						%>
+									<span id="letterListWriter" class="fontStyle"><%= letter.getWriter() %></span>
+						<%
+								}
+							} else {
+						%>
+									<span id="letterListWriter" class="fontStyle">관리자</span>
+						<%	
+							}
+						%>
 									&nbsp;님으로부터
 								</p>
 							</td>

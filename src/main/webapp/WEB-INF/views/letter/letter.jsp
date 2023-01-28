@@ -3,6 +3,7 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 	<script>		
 		const friendNick = localStorage.getItem('friendNick');
+		localStorage.removeItem('friendNick');
 		console.log('friendNick = ' + friendNick);
 	</script>
 	<section>
@@ -26,7 +27,11 @@
 		                    	<label for="sendRandom" id="random"><input type="checkbox" name="sendChoice" id="sendRandom" value="A" onclick="clickSendChoice(this);" />임의의 누군가에게 보내기</label>
 		                    </td>
 		                    <td>
+						<% if (loginMember.getMemberRole() == MemberRole.U) { %>
 		                    	<label for="sendFriend" id="friend"><input type="checkbox" name="sendChoice" id="sendFriend" value="F" onclick="clickSendChoice(this);" />친구에게 보내기</label>
+						<% } else { %>
+		                    	<label for="sendFriend" id="friend"><input type="checkbox" name="sendChoice" id="sendFriend" value="F" onclick="clickSendChoice(this);" />회원에게 보내기</label>
+		                <% } %>
 		                    </td>
 						</tr>
 		                <tr id="genderChoiceTr" style="display: none;">
@@ -56,7 +61,7 @@
 		                    	<input type="text" list="friendsList" id="textFriendsList" name="friendsList" />
 		                        <datalist id="friendsList">
 		                    <% for (Friends friend : friendsList) { %>
-		                            <%-- <option value="<%= friend.getNickname() %>"><%= friend.getNickname() %></option> --%>
+		                            <option value="<%= friend.getfNickname() %>"><%= friend.getfNickname() %></option>
 							<% } %>
 		                        </datalist>
 		                    </td>
@@ -310,7 +315,7 @@
 		/*
 		  친구 목록에서 편지쓰기 클릭 시 자동으로 친구 띄워주기
 		*/
-		if (friendNick != null) {
+		if (friendNick != null && friendNick != '<%= loginMember.getNickname() %>') {
 			const friend = document.querySelector('#sendFriend');
 			friend.checked = true;
 		
@@ -326,71 +331,6 @@
 			letterSubmit.style.display = '';
 			textFriendsList.value = friendNick;
 		}
-		
-		
-		/*
-		  사진 3장까지만 첨부 가능하고 미리보기 띄워줌
-		
-		let uploadCnt = 0;
-		let uploadFiles = [];
-		const getImageFiles = (e) => {
-			const file = e.currentTarget.files;
-			const imagePreview = document.querySelector('#letterImg');
-			uploadCnt += 1;
-			
-			if (uploadFiles.length >= 4 || uploadCnt >= 4) {
-				alert('이미지는 최대 3장까지 업로드 가능합니다.');
-				uploadCnt -= 1;
-				return;
-			}
-
-			// 파일 타입 검사
-			if (!file[0].type.match("image/.*")) {
-				alert('이미지 파일만 업로드 가능합니다.');
-				return;
-			}
-
-			// 파일 갯수 검사
-			if (uploadFiles.length >= 4 || uploadCnt < 4) {
-				uploadFiles.push(file[0]);
-				const reader = new FileReader();
-				reader.onload = (e) => {
-					const preview = createElement(e, file[0]);
-					imagePreview.appendChild(preview);
-				};
-				reader.readAsDataURL(file[0]);
-				console.log(uploadFiles);
-			}
-		};
-		
-		const createElement = (e, file) => {
-			const img = document.createElement('img');
-			img.classList.add('letterImg');
-			img.src = e.target.result
-			return img;
-		};
-		
-		imgChoice.addEventListener('change', (e) => {
-			getImageFiles(e);
-			console.log(uploadCnt);
-		});
-		*/
-		
-		
-		/*
-		  사진 첨부 시 이미지 미리보기 띄우기
-		
-		imgChoice3.addEventListener('change', (e) => {
-			const files = e.target.files;
-			const reader = new FileReader();
-			reader.onload = ({target}) => {
-				const letterImg = document.querySelector('#letterImg3');
-				letterImg.src = target.result;
-				console.log(letterImg.src);
-			};
-			reader.readAsDataURL(files[0]);
-		});
-		*/
 	</script>
 </body>
 </html>

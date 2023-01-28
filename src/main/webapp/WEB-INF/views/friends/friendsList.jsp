@@ -30,9 +30,9 @@
 							<img src="<%= request.getContextPath() %>/images/default.png" alt="" class="friendsImage" />							
 						<% } %>
 						</td>
-						<%-- <td><%= friend.getNickname() %></td> --%>
+						<td><%= friend.getfNickname() %></td>
 						<td>
-							<%-- <input id="friends-send-letter" class="friendsBtn fontStyle" type="button" data-friend-nick="<%= friend.getNickname() %>" value="편지작성" /> --%>
+							<input id="friends-send-letter" class="friendsBtn fontStyle" type="button" data-friend-nick="<%= friend.getfNickname() %>" value="편지작성" />
 						</td>
 					<% if (friend.getIsFriend() == OX.O) { %>
 						<td>
