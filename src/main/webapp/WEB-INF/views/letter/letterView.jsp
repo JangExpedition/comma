@@ -6,9 +6,10 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%
 	Letter letter = (Letter) request.getAttribute("letter");
-	System.out.println("letter = " + letter);
 	List<Attachment> attachList = letter.getAttachments();
 	partition = Partition.LETTER;
+	Boolean bool = friendsList.contains(letter.getWriter());
+	System.out.println(bool);
 %>
 	<section>
 		<div id="letterTitle" class="fontStyle" onclick="history.back();">받은 편지함</div>
@@ -19,7 +20,23 @@
 						<tr>
 							<td colspan="2" class="firstTd">
 								<p class="letterListInfo">
-									<span id="letterListWriter" class="fontStyle"><%= letter.getAnonymous() == OX.O ? "익명" : letter.getWriter() %></span>
+						<%
+							if (letter.getWriterRole() == MemberRole.U) {
+								if (letter.getAnonymous() == OX.O) {
+						%>
+									<span id="letterListWriter" class="fontStyle">익명</span>
+						<%
+								} else {
+						%>
+									<span id="letterListWriter" class="fontStyle"><%= letter.getWriter() %></span>
+						<%
+								}
+							} else {
+						%>
+									<span id="letterListWriter" class="fontStyle">관리자</span>
+						<%	
+							}
+						%>
 									&nbsp;님으로부터
 								</p>
 							</td>

@@ -4,16 +4,95 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%
 	List<Complain> complainList = (List<Complain>) request.getAttribute("complainList");
+
+	String searchType = request.getParameter("searchType");
+	String searchKeyword = request.getParameter("searchKeyword");
+	System.out.println("searchType = " + searchType);
+	System.out.println("searchKeyword = " + searchKeyword);
 %>
+
+	<style>
+	    #search-villain {
+	    	display: <%= searchType == null || "villain".equals(searchType) ? "inline-block" : "none" %>;
+	    }
+	    
+	    #search-partition {
+	    	display: <%= "partition".equals(searchType) ? "inline-block" : "none" %>;
+	    }
+	    
+	    #search-warningCnt {
+	    	display: <%= "warning_count".equals(searchType) ? "inline-block" : "none" %>;
+	    }
+	</style>
+	<script>
+		window.addEventListener('load', () => {
+			document.querySelector("#searchType").addEventListener('change', (e) => {
+				console.log(e.target.value);
+	
+				// div 모두 숨김
+				document.querySelectorAll(".search-type").forEach((div) => {
+					div.style.display = "none";
+				});
+				
+				// 현재 선택된 값에 상응하는 div만 노출
+				let id;
+				switch (e.target.value) {
+				case "villain" :
+					id = "search-villain";
+					break;
+				case "partition" :
+					id = "search-partition";
+					break;
+				case "warning_count" :
+					id = "search-warningCnt";
+					break;
+				}
+				
+				document.querySelector("#" + id).style.display = "inline-block";
+			});
+		});
+	</script>
 	<section>
 		<div id="adminTitle" class="fontStyle">신고목록</div>
 		
-		<div id="search-container">
-			<form action="<%= request.getContextPath() %>/complain/complainFinder">
-				<input type="text" id="searchContent" name="searchContent" size="30" placeholder="검색할 닉네임을 입력해주세요." />
-				<input type="submit" id="searchBtn" class="fontStyle" value="검색" />
-			</form>
-		</div>
+		<div id="search-container" class="fontStyle">
+	        <label for="searchType">검색타입 :</label> 
+	        <select id="searchType">
+	            <option value="villain" <%= "villain".equals(searchType) ? "selected" : "" %>>피신고자</option>        
+	            <option value="partition"  <%= "partition".equals(searchType) ? "selected" : "" %>>분류</option>
+	            <option value="warning_count"  <%= "warning_count".equals(searchType) ? "selected" : "" %>>누적경고</option>
+	        </select>
+	        <div id="search-villain" class="search-type">
+	            <form action="<%=request.getContextPath()%>/complain/complainFinder">
+	                <input type="hidden" name="searchType" value="villain"/>
+	                <input type="text" name="searchKeyword"  size="25" placeholder="검색할 피신고자를 입력하세요."
+	                	value="<%= "villain".equals(searchType) ? searchKeyword : "" %>" />
+	                <button type="submit">검색</button>            
+	            </form>    
+	        </div>
+	        <div id="search-partition" class="search-type">
+	            <form action="<%=request.getContextPath()%>/complain/complainFinder">
+	                <input type="hidden" name="searchType" value="partition"/>
+	                <input type="radio" id="letter" name="searchKeyword" value="LETTER" <%= "partition".equals(searchType) && "LETTER".equals(searchKeyword) ? "checked" : "" %> />
+	                <label for="letter"> 편지</label>
+	                <input type="radio" id="counseling" name="searchKeyword" value="COUNSESING" <%= "partition".equals(searchType) && "COUNSESING".equals(searchKeyword) ? "checked" : "" %> />
+	                <label for="counseling"> 고민상담소</label>
+	                <input type="radio" id="comment" name="searchKeyword" value="COMMENT" <%= "partition".equals(searchType) && "COMMENT".equals(searchKeyword) ? "checked" : "" %> />
+	                <label for="comment"> 댓글</label>
+	                <input type="radio" id="chatting" name="searchKeyword" value="CHATTING" <%= "partition".equals(searchType) && "CHATTING".equals(searchKeyword) ? "checked" : "" %> />
+	                <label for="chatting"> 채팅</label>
+	                <button type="submit">검색</button>
+	            </form>
+	        </div>
+	        <div id="search-warningCnt" class="search-type">
+	            <form action="<%=request.getContextPath()%>/complain/complainFinder">
+	                <input type="hidden" name="searchType" value="warning_count"/>
+	                <input type="number" name="searchKeyword"  size="25" placeholder="검색할 누적경고횟수를 입력하세요."
+	                	value="<%= "warning_count".equals(searchType) ? searchKeyword : "" %>" />
+	                <button type="submit">검색</button>            
+	            </form>  
+	        </div>
+	    </div>
 		
 		<div id="admin-list">
 			<table class="admin-list-table">

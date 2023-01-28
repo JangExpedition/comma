@@ -4,6 +4,7 @@ import static common.JdbcTemplate.*;
 
 import java.sql.Connection;
 import java.util.List;
+import java.util.Map;
 
 import complain.model.dao.ComplainDao;
 import complain.model.dto.Complain;
@@ -36,9 +37,11 @@ public class ComplainService {
 		return complainList;
 	} // selectAllComplain() end
 
-	public List<Complain> selectComplainFind(String searchContent) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public List<Complain> selectComplainFind(Map<String, Object> param) {
+		Connection conn = getConnection();
+		List<Complain> complainList = complainDao.selectComplainFind(conn, param);
+		close(conn);
+		return complainList;
+	} // selectComplainFind() end
 
 }

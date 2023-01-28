@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import complain.model.dto.Complain;
@@ -77,5 +78,26 @@ public class ComplainDao {
 		}
 		return complainList;
 	} // selectAllComplain() end
+
+	public List<Complain> selectComplainFind(Connection conn, Map<String, Object> param) {
+		List<Complain> complainList = new ArrayList<>();
+		String sql = prop.getProperty("selectComplainFind");
+		
+		String type = (String) param.get("searchType");
+		Object keyword = param.get("searchKeyword");
+		
+		sql = sql.replace("#", type);
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setObject(1, keyword);
+			
+			try (ResultSet rset = pstmt.executeQuery()) {
+				while (rset.next())
+					complainList.add(handleComplainResultSet(rset));
+			}
+		} catch (SQLException e) {
+			throw new ComplainException("신고 목록 검색 오류", e);
+		}
+		return complainList;
+	} // slectComplainFind() end
 	
 }

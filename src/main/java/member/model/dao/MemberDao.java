@@ -192,12 +192,15 @@ public class MemberDao {
 	} // updateMemberRole() end
 
 
-	public List<Member> selectFindMember(Connection conn, String searchNick) {
+	public List<Member> selectFindMember(Connection conn, Map<String, Object> param) {
 		List<Member> memberList = new ArrayList<>();
 		String sql = prop.getProperty("selectFindMember");
+		String type = (String) param.get("searchType");
+		Object keyword = param.get("searchKeyword");
 		
+		sql = sql.replace("#", type);
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
-			pstmt.setString(1, '%' + searchNick + '%');
+			pstmt.setObject(1, keyword);
 			
 			try(ResultSet rset = pstmt.executeQuery()){
 				while(rset.next()) {

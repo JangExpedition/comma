@@ -56,7 +56,7 @@
 		                    	<input type="text" list="friendsList" id="textFriendsList" name="friendsList" />
 		                        <datalist id="friendsList">
 		                    <% for (Friends friend : friendsList) { %>
-		                            <%-- <option value="<%= friend.getNickname() %>"><%= friend.getNickname() %></option> --%>
+		                            <option value="<%= friend.getfNickname() %>"><%= friend.getfNickname() %></option>
 							<% } %>
 		                        </datalist>
 		                    </td>
@@ -310,7 +310,7 @@
 		/*
 		  친구 목록에서 편지쓰기 클릭 시 자동으로 친구 띄워주기
 		*/
-		if (friendNick != null) {
+		if (friendNick != null && friendNick != '<%= loginMember.getNickname() %>') {
 			const friend = document.querySelector('#sendFriend');
 			friend.checked = true;
 		

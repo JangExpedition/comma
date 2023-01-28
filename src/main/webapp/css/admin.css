@@ -19,6 +19,14 @@ section {
 	text-align: center;
 }
 
+#search-container button {
+	padding: 5px 10px;
+	background-color: #212E40;
+	color: #fff;
+	border-radius: 50px;
+	border: none;
+}
+
 #admin-list {
 	margin: 20px 0px;
 	font-size: 15px;
@@ -28,17 +36,35 @@ section {
 	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
-	border: 1px solid #000;
-    border-collapse: collapse;
+	/*border: 1px solid #000;
+    border-collapse: collapse;*/
 }
 
-.admin-list-table th, td {
-	border: 1px solid #000;
+.admin-list-table th {
+	border-bottom: 1px solid #000;
 	
 }
 
 .admin-list-table td {
 	text-align: center;
+}
+
+.btnFrm {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.btnFrm form {
+	padding: 2px;
+}
+
+.memberBtn {
+	padding: 5px 10px;
+	background-color: #212E40;
+	color: #fff;
+	border-radius: 50px;
+	border: none;
 }
 
 .adminImage {
