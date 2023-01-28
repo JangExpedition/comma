@@ -20,6 +20,7 @@ import common.CommaFileRenamePolicy;
 import common.OX;
 import counseling.model.dto.Counseling;
 import counseling.model.service.CounselingService;
+import member.model.dto.Gender;
 
 /**
  * Servlet implementation class UpdateCounselingServlet
@@ -61,7 +62,7 @@ public class UpdateCounselingServlet extends HttpServlet {
 			String content = multiReq.getParameter("content");
 			String title = multiReq.getParameter("counselingTitle");
 			Category category = Category.valueOf(multiReq.getParameter("counselingCategory"));
-			String limitGender = multiReq.getParameter("gender");
+			Gender limitGender = Gender.valueOf(multiReq.getParameter("gender"));
 			int limitAge = Integer.valueOf(multiReq.getParameter("age"));
 			OX anonymous = OX.valueOf(multiReq.getParameter("anonymous"));
 			String[] delFiles = multiReq.getParameterValues("delFile");

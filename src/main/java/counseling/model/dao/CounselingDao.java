@@ -19,6 +19,7 @@ import counseling.model.dto.CounselingComment;
 import counseling.model.exception.CounselingException;
 import letter.model.exception.LetterException;
 import member.model.dao.MemberDao;
+import member.model.dto.Gender;
 
 public class CounselingDao {
 	
@@ -42,7 +43,7 @@ public class CounselingDao {
 			pstmt.setString(2, counseling.getTitle());
 			pstmt.setString(3, counseling.getContent());
 			pstmt.setString(4, counseling.getCategory().toString());
-			pstmt.setString(5, counseling.getLimitGender());
+			pstmt.setString(5, counseling.getLimitGender().toString());
 			pstmt.setInt(6, counseling.getLimitAge());
 			pstmt.setString(7, counseling.getAnonymous().toString());
 			
@@ -87,7 +88,7 @@ public class CounselingDao {
 		counseling.setLike(rset.getInt("cs_like"));
 		counseling.setCategory(Category.valueOf(rset.getString("category")));
 		counseling.setRegDate(rset.getDate("reg_date"));
-		counseling.setLimitGender(rset.getString("limit_gender"));
+		counseling.setLimitGender(Gender.valueOf(rset.getString("limit_gender")));
 		counseling.setLimitAge(rset.getInt("limit_age"));
 		counseling.setAnonymous(OX.valueOf(rset.getString("anonymous")));
 		return counseling;

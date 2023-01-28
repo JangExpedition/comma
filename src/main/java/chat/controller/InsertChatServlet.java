@@ -37,7 +37,7 @@ public class InsertChatServlet extends HttpServlet {
 			int ableAge = Integer.valueOf(request.getParameter("age"));
 			int ableCount = Integer.valueOf(request.getParameter("chattingPerson"));
 			
-			Chat chat = new Chat(0, chatName, captin, gender, ableAge, ableCount, null);
+			Chat chat = new Chat(0, chatName, captin, gender, ableAge, 0, ableCount, null);
 			
 			int result = chatService.insertChat(chat);
 			

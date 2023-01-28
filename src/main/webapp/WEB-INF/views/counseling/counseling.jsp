@@ -6,7 +6,6 @@
 <%@ page import="common.Attachment" %>
 <%
 	List<Counseling> counselingList = (List<Counseling>)request.getAttribute("counselingList");
-	System.out.println(counselingList);
 	int counselingNo = 0;
 	List<Attachment> attachList = (List<Attachment>)request.getAttribute("attachList");
 %>
@@ -50,15 +49,12 @@
 								<div class="td">
 								<%
 								for(Attachment attach : attachList){
-								if(counseling.getNo() == attach.getAttachNo()) {
-								%>
-									<img src="<%= request.getContextPath() %>/upload/counseling/<%= attach.getRenamedFilename() %>" alt="" />
-								<% } else{ %>
-									<img src="<%= request.getContextPath() %>/images/default.png" alt="" />
-								<% 
-									} 
-								}
-								%>
+									if(counseling.getNo() == attach.getAttachNo()) { %>
+									<img src="<%= request.getContextPath() %>/upload/counseling/<%= attach.getRenamedFilename() %>" alt="" class="diaryImg" />
+								<% } else { %>
+									<img src="<%= request.getContextPath() %>/images/default.png" alt="" class="diaryImg" />
+								<% } 
+								} %>
 								</div>
 								<div class="td"><%= counseling.getTitle() %></div>
 								<% if("O" == counseling.getAnonymous().toString()) { %>

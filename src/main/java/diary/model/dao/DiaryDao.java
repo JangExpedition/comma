@@ -36,6 +36,7 @@ public class DiaryDao {
 			pstmt.setString(2, diary.getContent());
 			pstmt.setString(3, diary.getOriginalFilename());
 			pstmt.setString(4, diary.getRenamedFilename());
+			pstmt.setString(5, diary.getRegDate());
 			
 			result = pstmt.executeUpdate();
 			
@@ -53,25 +54,47 @@ public class DiaryDao {
 			pstmt.setString(1, member.getNickname());
 			try(ResultSet rset = pstmt.executeQuery()){
 				while(rset.next()) {
-					Diary diary = new Diary();
-					
-					diary.setNo(rset.getInt("no"));
-					diary.setWriter(rset.getString("writer"));
-					diary.setContent(rset.getString("content"));
-					diary.setDesignNo(rset.getInt("design_no"));
-					diary.setFontNo(rset.getInt("font_no"));
-					diary.setOriginalFilename(rset.getString("original_filename"));
-					diary.setRenamedFilename(rset.getString("renamed_filename"));
-					diary.setRegDate(rset.getDate("reg_date"));
+					Diary diary = handleDiaryResultSet(rset);
 					
 					diaryList.add(diary);
 				}
 				
 			}
 		} catch (SQLException e) {
-			throw new DiaryException("일기장 등록오류!", e);
+			throw new DiaryException("일기장 목록 가져오기 오류!", e);
 		}
 		return diaryList;
+	}
+
+	private Diary handleDiaryResultSet(ResultSet rset) throws SQLException {
+		Diary diary = new Diary();
+		
+		diary.setNo(rset.getInt("no"));
+		diary.setWriter(rset.getString("writer"));
+		diary.setContent(rset.getString("content"));
+		diary.setDesignNo(rset.getInt("design_no"));
+		diary.setFontNo(rset.getInt("font_no"));
+		diary.setOriginalFilename(rset.getString("original_filename"));
+		diary.setRenamedFilename(rset.getString("renamed_filename"));
+		diary.setRegDate(rset.getDate("reg_date").toString());
+		return diary;
+	}
+
+	public Diary selectOneDiary(Connection conn, int diaryNo) {
+		Diary diary = null;
+		String sql  = prop.getProperty("selectOneDiary");
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setInt(1, diaryNo);
+			try(ResultSet rset = pstmt.executeQuery()){
+				if(rset.next()) {
+					diary = handleDiaryResultSet(rset);
+				}
+				
+			}
+		} catch (SQLException e) {
+			throw new DiaryException("일기장 조회오류!", e);
+		}
+		return diary;
 	}
 	
 } // class end

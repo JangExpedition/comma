@@ -5,7 +5,7 @@ ws.addEventListener('open', (e) => {
 });
 ws.addEventListener('message', (e) => {
 	console.log('message : ', e);
-	const wrapper = document.querySelector("#msg-container");
+	const wrapper = document.querySelector("#msgContainer");
 	const notification = document.querySelector("#notification");
 	
 	const {message, messageType, datetime, sender, receiver} = JSON.parse(e.data);
@@ -34,19 +34,19 @@ ws.addEventListener('message', (e) => {
 			notification.append(i1);
 			break;
 		case "CHATROOM_ENTER" :
-			wrapper.insertAdjacentHTML('beforeend', `<li class="line">${sender}님이 입장했습니다.</li>`);
+			wrapper.insertAdjacentHTML('beforeend', `<div class="line fontStyle">${sender}님이 입장했습니다.</div>`);
 			// beforeend : 마지막에 넣어달라
 			break;
 		case "CHATROOM_LEAVE" :
-			wrapper.insertAdjacentHTML('beforeend', `<li class="line">${sender}님이 퇴장했습니다.</li>`);		
+			wrapper.insertAdjacentHTML('beforeend', `<div class="line fontStyle">${sender}님이 퇴장했습니다.</div>`);		
 			break;
 		case "CHAT_MSG" :
-			wrapper.insertAdjacentHTML('beforeend', `<li class="left"><span class="badge">${sender}</span> ${message}</li>`);		
+			wrapper.insertAdjacentHTML('beforeend', `<div class="left ${sender} fontStyle"><span class="sender">${sender}</span> <span id="message" class="pointColor">${message}</span></div>`);		
 			break;
 	} // switch end
 	
 	// 스크롤 처리
-	//wrapper.scrollTop = wrapper.scrollHeight;
+	wrapper.scrollTop = wrapper.scrollHeight;
 });
 ws.addEventListener('error', (e) => {
 	console.log('error : ', e);

@@ -4,32 +4,57 @@ import java.sql.Date;
 
 import common.Form;
 
-public class Diary extends Form{
+public class Diary {
 	
+	private int no;
+	private String writer;
+	private String content;
 	private int designNo;
 	private int fontNo;
 	private String originalFilename;
 	private String renamedFilename;
+	private String regDate;
 	
 	public Diary() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Diary(int designNo, int fontNo, String originalFilename, String renamedFilename) {
+	public Diary(int no, String writer, String content, int designNo, int fontNo, String originalFilename,
+			String renamedFilename, String regDate) {
 		super();
+		this.no = no;
+		this.writer = writer;
+		this.content = content;
 		this.designNo = designNo;
 		this.fontNo = fontNo;
 		this.originalFilename = originalFilename;
 		this.renamedFilename = renamedFilename;
+		this.regDate = regDate;
 	}
-	
-	public Diary(int no, String writer, String content, Date regDate, int designNo, int fontNo, String originalFilename, String renamedFilename) {
-		super(no, writer, content, regDate);
-		this.designNo = designNo;
-		this.fontNo = fontNo;
-		this.originalFilename = originalFilename;
-		this.renamedFilename = renamedFilename;
+
+	public int getNo() {
+		return no;
+	}
+
+	public void setNo(int no) {
+		this.no = no;
+	}
+
+	public String getWriter() {
+		return writer;
+	}
+
+	public void setWriter(String writer) {
+		this.writer = writer;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 	public int getDesignNo() {
@@ -64,10 +89,19 @@ public class Diary extends Form{
 		this.renamedFilename = renamedFilename;
 	}
 
+	public String getRegDate() {
+		return regDate;
+	}
+
+	public void setRegDate(String regDate) {
+		this.regDate = regDate;
+	}
+
 	@Override
 	public String toString() {
-		return "Daily [designNo=" + designNo + ", fontNo=" + fontNo + ", originalFilename=" + originalFilename
-				+ ", renamedFilename=" + renamedFilename + ", toString()=" + super.toString() + "]";
+		return "Diary [no=" + no + ", writer=" + writer + ", content=" + content + ", designNo=" + designNo
+				+ ", fontNo=" + fontNo + ", originalFilename=" + originalFilename + ", renamedFilename="
+				+ renamedFilename + ", regDate=" + regDate + "]";
 	}
 	
 }

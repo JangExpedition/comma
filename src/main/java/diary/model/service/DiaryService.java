@@ -34,5 +34,12 @@ public class DiaryService {
 		close(conn);
 		return diaryList;
 	}
+
+	public Diary selectOneDiary(int diaryNo) {
+		Connection conn = getConnection();
+		Diary diary = diaryDao.selectOneDiary(conn, diaryNo);
+		close(conn);
+		return diary;
+	}
 	
 } // class end
