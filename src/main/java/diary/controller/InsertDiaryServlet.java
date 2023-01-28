@@ -1,6 +1,8 @@
 package diary.controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,7 +32,7 @@ public class InsertDiaryServlet extends HttpServlet {
 		
 		try {
 			
-			String saveDirectory = getServletContext().getRealPath("/upload/counseling");
+			String saveDirectory = getServletContext().getRealPath("/upload/diary");
 			int maxPostSize = 10 * 1024 * 1024;
 			String encoding = "utf-8";
 			FileRenamePolicy policy = new CommaFileRenamePolicy();
@@ -39,13 +41,13 @@ public class InsertDiaryServlet extends HttpServlet {
 			
 			String writer = multiReq.getParameter("writer");
 			String content = multiReq.getParameter("nowContent");
+			String nowDate = multiReq.getParameter("nowDate");
 			
+			Diary diary = new Diary(0, writer, content, 0, 0, null, null, "2022-10-10");
 			
-			Diary diary = new Diary(0, writer, content, null, 0, 0, null, null);
-			
-			if (multiReq.getFile("enrollImage") != null) {
-				diary.setOriginalFilename(multiReq.getOriginalFileName("enrollImage"));
-				diary.setRenamedFilename(multiReq.getFilesystemName("enrollImage"));
+			if (multiReq.getFile("file") != null) {
+				diary.setOriginalFilename(multiReq.getOriginalFileName("file"));
+				diary.setRenamedFilename(multiReq.getFilesystemName("file"));
 			}
 			
 			int result = diaryService.insertDiary(diary);

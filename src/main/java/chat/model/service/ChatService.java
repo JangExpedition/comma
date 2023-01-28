@@ -6,14 +6,12 @@ import static common.JdbcTemplate.getConnection;
 import static common.JdbcTemplate.rollback;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.util.List;
-import java.util.Map;
 
 import chat.model.dao.ChatDao;
 import chat.model.dto.Chat;
+import chat.model.dto.ChatLog;
 import chat.model.dto.ChatMember;
-import common.Attachment;
 
 public class ChatService {
 	private ChatDao chatDao = new ChatDao();
@@ -53,11 +51,11 @@ public class ChatService {
 		return result;
 	}
 
-	public int insertChatLog(Map<String, Object> data) {
+	public int insertChatLog(ChatLog chatLog) {
 		int result = 0;
 		Connection conn = getConnection();
 		try {
-			result = chatDao.insertChatLog(conn, data);
+			result = chatDao.insertChatLog(conn, chatLog);
 			commit(conn);
 		} catch(Exception e) {
 			rollback(conn);
@@ -67,4 +65,69 @@ public class ChatService {
 		}
 		return result;
 	}
+
+	public int leaveChatMember(int chatNo, String memberNick) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = chatDao.downNowCntChat(conn, chatNo);
+			
+			result = chatDao.updateChatMemEndDate(conn, chatNo, memberNick);
+			commit(conn);
+		} catch(Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
+	public int enterChatMemmber(int chatNo, String memberNick) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = chatDao.upNowCntChat(conn, chatNo);
+			
+			result = chatDao.insertChatMember(conn, chatNo, memberNick);
+			
+		} catch(Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
+	public int getNowCount(int chatNo) {
+		int nowCount = 0;
+		Connection conn = getConnection();
+		try {
+			nowCount = chatDao.getNowCount(conn, chatNo);
+			commit(conn);
+		} catch(Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return nowCount;
+	}
+
+	public int deleteChat(int chatNo) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = chatDao.deleteChat(conn, chatNo);
+			commit(conn);
+		} catch(Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
 }

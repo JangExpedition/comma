@@ -1,23 +1,39 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
-<section id="chat-container">	
-	<h2>채팅</h2>
-	<div id="msg-container">
-		<ul></ul>
-	</div>
-	
-	<div id="msg-editor" class="editor">
-		<form name="chatMsgFrm">
-			<textarea name="msg" id="msg" cols="30" rows="2" pattern="(.|\n)+"
-				required></textarea>
-			<button type="submit" id="send">Send</button>
-		</form>
+<section id="chatSection">	
+	<div id="chatContainer">	
+		<h2 id="chatTitle" class="fontStyle pointColor">익명채팅방</h2>
+		<div id="msgContainer">
+		</div>
+		<div id="msgEditor" class="editor">
+			<form name="chatMsgFrm" id="chatMsgFrm">
+				<textarea name="msg" id="msg" cols="30" rows="2" pattern="(.|\n)+"
+					required></textarea>
+				<button type="submit" id="send" class="fontStyle">보내기</button>
+			</form>
+		</div>
 	</div>
 </section>
 <script>
+
+$(".<%= loginMember.getNickname() %>").css("align-items", "flex-end");
+
+document.querySelector("#msg").addEventListener("keyup", (e)=>{
+	if(e.keyCode === 13){
+		document.querySelector("#send").click();
+	};
+});
+
 document.chatMsgFrm.addEventListener("submit", (e)=>{
 	e.preventDefault();
+	
+	
+	if(/\n/g.test(e.target.msg.value)){
+		console.log(e.target.msg.value);
+		e.target.msg.value = null;
+		return;
+	};
 	
 	const msg = {
 		messageType : "CHAT_MSG",

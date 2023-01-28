@@ -68,7 +68,7 @@
 		<tr>
 			<th>채팅방 최대 인원 : </th>
 			<td><input type="number" name="chattingPerson" min="1"
-				max="1000" value="1" /></td>
+				max="1000" value="2" /></td>
 		</tr>
 		
 		<tr>

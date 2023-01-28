@@ -77,6 +77,24 @@ section {
 	cursor: pointer;
 }
 
+#diarySec{
+	display: flex;
+}
+
+#yearFilter{
+	width: 20%;
+	padding: 20px;
+	box-sizing: border-box;
+}
+
+.yFilter:hover{
+	cursor: pointer;
+}
+
+#didiary{
+	width: 80%;
+}
+
 /* #diaryList {
 	padding: 0px 20%;
 	display: flex;
@@ -131,8 +149,9 @@ section {
 	box-sizing: border-box;
 }
 
-.writeImg {
+.writeImg{
 	width: 166px;
+	height: 166px;
 }
 
 .writeDate {
@@ -155,7 +174,7 @@ section {
 
 /* diaryEnroll */
 #diaryEnrollBack {
-	display: none;
+	display: flex;
 	align-items: center;
 	justify-content: center;
 	width: 100%;
@@ -181,12 +200,15 @@ section {
 
 #diaryEnrollTitle {
 	padding: 30px 10px;
-	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	font-size: 30px;
 	margin: 0px;
 	font-weight: bold;
 	color: #454a7b;
-	color: #454a7b;
+	height: 10%;
+	box-sizing: boder-box;
 }
 
 #diaryEnrollClose {
@@ -196,24 +218,18 @@ section {
 	font-size: 20px;
 }
 
-#diaryEnrollDiv {
-	display: inline-block;
-}
-
 #diaryEnrollClose:hover {
 	cursor: pointer;
 }
 
-#diaryEnroll {
-	padding: 0px 2%;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-}
-
 #diaryEnrollFrm {
 	font-size: 20px;
+	width: 100%;
+	height: 80%;
+}
+
+#diaryEnrollFrm>table{
+	width:100%;
 }
 
 #diaryEnrollFrm td {
@@ -232,8 +248,22 @@ section {
 }
 
 #nowContent {
+	width: 100%;
 	padding: 10px;
+	box-sizing: border-box;
+	height: 100%;
+	text-align: left;
 }
+
+#diaryEnrollFrmSubmit {
+	padding: 10px 20px;
+	background-color: rgba(0, 0, 0, 0);
+	font-size: 20px;
+	color: #454a7b;
+	border: 1px solid #363c61;
+	border-radius: 5px;
+	box-shadow: 1px 1px 1px #272b45;
+} 
 
 #enrollImage {
 	text-align: left;
@@ -248,39 +278,6 @@ section {
     flex-direction: column;
     flex-wrap: nowrap;
     align-items: flex-start;
-}
-
-#diaryEnrollFrm td {
-	height: 50px;
-	text-align: left;
-}
-
-
-#diaryEnrollFrm td:first-child {
-	color: #fff;
-}
-
-#diaryEnrollFrm tr:nth-child(2) input {
-	background-color: rgba(0, 0, 0, 0);
-	border: none;
-	color: #fff;
-	font-size: 15px;
-}
-
-
-#diaryEnrollFrm textarea {
-	border: none;
-    resize: none;
-}
-
-
-#diaryEnrollFrm tr:last-child td {
-	text-align: center;
-}
-
-
-#diaryEnrollFrm tr:last-child td input:hover {
-	cursor: pointer;
 }
 
 #enrollDesign {
@@ -309,121 +306,46 @@ section {
 	font-size: 20px;
 }
 
-
-/* designChoiceModal */
-
-#designChoiceModalBack {
+#designChoiceModal{
 	display: none;
-	align-items: center;
-	justify-content: center;
-	width: 100%;
-	height: 100vh;
-	position: absolute;
-	left: 0;
-	top: 0;
-	background-color: rgba(0, 0, 0, 0.5);
 }
 
-
-#designChoiceModal {
-	position: absolute;
-	display: none;
-	width: 300px;
-	height: 300px;
-	top: 15%;
-	text-align: center;
-	background-color: #fff;
-	border: 3px solid #272b45;
-	border-radius: 15px;
-	color: #454a7b;
-}
-
-#designModalTitle {
-	text-align: center;
-	padding: 15px 0px;
-	font-size: 20px;
-	margin: 0px;
-	font-weight: bold;
-	color: #454a7b;
-}
-
-.modal-close {
-	position: absolute;
-	top: 15px;
-	right: 15px;
-	font-size: 15px;
-	background-color: rgba(0, 0, 0, 0);
-	color: #454a7b;
-	border: none;
-}
-
-.modal-close:hover {
-	cursor: pointer;
-}
-
-#designModalContent {
-	font-size: 15px;
-	padding: 0px 20px;
-}
-
-#designModalContent td {
-	padding: 5px 10px;
-}
-
-#designModalContent td:last-child {
-	text-align: right;
-}
-
-.designImage {
-	width: 50px;
-	border-radius: 50%;
-}
-
-.designBtn {
-	background-color: #454a7b;
-	color: #fff;
-	border: 1px solid #363c61;
-	border-radius: 5px;
-	padding: 5px 10px;
-	box-shadow: 1px 1px 1px #272b45;
-}
-
-.designBtn:hover {
-	cursor: pointer;
-}
-
-#diaryEnrollFrm tr:nth-child(3) td {
-	text-align: right;
-}
-
-#diaryEnrollFrm tr:last-child td {
-	text-align: center;
-}
-
-#diaryEnrollFrmSubmit {
-	padding: 10px 20px;
-	background-color: rgba(0, 0, 0, 0);
-	font-size: 20px;
-	color: #454a7b;
-	border: 1px solid #363c61;
-	border-radius: 5px;
-	box-shadow: 1px 1px 1px #272b45;
-} 
-
-#diarySec{
+#noDiary{
 	display: flex;
-}
-
-#yearFilter{
-	width: 20%;
-	padding: 20px;
-	box-sizing: border-box;
-}
-
-.yFilter:hover{
-	cursor: pointer;
-}
-
-#didiary{
+	justify-content: center;
+	align-items: center;
 	width: 80%;
+}
+
+#oneDiaryFlexBox{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 80%;
+}
+
+#oneDiaryImg{
+	width: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#enrollContent{
+	width: 50%;
+	height: 100%;
+	overflow: scroll;
+}
+
+#editItemBox{
+	text-align: right;
+	padding: 10px;
+	box-sizing: border-box;
+	height: 10%;
+}
+
+#updateDiaryBtn{
+	heigth: 10%;
+	width: 100%;
 }

@@ -20,11 +20,15 @@ import javax.websocket.server.ServerEndpoint;
 
 import com.google.gson.Gson;
 
+import chat.model.dto.ChatLog;
+import chat.model.service.ChatService;
 import ws.MessageType;
 import ws.config.CommaWebSocketConfigurator;
 
 @ServerEndpoint(value = "/commaWebSocket", configurator = CommaWebSocketConfigurator.class)
 public class CommaWebSocket {
+	
+	private ChatService chatService = new ChatService();
 
 	/**
 	 * 사용자의 웹소켓 세션을 관리하는 맵 (공용자원느낌)
@@ -172,6 +176,7 @@ public class CommaWebSocket {
 		// json => map
 		Map<String, Object> data = new Gson().fromJson(msg, Map.class);
 		// { "messageType" : "CHAT", "message" : "ㅋㅋㅋ", "datetime" : 13415154312, ... }
+		System.out.println(data);
 		
 		String chatNo = (String) data.get("chatNo");
 		MessageType messageType = MessageType.valueOf((String) data.get("messageType"));		
@@ -189,9 +194,27 @@ public class CommaWebSocket {
 			} // for each end
 			break;
 		case CHAT_MSG :
+			// 채팅방 메세지 DB insert
+			int chatNum = Integer.valueOf(chatNo);
+			String memberNickname = (String) data.get("sender");
+			String content = (String) data.get("message");
+			ChatLog chatLog = new ChatLog(0, chatNum, memberNickname, content, null, null, null);
+			try {
+				int result = chatService.insertChatLog(chatLog);
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
 		case CHATROOM_ENTER :
 		{
+			// 채팅방 멤버 DB update
+			try {
+				int result = chatService.enterChatMemmber(Integer.valueOf(chatNo), (String) data.get("sender"));
+			} catch(Exception e){
+				e.printStackTrace();
+			}
+			
 			Set<String> participantSet = chatParticipantMap.get(chatNo);
+			
 			// 방법1)
 			 Map<String, Session> nicknameSession = new HashMap<>();
 			for (Session key : sessionNickname.keySet() ) {
@@ -222,37 +245,53 @@ public class CommaWebSocket {
 		}
 			break;
 		case CHATROOM_LEAVE :
-		try {
-			Set<String> participantSet = chatParticipantMap.get(chatNo);
-			// 방법1)
-			 Map<String, Session> nicknameSession = new HashMap<>();
-			for (Session key : sessionNickname.keySet() ) {
-			    nicknameSession.put(sessionNickname.get(key),key);
+		{
+			// 채팅방 멤버 DB update
+			try {
+				int result = chatService.leaveChatMember(Integer.valueOf(chatNo), (String) data.get("sender"));
+			}catch(Exception e) {
+				e.printStackTrace();
 			}
-			for (String participant : participantSet) {
-				Session sess = clientMap.get(participant);
-				if(sessionNickname.get(sess) == participant)
-				{
-					Basic basic = sess.getBasicRemote();
-					try {
-						basic.sendText(msg);
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				}
-				else {
-					sess = nicknameSession.get(participant);
-					Basic basic = sess.getBasicRemote();
-					try {
-						basic.sendText(msg);
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				} 
 			
-			} // for each end
-		}catch(Exception e){
-			System.out.println("마지막 사람 나감");
+			// 채팅방 현재 인원수 조회
+			int nowCount = chatService.getNowCount(Integer.valueOf(chatNo));
+			
+			System.out.println("CommaWebSocket nowCount = " + nowCount);
+			
+			if(nowCount>0) {
+				Set<String> participantSet = chatParticipantMap.get(chatNo);
+				// 방법1)
+				Map<String, Session> nicknameSession = new HashMap<>();
+				for (Session key : sessionNickname.keySet() ) {
+					nicknameSession.put(sessionNickname.get(key),key);
+				}
+				for (String participant : participantSet) {
+					Session sess = clientMap.get(participant);
+					if(sessionNickname.get(sess) == participant)
+					{
+						Basic basic = sess.getBasicRemote();
+						try {
+							basic.sendText(msg);
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+					else {
+						sess = nicknameSession.get(participant);
+						Basic basic = sess.getBasicRemote();
+						try {
+							basic.sendText(msg);
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					} 
+					
+				} // for each end
+			} else {
+				// 채팅방 인원이 0이면 채팅방 제거
+				int result = chatService.deleteChat(Integer.valueOf(chatNo));
+			}
+			
 		}
 			break;
 		} // switch end

@@ -2,6 +2,8 @@
 <%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="java.time.LocalDateTime"%>
 <%@page import="diary.model.dto.Diary"%>
+<%@page import="java.util.HashSet"%>
+<%@page import="java.util.Iterator" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
@@ -9,116 +11,147 @@
 <%
 	LocalDateTime today = LocalDateTime.now();
 	String formatToday = today.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-	System.out.println(formatToday);
 	List<Diary> diaryList = (List<Diary>)request.getAttribute("diaryList");
-	System.out.println("diaryList = " + diaryList);
-	String yFilter = formatToday.substring(0, 4);
+	String yFilter = (String) request.getAttribute("yearFilter");
+	
+	boolean canWrite = true;
+	HashSet<String> memberHaveYearSet = (HashSet<String>)request.getAttribute("memberHaveYearSet");
+	
+	for(Diary diary : diaryList){
+		if(diary.getRegDate().equals(formatToday)){
+			canWrite = false;
+		}
+	}
+	
 %>
 	
 	<section id="diaryTotalList" class="fontStyle">
 	<div id="diaryContainer">
 	<div id="diaryTitle">일기장</div>
-	<div id="inputBtn"><input type="button" id="writeBtn" class="fontStyle" value="일기 작성하기" /></div>
+	<div id="inputBtn">
+	<% 
+	if(canWrite){
+		if(formatToday.substring(0, 4).equals(yFilter)) { 
+	%>
+		<input type="button" id="writeBtn" class="fontStyle" value="일기 작성하기" />
+		<script>
+			document.querySelector("#writeBtn").addEventListener('click', () => {
+				location.href = "<%= request.getContextPath() %>/diary/writeDiary";
+			});
+		</script>
+	<% } 
+	} %>
+	</div>
+	
+	<div class="yearContainer">
+	<% if(yFilter == null) { %>
+		<%= formatToday.substring(0, 4) %>
+	<% } else{ %>
+		<%= yFilter %>
+	<% } %>
+	</div>
 	<div id="diarySec">
 		<div id="yearFilter">
-		<p class="yFilter">#2023</p>
-		<p class="yFilter">#2022</p>
-		<p class="yFilter">#2021</p>
-		<p class="yFilter">#2020</p>
-		<p class="yFilter">#2019</p>
-		<p class="yFilter">#2018</p>
-		<p class="yFilter">#2017</p>
+		<p class="yFilter">#전체보기</p>
+		<%
+			Iterator<String> iter = memberHaveYearSet.iterator();
+			while(iter.hasNext()){
+		%>
+		<p class="yFilter">#<%= iter.next() %></p>
+		<% } %>
 		</div>
 		
 		<% if(diaryList.isEmpty()) {%>
-			<div>
-				일기를 작성해보세요!
+			<div id="noDiary">
+				작성된 일기가 없습니다.
 			</div>
 		<% }else{ %>
 		<div id="didiary">
-			<div class="yearContainer">2023</div>
-		<% for(Diary diary : diaryList){ 
-			if(diary.getRegDate().toString().substring(0, 4).equals(yFilter)) %>
-					<div id="diary">
-						<div id="imgBox">
-						<% if(diary.getOriginalFilename() != null){ %>
-							<img src="<%= request.getContextPath() %>/upload/diary/<%= diary.getRenamedFilename() %>" alt="" class="writeImg" />
-						<% } else{ %>
-							<img src="<%= request.getContextPath() %>/images/default.png" alt="" class="writeImg" />
+		<% for(Diary diary : diaryList){ %>
+			<div id="diary" data-diary-no="<%= diary.getNo() %>" class="onediary" >
+				<div id="imgBox">
+				<% if(diary.getOriginalFilename() != null){ %>
+					<img src="<%= request.getContextPath() %>/upload/diary/<%= diary.getRenamedFilename() %>" alt="" class="writeImg" />
+				<% } else{ %>
+					<img src="<%= request.getContextPath() %>/images/default.png" alt="" class="writeImg" />
+				<% } %>
+				</div>
+				<div id="diaryContent">
+					<p class="writeDate"><%= diary.getRegDate() %></p>
+					<% if(diary.getContent().length() > 20) {%>
+					<p class="writeContent"><%= diary.getContent().substring(0, 20) + "..." %></p>
+					<% } else{ %>
+					<p class="writeContent"><%= diary.getContent() %></p>
+					<% } %>
+					<div>
+						<% if(diary.getRegDate().toString().equals(formatToday)){  %>
+						<button id="updateBtn">수정하기</button>
 						<% } %>
-						</div>
-						<div id="diaryContent">
-							<p class="writeDate"><%= diary.getRegDate() %></p>
-							<% if(diary.getContent().length() > 20) {%>
-							<p class="writeContent"><%= diary.getContent().substring(0, 20) + "..." %></p>
-							<% } else{ %>
-							<p class="writeContent"><%= diary.getContent() %></p>
-							<% } %>
-							<div>
-								<% if(diary.getRegDate().toString().equals(formatToday)){  %>
-								<button id="updateBtn">수정하기</button>
-								<% } %>
-							</div>
-						</div>
 					</div>
+				</div>
+			</div>
 		<% } %>
 		</div>
+		<script>
+		/*
+		  버튼 클릭 시 모달 창 띄우기
+		*/
+		$(".onediary").click((e)=>{
+			const diaryNo = $(event.target).parent('.onediary').data('diaryNo');
+			$.ajax({
+				url : "<%= request.getContextPath() %>/diary/diaryView",
+				data : {diaryNo},
+				dataType: "json",
+				success(data){
+					
+					const{no, writer, content, designNo, fontNo, originalFilename, renamedFilename, regDate} = data;
+					
+					diaryEnrollTitle.innerHTML = regDate;
+					if(originalFilename === null){
+						diaryViewImg.src = "<%= request.getContextPath() %>/images/default.png";
+					} else{
+						diaryViewImg.src = `<%= request.getContextPath() %>/upload/diary/\${renamedFilename}`;
+ 					}
+					
+					nowContent.innerHTML = content;
+					
+					diaryEnrollBack.style.display = "flex";
+					
+				}
+			});
+		});
+		</script>
 		<% } %>
 		</div>
 	</div>
 	</section>
-	
 	<!-- 일기 작성 모달 -->
 	<div id="diaryEnrollBack">
 		<div id="diaryEnrollModal" class="modal fontStyle">
-			<div id="diaryEnrollTitle">일기작성</div>
+			<div id="diaryEnrollTitle"></div>
 			<span id="diaryEnrollClose" onclick="modalClose(this);">X</span>
-			<div id="diaryEnrollDiv">
-				<div id="diaryEnroll">
-					<form id="diaryEnrollFrm" name="diaryEnrollFrm" action="<%= request.getContextPath() %>/diary/insertDiary" method="POST" enctype="multipart/form-data">
-					<input type="hidden" name="writer" value="<%= loginMember.getNickname() %>" />
-						<table>
-							<tbody>
-								<tr>
-									<td colspan="2">
-										<div id="enrollDate">
-											<input type="date" name="nowDate" id="nowDate" class="fontStyle" value=<%= formatToday %> readonly />						
-										</div>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<div id="enrollImage">
-											<img src="<%= request.getContextPath() %>/images/default.png" alt="첨부한 이미지" class="enrollImage" />
-										</div>										
-									</td>
-									<td>
-										<div id="enrollContent">
-											<label for="nowContent"></label>
-											<textarea name="nowContent" id="nowContent" cols="50" rows="12" placeholder="내용 작성"></textarea>
-										</div>
-									</td>
-								</tr>
-								<tr>
-									<td colspan="2">
-										<label for="enrollImage">
-											<i id="enrollImageChoice" class="fa-regular fa-image"></i>
-										</label>
-										<input type="file" name="enrollImage" id="enrollImage" style="display: none;" />
-										<i id="enrollFontChoice" class="fa-solid fa-font"></i>
-										<i id="enrollDesignChoice" class="fa-solid fa-brush"></i>
-									</td>
-								</tr>
-								<tr>
-									<td colspan="2">
-										<input id="diaryEnrollFrmSubmit" class="fontStyle" type="submit" value="등록하기" />
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</form>
+			<form id="diaryEnrollFrm" name="diaryEnrollFrm" action="<%= request.getContextPath() %>/diary/insertDiary" method="POST" enctype="multipart/form-data">
+				<input type="hidden" name="writer" value="<%= loginMember.getNickname() %>" />
+				<div id="oneDiaryFlexBox">
+					<div id="oneDiaryImg">
+						<img id="diaryViewImg" src="" alt="첨부한 이미지" class="enrollImage" />
+					</div>
+					<div id="enrollContent">
+						<div id="nowContent" name="nowContent"></div>
+					</div>
 				</div>
-			</div>
+				<div id="editItemBox">
+					<label for="enrollImage">
+						<i id="enrollImageChoice" class="fa-regular fa-image"></i>
+					</label>
+					<input type="file" name="enrollImage" id="enrollImage" style="display: none;" />
+					<i id="enrollFontChoice" class="fa-solid fa-font"></i>
+					<i id="enrollDesignChoice" class="fa-solid fa-brush"></i>
+				</div>
+				<div id="updateDiaryBtn">
+					<input id="diaryEnrollFrmSubmit" class="fontStyle" type="submit" value="등록하기" />
+				</div>
+			</form>
 		</div>
 	</div>
 	
@@ -163,28 +196,22 @@
 			</table>
 		</div>
 	</div>
-	
+	<form action="<%= request.getContextPath() %>/diary/diaryList" name="filterFrm">
+		<input type="hidden" id="yearFilter" name="yearFilter"/>
+	</form>
 	<script>
-	document.querySelector("#updateBtn").addEventListener("click", (e)=>{
-		
-		modal.style.display = 'flex';
-	});
 	/*
 		일기년도 필터 메서드
 	*/
 	$(".yFilter").click((e)=>{
-		console.log("sadfsadfd");
+		const form = document.filterFrm;
+		form.yearFilter.value = e.target.innerHTML.substr(1,);
+		
+		document.filterFrm.submit();
+		
 	});
 	
 	const modal = document.querySelector('#diaryEnrollBack');
-	
-	/*
-	  일기쓰기 버튼 클릭 시 모달 창 띄우기
-	*/
-	document.querySelector("#writeBtn").addEventListener('click', () => {
-		console.log(modal);
-		modal.style.display = 'flex';
-	});
 	
 	/*
 	  모달 창 이외의 부분 클릭 시 창 닫기
@@ -210,7 +237,7 @@
 	// 디자인 이미지 클릭하면 디자인 선택창 띄움
 	enrollDesignChoice.addEventListener('click', () => {
 		designChoiceModal.style.display = 'inline-block';
-	});
+	}); 
 	</script>
 
 </body>

@@ -6,6 +6,7 @@ public class ChatLog {
 	
 	private int no;
 	private int chatNo;
+	private String memberNick;
 	private String content;
 	private String originalFilename;
 	private String renamedFilename;
@@ -15,10 +16,11 @@ public class ChatLog {
 		super();
 	}
 
-	public ChatLog(int no, int chatNo, String content, String originalFilename, String renamedFilename, Date regDate) {
+	public ChatLog(int no, int chatNo, String memberNick, String content, String originalFilename, String renamedFilename, Date regDate) {
 		super();
 		this.no = no;
 		this.chatNo = chatNo;
+		this.memberNick = memberNick;
 		this.content = content;
 		this.originalFilename = originalFilename;
 		this.renamedFilename = renamedFilename;
@@ -72,11 +74,20 @@ public class ChatLog {
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
+	
+	public String getMemberNick() {
+		return memberNick;
+	}
+
+	public void setMemberNick(String memberNick) {
+		this.memberNick = memberNick;
+	}
 
 	@Override
 	public String toString() {
-		return "ChatLog [no=" + no + ", chatNo=" + chatNo + ", content=" + content + ", originalFilename="
-				+ originalFilename + ", renamedFilename=" + renamedFilename + ", regDate=" + regDate + "]";
+		return "ChatLog [no=" + no + ", chatNo=" + chatNo + ", memberNick=" + memberNick + ", content=" + content
+				+ ", originalFilename=" + originalFilename + ", renamedFilename=" + renamedFilename + ", regDate="
+				+ regDate + "]";
 	}
 	
 }

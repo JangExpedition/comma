@@ -242,7 +242,7 @@ create table diary (
 	content clob not null,
 	original_filename varchar2(300),
 	renamed_filename varchar2(300),
-	reg_date date default sysdate not null
+	reg_date char(10)
 );
 -- diary 제약조건 추가
 alter table diary
@@ -410,9 +410,11 @@ create table chatting (
     captin varchar2(50) not null,  -- 방장
     able_gender char(1) not null,
     able_age number not null,
+    now_count number default 1 not null,
     able_count number not null,
     reg_date date default sysdate
 );
+
 -- chatting 제약조건 추가
 alter table chatting
     add constraint pk_chatting_no primary key (no)
@@ -446,8 +448,8 @@ create sequence seq_chatting_member_no;
 create table chatting_log (
     no number, -- 채팅로그 별 고유 번호
     chat_no number,
-    member_no number,
-    which_one char(1) not null,
+    member_nick varchar2(50) not null,
+--    which_one char(1) not null,
     content varchar2(1000),
     original_filename varchar2(300),
     renamed_filename varchar2(300),
@@ -457,8 +459,8 @@ create table chatting_log (
 alter table chatting_log
     add constraint pk_chatting_log_no primary key (no)
     add constraint fk_chatting_log_chat_no foreign key (chat_no) references chatting(no) on delete cascade
-    add constraint fk_chatting_log_member_no foreign key (member_no) references chatting_member(no) on delete cascade
-    add constraint ck_chatting_log_which_one check (which_one in ('C', 'F'));
+    add constraint fk_chatting_log_member_nick foreign key (member_nick) references member(nickname) on delete cascade;
+--    add constraint ck_chatting_log_which_one check (which_one in ('C', 'F'));
 
 -- seq_chatting_log_no 시퀀스 생성
 create sequence seq_chatting_log_no;
@@ -495,17 +497,16 @@ begin
     insert into
         leave_member
     values(
-        :old.email,
+        :old.member_id,
         :old.nickname,
         :old.password,
         :old.birthday,
         :old.gender,
+        :old.phone,
+        :old.email,
         :old.enroll_date,
         :old.member_role,
-        :old.original_filename,
-        :old.renamed_filename,
         :old.warning_count,
-        :old.age,
         sysdate
     );
 end;
