@@ -129,11 +129,8 @@
 						<td><%= member.getEnrollDate() %></td>
 						<td>
 							<div class="btnFrm">
-								<form action="<%= request.getContextPath() %>/letter/writeLetter" method="post" name="sendLetterFrm">
-									<input type="hidden" name="nick" value="<%= member.getNickname() %>" />
-									<input type="submit" id="sendLetterBtn" class="memberBtn" value="편지" />
-								</form>
-								<input type="button" id="delMemberBtn" class="delMemberBtn memberBtn" value="탈퇴" data-member-nickname="<%= member.getNickname() %>" data-member-email="<%= member.getEmail() %>" />
+								<input type="button" id="sendLetterBtn" class="sendLetterBtn memberBtn" value="편지" data-member-nick="<%= member.getNickname() %>" />
+								<input type="button" id="delMemberBtn" class="delMemberBtn memberBtn" value="탈퇴" data-member-nick="<%= member.getNickname() %>" data-member-email="<%= member.getEmail() %>" />
 							</div>
 						</td>
 					</tr>
@@ -162,6 +159,9 @@
 	</form>
 
 	<script>
+		/*
+		  회원탈퇴
+		*/
 		document.querySelectorAll('.delMemberBtn').forEach((del) => {
 			del.addEventListener('click', (e) => {
 				const memberNick = e.target.dataset.memberNick;
@@ -172,6 +172,16 @@
 					frm.memberEmail.value = email;
 					frm.submit();
 				}
+			});
+		});
+		
+		/*
+		  해당 회원에게 편지 보내기
+		*/
+		document.querySelectorAll('.sendLetterBtn').forEach((send) => {
+			send.addEventListener('click', (e) => {
+				localStorage.setItem('friendNick', e.target.dataset.memberNick);
+				location.href = '<%= request.getContextPath() %>/letter/writeLetter';
 			});
 		});
 		
