@@ -104,6 +104,7 @@ public class StyleDao {
 	public Design handleDesignResultSet(ResultSet rset) throws SQLException {
 		Design design = new Design();
 		design.setNo(rset.getInt("no"));
+		design.setRnum(rset.getInt("rnum"));
 		design.setPart(Part.valueOf(rset.getString("part")));
 		design.setOriginalFilename(rset.getString("original_filename"));
 		design.setRenamedFilename(rset.getString("renamed_filename"));

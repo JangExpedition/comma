@@ -169,7 +169,7 @@ input[type="checkbox"]:checked {
 	margin-top: 20px;
 	padding: 10px 0px;
 	width: 50%;
-	background-color: #fdffb5;
+	/*background-color: #fdffb5;*/
 	border-radius: 20px;
 }
 

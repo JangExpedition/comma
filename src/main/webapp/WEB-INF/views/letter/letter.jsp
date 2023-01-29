@@ -103,22 +103,17 @@
 		                    	<select name="designChoice" id="designChoice">
                     	<%
                     		if (designList != null && !designList.isEmpty()) {
-                    			for (Design design : designList) {
+                    			for (int i = 0; i < designList.size(); i++) {
+                    				Design design = designList.get(i);
                     				if (design.getPart() == Part.L) {
                     	%>
-                    			<%-- 
-                    				<div class="designChoiceDiv">
-	                    				<input type="radio" name="designChoice" id="designChoice" />
-	                    				<label for="designChoice" id="designImg" class="designImg" style="background-image:url(<%= request.getContextPath() %>/upload/design/<%= design.getRenamedFilename() %>);"></label>
-                    				</div>
-                    			 --%>
-                    				<option value="<%= design.getNo() %>" >디자인<%= design.getNo() %></option>
+                    				<option class="designChoiceOption" data-design-img="<%= design.getRenamedFilename() %>" value="<%= i %>">디자인<%= design.getRnum() %></option>
                     	<%
                     				} // if end
                     			} // for end
                     		} else {
                     	%>
-		                    		<option value=0>디자인선택불가</option>
+		                    		<option value=-1>디자인선택불가</option>
                     	<%
                     		} // else end
                     	%>
@@ -170,13 +165,19 @@
 		};
 		
 		/*
-		document.querySelectorAll('.designChoiceDiv').forEach((img) => {
-			img.addEventListener('click', (e) => {
-				console.log(e.target);
-				e.target.style.outline = '2px solid #000';
+		  디자인 선택 시 백그라운드 이미지 변경
+		*/
+		document.querySelector('#designChoice').addEventListener('change', (e) => {
+			console.log(e.target.value);
+			document.querySelectorAll('.designChoiceOption').forEach((option) => {
+				const bool = option.selected;
+				const designImg = option.dataset.designImg;
+				
+				if (bool) {
+					writeLetterFrm.style.backgroundImage = `url('<%= request.getContextPath() %>/upload/design/\${designImg}')`;
+				}
 			});
 		});
-		*/
 		
 		/*
 		  폼 제출 시 내용 또는 친구를 선택하지 않은 경우 폼 제출 막는 이벤트
