@@ -1,3 +1,5 @@
+<%@page import="style.model.dto.Design"%>
+<%@page import="style.model.dto.Font"%>
 <%@page import="member.model.dto.MemberRole"%>
 <%@page import="complain.model.dto.Partition"%>
 <%@page import="friends.model.dto.Friends"%>
@@ -12,6 +14,8 @@
 	String msg = (String) session.getAttribute("msg");
 	if(msg != null) session.removeAttribute("msg");
 	List<Friends> friendsList = (List<Friends>) session.getAttribute("friendsList");
+	List<Font> fontList = (List<Font>) session.getAttribute("fontList");
+	List<Design> designList = (List<Design>) session.getAttribute("designList");
 	Partition partition = null;
 %>
 <!DOCTYPE html>
@@ -20,6 +24,9 @@
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/common.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Cute+Font&family=Dongle:wght@300;400&family=East+Sea+Dokdo&family=Gaegu:wght@300;400&family=Gamja+Flower&family=Hi+Melody&family=IBM+Plex+Sans+KR:wght@200;300;400&family=Jua&family=Moon+Dance&family=Nanum+Brush+Script&family=Nanum+Gothic&family=Nanum+Myeongjo&family=Nanum+Pen+Script&family=Rubik+Bubbles&family=Sunflower:wght@300;500&family=Yeon+Sung&display=swap" rel="stylesheet">
 	<script src="<%= request.getContextPath() %>/js/jquery-3.6.1.js"></script>
 <% if (loginMember != null) { %>
 	<script src="<%= request.getContextPath() %>/js/ws.js"></script>

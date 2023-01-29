@@ -1,3 +1,5 @@
+<%@page import="style.model.dto.Part"%>
+<%@page import="style.model.dto.Design"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
@@ -77,10 +79,19 @@
 		                    </td>
 		                    <td colspan="2">
 		                    	<select name="fontChoice" id="fontChoice">
-		                    		<option value=1>폰트1</option>
-		                    		<option value=2>폰트2</option>
-		                    		<option value=3>폰트3</option>
-		                    		<option value=4>폰트4</option>
+                    	<%
+                    		if (fontList != null && !fontList.isEmpty()) {
+                    			for (Font font : fontList) {
+                    	%>
+                    				<option style="font-family:<%= font.getName() %>;" class="fontChoiceOption" value="<%= font.getNo() %>" data-font-name="<%= font.getName() %>"><%= font.getName() %></option>
+                    	<%
+                    			} // for end
+                    		} else {
+                    	%>
+		                    		<option value=0>폰트선택불가</option>
+                    	<%
+                    		} // else end
+                    	%>
 		                    	</select>
 		                    </td>
 						</tr>
@@ -88,12 +99,24 @@
 		                    <td>
 		                    	<label for="designChoice" id="labelTd" class="fontStyle">디자인 선택</label>
 		                    </td>
-		                    <td colspan="2">
+		                    <td colspan="2" class="designTd">
 		                    	<select name="designChoice" id="designChoice">
-		                    		<option value=1>디자인1</option>
-		                    		<option value=2>디자인2</option>
-		                    		<option value=3>디자인3</option>
-		                    		<option value=4>디자인4</option>
+                    	<%
+                    		if (designList != null && !designList.isEmpty()) {
+                    			for (int i = 0; i < designList.size(); i++) {
+                    				Design design = designList.get(i);
+                    				if (design.getPart() == Part.L) {
+                    	%>
+                    				<option class="designChoiceOption" data-design-img="<%= design.getRenamedFilename() %>" value="<%= design.getNo() %>">디자인<%= design.getRnum() %></option>
+                    	<%
+                    				} // if end
+                    			} // for end
+                    		} else {
+                    	%>
+		                    		<option value=-1>디자인선택불가</option>
+                    	<%
+                    		} // else end
+                    	%>
 		                    	</select>
 		                    </td>
 						</tr>
@@ -137,7 +160,38 @@
 			checkBox.forEach((box) => {
 				box.classList.add('choiceDetail');
 			});
+			random.click();
+			writeLetterFrm.style.backgroundImage = "url('<%= request.getContextPath() %>/upload/design/<%= designList.get(0).getRenamedFilename() %>')";
 		};
+		
+		/*
+		  폰트 선택 시 폰트 변경
+		*/
+		document.querySelector('#fontChoice').addEventListener('change', (e) => {
+			document.querySelectorAll('.fontChoiceOption').forEach((option) => {
+				const bool = option.selected;
+				const fontName = option.dataset.fontName;
+				
+				if (bool) {
+					writeLetterFrm.style.fontFamily = `\${fontName}`;
+					content.style.fontFamily = `\${fontName}`;
+				}
+			});
+		});
+		
+		/*
+		  디자인 선택 시 백그라운드 이미지 변경
+		*/
+		document.querySelector('#designChoice').addEventListener('change', (e) => {
+			document.querySelectorAll('.designChoiceOption').forEach((option) => {
+				const bool = option.selected;
+				const designImg = option.dataset.designImg;
+				
+				if (bool) {
+					writeLetterFrm.style.backgroundImage = `url('<%= request.getContextPath() %>/upload/design/\${designImg}')`;
+				}
+			});
+		});
 		
 		/*
 		  폼 제출 시 내용 또는 친구를 선택하지 않은 경우 폼 제출 막는 이벤트

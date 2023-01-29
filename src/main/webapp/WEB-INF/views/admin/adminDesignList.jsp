@@ -5,7 +5,7 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 <%
-	List<Design> designList = (List<Design>) request.getAttribute("designList");
+	designList = (List<Design>) session.getAttribute("designList");
 	String searchKeyword = request.getParameter("searchKeyword");
 %>
 
@@ -86,7 +86,9 @@
 					<table id="designEnrollTable" class="modalTable">
 						<tr>
 							<th class="fontStyle">작성자</th>
-							<td><input type="text" id="writerInput" name="writer" value="<%= loginMember.getNickname() %>" readOnly /></td>
+							<td>
+								<input type="text" id="writerInput" name="writer" value="<%= loginMember.getNickname() %>" readOnly />
+							</td>
 						</tr>
 						<tr>
 							<th class="fontStyle">구분</th>
@@ -99,7 +101,7 @@
 							<th class="fontStyle">이미지</th>
 							<td>
 								<img id="img" src="" alt="" class="uploadImg" /><br />
-								<input type="file" name="upFile" id="upFile" required />
+								<input type="file" name="upFile" id="upFile" accept="image/*" required />
 							</td>
 						</tr>
 						<tr>
@@ -139,7 +141,7 @@
 							<th class="fontStyle">이미지</th>
 							<td>
 								<img id="updateImg" src="" alt="" class="uploadImg" /><br />
-								<input type="file" name="upFile" id="updateFile" required />
+								<input type="file" name="upFile" id="updateFile" accept="image/*" required />
 							</td>
 						</tr>
 						<tr>

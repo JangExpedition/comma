@@ -29,13 +29,14 @@ input[type="checkbox"]:checked {
     display: flex;
     align-items: center;
     justify-content: center;
+    padding-bottom: 20px;
 }
 
 #writeLetterFrm {
 	padding: 0 30px;
 	margin: auto;
 	text-align: left;
-	background-color: #bebebe;
+	/*background-color: #bebebe;*/
 }
 
 #writeLetterTable {
@@ -74,6 +75,29 @@ input[type="checkbox"]:checked {
 .letterImg {
 	width: 30%;
 }
+
+/*
+#designChoice {
+	opacity: 0;
+	width: 0;
+	height: 0;
+}
+*/
+
+.designImg {
+	cursor: pointer;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+}
+
+/*
+.designTd input:checked + .designImg {
+	outline: 2px solid #000;
+}
+*/
 
 .imgBtn {
 	text-align: right;
@@ -139,13 +163,14 @@ input[type="checkbox"]:checked {
 	display: flex;
     flex-direction: column;
     align-items: center;
+    padding-bottom: 50px;
 }
 
 .letterList {
 	margin-top: 20px;
 	padding: 10px 0px;
 	width: 50%;
-	background-color: #fdffb5;
+	/*background-color: #fdffb5;*/
 	border-radius: 20px;
 }
 

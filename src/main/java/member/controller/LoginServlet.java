@@ -15,6 +15,9 @@ import friends.model.dto.Friends;
 import friends.model.service.FriendsService;
 import member.model.dto.Member;
 import member.model.service.MemberService;
+import style.model.dto.Design;
+import style.model.dto.Font;
+import style.model.service.StyleService;
 
 /**
  * Servlet implementation class LoginServlet
@@ -24,6 +27,7 @@ public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private MemberService memberService = new MemberService();
 	private FriendsService friendsService = new FriendsService();
+	private StyleService styleService = new StyleService();
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -39,8 +43,13 @@ public class LoginServlet extends HttpServlet {
 		
 		if(member != null && password.equals(member.getPassword())) {
 			List<Friends> friendsList = friendsService.selectAllFriends(member.getNickname());
+			List<Font> fontList = styleService.selectAllFont();
+			List<Design> designList = styleService.selectAllDesign();
+			
 			session.setAttribute("loginMember", member);
 			session.setAttribute("friendsList", friendsList);
+			session.setAttribute("fontList", fontList);
+			session.setAttribute("designList", designList);
 		}else {
 			session.setAttribute("msg", "아이디 또는 비밀번호가 일치하지 않습니다.");
 		}

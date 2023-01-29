@@ -26,7 +26,7 @@ public class AdminFontListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<Font> fontList = styleService.selectAllFont();
 		
-		request.setAttribute("fontList", fontList);
+		request.getSession().setAttribute("fontList", fontList);
 		
 		request.getRequestDispatcher("/WEB-INF/views/admin/adminFontList.jsp")
 			.forward(request, response);
