@@ -24,6 +24,7 @@ select * from member;
 --update member set member_role = 'A' where nickname like ('admin%');
 select * from leave_member;
 select * from friends;
+--delete from friends where my_nickname = 'test4';
 select * from letter;
 select * from attachment_letter;
 select * from diary;

@@ -1,9 +1,6 @@
 package friends.controller;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,17 +8,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-
 import friends.model.dto.Friends;
 import friends.model.service.FriendsService;
 import notification.model.service.NotificationService;
 
 /**
- * Servlet implementation class InsertFriendServlet
+ * Servlet implementation class FriendsRequestServlet
  */
-@WebServlet("/friend/friendship")
-public class InsertFriendServlet extends HttpServlet {
+@WebServlet("/friends/friendRequest")
+public class FriendsRequestServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private FriendsService friendsService = new FriendsService();
 	private NotificationService notificationService = new NotificationService();
@@ -30,6 +25,7 @@ public class InsertFriendServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int no = Integer.parseInt(request.getParameter("no"));
 		try {
 			String fNick = request.getParameter("fNick");
 			String myNick = request.getParameter("myNick");
@@ -41,22 +37,19 @@ public class InsertFriendServlet extends HttpServlet {
 			
 			int result = friendsService.insertFriend(friends);
 			
-			Map<String, Object>map = new HashMap<>();
-			map.put("result", "친구요청 성공!");
-			
 			try {
 				notificationService.notifyNewFriend(friends);
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
 			
-			response.setContentType("application/json; charset=utf-8");
-			new Gson().toJson(map, response.getWriter());
-			
+			request.getSession().setAttribute("msg", "친구 신청 성공!");
 		} catch(Exception e) {
+			request.getSession().setAttribute("msg", "친구 신청 실패!");
 			e.printStackTrace();
 		}
 		
-	}
+		response.sendRedirect(request.getContextPath() + "/letter/letterView?no=" + no);
+	} // doPost() end
 
 }

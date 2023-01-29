@@ -39,11 +39,4 @@ public class FriendsListServlet extends HttpServlet {
 		request.getRequestDispatcher("/WEB-INF/views/friends/friendsList.jsp").forward(request, response);
 	} // doGet() end
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-	} // doPost() end
-
 }

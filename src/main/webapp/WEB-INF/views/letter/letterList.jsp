@@ -203,20 +203,6 @@
 			letterContent.innerText = content + '  .....';
 		});
 		
-		<%--
-		window.onload = () => {
-			document.querySelectorAll('.letterList').forEach((letter) => {
-				console.log(letter);
-				
-				const no = letter.dataset.letterNo;
-				const fontNo = letter.dataset.fontNo;
-				const designImg = letter.dataset.designImg;
-				
-				letter.style.backgroudImage = "url('<%= request.getContextPath() %>/upload/design/'" + designImg + "')";
-			});			
-		};
-		--%>
-		
 	</script>
 </body>
 </html>

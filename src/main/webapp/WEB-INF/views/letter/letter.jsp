@@ -160,7 +160,9 @@
 			checkBox.forEach((box) => {
 				box.classList.add('choiceDetail');
 			});
-			random.click();
+			
+			if (friendNick == null)
+				random.click();
 			writeLetterFrm.style.backgroundImage = "url('<%= request.getContextPath() %>/upload/design/<%= designList.get(0).getRenamedFilename() %>')";
 		};
 		

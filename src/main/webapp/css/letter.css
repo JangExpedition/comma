@@ -215,3 +215,8 @@ input[type="checkbox"]:checked {
 .letterDetailImg {
 	width: 30%;
 }
+
+
+#writerDiv {
+	margin: 0px auto;
+}
