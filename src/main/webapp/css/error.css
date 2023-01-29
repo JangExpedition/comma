@@ -1,1 +1,62 @@
+
 @charset "UTF-8";
+
+body
+{
+ font-family: 'Rubik', sans-serif;
+ background-color: #454a7b;
+}
+
+h1,h2,h3,h4,h5,h6,p
+{
+ margin: 0px;
+ padding: 0px;
+ color: #fff;
+}
+
+.error_container
+{
+ width: 100%;
+ height: 100vh;
+}
+
+.error_block
+{
+ width: 40%;
+ position: absolute;
+ left: 50%;
+ top: 50%;
+ transform: translate(-50%,-50%);
+ text-align: center;
+}
+
+.error_block h1
+{
+ font-size: 100px;
+ color: #ffffff;
+}
+
+.error_block h3
+{
+ font-size: 40px;
+ color: #fff;
+}
+
+#try{
+  text-align: center; 
+  font-size: 18px;
+}
+
+.error_btn
+{
+ width: 250px;
+ height: 45px;
+ background: #bfafeb;
+ border:none;
+ border-radius: 5px;
+ color: #fff;
+ font-size: 18px;
+ font-weight: 600;
+ margin-top: 30px;
+ cursor: pointer;
+}

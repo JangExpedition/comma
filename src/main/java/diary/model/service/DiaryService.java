@@ -41,5 +41,35 @@ public class DiaryService {
 		close(conn);
 		return diary;
 	}
+
+	public int deleteDiary(int diaryNo) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = diaryDao.deleteDiary(conn, diaryNo);
+			commit(conn);
+		} catch(Exception e){
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
+	public int upDateDiary(Diary diary) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = diaryDao.upDateDiary(conn, diary);
+			commit(conn);
+		} catch(Exception e){
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
 	
 } // class end

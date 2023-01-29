@@ -24,15 +24,21 @@ public class MemberEmailCertify extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String clientEmail = request.getParameter("clientEmail");
-		String code = mail.sendMail(clientEmail);
 		
-		response.setContentType("application/jsp; charset=utf-8");
-		Gson gson = new Gson();
-		String jsonStr = gson.toJson(code);
-		System.out.println(jsonStr);
-		
-		response.getWriter().append(jsonStr);
+			String email = request.getParameter("email");
+			
+			int _code = (int) (Math.random()*89999+100000);
+	        String code = String.valueOf(_code);
+	        String content = "인증번호는 " + code + "입니다.";
+			
+			mail.naverMailSend(email, content);
+			
+			response.setContentType("application/jsp; charset=utf-8");
+			Gson gson = new Gson();
+			String jsonStr = gson.toJson(code);
+			
+			response.getWriter().append(jsonStr);
+
 	}
 
 }

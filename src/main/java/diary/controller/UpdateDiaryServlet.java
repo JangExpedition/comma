@@ -1,8 +1,6 @@
 package diary.controller;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,10 +16,10 @@ import diary.model.dto.Diary;
 import diary.model.service.DiaryService;
 
 /**
- * Servlet implementation class InsertDiaryServlet
+ * Servlet implementation class UpdateDiaryServlet
  */
-@WebServlet("/diary/insertDiary")
-public class InsertDiaryServlet extends HttpServlet {
+@WebServlet("/diary/updateDiary")
+public class UpdateDiaryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private DiaryService diaryService = new DiaryService();
 
@@ -29,7 +27,6 @@ public class InsertDiaryServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		try {
 			
 			String saveDirectory = getServletContext().getRealPath("/upload/diary");
@@ -39,18 +36,19 @@ public class InsertDiaryServlet extends HttpServlet {
 			
 			MultipartRequest multiReq = new MultipartRequest(request, saveDirectory, maxPostSize, encoding, policy);
 			
-			String writer = multiReq.getParameter("writer");
-			String content = multiReq.getParameter("nowContent");
-			String nowDate = multiReq.getParameter("nowDate");
+			int diaryNo = Integer.valueOf(multiReq.getParameter("updateDiaryNo"));
+			String content = multiReq.getParameter("editContent");
 			
-			Diary diary = new Diary(0, writer, content, 0, 0, null, null, nowDate);
+			Diary diary = diaryService.selectOneDiary(diaryNo);
 			
-			if (multiReq.getFile("file") != null) {
-				diary.setOriginalFilename(multiReq.getOriginalFileName("file"));
-				diary.setRenamedFilename(multiReq.getFilesystemName("file"));
+			diary.setContent(content);
+			
+			if (multiReq.getFile("updateFile") != null) {
+				diary.setOriginalFilename(multiReq.getOriginalFileName("updateFile"));
+				diary.setRenamedFilename(multiReq.getFilesystemName("updateFile"));
 			}
 			
-			int result = diaryService.insertDiary(diary);
+			int result = diaryService.upDateDiary(diary);
 			
 			
 		} catch(Exception e) {

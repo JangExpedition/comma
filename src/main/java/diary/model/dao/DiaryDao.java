@@ -96,5 +96,38 @@ public class DiaryDao {
 		}
 		return diary;
 	}
+
+	public int deleteDiary(Connection conn, int diaryNo) {
+		int result = 0;
+		String sql = prop.getProperty("deleteDiary");
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setInt(1, diaryNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			throw new DiaryException("일기장 삭제오류!", e);
+		}
+		
+		return result;
+	}
+
+	public int upDateDiary(Connection conn, Diary diary) {
+		int result = 0;
+		String sql = prop.getProperty("upDateDiary");
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setString(1, diary.getContent());
+			pstmt.setString(2, diary.getOriginalFilename());
+			pstmt.setString(3, diary.getRenamedFilename());
+			pstmt.setInt(4, diary.getNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			throw new DiaryException("일기장 삭제오류!", e);
+		}
+		
+		return result;
+	}
 	
 } // class end

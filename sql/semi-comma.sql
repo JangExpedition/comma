@@ -41,6 +41,7 @@ select * from faq;
 select * from chatting;
 select * from chatting_member;
 select * from chatting_log;
+select * from like_counseling;
 
 
 
@@ -284,6 +285,20 @@ alter table counseling
 
 -- seq_cs_no 시퀀스 생성
 create sequence seq_cs_no;
+
+-- like_counseling 테이블 생성
+create table like_counseling (
+    no number,
+    cs_no number not null,
+    mem_nick varchar2(50) not null,
+    reg_date date default sysdate not null
+);
+-- like_counseling 제약조건 추가  
+alter table like_counseling
+    add constraint pk_like_counseling_no primary key (no)
+    add constraint fk_like_counseling_cs_no foreign key (cs_no) references counseling(no) on delete cascade;
+-- seq_like_cs_no 시퀀스 생성
+create sequence seq_cs_like_no;
 
 -- attachment_counseling 테이블 생성
 create table attachment_counseling (
@@ -734,6 +749,14 @@ comment on column notification.not_content_pk is '알람 받은 컨텐츠 pk';
 comment on column notification.not_message is '알람 메세지';
 comment on column notification.not_datetime is '알람 발송 시간';
 comment on column notification.check_read is '알람 확인여부(CK in (O,X))';
+
+
+-- like_counseling 테이블
+comment on table like_counseling is '좋아요 테이블';
+comment on column like_counseling.no is '좋아요 번호(PK, 변경불가)';
+comment on column like_counseling.cs_no is '좋아요 누른 게시물 번호(FK, counseling.no)';
+comment on column like_counseling.mem_nick is '좋아요 누른 회원 닉네임';
+comment on column like_counseling.reg_date is '좋아요 누른 시간';
 
 -- ======================================================================
 -- member 테이블 insert
