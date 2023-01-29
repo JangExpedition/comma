@@ -750,3 +750,4 @@ comment on column notification.check_read is '알람 확인여부(CK in (O,X))';
 --insert into friends values (seq_friends_no.nextval, 'test', 'test2', 'O');
 
 --select * from friends f left join member m on f.f_nickname = m.nickname where my_nickname = 'test';
+
