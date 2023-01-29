@@ -16,11 +16,17 @@
 		if (design.getNo() == letter.getDesignNo())
 			designImg = design.getRenamedFilename();
 	}
+	
+	String fontName = "";
+	for (Font font : fontList) {
+		if (font.getNo() == letter.getFontNo())
+			fontName = font.getName();
+	}
 %>
 	<section>
 		<div id="letterTitle" class="fontStyle" onclick="history.back();">받은 편지함</div>
 		<div id="letterAllList">
-			<div id="letterListDiv" class="letterList" style="background-image:url('<%= request.getContextPath() %>/upload/design/<%= designImg %>')">
+			<div id="letterListDiv" class="letterList" style="font-family:<%= fontName %>; background-image:url('<%= request.getContextPath() %>/upload/design/<%= designImg %>')">
 				<div id="letterListTitle">
 					<table>
 						<tr>

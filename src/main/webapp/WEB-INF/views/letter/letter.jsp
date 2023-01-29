@@ -83,7 +83,7 @@
                     		if (fontList != null && !fontList.isEmpty()) {
                     			for (Font font : fontList) {
                     	%>
-                    				<option value="<%= font.getNo() %>"><%= font.getName() %></option>
+                    				<option style="font-family:<%= font.getName() %>;" class="fontChoiceOption" value="<%= font.getNo() %>" data-font-name="<%= font.getName() %>"><%= font.getName() %></option>
                     	<%
                     			} // for end
                     		} else {
@@ -165,10 +165,24 @@
 		};
 		
 		/*
+		  폰트 선택 시 폰트 변경
+		*/
+		document.querySelector('#fontChoice').addEventListener('change', (e) => {
+			document.querySelectorAll('.fontChoiceOption').forEach((option) => {
+				const bool = option.selected;
+				const fontName = option.dataset.fontName;
+				
+				if (bool) {
+					writeLetterFrm.style.fontFamily = `\${fontName}`;
+					content.style.fontFamily = `\${fontName}`;
+				}
+			});
+		});
+		
+		/*
 		  디자인 선택 시 백그라운드 이미지 변경
 		*/
 		document.querySelector('#designChoice').addEventListener('change', (e) => {
-			console.log(e.target.value);
 			document.querySelectorAll('.designChoiceOption').forEach((option) => {
 				const bool = option.selected;
 				const designImg = option.dataset.designImg;

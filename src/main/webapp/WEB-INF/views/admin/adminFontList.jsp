@@ -4,7 +4,7 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 <%
-	//List<Font> fontList = (List<Font>) request.getAttribute("fontList");
+	fontList = (List<Font>) session.getAttribute("fontList");
 	String searchKeyword = request.getParameter("searchKeyword");
 %>
 	
@@ -41,8 +41,8 @@
 	        if (!fontList.isEmpty()) {
 	        	for (Font font : fontList) {
 	    %>
-		            <tr>
-		                <td><%= font.getNo() %></td>
+		            <tr style="font-family:<%= font.getName() %>">
+		                <td><%= font.getRnum() %></td>
 						<td><%= font.getName() %></td>
 						<td><%= font.getLink() %></td>
 						<td>

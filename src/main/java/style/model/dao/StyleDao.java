@@ -33,6 +33,7 @@ public class StyleDao {
 	public Font handleFontResultSet(ResultSet rset) throws SQLException {
 		Font font = new Font();
 		font.setNo(rset.getInt("no"));
+		font.setRnum(rset.getInt("rnum"));
 		font.setName(rset.getString("name"));
 		font.setLink(rset.getString("link"));
 		return font;
