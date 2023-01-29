@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import chat.model.dto.Chat;
@@ -35,23 +36,25 @@ public class ChatDao {
 		String sql = prop.getProperty("selectAllChat");
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
 			try(ResultSet rset = pstmt.executeQuery()){
-				while(rset.next()) {
-					Chat chat = new Chat();
-					chat.setNo(rset.getInt("no"));
-					chat.setChatName(rset.getString("name"));
-					chat.setCaptin(rset.getString("captin"));
-					chat.setAbleGender(Gender.valueOf(rset.getString("able_gender")));
-					chat.setAbleAge(rset.getInt("able_age"));
-					chat.setAbleCount(rset.getInt("able_count"));
-					chat.setRegDate(rset.getDate("reg_date"));
-					
-					chatList.add(chat);
-				}
+				while(rset.next())
+					chatList.add(handleChatResultSet(rset));
 			}
 		} catch (SQLException e) {
 			throw new ChatException("채팅목록 불러오기 오류!", e);
 		}
 		return chatList;
+	}
+
+	public Chat handleChatResultSet(ResultSet rset) throws SQLException {
+		Chat chat = new Chat();
+		chat.setNo(rset.getInt("no"));
+		chat.setChatName(rset.getString("name"));
+		chat.setCaptin(rset.getString("captin"));
+		chat.setAbleGender(Gender.valueOf(rset.getString("able_gender")));
+		chat.setAbleAge(rset.getInt("able_age"));
+		chat.setAbleCount(rset.getInt("able_count"));
+		chat.setRegDate(rset.getDate("reg_date"));
+		return chat;
 	}
 
 	public int insertChat(Connection conn, Chat chat) {
@@ -205,6 +208,114 @@ public class ChatDao {
 			throw new ChatException("채팅방 현재인원 조회오류!", e);
 		}
 		return result;
+	}
+
+	public List<Chat> selectFindChat(Connection conn, Map<String, Object> param) {
+		List<Chat> chatList = new ArrayList<>();
+		String sql = prop.getProperty("selectFindChat");
+		
+		String type = (String) param.get("searchType");
+		Object keyword = param.get("searchKeyword");
+		
+		sql = sql.replace("#", type);
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setObject(1, keyword);
+			
+			try(ResultSet rset = pstmt.executeQuery()){
+				while(rset.next())
+					chatList.add(handleChatResultSet(rset));
+			}
+		} catch (SQLException e) {
+			throw new ChatException("채팅목록 불러오기 오류!", e);
+		}
+		return chatList;
+	} // selectFindChat() end
+
+	public List<ChatLog> selectAllChatLog(Connection conn, int no) {
+		List<ChatLog> chatLogList = new ArrayList<>();
+		String sql = prop.getProperty("selectAllChatLog");
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, no);
+			
+			try (ResultSet rset = pstmt.executeQuery()) {
+				while (rset.next())
+					chatLogList.add(handleChatLogResultSet(rset));
+			}
+		} catch (SQLException e) {
+			throw new ChatException("채팅로그 불러오기 오류!", e);
+		}
+		return chatLogList;
+	} // selectAllChatLog() end
+
+	public ChatLog handleChatLogResultSet(ResultSet rset) throws SQLException {
+		ChatLog chatLog = new ChatLog();
+		chatLog.setNo(rset.getInt("no"));
+		chatLog.setChatNo(rset.getInt("chat_no"));
+		chatLog.setMemberNick(rset.getString("member_nick"));
+		chatLog.setContent(rset.getString("content"));
+		chatLog.setOriginalFilename(rset.getString("original_filename"));
+		chatLog.setRenamedFilename(rset.getString("renamed_filename"));
+		chatLog.setRegDate(rset.getDate("reg_date"));
+		return chatLog;
+	}
+
+	public List<ChatMember> selectAllChatMember(Connection conn, int no) {
+		List<ChatMember> chatMemberList = new ArrayList<>();
+		String sql = prop.getProperty("selectAllChatMember");
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, no);
+			
+			try (ResultSet rset = pstmt.executeQuery()) {
+				while (rset.next()) {
+					ChatMember chatMember = new ChatMember();
+					chatMember.setNo(rset.getInt("no"));
+					chatMember.setChatNo(rset.getInt("chat_no"));
+					chatMember.setNickname(rset.getString("nickname"));
+					chatMember.setStartDate(rset.getDate("start_date"));
+					chatMember.setEndDate(rset.getDate("end_date"));
+					chatMemberList.add(chatMember);
+				}
+			}
+		} catch (SQLException e) {
+			throw new ChatException("채팅멤버 불러오기 오류!", e);
+		}
+		return chatMemberList;
+	} // selectAllChatMember() end
+
+	public int deleteChatLog(Connection conn, int chatLogNo) {
+		int result = 0;
+		String sql = prop.getProperty("deleteChatLog");
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setInt(1, chatLogNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new ChatException("채팅로그 삭제 오류", e);
+		}
+		return result;
+	} // deleteChatLog() end
+
+	public List<ChatLog> selectFindChatLog(Connection conn, Map<String, Object> param) {
+		List<ChatLog> chatLogList = new ArrayList<>();
+		String sql = prop.getProperty("selectFindChatLog");
+		
+		String type = (String) param.get("searchType");
+		Object keyword = param.get("searchKeyword");
+		
+		sql = sql.replace("#", type);
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setObject(1, keyword);
+			
+			try(ResultSet rset = pstmt.executeQuery()){
+				while(rset.next())
+					chatLogList.add(handleChatLogResultSet(rset));
+			}
+		} catch (SQLException e) {
+			throw new ChatException("채팅로그 목록 검색 오류!", e);
+		}
+		return chatLogList;
 	}
 
 }

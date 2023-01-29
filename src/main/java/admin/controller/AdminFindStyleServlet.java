@@ -1,9 +1,8 @@
 package admin.controller;
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,21 +26,31 @@ public class AdminFindStyleServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String type = request.getParameter("type");
+		String type = request.getParameter("searchType");
 		String searchKeyword = request.getParameter("searchKeyword");
 		
+		List<Font> fontList = new ArrayList<>();
+		List<Design> designList = new ArrayList<>();
+		
 		if ("font".equals(type)) {
-			List<Font> fontList = styleService.selectFindFont(searchKeyword);
-			request.setAttribute("fontList", fontList);
-			request.getRequestDispatcher("/WEB-INF/views/admin/adminFontList.jsp")
-				.forward(request, response);
+			fontList = styleService.selectFindFont(searchKeyword);
+			//designList = styleService.selectAllDesign();
+			
+			request.getSession().setAttribute("fontList", fontList);
+			//request.getSession().setAttribute("designList", designList);
+			request.getRequestDispatcher("/WEB-INF/views/admin/adminFontList.jsp").forward(request, response);
 		}
 		else {
-			List<Design> designList = styleService.selectFindDesign(searchKeyword);
-			request.setAttribute("designList", designList);
-			request.getRequestDispatcher("/WEB-INF/views/admin/adminDesignList.jsp")
-				.forward(request, response);
+			designList = styleService.selectFindDesign(searchKeyword);
+			//fontList = styleService.selectAllFont();
+			
+			//request.getSession().setAttribute("fontList", fontList);
+			request.getSession().setAttribute("designList", designList);
+			request.getRequestDispatcher("/WEB-INF/views/admin/adminDesignList.jsp").forward(request, response);
 		}
+		
+		//request.setAttribute("type", type);
+		//request.getRequestDispatcher("/WEB-INF/views/admin/adminStyleList.jsp").forward(request, response);
 	} // doGet() end
 
 }

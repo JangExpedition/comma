@@ -2,18 +2,48 @@
 
 section{
 	width: 70%;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
+	text-align: center;
 	padding-top: 40px;
 }
 
+div {
+	margin: auto;
+}
 
 #adminTitle{
 	text-align : center;
 	font-size: 30px;
 }
+
+#styleButton{
+	width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-items: stretch;
+	/* background-color: #5F5DA6; */
+	border: 2px solid #212E40;
+	border-radius: 50px;
+}
+
+.styleBtn {
+	width: 100%;
+	padding: 5px 0;
+	text-align: center;
+	background-color: rgba(0, 0, 0, 0);
+    color: #909090;
+    border: none;
+    font-size: 15px;
+}
+
+.styleBtnClick {
+    color: #212E40;
+}
+
+#styleFontBtn {
+	border-right: 2px solid #212E40;
+}
+
 
 #search-container {
 	width: 100%;
@@ -39,6 +69,7 @@ section{
 	border-radius: 10px;
 	margin: 20px;
 }
+
 
 .table{
 	width: 100%;
