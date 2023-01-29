@@ -6,6 +6,7 @@ import java.sql.Date;
 
 public class Design {
 	private int no;
+	private int rnum;
 	private Part part;
 	private String originalFilename;
 	private String renamedFilename;
@@ -25,12 +26,30 @@ public class Design {
 		this.regDate = regDate;
 	}
 
+	public Design(int no, int rnum, Part part, String originalFilename, String renamedFilename, Date regDate) {
+		super();
+		this.no = no;
+		this.rnum = rnum;
+		this.part = part;
+		this.originalFilename = originalFilename;
+		this.renamedFilename = renamedFilename;
+		this.regDate = regDate;
+	}
+
 	public int getNo() {
 		return no;
 	}
 
 	public void setNo(int no) {
 		this.no = no;
+	}
+
+	public int getRnum() {
+		return rnum;
+	}
+
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
 	}
 
 	public Part getPart() {
@@ -67,8 +86,8 @@ public class Design {
 
 	@Override
 	public String toString() {
-		return "Design [no=" + no + ", part=" + part + ", originalFilename=" + originalFilename + ", renamedFilename="
-				+ renamedFilename + ", regDate=" + regDate + "]";
+		return "Design [no=" + no + ", rnum=" + rnum + ", part=" + part + ", originalFilename=" + originalFilename
+				+ ", renamedFilename=" + renamedFilename + ", regDate=" + regDate + "]";
 	}
 	
 }

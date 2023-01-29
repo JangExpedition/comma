@@ -8,6 +8,7 @@
 	List<Letter> letterList = (List<Letter>) request.getAttribute("letterList");
 	System.out.println("letterList = " + letterList);
 	int no = 0;
+	String designImg = "";
 %>
 	<section>
 		<div id="letterTitle" class="fontStyle" onclick="location.href='<%= request.getContextPath() %>/letter/letterList';">받은 편지함</div>
@@ -26,8 +27,12 @@
 				System.out.println(letter.getSendWho());
 				if (letter.getSendWho() == AF.A) {
 					no = letter.getNo();
+					for (Design design : designList) {
+						if (design.getNo() == letter.getDesignNo())
+							designImg = design.getRenamedFilename();
+					}
 		%>
-			<div id="letterListAnony" class="letterList letterListDiv" data-letter-no="<%= no %>">
+			<div id="letterListAnony" class="letterList letterListDiv" data-letter-no="<%= no %>" style="background-image:url('<%= request.getContextPath() %>/upload/design/<%= designImg %>');">
 				<div id="letterListTitle">
 					<table>
 						<tr>
@@ -77,8 +82,12 @@
 		<%
 				} else {
 					no = letter.getNo();
+					for (Design design : designList) {
+						if (design.getNo() == letter.getDesignNo())
+							designImg = design.getRenamedFilename();
+					}
 		%>
-			<div id="letterListFriend" class="letterList letterListDiv" data-letter-no="<%= no %>">
+			<div id="letterListFriend" class="letterList letterListDiv" data-letter-no="<%= no %>" style="background-image:url('<%= request.getContextPath() %>/upload/design/<%= designImg %>');">
 				<div id="letterListTitle">
 					<table>
 						<tr>
@@ -184,6 +193,20 @@
 			console.log('content' + content);
 			letterContent.innerText = content + '  .....';
 		});
+		
+		<%--
+		window.onload = () => {
+			document.querySelectorAll('.letterList').forEach((letter) => {
+				console.log(letter);
+				
+				const no = letter.dataset.letterNo;
+				const fontNo = letter.dataset.fontNo;
+				const designImg = letter.dataset.designImg;
+				
+				letter.style.backgroudImage = "url('<%= request.getContextPath() %>/upload/design/'" + designImg + "')";
+			});			
+		};
+		--%>
 		
 	</script>
 </body>

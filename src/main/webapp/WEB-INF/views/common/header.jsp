@@ -1,3 +1,5 @@
+<%@page import="style.model.dto.Design"%>
+<%@page import="style.model.dto.Font"%>
 <%@page import="member.model.dto.MemberRole"%>
 <%@page import="complain.model.dto.Partition"%>
 <%@page import="friends.model.dto.Friends"%>
@@ -12,6 +14,8 @@
 	String msg = (String) session.getAttribute("msg");
 	if(msg != null) session.removeAttribute("msg");
 	List<Friends> friendsList = (List<Friends>) session.getAttribute("friendsList");
+	List<Font> fontList = (List<Font>) session.getAttribute("fontList");
+	List<Design> designList = (List<Design>) session.getAttribute("designList");
 	Partition partition = null;
 %>
 <!DOCTYPE html>

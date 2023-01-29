@@ -10,11 +10,17 @@
 	partition = Partition.LETTER;
 	Boolean bool = friendsList.contains(letter.getWriter());
 	System.out.println(bool);
+	
+	String designImg = "";
+	for (Design design : designList) {
+		if (design.getNo() == letter.getDesignNo())
+			designImg = design.getRenamedFilename();
+	}
 %>
 	<section>
 		<div id="letterTitle" class="fontStyle" onclick="history.back();">받은 편지함</div>
 		<div id="letterAllList">
-			<div id="letterListDiv" class="letterList">
+			<div id="letterListDiv" class="letterList" style="background-image:url('<%= request.getContextPath() %>/upload/design/<%= designImg %>')">
 				<div id="letterListTitle">
 					<table>
 						<tr>

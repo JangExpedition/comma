@@ -5,7 +5,7 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 <%
-	List<Design> designList = (List<Design>) request.getAttribute("designList");
+	//List<Design> designList = (List<Design>) request.getAttribute("designList");
 	String searchKeyword = request.getParameter("searchKeyword");
 %>
 
@@ -99,7 +99,7 @@
 							<th class="fontStyle">이미지</th>
 							<td>
 								<img id="img" src="" alt="" class="uploadImg" /><br />
-								<input type="file" name="upFile" id="upFile" required />
+								<input type="file" name="upFile" id="upFile" accept="image/*" required />
 							</td>
 						</tr>
 						<tr>
@@ -139,7 +139,7 @@
 							<th class="fontStyle">이미지</th>
 							<td>
 								<img id="updateImg" src="" alt="" class="uploadImg" /><br />
-								<input type="file" name="upFile" id="updateFile" required />
+								<input type="file" name="upFile" id="updateFile" accept="image/*" required />
 							</td>
 						</tr>
 						<tr>
