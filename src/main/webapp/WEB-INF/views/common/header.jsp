@@ -108,6 +108,10 @@
 	case "/comma/admin/adminMemberFinder" :
 	case "/comma/complain/complain" :
 	case "/comma/complain/complainFinder" :
+	case "/comma/admin/adminChatList" :
+	case "/comma/admin/adminChatLog" :
+	case "/comma/admin/adminChatFinder" :
+	case "/comma/admin/adminChatLogFinder" :
 		link.href = "<%= request.getContextPath() %>/css/admin.css";
 		break;
 	case "/comma/counseling/CSView" :
@@ -231,7 +235,34 @@
 				<div id="toDiary" class="navBtn">일기장</div>
 				<div id="toPost" class="navBtn">우편함</div>
 				<div id="toLetter" class="navBtn">편지쓰기</div>
-				<div id="toChat" class="navBtn">익명채팅방</div>
+			<% if (loginMember.getMemberRole() == MemberRole.A || loginMember.getMemberRole() == MemberRole.M) { %>
+				<div id="toAdminChatList" class="navBtn">익명채팅방</div><script>
+				/*
+			    Date : 2023. 1. 23
+			    @한혜진
+			    
+			    익명채팅방 메서드
+			    */
+			    
+				document.querySelector("#toAdminChatList").addEventListener("click", (e)=>{
+					location.href = "<%= request.getContextPath() %>/admin/adminChatList";	
+				});
+				</script>
+			<% } else { %>
+				<div id="toChat" class="navBtn">익명채팅</div>
+				<script>
+				/*
+			    Date : 2023. 1. 23
+			    @한혜진
+			    
+			    익명채팅방 메서드
+			    */
+			    
+				document.querySelector("#toChat").addEventListener("click", (e)=>{
+					location.href = "<%= request.getContextPath() %>/chat/chatList";	
+				});
+				</script>
+			<% } %>
 				<div id="toCounseling" class="navBtn">고민상담소</div>
 				<div id="toMypage" class="navBtn">마이페이지</div>
 				<div id="toQuestion" class="navBtn">고객센터</div>
@@ -358,18 +389,6 @@
 		*/
 		document.querySelector("#logoutBtn").addEventListener("click", (e)=>{
 			location.href = "<%= request.getContextPath() %>/member/logout";	
-		});
-	    
-	    
-	    /*
-	    Date : 2023. 1. 23
-	    @한혜진
-	    
-	    익명채팅방 메서드
-	    */
-	    
-		document.querySelector("#toChat").addEventListener("click", (e)=>{
-			location.href = "<%= request.getContextPath() %>/chat/chatList";	
 		});
 	    
 	    </script>
