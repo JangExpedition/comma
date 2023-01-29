@@ -13,6 +13,7 @@ public class Chat {
 	private String captin;
 	private Gender ableGender;
 	private int ableAge;
+	private int nowCount;
 	private int ableCount;
 	private Date regDate;
 	private List<ChatMember> chatMembers = new ArrayList<>();
@@ -20,16 +21,16 @@ public class Chat {
 	
 	public Chat() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public Chat(int no, String chatName, String captin, Gender ableGender, int ableAge, int ableCount, Date regDate) {
+	public Chat(int no, String chatName, String captin, Gender ableGender, int ableAge, int nowCount, int ableCount, Date regDate) {
 		super();
 		this.no = no;
 		this.chatName = chatName;
 		this.captin = captin;
 		this.ableGender = ableGender;
 		this.ableAge = ableAge;
+		this.nowCount = nowCount;
 		this.ableCount = ableCount;
 		this.regDate = regDate;
 	}
@@ -105,11 +106,22 @@ public class Chat {
 	public void setChatLogs(List<ChatLog> chatLogs) {
 		this.chatLogs = chatLogs;
 	}
+	
+
+	public int getNowCount() {
+		return nowCount;
+	}
+
+	public void setNowCount(int nowCount) {
+		this.nowCount = nowCount;
+	}
 
 	@Override
 	public String toString() {
 		return "Chat [no=" + no + ", chatName=" + chatName + ", captin=" + captin + ", ableGender=" + ableGender
-				+ ", ableAge=" + ableAge + ", ableCount=" + ableCount + ", regDate=" + regDate + "]";
+				+ ", ableAge=" + ableAge + ", nowCount=" + nowCount + ", ableCount=" + ableCount + ", regDate="
+				+ regDate + ", chatMembers=" + chatMembers + ", chatLogs=" + chatLogs + ", toString()="
+				+ super.toString() + "]";
 	}
-	
+
 }

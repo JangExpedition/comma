@@ -8,10 +8,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 
 import chat.model.dto.Chat;
+import chat.model.dto.ChatLog;
 import chat.model.dto.ChatMember;
 import chat.model.exception.ChatException;
 import member.model.dao.MemberDao;
@@ -102,24 +102,107 @@ public class ChatDao {
 		}
 		return result;
 	}
-
-	public int insertChatLog(Connection conn, Map<String, Object> data) {
+	
+	public int insertChatMember(Connection conn, int chatNo, String memberNick) {
 		int result = 0;
-		String sql = prop.getProperty("insertChatLog");
+		String sql = prop.getProperty("insertChatMember");
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
-			/**
-			 * no number, -- 채팅로그 별 고유 번호
-		    chat_no number,
-		    member_no number,
-		    content varchar2(1000),
-		    original_filename varchar2(300),
-		    renamed_filename varchar2(300),
-		    reg_date timestamp default systimestamp
-			 */
+			pstmt.setInt(1, chatNo);
+			pstmt.setString(2, memberNick);
 			
+			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
-			throw new ChatException("채팅방 로그추가 오류!");
+			throw new ChatException("채팅방 멤버추가 오류!");
+		}
+		return result;
+	}
+
+	public int insertChatLog(Connection conn, ChatLog chatLog) {
+		int result = 0;
+		String sql = prop.getProperty("insertChatLog");
+		System.out.println("ChatDao.insertChatLog = " + chatLog);
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setInt(1, chatLog.getChatNo());
+			pstmt.setString(2, chatLog.getMemberNick());
+			pstmt.setString(3, chatLog.getContent());
+			pstmt.setString(4, chatLog.getOriginalFilename());
+			pstmt.setString(5, chatLog.getRenamedFilename());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new ChatException("채팅방 로그추가 오류!", e);
+		}
+		return result;
+	}
+	
+	public int upNowCntChat(Connection conn, int chatNo) {
+		int result = 0;
+		String sql = prop.getProperty("upNowCntChat");
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setInt(1, chatNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new ChatException("채팅방 인원 카운트 업 오류!", e);
+		}
+		return result;
+	}
+
+	public int downNowCntChat(Connection conn, int chatNo) {
+		int result = 0;
+		String sql = prop.getProperty("downNowCntChat");
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setInt(1, chatNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new ChatException("채팅방 인원 카운트 다운 오류!", e);
+		}
+		return result;
+	}
+
+	public int updateChatMemEndDate(Connection conn, int chatNo, String memberNick) {
+		int result = 0;
+		String sql = prop.getProperty("updateChatMemEndDate");
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setInt(1, chatNo);
+			pstmt.setString(2, memberNick);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new ChatException("채팅멤버 나간시간 지정오류!", e);
+		}
+		return result;
+	}
+
+	public int getNowCount(Connection conn, int chatNo) {
+		int nowCount = 0;
+		String sql = prop.getProperty("getNowCount");
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setInt(1, chatNo);
+			
+			try(ResultSet rset = pstmt.executeQuery()){
+				if(rset.next()) {
+					nowCount = rset.getInt(1);
+				}
+			}
+		} catch (SQLException e) {
+			throw new ChatException("채팅방 현재인원 조회오류!", e);
+		}
+		return nowCount;
+	}
+
+	public int deleteChat(Connection conn, int chatNo) {
+		int result = 0;
+		String sql = prop.getProperty("deleteChat");
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setInt(1, chatNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			throw new ChatException("채팅방 현재인원 조회오류!", e);
 		}
 		return result;
 	}

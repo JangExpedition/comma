@@ -1,6 +1,7 @@
 package counseling.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,11 +11,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import chat.model.dto.Chat;
 import common.Attachment;
 import common.CommaUtils;
 import counseling.model.dto.Counseling;
 import counseling.model.service.CounselingService;
+import member.model.dto.Gender;
+import member.model.dto.Member;
 
 /**
  * Servlet implementation class CounselingServlet
@@ -47,8 +52,30 @@ public class CounselingServlet extends HttpServlet {
 		String url = request.getRequestURI();
 		String pagebar = CommaUtils.getPageBar(page, limit, totalCount, url);
 		
+		HttpSession session = request.getSession();
+		Member loginMember = (Member) session.getAttribute("loginMember");
+		String memberNick = loginMember.getNickname();
+		int memberAge = loginMember.getAge()/10;
+		Gender memberGender = loginMember.getGender();
+		
+		System.out.println("CounselingServlet loginMemberAge " + loginMember.getAge());
+		System.out.println("CounselingServlet = " + memberNick + memberAge + memberGender);
+		
+		List<Counseling> afterCounselingList = new ArrayList<>();
+		
+		// 작성자 본인글, 나이, 성별 필터링
+		for(Counseling counseling : counselingList) {
+			System.out.println("CounselingServlet = " + counseling);
+			if((counseling.getWriter() == memberNick) || (counseling.getLimitAge() <= memberAge) &&
+					((counseling.getLimitGender() == memberGender) || (counseling.getLimitGender() == Gender.X))) {
+				afterCounselingList.add(counseling);
+			}
+		}
+		
+		System.out.println("CounselingServlet = " + afterCounselingList);
+		
 		request.setAttribute("pagebar", pagebar);
-		request.setAttribute("counselingList", counselingList);
+		request.setAttribute("counselingList", afterCounselingList);
 		request.setAttribute("attachList", attachList);
 		
 		request.getRequestDispatcher("/WEB-INF/views/counseling/counseling.jsp")

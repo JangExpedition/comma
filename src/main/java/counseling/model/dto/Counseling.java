@@ -1,6 +1,5 @@
 package counseling.model.dto;
 
-import java.sql.Connection;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,13 +8,14 @@ import common.Attachment;
 import common.Category;
 import common.Form;
 import common.OX;
+import member.model.dto.Gender;
 
 public class Counseling extends Form{
 	private String title;
 	private int views;
 	private int like;
 	private Category category;
-	private String limitGender;
+	private Gender limitGender;
 	private int limitAge;
 	private OX anonymous;
 	private List<Attachment> attachments = new ArrayList<>();
@@ -30,7 +30,7 @@ public class Counseling extends Form{
 		// TODO Auto-generated constructor stub
 	}
 
-	public Counseling(int no, String writer, String content, Date regDate, String title, int views, int like, Category category, String limitGender, int limitAge,
+	public Counseling(int no, String writer, String content, Date regDate, String title, int views, int like, Category category, Gender limitGender, int limitAge,
 			OX anonymous) {
 		super(no, writer, content, regDate);
 		this.title = title;
@@ -42,7 +42,7 @@ public class Counseling extends Form{
 		this.anonymous = anonymous;
 	}
 	
-	public Counseling(String title, int views, int like, Category category, String limitGender, int limitAge,
+	public Counseling(String title, int views, int like, Category category, Gender limitGender, int limitAge,
 			OX anonymous) {
 		super();
 		this.title = title;
@@ -86,11 +86,11 @@ public class Counseling extends Form{
 		this.category = category;
 	}
 
-	public String getLimitGender() {
+	public Gender getLimitGender() {
 		return limitGender;
 	}
 
-	public void setLimitGender(String limitGender) {
+	public void setLimitGender(Gender limitGender) {
 		this.limitGender = limitGender;
 	}
 

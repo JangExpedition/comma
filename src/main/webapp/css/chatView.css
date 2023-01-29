@@ -1,162 +1,77 @@
-@charset "UTF-8";
-
-
-.jstalktheme
-{
-	background-color: #9bbad8;
-	padding: 4px 4px 0px 4px;
-}
-
-.jstalktheme .clear
-{
-	clear: both;
-}
-
-.jstalktheme .blank
-{
-	clear: both;
-	height: 4px;
-}
-
-.jstalktheme .msg
-{
-	height: calc(100% - 72px);
-	overflow-y: scroll;
-	
-	font-size: 12px;
-}
-
-.jstalktheme .msg .time
-{
-	font-size: 10px;
-}
-
-.jstalktheme .msg .mytalk
-{
-	float: right;
+#chatSection{
 	width: 100%;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
-.jstalktheme .msg .mytalk .time
-{
-	float: right;
-	bottom: 0;
+#chatContainer{
+	width: 70%;
+	height: 80vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column
 }
 
-.jstalktheme .msg .mytalk .a
-{
-	float: right;
-	position: relative;
-	min-height: 24px;
-	max-width: calc(100% - 64px);
-	left: 2px;
-	background-color: #454a7b;
-	border-radius: 3px;
-	z-index: 2;
-	padding: 0px 4px 0px 4px;
-	word-break: break-all;
-}
-
-.jstalktheme .msg .mytalk .b
-{
-	float: right;
-	position: relative;
-	width: 8px;
-	height: 22px;
-	background: url(./chat_balloon_yellow.right.png) no-repeat;
-	z-index: 1;
-}
-
-.jstalktheme .msg .othertalk
-{
-	float: left;
+#msgContainer{
 	width: 100%;
+	height: 90%;
+	overflow: scroll;
 }
 
-.jstalktheme .msg .othertalk .profile_image
-{
-	float: left;
-	width: 40px;
-	height: 40px;
-	border-radius: 14px; 
+#msgEditor{
+	width: 100%;
+	height: 10%;
 }
 
-.jstalktheme .msg .othertalk .box
-{
-	float: left;
-	width: calc(100% - 48px);
+#chatMsgFrm{
+	width: 100%;
+	height: 100%;
+	display: flex;
 }
 
-.jstalktheme .msg .othertalk .box .profile_name
-{
-	font-size: 12px;
-}
-
-.jstalktheme .msg .othertalk .box .a
-{
-	float: left;
-	position: relative;
-	width: 8px;
-	height: 22px;
-	background: url(./chat_balloon_white.left.png) no-repeat;
-	z-index: 1;
-}
-
-.jstalktheme .msg .othertalk .box .b
-{
-	float: left;
-	position: relative;
-	min-height: 24px;
-	max-width: calc(100% - 64px);
-	left: -2px;
-	background-color: #ffffff;
-	border-radius: 3px;
-	z-index: 2;
-	padding: 0px 4px 0px 4px;
-	word-break: break-all;
-}
-
-.jstalktheme .msg .othertalk .box .time
-{
-	float: left;
-}
-
-.jstalktheme .sendmsg
-{
-	
-}
-
-.jstalktheme .sendmsg .textarea
-{
-	float: left;
-	width: calc(100% - 68px);
-	height: 64px;
-	border-radius: 8px 0px 0px 8px;
-	margin: 0px 0px 0px 0px;
-	padding: 2px 2px 2px 2px;
+#msg{
+	width: 80%;
+	height: 100%;
 	resize: none;
+	box-sizing: border-box;
 }
 
-.jstalktheme .sendmsg .button
-{
-	float: right;
-	width: 62px;
-	height: 68px;
-	background-color: #ffec42;
-	border-radius: 0px 8px 8px 0px;
-	margin: 0px 0px 0px 0px;
-	padding: 0px 0px 0px 0px;
-	text-align: center;
-	display: table;
-	cursor: pointer;
+#send{
+	width: 20%;
+	box-sizing: border-box;
+	color: #fff;
+	background-color: #454a7b;
 }
 
-.jstalktheme .sendmsg .button p
-{
-  display: table-cell;
-  vertical-align: middle;
+.line{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 10px 0;
 }
 
+.left{
+	margin: 10px 0;
+	width: auto;
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+	flex-direction: column
+}
 
+#message{
+	border: 1px solid #000;
+	border-radius: 10px;
+	margin: 5px;
+	padding: 10px;
+	font-size: 15px;
+	box-shadow: 5px 5px 5px grey;
+}
 
- 
+#chatTitle{
+	text-align : center;
+	font-size: 30px;
+}

@@ -1,6 +1,8 @@
 package diary.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -28,10 +30,32 @@ public class DiaryListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		Member member = (Member) session.getAttribute("loginMember");
+		String yearFilter = request.getParameter("yearFilter");
 		
 		List<Diary> diaryList = diaryService.selectAllDiary(member);
-		System.out.println(diaryList);
-		request.setAttribute("diaryList", diaryList);
+		
+		HashSet<String> memberHaveYearSet = new HashSet<>();
+		
+		for(Diary diary : diaryList){
+			memberHaveYearSet.add(diary.getRegDate().substring(0, 4));
+		}
+		
+		request.setAttribute("memberHaveYearSet", memberHaveYearSet);
+		
+		List<Diary> afterDiaryList = new ArrayList<>();
+		
+		if(yearFilter == null || "전체보기".equals(yearFilter)) {
+			request.setAttribute("diaryList", diaryList);
+		}else {
+			for(Diary diary : diaryList) {
+				if(diary.getRegDate().substring(0, 4).equals(yearFilter)) {
+					afterDiaryList.add(diary);
+				}
+			}
+			request.setAttribute("diaryList", afterDiaryList);
+			request.setAttribute("yearFilter", yearFilter);
+		}
+		
 		request.getRequestDispatcher("/WEB-INF/views/diary/diaryList.jsp")
 			.forward(request, response);
 	} // doGet() end

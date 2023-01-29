@@ -59,6 +59,9 @@
 	case "/comma/diary/diaryList" :
 		link.href = "<%= request.getContextPath() %>/css/diary.css";
 		break;
+	case "/comma/diary/writeDiary" :
+		link.href = "<%= request.getContextPath() %>/css/writeDiary.css";
+		break;
 	case "/comma/mypage/mypage" :
 		link.href = "<%= request.getContextPath() %>/css/mypage.css";
 		break;

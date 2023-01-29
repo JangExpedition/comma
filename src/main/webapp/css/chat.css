@@ -35,7 +35,7 @@ hr{
 }
 
 #chatCreatepage{
-	 color: #454a7b !important;
+	color: #454a7b !important;
 	font-size: 20px;
 	border: 7px solid #454a7b;
 	border-radius: 20px;
@@ -65,7 +65,6 @@ th,td{
 }
 
 #chatroomList{
-	
 	margin: 0px 10px;
 	padding: 7px 10px;
 	background-color: rgba(0, 0, 0, 0);
