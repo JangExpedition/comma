@@ -86,7 +86,9 @@
 					<table id="designEnrollTable" class="modalTable">
 						<tr>
 							<th class="fontStyle">작성자</th>
-							<td><input type="text" id="writerInput" name="writer" value="<%= loginMember.getNickname() %>" readOnly /></td>
+							<td>
+								<input type="text" id="writerInput" name="writer" value="<%= loginMember.getNickname() %>" readOnly />
+							</td>
 						</tr>
 						<tr>
 							<th class="fontStyle">구분</th>

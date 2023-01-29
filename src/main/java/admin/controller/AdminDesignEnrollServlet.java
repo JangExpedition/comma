@@ -37,11 +37,9 @@ public class AdminDesignEnrollServlet extends HttpServlet {
 			
 			MultipartRequest multiReq = new MultipartRequest(request, saveDirectory, maxPostSize, encoding, policy);
 			
-			int no = Integer.parseInt(multiReq.getParameter("updateNo"));
 			String part = multiReq.getParameter("part");
 			
 			Design design = new Design();
-			design.setNo(no);
 			design.setPart(Part.valueOf(part));
 			
 			if (multiReq.getFile("upFile") != null) {

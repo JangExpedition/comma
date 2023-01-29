@@ -107,7 +107,7 @@
                     				Design design = designList.get(i);
                     				if (design.getPart() == Part.L) {
                     	%>
-                    				<option class="designChoiceOption" data-design-img="<%= design.getRenamedFilename() %>" value="<%= i %>">디자인<%= design.getRnum() %></option>
+                    				<option class="designChoiceOption" data-design-img="<%= design.getRenamedFilename() %>" value="<%= design.getNo() %>">디자인<%= design.getRnum() %></option>
                     	<%
                     				} // if end
                     			} // for end
