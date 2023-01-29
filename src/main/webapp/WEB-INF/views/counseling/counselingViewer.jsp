@@ -5,6 +5,7 @@
 <%@ page import="common.Attachment" %>
 <%@ page import="counseling.model.dto.CounselingComment" %>
 <%@ page import="common.OX" %>
+<%@ page import="counseling.model.dto.LikeCounseling" %>
 <%
 	Counseling counseling = (Counseling)request.getAttribute("counseling");
 	List<Attachment> attachList = counseling.getAttachments();
@@ -15,6 +16,14 @@
 		if(comment.getChoice() == OX.O){
 			adoptComment = comment;
 			adopt = true;
+		}
+	}
+	
+	List<LikeCounseling> likeList = (List<LikeCounseling>) request.getAttribute("likeList");
+	boolean canLike = true;
+	for(LikeCounseling lc : likeList){
+		if(lc.getMemNick().equals(loginMember.getNickname())){
+			canLike = false;
 		}
 	}
 %>
@@ -67,7 +76,33 @@
 			<%= counseling.getContent() %>
 		</div>
 		<div id="likeBox">
-			<button id="likeBtn"><i id="clickLike" class="fa-solid fa-heart"></i><i id="unClickLike" class="fa-regular fa-heart"></i> 공감</button>
+		<% if(canLike){ %>
+			<button id="likeBtn" data-cs-no="<%= counseling.getNo() %>"><i id="unClickLike" class="fa-regular fa-heart"></i> 공감</button>
+			<form action="<%= request.getContextPath() %>/counseling/counselingLike" id="updateLikeFrm" name="updateLikeFrm" method="POST">
+				<input type="hidden" name="csNo" />
+			</form>
+			<script>
+			document.querySelector("#likeBtn").addEventListener("click", (e)=>{
+				const csNo = e.target.dataset.csNo;
+				const frm = document.updateLikeFrm;
+				frm.csNo.value = csNo;
+				frm.submit();
+			});
+			</script>
+		<% } else{ %>
+			<button id="unlikeBtn" data-cs-no="<%= counseling.getNo() %>"><i id="clickLike" class="fa-solid fa-heart"></i> 공감</button>
+			<form action="<%= request.getContextPath() %>/counseling/counselingUnlike" id="updateUnlikeFrm" name="updateUnlikeFrm" method="POST">
+				<input type="hidden" name="csNo" />
+			</form>
+			<script>
+			document.querySelector("#unlikeBtn").addEventListener("click", (e)=>{
+				const csNo = e.target.dataset.csNo;
+				const frm = document.updateUnlikeFrm;
+				frm.csNo.value = csNo;
+				frm.submit();
+			});
+			</script>
+		<% } %>
 		</div>
 		<div id="commentBox">
 			<div class="comment-editor">
@@ -174,6 +209,7 @@
 		<input type="hidden" name="myNick" value="<%= loginMember.getNickname() %>"/>
 	</form>
 	<script>
+	
 	<%-- $("#friendship").click((e)=>{
 		if(confirm(`\${e.target.dataset.writer}에게 친구요청을 보내시겠습니까?`)){
 			if(e.target.dataset.writer === "<%= loginMember.getNickname() %>"){

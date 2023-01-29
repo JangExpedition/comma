@@ -33,6 +33,13 @@ public class MemberService {
 		close(conn);
 		return member;
 	}
+	
+	public Member selectOneMemberFromNick(String nickname) {
+		Connection conn = getConnection();
+		Member member = memberDao.selectOneMemberFromNick(conn, nickname);
+		close(conn);
+		return member;
+	}
 
 	public int insertMember(Member member) {
 		int result = 0;

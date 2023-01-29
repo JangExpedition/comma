@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import common.CommaUtils;
 import counseling.model.dto.Counseling;
 import counseling.model.dto.CounselingComment;
+import counseling.model.dto.LikeCounseling;
 import counseling.model.service.CounselingService;
 
 /**
@@ -66,8 +67,11 @@ public class CounselingViewServlet extends HttpServlet {
 		
 		List<CounselingComment> csComments = counselingService.selectCsComment(no);
 		
+		List<LikeCounseling> likeCounselingList = counselingService.selectAllLikeCs(no);
+		
 		request.setAttribute("counseling", counseling);
 		request.setAttribute("comments", csComments);
+		request.setAttribute("likeList", likeCounselingList);
 		request.getRequestDispatcher("/WEB-INF/views/counseling/counselingViewer.jsp")
 			.forward(request, response);
 	}

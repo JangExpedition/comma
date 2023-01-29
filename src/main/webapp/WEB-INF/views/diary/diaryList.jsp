@@ -13,6 +13,7 @@
 	String formatToday = today.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 	List<Diary> diaryList = (List<Diary>)request.getAttribute("diaryList");
 	String yFilter = (String) request.getAttribute("yearFilter");
+	System.out.println("yFilter" + yFilter);
 	
 	boolean canWrite = true;
 	HashSet<String> memberHaveYearSet = (HashSet<String>)request.getAttribute("memberHaveYearSet");
@@ -31,7 +32,7 @@
 	<div id="inputBtn">
 	<% 
 	if(canWrite){
-		if(formatToday.substring(0, 4).equals(yFilter)) { 
+		if(yFilter == null) { 
 	%>
 		<input type="button" id="writeBtn" class="fontStyle" value="일기 작성하기" />
 		<script>
@@ -45,7 +46,7 @@
 	
 	<div class="yearContainer">
 	<% if(yFilter == null) { %>
-		<%= formatToday.substring(0, 4) %>
+		<%= formatToday %>
 	<% } else{ %>
 		<%= yFilter %>
 	<% } %>
@@ -94,28 +95,48 @@
 		<div id="diaryEnrollModal" class="modal fontStyle">
 			<div id="diaryEnrollTitle"></div>
 			<span id="diaryEnrollClose" onclick="modalClose(this);">X</span>
-			<form id="diaryEnrollFrm" name="diaryEnrollFrm" action="<%= request.getContextPath() %>/diary/insertDiary" method="POST" enctype="multipart/form-data">
-				<input type="hidden" name="writer" value="<%= loginMember.getNickname() %>" />
+			<form id="diaryEnrollFrm" name="diaryEnrollFrm" action="<%= request.getContextPath() %>/diary/deleteDiary" method="POST">
+				<input type="hidden" id="deleteDiaryNo" name="deleteDiaryNo" class="deleteDiaryNo" value="" />
 				<div id="oneDiaryFlexBox">
 					<div id="oneDiaryImg">
 						<img id="diaryViewImg" src="" alt="첨부한 이미지" class="enrollImage" />
 					</div>
 					<div id="enrollContent">
-						<div id="nowContent" name="nowContent"></div>
+ 						<textarea id="nowContent" name="nowContent" readonly></textarea>
+					</div>
+				</div>
+				<% if(canEdit) { %>
+				<div id="updateDiaryBtn">
+					<input id="diaryUpdateModalBtn" class="fontStyle" type="button" value="수정하기" />
+					<input id="diaryDeleteFrmSubmit" class="fontStyle" type="submit" value="삭제하기" />
+				</div>
+				<% } %>
+			</form>
+		</div>
+		<div id="diaryUpdateModal" class="modal fontStyle">
+			<div id="diaryUpdateTitle"></div>
+			<span id="diaryUpdateClose" onclick="modalClose(this);">X</span>
+			<form id="diaryUpdateFrm" name="diaryUpdateFrm" action="<%= request.getContextPath() %>/diary/updateDiary" method="POST" enctype="multipart/form-data">
+				<input type="hidden" id="updateDiaryNo" name="updateDiaryNo" class="diaryNo" value="" />
+				<div id="oneDiaryFlexBox">
+					<div id="oneDiaryImg">
+						<img id="diaryUpdateImg" src="" alt="첨부한 이미지" class="enrollImage" />
+					</div>
+					<div id="updateContent">
+ 						<textarea id="editContent" name="editContent"></textarea>
 					</div>
 				</div>
 				<% if(canEdit) { %>
 				<div id="editItemBox">
-					<label for="enrollImage">
+					<label for="updateFile">
 						<i id="enrollImageChoice" class="fa-regular fa-image"></i>
 					</label>
-					<input type="file" name="enrollImage" id="enrollImage" style="display: none;" />
+					<input type="file" name="updateFile" id="updateFile" style="display: none;" />
 					<i id="enrollFontChoice" class="fa-solid fa-font"></i>
 					<i id="enrollDesignChoice" class="fa-solid fa-brush"></i>
 				</div>
 				<div id="updateDiaryBtn">
 					<input id="diaryUpdateFrmSubmit" class="fontStyle" type="submit" value="수정하기" />
-					<input id="diaryDeleteFrmSubmit" class="fontStyle" type="submit" value="삭제하기" />
 				</div>
 				<% } %>
 			</form>
@@ -164,6 +185,27 @@
 		</div>
 	</div>
 		<script>
+		document.querySelector("#updateFile").addEventListener("change", (e)=>{
+			const reader = new FileReader();
+			const file = e.target;
+			const img = document.querySelector("#diaryUpdateImg");
+			
+			if(file.files[0]){
+				reader.readAsDataURL(file.files[0]);
+				reader.onload = (e) => {
+					img.src = e.target.result;
+				};
+			} else{
+				img.style.display = "none";
+			}
+			
+		});
+		
+		document.querySelector("#diaryUpdateModalBtn").addEventListener("click",(e)=>{
+			diaryEnrollModal.style.display = "none";
+			diaryUpdateModal.style.display = "inline-block";
+		});
+		
 		/*
 		  버튼 클릭 시 모달 창 띄우기
 		*/
@@ -178,13 +220,18 @@
 					const{no, writer, content, designNo, fontNo, originalFilename, renamedFilename, regDate} = data;
 					
 					diaryEnrollTitle.innerHTML = regDate;
+					diaryUpdateTitle.innerHTML = regDate;
+					
 					if(originalFilename === null){
 						diaryViewImg.src = "<%= request.getContextPath() %>/images/default.png";
+						diaryUpdateImg.src = "<%= request.getContextPath() %>/images/default.png";
 					} else{
 						diaryViewImg.src = `<%= request.getContextPath() %>/upload/diary/\${renamedFilename}`;
+						diaryUpdateImg.src = `<%= request.getContextPath() %>/upload/diary/\${renamedFilename}`;
  					}
 					
-					nowContent.innerHTML = content;
+					nowContent.value = content;
+					editContent.value = content;
 					
 					diaryEnrollBack.style.display = "flex";
 					
@@ -195,9 +242,18 @@
 						document.querySelector("#updateDiaryBtn").style.display = "none";
 					}
 					
+					document.querySelector("#deleteDiaryNo").value = no;
+					document.querySelector("#updateDiaryNo").value = no;
+					
 				}
 			});
 		});
+		
+		// 디자인 이미지 클릭하면 디자인 선택창 띄움
+		enrollDesignChoice.addEventListener('click', () => {
+			designChoiceModal.style.display = 'inline-block';
+		}); 
+		
 		</script>
 		<% } %>
 		</div>
@@ -206,6 +262,18 @@
 		<input type="hidden" id="yearFilter" name="yearFilter"/>
 	</form>
 	<script>
+	diaryEnrollFrm.addEventListener("submit", (e)=>{
+		if(confirm("정말로 삭제하시겠습니까?")){
+			e.target.submit();
+		};
+	});
+	
+	diaryUpdateFrm.addEventListener("submit", (e)=>{
+		if(confirm("정말로 수정하시겠습니까?")){
+			e.target.submit();
+		};
+	});
+	
 	/*
 		일기년도 필터 메서드
 	*/
@@ -240,10 +308,7 @@
 		}
 	};
 	
-	// 디자인 이미지 클릭하면 디자인 선택창 띄움
-	enrollDesignChoice.addEventListener('click', () => {
-		designChoiceModal.style.display = 'inline-block';
-	}); 
+	
 	</script>
 
 </body>
