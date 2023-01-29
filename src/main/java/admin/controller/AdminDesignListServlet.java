@@ -26,7 +26,7 @@ public class AdminDesignListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<Design> designList = styleService.selectAllDesign();
 		
-		request.setAttribute("designList", designList);
+		request.getSession().setAttribute("designList", designList);
 		
 		request.getRequestDispatcher("/WEB-INF/views/admin/adminDesignList.jsp")
 			.forward(request, response);

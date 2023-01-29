@@ -9,6 +9,7 @@
 	System.out.println("letterList = " + letterList);
 	int no = 0;
 	String designImg = "";
+	String fontName = "";
 %>
 	<section>
 		<div id="letterTitle" class="fontStyle" onclick="location.href='<%= request.getContextPath() %>/letter/letterList';">받은 편지함</div>
@@ -31,8 +32,12 @@
 						if (design.getNo() == letter.getDesignNo())
 							designImg = design.getRenamedFilename();
 					}
+					for (Font font : fontList) {
+						if (font.getNo() == letter.getFontNo())
+							fontName = font.getName();
+					}
 		%>
-			<div id="letterListAnony" class="letterList letterListDiv" data-letter-no="<%= no %>" style="background-image:url('<%= request.getContextPath() %>/upload/design/<%= designImg %>');">
+			<div id="letterListAnony" class="letterList letterListDiv" data-letter-no="<%= no %>" style="background-image:url('<%= request.getContextPath() %>/upload/design/<%= designImg %>'); font-family:<%= fontName %>;">
 				<div id="letterListTitle">
 					<table>
 						<tr>
@@ -86,8 +91,12 @@
 						if (design.getNo() == letter.getDesignNo())
 							designImg = design.getRenamedFilename();
 					}
+					for (Font font : fontList) {
+						if (font.getNo() == letter.getFontNo())
+							fontName = font.getName();
+					}
 		%>
-			<div id="letterListFriend" class="letterList letterListDiv" data-letter-no="<%= no %>" style="background-image:url('<%= request.getContextPath() %>/upload/design/<%= designImg %>');">
+			<div id="letterListFriend" class="letterList letterListDiv" data-letter-no="<%= no %>" style="font-family:<%= fontName %>; background-image:url('<%= request.getContextPath() %>/upload/design/<%= designImg %>');">
 				<div id="letterListTitle">
 					<table>
 						<tr>

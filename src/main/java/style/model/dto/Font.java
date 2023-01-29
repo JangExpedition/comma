@@ -2,6 +2,7 @@ package style.model.dto;
 
 public class Font {
 	private int no;
+	private int rnum;
 	private String name;
 	private String link;
 	
@@ -17,12 +18,28 @@ public class Font {
 		this.link = link;
 	}
 
+	public Font(int no, int rnum, String name, String link) {
+		super();
+		this.no = no;
+		this.rnum = rnum;
+		this.name = name;
+		this.link = link;
+	}
+
 	public int getNo() {
 		return no;
 	}
 
 	public void setNo(int no) {
 		this.no = no;
+	}
+
+	public int getRnum() {
+		return rnum;
+	}
+
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
 	}
 
 	public String getName() {
@@ -43,7 +60,7 @@ public class Font {
 
 	@Override
 	public String toString() {
-		return "Font [no=" + no + ", name=" + name + ", link=" + link + "]";
+		return "Font [no=" + no + ", rnum=" + rnum + ", name=" + name + ", link=" + link + "]";
 	}
 	
 }
