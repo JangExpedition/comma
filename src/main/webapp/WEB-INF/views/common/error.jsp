@@ -3,15 +3,25 @@
     
   <%@ include file="/WEB-INF/views/common/header.jsp"%>
   
-<link rel="stylesheet" type="text/css" href="error.css">
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="errorpage.css">
 
-
-<div class="container">
-<div id="error"><h1>404</h1></div>
-<div id="notfound"><h2>Page Not Found</h2></div>
-<div id="occured"><p>The Page you are looking for doesn't exist or an other error occured. Go to
- <a href="http://localhost:8090/comma/">Home Page.</a></p></div>
-</div>
+<div class="error_container">
+    <div class="error_block">
+        
   
+         <h1>404</h1>
+
+        <h3>Oops... Page Not Found!</h3>
+        <br>
+        <div id="try"><p>Try using the button below to go to main page of the site</p></div>
+
+        <a href="http://localhost:8090/comma/"><input type="button" class="error_btn" value="Go To Main"></a>
+
+    </div>
+ </div>
+
 </body>
 </html>
+  
