@@ -189,7 +189,7 @@
 				return;
 			}
 			if(cnt === 1){
-				/* emailCertify(clientEmail); */
+				emailCertify(clientEmail);
 				/* btn.disabled = true; */
 				
 				document.querySelector("#firstEnrollFrm").style.display = "none";
@@ -488,13 +488,13 @@
 		@장원정
 		이메일 인증 메서드
 		*/
-		const emailCertify = (clientEmail) => {
-			
-			const frmData = new FormData(document.cEmailFrm);
+		const emailCertify = (email) => {
 			
 			$.ajax({
+				
+				
 				url : "<%= request.getContextPath() %>/member/emailCertify",
-    			data : {clientEmail},
+    			data : {email},
     			dataType : "json",
     			success(data){
     				console.log(data);
