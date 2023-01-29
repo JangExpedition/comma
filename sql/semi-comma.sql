@@ -28,6 +28,7 @@ select * from letter;
 select * from attachment_letter;
 select * from diary;
 select * from design;
+select * from (select row_number() over (order by no asc) rnum, f.* from font f where name like '%serif%');
 select * from font;
 select * from complain;
 select * from counseling;

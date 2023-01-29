@@ -119,6 +119,7 @@
 	case "/comma/chat/chatList" :
 		link.href = "<%= request.getContextPath() %>/css/chatList.css";
 		break;
+	case "/comma/admin/adminStyleList" :
 	case "/comma/admin/adminFontList" :
 	case "/comma/admin/adminDesignList" :
 	case "/comma/admin/findStyle" :
@@ -155,7 +156,7 @@
 			    
 				</script>
 			<% } else { %>
-				<div id="toAdminMemberList" class="navBtn">회원목록</div>
+				<div id="toAdminMemberList" class="navBtn">회원</div>
 				<script>
 				/*
 			      Date : 2023. 1. 25
@@ -170,7 +171,23 @@
 			<% } %>
 			
 			<% if (loginMember.getMemberRole() == MemberRole.A || loginMember.getMemberRole() == MemberRole.M) { %>
-				<div id="toFontList" class="navBtn">폰트 목록</div>
+				<%--
+				<div id="toStyleList" class="navBtn">폰트 및 디자인</div>
+				<script>
+				/*
+			      Date : 2023. 1. 27
+			      @한혜진
+			    
+			      adminStyleList.jsp 이동 메서드
+			    */
+				document.querySelector("#toStyleList").addEventListener("click", (e)=>{
+					location.href = "<%= request.getContextPath() %>/admin/adminStyleList";	
+				});
+				
+				</script>
+				 --%>
+				 
+				<div id="toFontList" class="navBtn">폰트</div>
 				<script>
 				/*
 			      Date : 2023. 1. 27
@@ -184,7 +201,7 @@
 				
 				</script>
 				
-				<div id="toDesignList" class="navBtn">디자인 목록</div>
+				<div id="toDesignList" class="navBtn">디자인</div>
 				<script>
 				/*
 			      Date : 2023. 1. 27
@@ -195,9 +212,10 @@
 				document.querySelector("#toDesignList").addEventListener("click", (e)=>{
 					location.href = "<%= request.getContextPath() %>/admin/adminDesignList";	
 				});
+				
 				</script>
 				
-				<div id="toComplainList" class="navBtn">신고 목록</div>
+				<div id="toComplainList" class="navBtn">신고</div>
 				<script>
 				/*
 			      Date : 2023. 1. 27

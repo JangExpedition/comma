@@ -58,7 +58,7 @@ public class StyleDao {
 		String sql = prop.getProperty("selectFindFont");
 		
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setString(1, '%' + searchKeyword + '%');
+			pstmt.setString(1, searchKeyword);
 			
 			try (ResultSet rset = pstmt.executeQuery()) {
 				while (rset.next())
@@ -126,6 +126,23 @@ public class StyleDao {
 		}
 		return designList;
 	} // selectAllDesign() end
+
+	public Design selectOneDesign(Connection conn, int no) {
+		Design design = null;
+		String sql = prop.getProperty("selectOneDesign");
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, no);
+			
+			try (ResultSet rset = pstmt.executeQuery()) {
+				if (rset.next())
+					design = handleDesignResultSet(rset);
+			}
+		} catch (SQLException e) {
+			throw new StyleException("디자인 한 건 조회 오류", e);
+		}
+		return design;
+	} // selectOneDesign() end
 
 	public List<Design> selectFindDesign(Connection conn, String searchKeyword) {
 		List<Design> designList = new ArrayList<>();

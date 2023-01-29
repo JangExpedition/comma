@@ -47,6 +47,10 @@ public class AdminDesignUpdateServlet extends HttpServlet {
 			if (multiReq.getFile("upFile") != null) {
 				design.setOriginalFilename(multiReq.getOriginalFileName("upFile"));
 				design.setRenamedFilename(multiReq.getFilesystemName("upFile"));
+			} else {
+				Design design1 = styleService.selectOneDesign(no);
+				design.setOriginalFilename(design1.getOriginalFilename());
+				design.setRenamedFilename(design1.getRenamedFilename());
 			}
 			
 			int result = styleService.updateDesign(design);
