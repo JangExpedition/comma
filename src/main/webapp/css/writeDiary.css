@@ -25,12 +25,14 @@
 }
 
 #designModalTitle {
+	height: 73px;
 	text-align: center;
 	padding: 15px 0px;
 	font-size: 20px;
 	margin: 0px;
 	font-weight: bold;
 	color: #454a7b;
+	box-sizing: border-box;
 }
 
 .modal-close {
@@ -49,7 +51,12 @@
 
 #designModalContent {
 	font-size: 15px;
+	height: 227px;
 	padding: 0px 20px;
+}
+
+table, tbody{
+	height: 100%;
 }
 
 #designModalContent td {
@@ -62,6 +69,7 @@
 
 .designImage {
 	width: 50px;
+	height: 50px;
 	border-radius: 50%;
 }
 

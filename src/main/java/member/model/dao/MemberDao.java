@@ -230,4 +230,22 @@ public class MemberDao {
 		}
 		return result;
 	} // updateWarningCount() end
+
+
+	public Member selectOneMemberFromNick(Connection conn, String nickname) {
+		Member member = null;
+		String sql = prop.getProperty("selectOneMemberFromNick");
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setString(1, nickname);
+			
+			try(ResultSet rset = pstmt.executeQuery()){
+				if(rset.next()) {
+					member = handleMemberResultSet(rset);
+				}
+			}
+		} catch (SQLException e) {
+			throw new MemberException("회원찾기 실패!", e);
+		}
+		return member;
+	}
 }

@@ -16,6 +16,7 @@ import common.Category;
 import common.OX;
 import counseling.model.dto.Counseling;
 import counseling.model.dto.CounselingComment;
+import counseling.model.dto.LikeCounseling;
 import counseling.model.exception.CounselingException;
 import letter.model.exception.LetterException;
 import member.model.dao.MemberDao;
@@ -344,6 +345,86 @@ public class CounselingDao {
 			
 		} catch (SQLException e) {
 			throw new CounselingException("댓글채택 오류!", e);
+		}
+		return result;
+	}
+
+	public int updateLikeCounseling(Connection conn, int csNo) {
+		int result = 0;
+		String sql = prop.getProperty("updateLikeCounseling");
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setInt(1, csNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			throw new CounselingException("게시물 좋아요 등록오류!", e);
+		}
+		return result;
+	}
+
+	public int insertLikeCounseling(Connection conn, int csNo, String memNick) {
+		int result = 0;
+		String sql = prop.getProperty("insertLikeCounseling");
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setInt(1, csNo);
+			pstmt.setString(2, memNick);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			throw new CounselingException("게시물 좋아요 등록오류!", e);
+		}
+		return result;
+	}
+
+	public List<LikeCounseling> selectAllLikeCs(Connection conn, int no) {
+		List<LikeCounseling> likeList = new ArrayList<>();
+		String sql = prop.getProperty("selectAllLikeCs");
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setInt(1, no);
+			try(ResultSet rset = pstmt.executeQuery()){
+				while(rset.next()) {
+					LikeCounseling lc = new LikeCounseling();
+					lc.setNo(rset.getInt("no"));
+					lc.setCsNo(rset.getInt("cs_no"));
+					lc.setMemNick(rset.getString("mem_nick"));
+					lc.setRegDate(rset.getDate("reg_date"));
+					
+					likeList.add(lc);
+				}
+			}
+		} catch (SQLException e) {
+			throw new CounselingException("게시글 좋아요 조회 오류!", e);
+		}
+		return likeList;
+	}
+
+	public int updateunlikeCounseling(Connection conn, int csNo) {
+		int result = 0;
+		String sql = prop.getProperty("updateunlikeCounseling");
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setInt(1, csNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			throw new CounselingException("게시물 좋아요 취소오류!", e);
+		}
+		return result;
+	}
+
+	public int deleteLikeCounseling(Connection conn, int csNo, String memNick) {
+		int result = 0;
+		String sql = prop.getProperty("deleteLikeCounseling");
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setInt(1, csNo);
+			pstmt.setString(2, memNick);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			throw new CounselingException("게시물 좋아요 삭제오류!", e);
 		}
 		return result;
 	}

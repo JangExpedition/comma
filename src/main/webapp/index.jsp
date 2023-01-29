@@ -60,7 +60,8 @@
 						</fieldset>
 						<div id="submitBox">
 							<div id="searchPwd">
-								<span class="pointColor fontStyle">Forgot password?</span>
+								<span id="searchEmail" class="pointColor fontStyle">이메일 찾기 /</span>
+								<span id="searchPassword" class="pointColor fontStyle">비밀번호 찾기</span>
 							</div>
 							<input type="submit" value="Login" id="loginBtn" name="loginBtn" class="btnStyle fontStyle">
 						</div>
@@ -69,7 +70,8 @@
 			</div>
 		</div>
 	</section>
-	<!-- Modal-->
+	
+	<!-- 회원가입 모달 -->
 	<!-- The Modal -->
 	<div id="enrollModal">
 		<div id="modalDialog">
@@ -95,6 +97,7 @@
 					<div id="signUpTitle">회원가입</div>
 					<label for="code">인증번호</label>
 					<input type="text" id="code" name="code" placeholder="이메일로 보낸 인증번호를 입력해주세요." class="inputBar" required />
+					<span id="emailCheckErrorMsg" class="errorMsg fontStyle"></span>
 				</fieldset>
 				<fieldset id="thirdEnrollFrm" class="enrollFset">
 					<div id="signUpTitle">회원가입</div>
@@ -127,13 +130,372 @@
 			
 		</div>
 	  </div>
+	<!-- 아이디 찾기 모달 -->
+	<!-- The Modal -->
+	<div id="searchEmailModal">
+		<div id="searchEmailModalDialog">
+		  
+			<!-- Modal Header -->
+			<div id="searchEmailModalHeader">
+			  <div id="searchEmailCloseBtn">X</div>
+			</div>
+			
+			<!-- Modal body -->
+			<div id="searchEmailModalBody">
+			  <form action="<%= request.getContextPath() %>/member/findEmail" id="findEmailFrm" name="findEmailFrm" >
+				<fieldset id="findPwdFset" class="enrollFset">
+					<div id="findEmailTitle">이메일 찾기</div>
+					<label for="findEmailNickname">닉네임</label>
+					<input type="text" id="findEmailNickname" name="findEmailNickname" placeholder="닉네임을 입력해주세요." class="inputBar" required />
+					<span id="findEmailNicknameErrorMsg" class="errorMsg fontStyle"></span>
+					<label for="findEmailPwd">비밀번호</label>
+					<input type="password" id="findEmailPwd" name="findEmailPwd" placeholder="비밀번호를 입력해주세요." class="inputBar" required />
+					<span id="findEmailPwdErrorMsg" class="errorMsg fontStyle"></span>
+				</fieldset>
+				<!-- Modal footer -->
+				<div id="searchEamilModalFooter">
+				  <button type="submit" id="findEmailBtn" name="findEmailBtn" class="btnStyle">찾기</button>
+				</div>
+				</form>
+				<div id="emailResultBox" class="emailResultBox">
+					<p id="emailResultSpan" class="resultSpan fontStyle"></p>
+					<div id="searchEamilResultFooter">
+					  <button type="button" id="checkEmailBtn" name="checkEmailBtn" class="btnStyle">확인</button>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	  </div>
+	  
+	  <!-- 비밀번호 찾기 모달 -->
+	  <div id="searchPwdModal">
+		<div id="searchPwdModalDialog">
+		  
+			<!-- Modal Header -->
+			<div id="searchPwdModalHeader">
+			  <div id="searchPwdCloseBtn">X</div>
+			</div>
+			<div id="searchPwdModalBody">
+			<form action="<%= request.getContextPath() %>/member/findPwd" id="findPwdFrm" name="findPwdFrm" method="POST">
+				<fieldset id="findPasswordFset" class="enrollFset">
+					<div id="findPasswordTitle">비밀번호 찾기</div>
+					<label for="findPwdEmail">이메일</label>
+					<input type="email" id="findPwdEmail" name="findPwdEmail" placeholder="이메일을 입력해주세요." class="inputBar" required />
+					<span id="findPwdEmailErrorMsg" class="errorMsg fontStyle"></span>
+					<label for="findPwdNickname">닉네임</label>
+					<input type="text" id="findPwdNickname" name="findPwdNickname" placeholder="닉네임을 입력해주세요." class="inputBar" required />
+					<span id="findPwdNicknameErrorMsg" class="errorMsg fontStyle"></span>
+				</fieldset>
+				<!-- Modal footer -->
+				<div id="PwdModalFooter">
+				  <button type="submit" id="findPwdBtn" name="findPwdBtn" class="btnStyle">다음</button>
+				</div>
+			  </form>
+			  <div id="pwdResultBox" class="emailResultBox">
+					<p id="pwdResultSpan" class="resultSpan fontStyle"></p>
+					<div id="searchPwdResultFooter">
+					  <button type="button" id="checkPwdBtn" name="checkPwdBtn" class="btnStyle">확인</button>
+					</div>
+				</div>
+			</div>
+		</div>
+			
+		</div>
 	<script>	
-	
 		let cnt = 0; // 회원가입 폼 페이지 번호 변수
+		let count = 0; // 비밀번호 찾기 폼 페이지 번호 변수
 		const btn = document.querySelector("#nextBtn"); // 회원가입 폼 next 버튼
 		let nextNum1 = 0; // next버튼 활성화
 		let nextNum2 = 0; // next버튼 활성화
 		let clientEmail = "";
+		let codeCheck = "";
+	
+		// 아이디 비밀번호 모달창 오픈 메서드
+		document.querySelector("#searchEmail").addEventListener("click", (e)=>{
+			document.querySelector("#searchEmailModal").style.display = "flex";
+			
+			$("#findEmailFrm")[0].reset();
+			$(".errorMsg").html("");
+			findEmailBtn.disabled = true;
+			nextNum1 = 0;
+			nextNum2 = 0;
+		});
+		
+		document.querySelector("#searchPassword").addEventListener("click", (e)=>{
+			document.querySelector("#searchPwdModal").style.display = "flex";
+			
+			$("#findPwdFrm")[0].reset();
+			$(".errorMsg").html("");
+			findPwdBtn.disabled = true;
+			nextNum1 = 0;
+			nextNum2 = 0;
+		});
+		
+		// 아이디 비밀번호 모달창 닫기 메서드
+		document.querySelector("#searchEmailCloseBtn").addEventListener("click", (e)=>{
+			document.querySelector("#searchEmailModal").style.display = "none";
+		});
+		document.querySelector("#checkEmailBtn").addEventListener("click", (e)=>{
+			document.querySelector("#searchEmailModal").style.display = "none";
+		});
+		document.querySelector("#searchEmailModal").addEventListener("click", (e)=>{
+			if(e.target !== e.currentTarget){
+				return;
+			}
+			document.querySelector("#searchEmailModal").style.display = "none";
+		});
+		
+		document.querySelector("#searchPwdCloseBtn").addEventListener("click", (e)=>{
+			document.querySelector("#searchPwdModal").style.display = "none";
+		});
+		document.querySelector("#checkPwdBtn").addEventListener("click", (e)=>{
+			document.querySelector("#searchPwdModal").style.display = "none";
+		});
+		document.querySelector("#searchPwdModal").addEventListener("click", (e)=>{
+			if(e.target !== e.currentTarget){
+				return;
+			}
+			document.querySelector("#searchPwdModal").style.display = "none";
+		});
+		
+		// 이메일찾기 검사
+		
+		$("#findEmailNickname").focusout((e)=>{
+			const nickname = e.target.value;
+			const findEmailNicknameErrorMsg = document.querySelector("#findEmailNicknameErrorMsg"); 
+			findEmailNicknameErrorMsg.style.color = "tomato";
+			
+			// 아이디 유효성검사
+			if(!/^[A-Za-z가-힣0-9]{4,12}$/.test(nickname)){
+				findEmailNicknameErrorMsg.innerHTML = "사용할 수 없는 닉네임입니다.";
+				nextNum1 = 0;
+				return;
+			}
+			
+			
+			$.ajax({
+				url : "<%= request.getContextPath() %>/member/selectAllMember",
+				dataType: "json",
+				success(data){
+					const nicks = [];
+					let bool = true;
+					
+					// 아이디 중복검사
+					for(let i = 0; i < data.length; i++){
+						nicks[i] = data[i].nickname;
+					}
+					
+					nicks.forEach((nick)=>{
+						console.log(nickname, typeof nickname, nick, typeof nick);
+						if(nick === nickname){
+							bool = false;
+						} 
+					}); // forEach end
+					
+					if(bool){
+						findEmailNicknameErrorMsg.innerHTML = "존재하지 않는 닉네임입니다.";
+						nextNum1 = 0;
+					} else{
+						findEmailNicknameErrorMsg.innerHTML = "";
+						nextNum1 = 1;
+					}
+					
+					if(nextNum1 === 1 && nextNum2 === 1){
+						findEmailBtn.disabled = false;
+					}
+					
+				},
+				error : console.log
+			}); // ajax end
+			
+		}); // 아이디검사 end
+		
+		$("#findEmailPwd").focusout((e)=>{
+			const pwd = e.target.value;
+			const findEmailPwdErrorMsg = document.querySelector("#findEmailPwdErrorMsg");
+			findEmailPwdErrorMsg.style.color = "tomato";
+			
+			console.log(pwd);
+			
+			if(pwd === ""){
+				findEmailPwdErrorMsg.innerHTML = "비밀번호를 입력해주세요.";
+				nextNum2 = 0;
+			} else{
+				findEmailPwdErrorMsg.innerHTML = "";
+				nextNum2 = 1;
+			}
+			
+			if(nextNum1 === 1 && nextNum2 === 1){
+				findEmailBtn.disabled = false;
+			}
+			
+		}); 
+		
+		document.findEmailFrm.addEventListener("submit", (e)=>{
+			e.preventDefault();
+			
+			const nickname = e.target.findEmailNickname.value;
+			const password = e.target.findEmailPwd.value;
+			
+			console.log(nickname);
+			
+			$.ajax({
+				url : "<%= request.getContextPath() %>/member/findEmail",
+				dataType : "json",
+				data : {nickname, password},
+				success(data){
+					e.target.style.display = "none";
+					document.querySelector("#emailResultBox").style.display = "inline-block";
+					document.querySelector("#searchEamilResultFooter").style.display = "flex";
+					
+					if(data !== "false"){
+						emailResultSpan.innerHTML = `회원님의 이메일은 <p class="pointColor">\${data}</p> 입니다.`;
+					} else{
+						emailResultSpan.innerHTML = "입력하신 정보가 일치하지 않습니다.";
+					};
+				},
+				error : console.log,
+				complete(){
+					e.target.reset();
+				}
+			});
+		});
+		
+		// 비밀번호 찾기
+		
+		$("#findPwdEmail").focusout((e)=>{
+			const email = e.target.value;
+			const emailErrorMsg = document.querySelector("#findPwdEmailErrorMsg");
+			emailErrorMsg.style.color = "tomato";
+			
+			// 이메일 유효성 검사
+			if (!/^[\w]{4,}@[\w]+(\.[\w]+){1,3}$/.test(email)) {
+				emailErrorMsg.innerHTML = "유효하지 않는 이메일입니다.";
+				btn.disabled = true;
+		    	return;
+		    };
+		    
+		    $.ajax({
+				url : "<%= request.getContextPath() %>/member/selectAllMember",
+				dataType: "json",
+				success(data){
+					const emails = [];
+					let bool = true;
+					
+					// 이메일 중복검사
+					for(let i = 0; i < data.length; i++){
+						emails[i] = data[i].email;
+					}
+					
+					emails.forEach((em)=>{
+						console.log(em, email);
+						if(email === em){
+							bool = false;
+						}
+						
+					}); // forEach end
+					
+					if(bool){
+						emailErrorMsg.innerHTML = "존재하지 않는 이메일입니다.";
+						nextNum1 = 0;
+					} else{
+						emailErrorMsg.innerHTML = "";
+						clientEmail = email;
+						nextNum1 = 1;
+					}
+					
+				    if(nextNum1 === 1 && nextNum2 === 1){
+				    	findPwdBtn.disabled = false;
+					}
+					
+				},
+				error : console.log
+			}); // ajax end
+			
+		}); // 이메일검사 end
+		
+		$("#findPwdNickname").focusout((e)=>{
+			const nickname = e.target.value;
+			const findPwdNicknameErrorMsg = document.querySelector("#findPwdNicknameErrorMsg"); 
+			findPwdNicknameErrorMsg.style.color = "tomato";
+			
+			// 아이디 유효성검사
+			if(!/^[A-Za-z가-힣0-9]{4,12}$/.test(nickname)){
+				findPwdNicknameErrorMsg.innerHTML = "사용할 수 없는 닉네임입니다.";
+				nextNum2 = 0;
+				return;
+			}
+			
+			
+			$.ajax({
+				url : "<%= request.getContextPath() %>/member/selectAllMember",
+				dataType: "json",
+				success(data){
+					const nicks = [];
+					let bool = true;
+					
+					// 아이디 중복검사
+					for(let i = 0; i < data.length; i++){
+						nicks[i] = data[i].nickname;
+					}
+					
+					nicks.forEach((nick)=>{
+						console.log(nickname, typeof nickname, nick, typeof nick);
+						if(nick === nickname){
+							bool = false;
+						} 
+					}); // forEach end
+					
+					if(bool){
+						findPwdNicknameErrorMsg.innerHTML = "존재하지 않는 닉네임입니다.";
+						nextNum2 = 0;
+					} else{
+						findPwdNicknameErrorMsg.innerHTML = "";
+						nextNum2 = 1;
+					}
+					
+					console.log(nextNum1, nextNum2);
+					if(nextNum1 === 1 && nextNum2 === 1){
+						findPwdBtn.disabled = false;
+					}
+					
+				},
+				error : console.log
+			}); // ajax end
+			
+		}); // 아이디검사 end
+		
+		document.findPwdFrm.addEventListener("submit", (e)=>{
+			e.preventDefault();
+			
+			const email = e.target.findPwdEmail.value;
+			const nickname = e.target.findPwdNickname.value;
+			
+			console.log(nickname);
+			
+			$.ajax({
+				url : "<%= request.getContextPath() %>/member/findPwd",
+				method : "POST",
+				dataType : "json",
+				data : {nickname, email},
+				success(data){
+					e.target.style.display = "none";
+					document.querySelector("#pwdResultBox").style.display = "inline-block";
+					document.querySelector("#searchPwdResultFooter").style.display = "flex";
+					
+					if(data !== "false"){
+						pwdResultSpan.innerHTML = "메일로 임시 비밀번호가 발송됐습니다.";
+					} else{
+						pwdResultSpan.innerHTML = "입력하신 정보가 일치하지 않습니다.";
+					};
+				},
+				error : console.log,
+				complete(){
+					e.target.reset();
+				}
+			});
+		});
 		
 		/*
 		Date : 2023. 1. 17
@@ -156,7 +518,7 @@
 			nextNum1 = 0;
 			nextNum2 = 0;
 		});
-	
+		
 		/*
 		Date : 2023. 1. 17
 		@장원정
@@ -189,8 +551,8 @@
 				return;
 			}
 			if(cnt === 1){
+				btn.disabled = true;
 				emailCertify(clientEmail);
-				/* btn.disabled = true; */
 				
 				document.querySelector("#firstEnrollFrm").style.display = "none";
 				document.querySelector("#secondEnrollFrm").style.display = "flex";
@@ -344,6 +706,25 @@
 			}); // ajax end
 			
 		}); // 이메일검사 end
+		
+		$("#code").focusout((e)=>{
+			const code = e.target.value;
+			const emailCheckErrorMsg = document.querySelector("#emailCheckErrorMsg");
+			emailErrorMsg.style.color = "tomato";
+			
+			if(code == codeCheck){
+				nextNum1 = 1;
+				emailCheckErrorMsg.style.color = "green";
+				emailCheckErrorMsg.innerHTML = "인증번호가 일치합니다.";
+			} else{
+				nextNum1 = 0;
+				emailCheckErrorMsg.innerHTML = "인증번호가 일치하지 않습니다.";
+			}
+			
+			if(nextNum1 === 1){
+				btn.disabled = false;
+			}
+		});
 			
 			
 		$("#pwd").focusout((e)=>{
@@ -497,7 +878,8 @@
     			data : {email},
     			dataType : "json",
     			success(data){
-    				console.log(data);
+    				codeCheck = data;
+    				console.log(codeCheck);
     			},
     			error : console.log
 			});

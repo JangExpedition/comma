@@ -46,7 +46,21 @@
 											<i id="enrollImageChoice" class="fa-regular fa-image"></i>
 										</label>
 										<input type="file" name="enrollImage" id="enrollImage" style="display: none;" />
-										<i id="enrollFontChoice" class="fa-solid fa-font"></i>
+										<select name="fontChoice" id="fontChoice">
+				                    	<%
+				                    		if (fontList != null && !fontList.isEmpty()) {
+				                    			for (Font font : fontList) {
+				                    	%>
+				                    				<option style="font-family:<%= font.getName() %>;" class="fontChoiceOption" value="<%= font.getNo() %>" data-font-name="<%= font.getName() %>"><%= font.getName() %></option>
+				                    	<%
+				                    			} // for end
+				                    		} else {
+				                    	%>
+						                    		<option value=0>폰트선택불가</option>
+				                    	<%
+				                    		} // else end
+				                    	%>
+						                </select>
 										<i id="enrollDesignChoice" class="fa-solid fa-brush"></i>
 									</td>
 								</tr>
@@ -107,6 +121,18 @@
 	</div>
 	</section>
 	<script>
+	
+	document.querySelector('#fontChoice').addEventListener('change', (e) => {
+		document.querySelectorAll('.fontChoiceOption').forEach((option) => {
+			const bool = option.selected;
+			const fontName = option.dataset.fontName;
+			
+			if (bool) {
+				nowContent.style.fontFamily = `\${fontName}`;
+			}
+		});
+	});
+	
 	document.querySelector("#enrollImageChoice").addEventListener("click", (e)=>{
 		file.click();
 	});

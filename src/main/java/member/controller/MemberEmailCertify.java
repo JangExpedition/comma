@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import mail.Gmail;
+import com.google.gson.Gson;
+
+import mail.Mail;
 
 /**
  * Servlet implementation class MemberEmailCertify
@@ -16,25 +18,26 @@ import mail.Gmail;
 @WebServlet("/member/emailCertify")
 public class MemberEmailCertify extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private Gmail mail = new Gmail();
+	private Mail mail = new Mail();
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-			request.setCharacterEncoding("UTF-8");
-			String fromName = "쉼표";
-			String fromEmail = request.getParameter("email");
-			String fromSubject = "안녕하세요. 쉼표입니다.";
-			String fromPhone = "ㅇ";
-			String fromMessage = "테스트메일";
+			String email = request.getParameter("email");
 			
-			String[] fromInfo = {fromName,fromEmail,fromSubject,fromPhone,fromMessage};
+			int _code = (int) (Math.random()*89999+100000);
+	        String code = String.valueOf(_code);
+	        String content = "인증번호는 " + code + "입니다.";
 			
-			fromInfo[4] = "성함: "+fromInfo[0]+"\n"+"전화번호: "+fromInfo[3]+"\n"+"이메일: "+fromInfo[1]+"\n\n"+fromInfo[4];
+			mail.naverMailSend(email, content);
 			
-			mail.send(fromInfo);
+			response.setContentType("application/jsp; charset=utf-8");
+			Gson gson = new Gson();
+			String jsonStr = gson.toJson(code);
+			
+			response.getWriter().append(jsonStr);
 
 	}
 

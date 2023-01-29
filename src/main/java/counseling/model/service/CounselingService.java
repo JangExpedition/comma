@@ -11,6 +11,7 @@ import common.OX;
 import counseling.model.dao.CounselingDao;
 import counseling.model.dto.Counseling;
 import counseling.model.dto.CounselingComment;
+import counseling.model.dto.LikeCounseling;
 
 public class CounselingService {
 	private CounselingDao counselingDao = new CounselingDao();
@@ -194,6 +195,49 @@ public class CounselingService {
 		Connection conn = getConnection();
 		try {
 			result = counselingDao.adoptComment(conn, no, choice);
+			commit(conn);
+		} catch(Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
+	public int updateLikeCounseling(int csNo, String memNick) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = counselingDao.updateLikeCounseling(conn, csNo);
+			
+			result = counselingDao.insertLikeCounseling(conn, csNo, memNick);
+			
+			commit(conn);
+		} catch(Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
+	public List<LikeCounseling> selectAllLikeCs(int no) {
+		Connection conn = getConnection();
+		List<LikeCounseling> likeList = counselingDao.selectAllLikeCs(conn, no);
+		close(conn);
+		return likeList;
+	}
+
+	public int updateunlikeCounseling(int csNo, String memNick) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = counselingDao.updateunlikeCounseling(conn, csNo);
+			
+			result = counselingDao.deleteLikeCounseling(conn, csNo, memNick);
+			
 			commit(conn);
 		} catch(Exception e) {
 			rollback(conn);
