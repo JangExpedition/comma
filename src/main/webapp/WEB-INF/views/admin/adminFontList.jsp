@@ -14,7 +14,7 @@
 		<div id="search-container" class="fontStyle">
 	        <div id="search-name" class="search-type">
 	            <form action="<%=request.getContextPath()%>/admin/findStyle">
-	                <input type="hidden" name="type" value="font"/>
+	                <input type="hidden" name="searchType" value="font"/>
 	                <input type="text" name="searchKeyword"  size="25" placeholder="검색할 폰트를 입력하세요."
 	                	value="<%= searchKeyword != null ? searchKeyword : "" %>" />
 	                <button type="submit">검색</button>            

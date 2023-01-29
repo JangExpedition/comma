@@ -7,6 +7,7 @@ import static common.JdbcTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.List;
+import java.util.Map;
 
 import chat.model.dao.ChatDao;
 import chat.model.dto.Chat;
@@ -129,5 +130,48 @@ public class ChatService {
 		}
 		return result;
 	}
+
+	public List<Chat> selectFindChat(Map<String, Object> param) {
+		Connection conn = getConnection();
+		List<Chat> chatList = chatDao.selectFindChat(conn, param);
+		close(conn);
+		return chatList;
+	} // selectFindChat() end
+
+	public List<ChatLog> selectAllChatLog(int no) {
+		Connection conn = getConnection();
+		List<ChatLog> chatLogList = chatDao.selectAllChatLog(conn, no);
+		close(conn);
+		return chatLogList;
+	} // selectAllChatLog() end
+
+	public List<ChatMember> selectAllChatMember(int no) {
+		Connection conn = getConnection();
+		List<ChatMember> chatMemberList = chatDao.selectAllChatMember(conn, no);
+		close(conn);
+		return chatMemberList;
+	} // selectAllChatMember() end
+
+	public int deleteChatLog(int chatLogNo) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = chatDao.deleteChatLog(conn, chatLogNo);
+			commit(conn);
+		} catch(Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	} // deleteChatLog() end
+
+	public List<ChatLog> selectFindChatLog(Map<String, Object> param) {
+		Connection conn = getConnection();
+		List<ChatLog> chatLogList = chatDao.selectFindChatLog(conn, param);
+		close(conn);
+		return chatLogList;
+	} // selectFindChatLog() end
 
 }

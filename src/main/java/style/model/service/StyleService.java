@@ -73,6 +73,13 @@ public class StyleService {
 		return designList;
 	} // selectAllDesign() end
 
+	public Design selectOneDesign(int no) {
+		Connection conn = getConnection();
+		Design design = styleDao.selectOneDesign(conn, no);
+		close(conn);
+		return design;
+	} // selectOneDesign() end
+
 	public List<Design> selectFindDesign(String searchKeyword) {
 		Connection conn = getConnection();
 		List<Design> designList = styleDao.selectFindDesign(conn, searchKeyword);
