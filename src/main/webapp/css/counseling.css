@@ -74,6 +74,13 @@ img{
 	height: 100px;
 }
 
+#noCounselingList{
+	width: 100% !important;
+	display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 /*페이지바*/
 div#pagebar{margin-top:10px; text-align:center; background-color:rgb(221, 221, 221); }
 div#pagebar span.cPage{margin-right: 5px;}

@@ -1,7 +1,8 @@
 package common;
 
 public enum Category {
-	DARILY,
+	ALL,
+	DAILY,
 	CAREER,
 	LOVE,
 	FRIENDS,

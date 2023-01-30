@@ -8,21 +8,30 @@
 	List<Counseling> counselingList = (List<Counseling>)request.getAttribute("counselingList");
 	int counselingNo = 0;
 	List<Attachment> attachList = (List<Attachment>)request.getAttribute("attachList");
+	
+	for(Counseling counseling : counselingList){
+		for(Attachment attach : attachList){
+			if(attach.getAttachNo() == counseling.getNo()){
+				counseling.getAttachments().add(attach);
+			}
+		}
+	}
+	
 %>
 	<section id="counselingSection">
 		<div id="counselingContainer">
 			<div id="counselingTitle" class="fontStyle pointColor"><h1>고민 상담소</h1></div>
 			<div id = "counseilingCategory">
-				<select name = "category">
+				<select id="counselingCategory" name = "category">
 					<option value="" disabled selected>카테고리를 선택하세요.</option>
-					<option value ="all">전체</option>
-					<option value ="study">진로</option>
-					<option value ="love">연애</option>
-					<option value ="family">가족</option>
-					<option value ="childcare">육아</option>
-					<option value ="career">직장</option>
-					<option value ="daily">일상</option>
-					<option value ="friends">친구</option>
+					<option value ="ALL">전체</option>
+					<option value ="STUDY">진로</option>
+					<option value ="LOVE">연애</option>
+					<option value ="FAMILY">가족</option>
+					<option value ="CHILDCARE">육아</option>
+					<option value ="CAREER">직장</option>
+					<option value ="DAILY">일상</option>
+					<option value ="FREIND">친구</option>
 				</select>
 			   	<input type = "button" id="CounselingEnroll" value="고민 게시하기">
 			</div>
@@ -38,7 +47,7 @@
 			    		</div>
 			    		<% if(counselingList.isEmpty()) {%>
 			    			<div class="tr">
-			    				<div class="td">등록된 게시물이 없습니다.</div>
+			    				<div class="td" id="noCounselingList">등록된 게시물이 없습니다.</div>
 			    			</div>
 			    		<% 
 			    		} else{ 
@@ -48,13 +57,11 @@
 							<div class="tr" data-counseling-no="<%= counselingNo %>">
 								<div class="td">
 								<%
-								for(Attachment attach : attachList){
-									if(counseling.getNo() == attach.getAttachNo()) { %>
-									<img src="<%= request.getContextPath() %>/upload/counseling/<%= attach.getRenamedFilename() %>" alt="" class="diaryImg" />
-								<% } else { %>
+								if(!counseling.getAttachments().isEmpty()){%>
+									<img src="<%= request.getContextPath() %>/upload/counseling/<%= counseling.getAttachments().get(0).getRenamedFilename() %>" alt="" class="diaryImg" />
+								<% }else{ %>
 									<img src="<%= request.getContextPath() %>/images/default.png" alt="" class="diaryImg" />
-								<% } 
-								} %>
+								<% } %>
 								</div>
 								<div class="td"><%= counseling.getTitle() %></div>
 								<% if("O" == counseling.getAnonymous().toString()) { %>
@@ -75,7 +82,16 @@
 			</div>
 	    </div>
     </section>
+    <form action="<%= request.getContextPath() %>/counseling/counselingList" name="changeCsCateFrm">
+    	<input type="hidden" id="counselingCate" name="counselingCate" />
+    </form>
     <script>
+    document.querySelector("#counselingCategory").addEventListener("change", (e)=>{
+    	const frm = document.changeCsCateFrm;
+    	frm.counselingCate.value = e.target.value;
+    	frm.submit();
+    });
+    
     /*
     Date : 2023. 1. 20
     @한혜진
