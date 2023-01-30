@@ -4,7 +4,9 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%
 	friendsList = (List<Friends>) session.getAttribute("friendsList");
+	List<Friends> receiveFriendsList = (List<Friends>) request.getAttribute("receiveFriendsList");
 	System.out.println("friendsList = " + friendsList);
+	System.out.println("receiveFriendsList = " + receiveFriendsList);
 %>
 	<section class="fontStyle">
 		<div id="friendsTitle" class="fontStyle">친구</div>
@@ -36,11 +38,19 @@
 						</td>
 					<% if (friend.getIsFriend() == OX.O) { %>
 						<td>
-							<input class="friendsBtn fontStyle" type="button" value="친구삭제" />
+							<form action="<%= request.getContextPath() %>/friends/friendsDelete" method="post" name="friendDeleteFrm">
+								<input type="hidden" name="myNick" value="<%= friend.getMyNickname() %>" />
+								<input type="hidden" name="fNick" value="<%= friend.getfNickname() %>" />
+								<input class="friendsBtn fontStyle" type="submit" value="친구삭제" />
+							</form>
 						</td>
 					<% } else { %>
 						<td>
-							<input class="friendsBtn fontStyle" type="button" value="요청취소" />
+							<form action="<%= request.getContextPath() %>/friends/friendsDelete" method="post" name="friendDeleteFrm">
+								<input type="hidden" name="myNick" value="<%= friend.getMyNickname() %>" />
+								<input type="hidden" name="fNick" value="<%= friend.getfNickname() %>" />
+								<input class="friendsBtn fontStyle" type="submit" value="요청취소" />
+							</form>
 						</td>
 					<% } %>
 					</tr>
@@ -50,6 +60,53 @@
 		%>
 					<tr>
 						<td colspan="4">조회된 친구 목록이 없습니다.</td>
+					</tr>
+		<%
+			}
+		%>
+				</tbody>
+			</table>
+		</div>
+	</section>
+	
+	<section class="fontStyle">
+		<div id="friendsTitle" class="fontStyle">받은 친구 목록</div>
+		
+		<div id="friends-list">
+			<table class="friends-list-table">
+				<tbody>
+		<%
+			if (receiveFriendsList != null && !receiveFriendsList.isEmpty()) {
+				for (Friends friend : receiveFriendsList) {
+		%>
+					<tr>
+						<td>
+						<% if (friend.getOriginalFileName() == null) { %>
+							<img src="<%= request.getContextPath() %>/images/default.png" alt="" class="friendsImage" />							
+						<% } %>
+						</td>
+						<td><%= friend.getfNickname() %></td>
+						<td>
+							<form action="<%= request.getContextPath() %>/friends/friendsUpdate" method="post" name="isFriendUpdateFrm">
+								<input type="hidden" name="myNick" value="<%= friend.getfNickname() %>" />
+								<input type="hidden" name="fNick" value="<%= friend.getMyNickname() %>" />
+								<input class="friendsBtn fontStyle" type="submit" value="요청수락" />
+							</form>
+						</td>
+						<td>
+							<form action="<%= request.getContextPath() %>/friends/friendsDelete" method="post" name="friendDeleteFrm">
+								<input type="hidden" name="myNick" value="<%= friend.getfNickname() %>" />
+								<input type="hidden" name="fNick" value="<%= friend.getMyNickname() %>" />
+								<input class="friendsBtn fontStyle" type="submit" value="요청삭제" />
+							</form>
+						</td>
+					<% } %>
+					</tr>
+		<%
+			} else {
+		%>
+					<tr>
+						<td colspan="4">받은 친구 신청이 없습니다.</td>
 					</tr>
 		<%
 			}

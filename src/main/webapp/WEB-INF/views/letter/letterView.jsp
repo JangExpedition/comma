@@ -103,7 +103,18 @@
 	if (letter.getWriterRole() != MemberRole.A && letter.getWriterRole() != MemberRole.M && letter.getAnonymous() == OX.X) {
 		if (isFriend == 0) {
 %>
-		<input id="friendRequest" class="friendRequestBtn" type="button" value="친구신청" />
+		<input id="friendRequest" class="friendRequestBtn letterBtn" type="button" value="친구신청" />
+		<script>
+			/*
+			  친구 신청
+			*/
+			friendRequest.addEventListener('click', (e) => {
+				const nickname = "<%= letter.getWriter() %>";
+				if (confirm(`[\${nickname}]님께 친구 신청을 하시겠습니까?`)) {
+					document.friendRequestFrm.submit();
+				}
+			});
+		</script>
 <%
 		} else if (isFriend != 0 && ox == OX.X) {
 %>
@@ -112,7 +123,7 @@
 		}
 	}
 %>
-		<input id="replay" class="replayBtn" type="button" value="답장하기" data-friend-nick="<%= letter.getWriter() %>" />
+		<input id="replay" class="replayBtn letterBtn" type="button" value="답장하기" data-friend-nick="<%= letter.getWriter() %>" data-anonymous="<%= letter.getAnonymous() %>" />
 	</div>
 	
 	<form action="<%= request.getContextPath() %>/friends/friendRequest" method="post" id="friendRequestFrm" name="friendRequestFrm">
@@ -128,16 +139,21 @@
 		complainImg.addEventListener('click', (e) => {
 			document.querySelector('[name=complainFrm]').submit();
 		});
+
 		
 		/*
-		  친구 신청
+		  답장
 		*/
-		friendRequest.addEventListener('click', (e) => {
-			const nickname = "<%= letter.getWriter() %>";
-			if (confirm(`[\${nickname}]님께 친구 신청을 하시겠습니까?`)) {
-				document.friendRequestFrm.submit();
-			}
+		replay.addEventListener('click', (e) => {
+			const friendNick = e.target.dataset.friendNick;
+			const anonymous = e.target.dataset.anonymous;
+			localStorage.setItem('friendNick', friendNick);
+			localStorage.setItem('anonymous', anonymous);
+			location.href = "<%= request.getContextPath() %>/letter/writeLetter";
 		});
+		
+		
+		
 		
 		<%--
 		document.friendRequestFrm.addEventListener("submit", (e)=>{
@@ -162,15 +178,6 @@
 		});
 		--%>
 		
-		
-		/*
-		  답장
-		*/
-		replay.addEventListener('click', (e) => {
-			const friendNick = e.target.dataset.friendNick;
-			localStorage.setItem('friendNick', friendNick);
-			location.href = "<%= request.getContextPath() %>/letter/writeLetter";
-		});
 	</script>
 </body>
 </html>

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import common.OX;
 import friends.model.dto.Friends;
 import friends.model.service.FriendsService;
 import notification.model.service.NotificationService;
@@ -33,7 +34,7 @@ public class FriendsRequestServlet extends HttpServlet {
 			System.out.println("fNick = " + fNick);
 			System.out.println("myNick = " + fNick);
 			
-			Friends friends = new Friends(0, myNick, fNick, null, null, null);
+			Friends friends = new Friends(0, myNick, fNick, OX.X, null, null);
 			
 			int result = friendsService.insertFriend(friends);
 			

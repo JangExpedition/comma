@@ -47,5 +47,45 @@ public class FriendsService {
 		}
 		return result;
 	}
+
+	public List<Friends> selectReceiveFriends(String nickname) {
+		Connection conn = getConnection();
+		List<Friends> receiveFriendsList = friendsDao.selectReceiveFriends(conn, nickname);
+		close(conn);
+		return receiveFriendsList;
+	} // selectReceiveFriends() end
+	
+	public int updateIsFriend(Friends friend) {
+		int result = 0;
+		Connection conn = getConnection();
+		
+		try {
+			result = friendsDao.updateIsFriend(conn, friend);
+			result = friendsDao.insertFriend(conn, friend);
+			commit(conn);
+		} catch(Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	} // updateIsFriend() end
+
+	public int deleteFriend(Friends friend) {
+		int result = 0;
+		Connection conn = getConnection();
+		
+		try {
+			result = friendsDao.deleteFriend(conn, friend);
+			commit(conn);
+		} catch(Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	} // deleteFriend() end
 	
 } // class

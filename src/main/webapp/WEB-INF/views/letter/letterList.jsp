@@ -1,3 +1,4 @@
+<%@page import="java.util.stream.Collectors"%>
 <%@page import="common.OX"%>
 <%@page import="letter.model.dto.AF"%>
 <%@page import="letter.model.dto.Letter"%>
@@ -28,6 +29,7 @@
 				System.out.println(letter.getSendWho());
 				if (letter.getSendWho() == AF.A) {
 					no = letter.getNo();
+					
 					for (Design design : designList) {
 						if (design.getNo() == letter.getDesignNo())
 							designImg = design.getRenamedFilename();

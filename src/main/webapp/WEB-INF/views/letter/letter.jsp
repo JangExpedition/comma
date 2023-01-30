@@ -5,8 +5,9 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 	<script>		
 		const friendNick = localStorage.getItem('friendNick');
+		const anonymous = localStorage.getItem('anonymous');
 		localStorage.removeItem('friendNick');
-		console.log('friendNick = ' + friendNick);
+		localStorage.removeItem('anonymous');
 	</script>
 	<section>
 		<div id="letterTitle" class="fontStyle">편지쓰기</div>
@@ -60,10 +61,11 @@
 		                	<td></td>
 		                	<td></td>
 		                    <td>
-		                    	<input type="text" list="friendsList" id="textFriendsList" name="friendsList" />
+		                    	<input type="hidden" list="friendsList" id="textFriendsList" name="friendsList" />
+		                    	<input type="text" list="friendsList" id="textFriendsNickList" name="friendsNickList" />
 		                        <datalist id="friendsList">
 		                    <% for (Friends friend : friendsList) { %>
-		                            <option value="<%= friend.getfNickname() %>"><%= friend.getfNickname() %></option>
+		                            <option id="friendNickList" value="<%= friend.getfNickname() %>"><%= friend.getfNickname() %></option>
 							<% } %>
 		                        </datalist>
 		                    </td>
@@ -386,6 +388,10 @@
 			letterContent.style.display = '';
 			letterSubmit.style.display = '';
 			textFriendsList.value = friendNick;
+			textFriendsNickList.value = friendNick;
+			
+			if (anonymous === 'O')
+				textFriendsNickList.value = '익명';
 		}
 	</script>
 </body>
