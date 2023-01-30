@@ -1,17 +1,21 @@
 @charset "UTF-8";
 
+
 #counselingSection{
 	width: 100%;
-	height: 100vh;
+	height: 180vh;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	background-color:#dfe6ff;
+	
 }
 
 #counselingContainer{
 	width: 70%;
 	height: 80%;
+
 
 }
 
@@ -20,12 +24,14 @@
 	font-size: 30px;
 }
 
-#counseilingCategory{
-	margin: 20px 0;
-}
 
 #wrap {
     width: 100%;
+    color: #253759;
+	border: 5px solid #454a7b;
+	border-radius: 1em;
+	background:#fff;
+	
 }
 
 .table{
@@ -34,24 +40,28 @@
     line-height: 24px;
     border-left: 1px solid #000;
     border-right: 1px solid #000;
+    border-radius: 0.8em;
+
 }
 
 #thead {
 	background: rgb(221, 221, 221);
+	
 }
 
 .tr{
 	width:100%;
 	display: flex;
-	border-top:1px solid #000;
+	border-top:3px solid #000;
+	
 	
 }
 
 .tr:last-child{
 	width:100%;
 	display: flex;
-	border-top:1px solid #000;
-	border-bottom:1px solid #000;
+	border-top:3px solid #000;
+	border-bottom:3px solid #000;
 }
 
 .tr:hover{
@@ -67,6 +77,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    
 }
 
 img{
@@ -81,6 +92,34 @@ img{
     justify-content: center;
 }
 
+#counseilingCategoryDiv {
+	display: flex;
+	margin:20px 0px;
+	
+}
+
+#counselingCategory{
+	display: flex;
+	background-color: #fff;
+	color: #454a7b;
+	border-radius: 10px;
+	font-size: 15px;
+	border: 4px solid #454a7b;
+	float: left;
+}
+
+#CounselingEnroll{	
+	display: flex;
+	padding: 10px;
+	background-color: #fff;
+	color: #454a7b;
+	border: none;
+	border-radius: 10px;
+	font-size: 15px;
+	border: 4px solid #454a7b;
+	float: left;
+	
+}
 /*페이지바*/
 div#pagebar{margin-top:10px; text-align:center; background-color:rgb(221, 221, 221); }
 div#pagebar span.cPage{margin-right: 5px;}

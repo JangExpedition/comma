@@ -18,11 +18,11 @@
 	}
 	
 %>
-	<section id="counselingSection">
-		<div id="counselingContainer">
+	<section id="counselingSection" class="fontStyle">
+		<div id="counselingContainer" class="fontStyle">
 			<div id="counselingTitle" class="fontStyle pointColor"><h1>고민 상담소</h1></div>
-			<div id = "counseilingCategory">
-				<select id="counselingCategory" name = "category">
+			<div id = "counseilingCategoryDiv" >
+				<select id="counselingCategory" name = "category" class="fontStyle">
 					<option value="" disabled selected>카테고리를 선택하세요.</option>
 					<option value ="ALL">전체</option>
 					<option value ="STUDY">진로</option>
@@ -33,7 +33,7 @@
 					<option value ="DAILY">일상</option>
 					<option value ="FREIND">친구</option>
 				</select>
-			   	<input type = "button" id="CounselingEnroll" value="고민 게시하기">
+			   	<input type = "button" id="CounselingEnroll" value="고민 게시하기" class="fontStyle">
 			</div>
 			<div id="wrap">
 		    	<div class="table fontStyle">
