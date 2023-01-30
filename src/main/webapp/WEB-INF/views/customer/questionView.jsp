@@ -11,6 +11,10 @@
 %>
 	<section>
 		<div id="questionDiv" class="tableDiv">
+			<div>
+				<button id="goBack" class="buttonStyle">뒤로가기</button>
+			</div>
+			
 			<div id="titleContainer">
 				<h1 id="questionTitle"><%= question.getTitle() %></h1>
 				<div id="smallBox">
@@ -67,7 +71,7 @@
 		            <%-- 댓글인 경우 tr.level1 --%>
 		            <tr class="level1">
 		                <td>
-		                    <sub class=comment-writer><%= qComment.getWriter() %></sub>
+		                    <sub class=comment-writer>관리자</sub>
 		                    <sub class=comment-date><%= qComment.getRegDate() %></sub>
 		                    <br />
 	                    	<%= qComment.getContent() %>
@@ -111,7 +115,11 @@
 				document.questionDeleteFrm.submit();
 			}	
 		};
-		
+
+		// 뒤로가기
+		document.querySelector("#goBack").addEventListener("click", (e)=>{
+			location.href = "<%= request.getContextPath() %>/customer";
+		});
 	</script>
 <% } %>
 
