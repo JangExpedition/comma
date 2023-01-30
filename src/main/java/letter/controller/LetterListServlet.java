@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import common.CommaUtils;
+import friends.model.dto.Friends;
+import friends.model.service.FriendsService;
 import letter.model.dto.Letter;
 import letter.model.service.LetterService;
 import member.model.dto.Member;
@@ -21,6 +23,7 @@ import member.model.dto.Member;
 public class LetterListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private LetterService letterService = new LetterService();
+	private FriendsService friendsService = new FriendsService();
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -33,6 +36,7 @@ public class LetterListServlet extends HttpServlet {
 		
 		// 업무로직
 		List<Letter> letterList = letterService.selectAllLetter(nickname);
+		List<Friends> friendsList = friendsService.selectAllFriends(nickname);
 
 		// 개행문자 변환처리
 		for (Letter letter : letterList) {			
@@ -43,6 +47,7 @@ public class LetterListServlet extends HttpServlet {
 		}
 		
 		request.setAttribute("letterList", letterList);
+		request.getSession().setAttribute("friendsList", friendsList);
 		
 		// view단 처리
 		request.getRequestDispatcher("/WEB-INF/views/letter/letterList.jsp").forward(request, response);

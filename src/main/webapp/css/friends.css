@@ -45,6 +45,8 @@ section {
 	/* border: 1px solid #000; */
 	margin-left: auto;
 	margin-right: auto;
+	width: 50%;
+	text-align: center;
 }
 
 .friends-list-table td {

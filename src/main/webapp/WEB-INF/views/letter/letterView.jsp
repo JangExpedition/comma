@@ -11,6 +11,8 @@
 	Boolean bool = friendsList.contains(letter.getWriter());
 	System.out.println(bool);
 	
+	friendsList = (List<Friends>) session.getAttribute("friendsList");
+	
 	String designImg = "";
 	for (Design design : designList) {
 		if (design.getNo() == letter.getDesignNo())
@@ -21,6 +23,15 @@
 	for (Font font : fontList) {
 		if (font.getNo() == letter.getFontNo())
 			fontName = font.getName();
+	}
+	
+	int isFriend = 0;
+	OX ox = null;
+	for (Friends friend : friendsList) {
+		if (friend.getfNickname().equals(letter.getWriter())) {
+			++isFriend;
+			ox = friend.getIsFriend();
+		}
 	}
 %>
 	<section>
@@ -87,10 +98,86 @@
 		</div>
 	</section>
 	
+	<div id="writerDiv">
+<%
+	if (letter.getWriterRole() != MemberRole.A && letter.getWriterRole() != MemberRole.M && letter.getAnonymous() == OX.X) {
+		if (isFriend == 0) {
+%>
+		<input id="friendRequest" class="friendRequestBtn letterBtn" type="button" value="친구신청" />
+		<script>
+			/*
+			  친구 신청
+			*/
+			friendRequest.addEventListener('click', (e) => {
+				const nickname = "<%= letter.getWriter() %>";
+				if (confirm(`[\${nickname}]님께 친구 신청을 하시겠습니까?`)) {
+					document.friendRequestFrm.submit();
+				}
+			});
+		</script>
+<%
+		} else if (isFriend != 0 && ox == OX.X) {
+%>
+		<input id="waitFriend" class="waitFriend" type="button" value="신청 중" disabled />
+<%
+		}
+	}
+%>
+		<input id="replay" class="replayBtn letterBtn" type="button" value="답장하기" data-friend-nick="<%= letter.getWriter() %>" data-anonymous="<%= letter.getAnonymous() %>" />
+	</div>
+	
+	<form action="<%= request.getContextPath() %>/friends/friendRequest" method="post" id="friendRequestFrm" name="friendRequestFrm">
+		<input type="hidden" name="no" value="<%= letter.getNo() %>" />
+		<input type="hidden" name="fNick" value="<%= letter.getWriter() %>" />
+		<input type="hidden" name="myNick" value="<%= loginMember.getNickname() %>" />
+	</form>
+	
 	<script>
+		/*
+		  신고 버튼 클릭 시 신고
+		*/
 		complainImg.addEventListener('click', (e) => {
 			document.querySelector('[name=complainFrm]').submit();
 		});
+
+		
+		/*
+		  답장
+		*/
+		replay.addEventListener('click', (e) => {
+			const friendNick = e.target.dataset.friendNick;
+			const anonymous = e.target.dataset.anonymous;
+			localStorage.setItem('friendNick', friendNick);
+			localStorage.setItem('anonymous', anonymous);
+			location.href = "<%= request.getContextPath() %>/letter/writeLetter";
+		});
+		
+		
+		
+		
+		<%--
+		document.friendRequestFrm.addEventListener("submit", (e)=>{
+			e.preventDefault();
+			
+			const formData = new FormData(e.target);
+			console.log(formData);
+			
+			$.ajax({
+				url: "<%= request.getContextPath() %>/friend/friendship",
+				method: "POST",
+				data: formData,
+				dataType: "json",
+				contentType : false,
+				processData : false,
+				success(data){
+					console.log(data.result);
+					alert(data.result);
+				},
+				error : console.log,
+			});
+		});
+		--%>
+		
 	</script>
 </body>
 </html>
