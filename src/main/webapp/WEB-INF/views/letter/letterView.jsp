@@ -34,6 +34,7 @@
 		}
 	}
 %>
+
 	<section>
 		<div id="letterTitle" class="fontStyle" onclick="history.back();">받은 편지함</div>
 		<div id="letterAllList">
