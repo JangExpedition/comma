@@ -38,8 +38,17 @@ public class UpdateDiaryServlet extends HttpServlet {
 			
 			int diaryNo = Integer.valueOf(multiReq.getParameter("updateDiaryNo"));
 			String content = multiReq.getParameter("editContent");
-			int designNo = Integer.valueOf(multiReq.getParameter("designNo"));
-			int fontNo = Integer.valueOf(multiReq.getParameter("fontNo"));
+			String _designNo = multiReq.getParameter("designNo");
+			String _fontNo = multiReq.getParameter("fontNo");
+			int designNo = 0;
+			int fontNo = 0;
+		
+			if(!_designNo.isEmpty()) {
+				designNo = Integer.valueOf(_designNo);
+			}
+			if(!_fontNo.isEmpty()) {
+				fontNo = Integer.valueOf(_fontNo);
+			}
 			
 			Diary diary = diaryService.selectOneDiary(diaryNo);
 			

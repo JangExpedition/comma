@@ -3,60 +3,66 @@
 
 body
 {
- font-family: 'Rubik', sans-serif;
- background-color: #454a7b;
-}
+	 font-family: 'Rubik', sans-serif;
+	 height: 100vh;
+	 width: 100vw;
+	 background-image: url(../images/index2.png);
+	 background-repeat : no-repeat;
+	 background-size : cover;
+  }
 
 h1,h2,h3,h4,h5,h6,p
 {
- margin: 0px;
- padding: 0px;
- color: #fff;
+	 margin: 0px;
+	 padding: 0px;
+	 color: #fff;
 }
 
 .error_container
 {
- width: 100%;
- height: 100vh;
+	 width: 100%;
+	 height: 100vh;
 }
 
 .error_block
 {
- width: 40%;
- position: absolute;
- left: 50%;
- top: 50%;
- transform: translate(-50%,-50%);
- text-align: center;
+    
+	 width: 40%;
+	 position: absolute;
+	 left: 50%;
+	 top: 50%;
+	 transform: translate(-50%,-50%);
+	 text-align: center;
 }
 
 .error_block h1
 {
- font-size: 100px;
- color: #ffffff;
+	 font-size: 180px;
+	 color: #ffffff;
 }
 
 .error_block h3
 {
- font-size: 40px;
- color: #fff;
+	 font-size: 45px;
+	 color: #fff;
 }
 
 #try{
-  text-align: center; 
-  font-size: 18px;
+	  text-align: center; 
+	  font-size: 22px;
 }
 
-.error_btn
-{
- width: 250px;
- height: 45px;
- background: #bfafeb;
- border:none;
- border-radius: 5px;
- color: #fff;
- font-size: 18px;
- font-weight: 600;
- margin-top: 30px;
- cursor: pointer;
+.error_btn{
+	 width: 250px;
+	 height: 45px;
+	 background: #b388e1;
+	 border: 5px solid rgb(238, 238, 238);
+	 border-radius: 5px;
+	 color: #fff;
+	 font-size: 18px;
+	 font-weight: 600;
+	 margin-top: 30px;
+	 cursor: pointer;
+
+
 }

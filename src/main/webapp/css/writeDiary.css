@@ -68,6 +68,7 @@ body{
 	font-size: 15px;
 	height: 227px;
 	padding: 0px 20px;
+	overflow: scroll;
 }
 
 table, tbody{
@@ -239,3 +240,7 @@ img{
 	box-shadow: 3px 4px 3px #272b45;
 }
 	
+#enrollContent{
+	width: 100%;
+	height: 100%;
+}

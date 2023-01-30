@@ -17,12 +17,17 @@ import com.oreilly.servlet.multipart.FileRenamePolicy;
 import common.Attachment;
 import common.CommaFileRenamePolicy;
 import common.OX;
+import friends.model.dto.Friends;
+import friends.model.service.FriendsService;
 import letter.model.dto.AF;
 import letter.model.dto.Letter;
 import letter.model.service.LetterService;
 import member.model.dto.Member;
 import member.model.service.MemberService;
 import notification.model.service.NotificationService;
+import style.model.dto.Design;
+import style.model.dto.Font;
+import style.model.service.StyleService;
 
 /**
  * Servlet implementation class WriteLetterServlet
@@ -32,12 +37,27 @@ public class WriteLetterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private LetterService letterService = new LetterService();
 	private MemberService memberService = new MemberService();
+	private FriendsService friendsService = new FriendsService();
+	private StyleService styleService = new StyleService();
 	private NotificationService notificationService = new NotificationService();
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Member member = (Member) request.getSession().getAttribute("loginMember");
+		String nickname = member.getNickname();
+		
+		List<Member> memberList = memberService.selectAllMember();
+		List<Friends> friendsList = friendsService.selectAllFriends(nickname);
+		List<Font> fontList = styleService.selectAllFont();
+		List<Design> designList = styleService.selectAllDesign();
+		
+		request.setAttribute("memberList", memberList);
+		request.getSession().setAttribute("fontList", fontList);
+		request.getSession().setAttribute("designList", designList);
+		request.getSession().setAttribute("friendsList", friendsList);
+		
 		request.getRequestDispatcher("/WEB-INF/views/letter/letter.jsp")
 			.forward(request, response);  
 	} // doGet() end

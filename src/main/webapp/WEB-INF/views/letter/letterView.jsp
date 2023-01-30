@@ -7,11 +7,13 @@
 <%
 	Letter letter = (Letter) request.getAttribute("letter");
 	List<Attachment> attachList = letter.getAttachments();
+	List<Friends> friendsList = (List<Friends>) session.getAttribute("friendsList");
+	List<Font> fontList = (List<Font>) session.getAttribute("fontList");
+	List<Design> designList = (List<Design>) session.getAttribute("designList");
 	partition = Partition.LETTER;
 	Boolean bool = friendsList.contains(letter.getWriter());
 	System.out.println(bool);
 	
-	friendsList = (List<Friends>) session.getAttribute("friendsList");
 	
 	String designImg = "";
 	for (Design design : designList) {
@@ -34,10 +36,11 @@
 		}
 	}
 %>
+
 	<section>
 		<div id="letterTitle" class="fontStyle" onclick="history.back();">받은 편지함</div>
 		<div id="letterAllList">
-			<div id="letterListDiv" class="letterList" style="font-family:<%= fontName %>; background-image:url('<%= request.getContextPath() %>/upload/design/<%= designImg %>')">
+			<div id="letterListDiv" class="letterList" style="font-family:<%= fontName %>; background-image:url('<%= request.getContextPath() %>/upload/design/<%= designImg %>'); background-size: cover;">
 				<div id="letterListTitle">
 					<table>
 						<tr>

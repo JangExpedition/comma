@@ -11,7 +11,7 @@ section {
     text-align: center;
     font-size: 40px;
     height: 50px;
-    color: #454a7b;
+
 }
 
 #search-container {
@@ -21,6 +21,8 @@ section {
 
 #searchNick {
 	height: 30px;
+	padding-top:5px;
+    
 }
 
 #searchBtn {

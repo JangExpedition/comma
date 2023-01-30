@@ -1,3 +1,4 @@
+
 #category>div:not(#toDiary)>i.selected{
     display: none;
 }
@@ -263,6 +264,7 @@ section {
 
 #enrollImage {
 	text-align: left;
+	width: 200px;
 }
 
 .enrollImage {
@@ -330,6 +332,7 @@ section {
 	font-size: 15px;
 	height: 227px;
 	padding: 0px 20px;
+	overflow: scroll;
 }
 
 .designImage {
@@ -394,4 +397,17 @@ section {
 
 i:hover{
 	cursor: pointer;
+}
+
+#designModalContent td {
+	padding: 5px 10px;
+}
+
+.designBtn {
+	background-color: #454a7b;
+	color: #fff;
+	border: 1px solid #363c61;
+	border-radius: 5px;
+	padding: 5px 10px;
+	box-shadow: 1px 1px 1px #272b45;
 }

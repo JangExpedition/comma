@@ -134,4 +134,19 @@ public class MemberService {
 		}
 		return result;
 	} // updateWarningCount() end
+
+	public int deleteMemberNick(String memberNick) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = memberDao.deleteMemberNick(conn, memberNick);
+			commit(conn);
+		} catch(Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	} // deleteMemberNick() end
 }

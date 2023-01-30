@@ -4,7 +4,7 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 <%
-	fontList = (List<Font>) session.getAttribute("fontList");
+	List<Font> fontList = (List<Font>) session.getAttribute("fontList");
 	String searchKeyword = request.getParameter("searchKeyword");
 %>
 	
@@ -61,17 +61,6 @@
         %>
 		        </tbody>
 		    </table>
-		
-		    <div class="page-wrap">
-		
-		        <ul class="page-nation">
-		            <li><a href="/board/list?p=1">1</a></li>
-		            <li><a href="/board/list?p=2">2</a></li>
-		            <li><a href="/board/list?p=3">3</a></li>
-		            <li><a href="/board/list?p=4">4</a></li>
-		            <li><a href="/board/list?p=5">5</a></li>
-		        </ul>
-		    </div>
 		</div>
 	</section>
 

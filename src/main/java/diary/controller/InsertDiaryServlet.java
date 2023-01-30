@@ -42,8 +42,18 @@ public class InsertDiaryServlet extends HttpServlet {
 			String writer = multiReq.getParameter("writer");
 			String content = multiReq.getParameter("nowContent");
 			String nowDate = multiReq.getParameter("nowDate");
-			int designNo = Integer.valueOf(multiReq.getParameter("designNo"));
-			int fontNo = Integer.valueOf(multiReq.getParameter("fontNo"));
+			String _designNo = multiReq.getParameter("designNo");
+			String _fontNo = multiReq.getParameter("fontNo");
+			int designNo = 0;
+			int fontNo = 0;
+		
+			System.out.println("================" +_designNo + "===================" + _fontNo);
+			if(!_designNo.isEmpty()) {
+				designNo = Integer.valueOf(_designNo);
+			}
+			if(!_fontNo.isEmpty()) {
+				fontNo = Integer.valueOf(_fontNo);
+			}
 			
 			Diary diary = new Diary(0, writer, content, designNo, fontNo, null, null, nowDate);
 			
