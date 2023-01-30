@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
+
 <section id="chatSection">	
+
 	<div id="chatContainer">	
 		<h2 id="chatTitle" class="fontStyle pointColor">익명채팅방</h2>
 		<div id="msgContainer">

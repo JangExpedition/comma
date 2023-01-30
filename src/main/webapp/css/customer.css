@@ -66,6 +66,7 @@ div {
 	*/
 	font-size: 15px;
 	padding: 5px 12px;
+	
 }
 
 .tableDiv {
@@ -142,4 +143,9 @@ table td {
 .faqDetailBtn {
 	margin-right: 0;
 	display: flex;
+}
+
+#searchContent{
+	font-family: Hanna !important;
+	
 }
