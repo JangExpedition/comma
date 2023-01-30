@@ -14,7 +14,7 @@
 		<div id="search-container">
 			<form action="<%= request.getContextPath() %>/friends/friendsFinder">
 				<input type="hidden" name="memberNick" value="<%= loginMember.getNickname() %>" />
-				<input type="text" id="searchNick" name="searchNick" size="30" placeholder="검색할 닉네임을 입력해주세요." />
+				<input type="text" class="fontStyle id="searchNick" name="searchNick" size="30" placeholder="검색할 닉네임을 입력해주세요." />
 				<input type="submit" id="searchBtn" class="fontStyle" value="검색" />
 			</form>
 		</div>
