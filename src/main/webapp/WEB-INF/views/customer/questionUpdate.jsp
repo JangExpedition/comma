@@ -23,9 +23,42 @@
 					<tr>
 						<th class="lableTd pointColor">사진첨부</th>
 						<td colspan="3">
+						<%
+						if(!attachList.isEmpty()){
+							int size = attachList.size();
+							for(int i = 0; i < attachList.size(); i++){
+								Attachment attach = attachList.get(i);
+						%>
+							<img class="alreadyImg" src="<%= request.getContextPath() %>/upload/question/<%= attach.getRenamedFilename() %>" alt=""/>
+							<input type="checkbox" name="delFile" id="delFile<%= i %>" value="<%= attach.getNo() %>" />
+                  	 		<label for="delFile<%= i %>">삭제</label>
+                  	 		<input type="file" name="file<%= i + 1 %>" id="file<%= i + 1 %>" class="file" style="display:none;" />
+                  	 		<br />
+                  	 		<script>
+                  	 			document.querySelector("#delFile<%= i %>").addEventListener('click', (e) => {
+                  	 				const isChecked = document.querySelector("#delFile<%= i %>").checked;
+                  	 				if (isChecked) {
+                  	 					document.querySelector("#file<%= i + 1 %>").style.display = '';
+                  	 				} else {
+                  	 					document.querySelector("#file<%= i + 1 %>").value = '';
+                  	 					document.querySelector("#file<%= i + 1 %>").style.display = 'none';
+                  	 					document.querySelector("#img<%= i + 1 %>").src = '';
+                  	 					document.querySelector("#img<%= i + 1 %>").style.display = 'none';
+                  	 				}
+                  	 			});
+                  	 		</script>
+						<% 
+							}
+							for (int j = size; j < 3; j++) {
+						%>
+								<input type="file" name="file<%= j + 1 %>" id="file<%= j + 1 %>" /><br />
+						<%
+							}
+						}else{ %>
 							<input type="file" name="file1" id="file1" />
 							<input type="file" name="file2" id="file2" />
 							<input type="file" name="file3" id="file3" />
+						<% } %>
 						</td>
 					</tr>
 					<tr>
@@ -36,32 +69,9 @@
 					<tr>
 						<td colspan="4">
 							<div id="imgDiv">
-						<%
-						if(!attachList.isEmpty()){
-							int size = attachList.size();
-							for(int i = 0; i < size; i++){
-								Attachment attach = attachList.get(i);
-						%>
-								<img id="img<%= (i + 1) %>" class="img" src="<%= request.getContextPath() %>/upload/question/<%= attach.getRenamedFilename() %>" alt=""/>
-								<%--
-								<input type="checkbox" name="delFile" id="delFile<%= i %>" value="<%= attach.getNo() %>" />
-								<label for="delFile<%= i %>">삭제</label><br />
-								 --%>
-						<% 
-							}
-							if (size != 3) {
-								for (int j = size; j < 3; j++) {
-						%>
-								<img id="img<%= (j + 1) %>" class="img" src="" alt="" style="display: none;" />
-						<%
-								}
-							}
-						} else {
-						%>
-								<img src="" alt="" id="img1" name="img1" class="img"/>
-								<img src="" alt="" id="img2" name="img2" class="img"/>
-								<img src="" alt="" id="img3" name="img3" class="img"/>
-						<% } %>
+								<img src="" alt="" id="img1" name="img1" class="img" style="display:none;" />
+								<img src="" alt="" id="img2" name="img2" class="img" style="display:none;" />
+								<img src="" alt="" id="img3" name="img3" class="img" style="display:none;" />
 							</div>
 						</td>
 					</tr>
@@ -176,6 +186,7 @@
 			//제목을 작성하지 않은 경우 폼제출할 수 없음.
 			const titleVal = frm.questionTitle.value.trim(); // 좌우공백
 			if(!/^.+$/.test(titleVal)){
+				e.preventDefault();
 				alert("제목을 작성해주세요.");
 				frm.title.select();
 				return false;
@@ -184,6 +195,7 @@
 			//내용을 작성하지 않은 경우 폼제출할 수 없음.
 			const contentVal = frm.content.value.trim();
 			if(!/^(.|\n)+$/.test(contentVal)){
+				e.preventDefault();
 				alert("내용을 작성해주세요.");
 				frm.content.select();
 				return false;

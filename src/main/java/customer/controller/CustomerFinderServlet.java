@@ -14,6 +14,8 @@ import customer.model.dto.FAQ;
 import customer.model.dto.Question;
 import customer.model.service.FAQService;
 import customer.model.service.QuestionService;
+import member.model.dto.Member;
+import member.model.dto.MemberRole;
 
 /**
  * Servlet implementation class CustomerFinderServlet
@@ -28,6 +30,7 @@ public class CustomerFinderServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Member member = (Member) request.getSession().getAttribute("loginMember");
 		String nickname = request.getParameter("nickname");
 		String searchType = request.getParameter("searchType");
 		String searchContent = request.getParameter("searchContent");
@@ -39,7 +42,11 @@ public class CustomerFinderServlet extends HttpServlet {
 			questionList = questionService.selectFindQuestion(nickname, searchContent);
 			faqList = faqService.selectAllFAQ();
 		} else {
-			questionList = questionService.selectMyAllQuestion(nickname);
+			if (member.getMemberRole() == MemberRole.A || member.getMemberRole() == MemberRole.M) {
+				questionList = questionService.selectAllQuestion();
+			} else {
+				questionList = questionService.selectMyAllQuestion(nickname);			
+			}
 			faqList = faqService.selectFindFaq(searchContent);
 		}
 		
