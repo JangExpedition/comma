@@ -4,7 +4,7 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 <%
-	fontList = (List<Font>) session.getAttribute("fontList");
+	List<Font> fontList = (List<Font>) session.getAttribute("fontList");
 	String searchKeyword = request.getParameter("searchKeyword");
 %>
 	
