@@ -426,9 +426,10 @@ create table chatting (
     no number,
     name varchar2(100) not null, -- 채팅방 이름
     captin varchar2(50) not null,  -- 방장
+    category varchar2(15) not null,
     able_gender char(1) not null,
     able_age number not null,
-    now_count number default 1 not null,
+    now_count number default 0 not null,
     able_count number not null,
     reg_date date default sysdate
 );
