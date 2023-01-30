@@ -79,6 +79,32 @@ a:link {
 	right: 0;
 }
 
+.absolute-middle {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+/* 커스텀 */
+/* 반응형 레이아웃 */
+.con {
+	max-width: 950px;
+	
+}
+
+.con-min-width {
+	min-width: 320px;
+}
+
+.top-menu a {
+	text-decoration: none;
+	color: gray;
+	font-weight: bold;
+	font-size: 1.2rem;
+}
+
+html, body { 
+	overflow-x: hidden;
 	
 }
 
