@@ -10,11 +10,11 @@
 <section id="writeDiarySection">
 <div id="diaryEnrollBack">
 		<div id="diaryEnrollModal" class="modal fontStyle">
-			<div>
-				<button id="goBack" class="buttonStyle">뒤로가기</button>
+			<div id="goBackBtn">
+				<button id="goBack" class="buttonStyle" class="fontStyle" >뒤로가기</button>
 			</div>
-			<div id="diaryEnrollTitle">일기작성</div>
-			<div id="diaryEnrollDiv">
+			<div id="diaryEnrollTitle" class="fontStyle">일기작성</div>
+			<div id="diaryEnrollDiv" >
 				<div id="diaryEnroll">
 					<form id="diaryEnrollFrm" name="diaryEnrollFrm" action="<%= request.getContextPath() %>/diary/insertDiary" method="POST" enctype="multipart/form-data">
 					<input type="hidden" name="writer" value="<%= loginMember.getNickname() %>" />
@@ -29,15 +29,19 @@
 								</tr>
 								<tr>
 									<td>
+										<img id="img" name="img" src="<%= request.getContextPath() %>/images/이미지첨부.png" alt="첨부한 이미지" class="enrollImage" />
+										<!-- 
 										<div id="enrollImage">
-											<img id="img" name="img" src="<%= request.getContextPath() %>/images/default.png" alt="첨부한 이미지" class="enrollImage" />
 										</div>										
+										 -->
 									</td>
 									<td>
+										<label for="nowContent"></label>
+										<textarea name="nowContent" id="nowContent" cols="20" rows="16" placeholder="내용 작성"></textarea>
+										<!-- 
 										<div id="enrollContent">
-											<label for="nowContent"></label>
-											<textarea name="nowContent" id="nowContent" cols="50" rows="12" placeholder="내용 작성"></textarea>
 										</div>
+										 -->
 									</td>
 								</tr>
 								<tr>
@@ -65,7 +69,7 @@
 									</td>
 								</tr>
 								<tr>
-									<td colspan="2">
+									<td colspan="2" class="submitBtn">
 										<input id="diaryEnrollFrmSubmit" class="fontStyle" type="submit" value="등록하기" />
 									</td>
 								</tr>
@@ -182,6 +186,8 @@
 	enrollDesignChoice.addEventListener('click', () => {
 		designChoiceModal.style.display = 'inline-block';
 	});
+	
 	</script>
+	
 </body>
 </html>
