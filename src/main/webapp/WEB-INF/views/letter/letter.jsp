@@ -3,6 +3,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+<%
+	friendsList = (List<Friends>) session.getAttribute("friendsList");
+	List<Member> memberList = (List<Member>) request.getAttribute("memberList");
+%>
 	<script>		
 		const friendNick = localStorage.getItem('friendNick');
 		const anonymous = localStorage.getItem('anonymous');
@@ -56,7 +60,8 @@
 		                    	<input type="checkbox" name="ageChoice" id="ageChoice0" value=0 onclick="clickAgeChoice(this);" checked /><label for="ageChoice0">무관</label>
 		                    </td>
 		                </tr>
-					<% if (friendsList != null) { %>
+				<% if (loginMember.getMemberRole() == MemberRole.U) { %>
+					<% if (friendsList != null && !friendsList.isEmpty()) { %>
 		                <tr id="friendsListTr" style="display: none;">
 		                	<td></td>
 		                	<td></td>
@@ -75,6 +80,29 @@
 							<td colspan="3" class="fontStyle noFriends">조회된 친구목록이 없습니다..</td>
 						</tr>
 					<% } %>
+				<% } else { %>
+					<% if (memberList != null && !memberList.isEmpty()) { %>
+		                <tr id="friendsListTr" style="display: none;">
+		                	<td></td>
+		                	<td></td>
+		                    <td>
+		                    	<input type="hidden" list="friendsList" id="textFriendsList" name="friendsList" />
+		                    	<input type="text" list="friendsList" id="textFriendsNickList" name="friendsNickList" />
+		                        <datalist id="friendsList">
+		                    <% for (Member member : memberList) { %>
+		                    	<% if (!member.getNickname().equals(loginMember.getNickname())) { %>
+		                            <option id="friendNickList" value="<%= member.getNickname() %>"><%= member.getNickname() %></option>
+								<% } %>
+							<% } %>
+		                        </datalist>
+		                    </td>
+		                </tr>
+					<% } else { %>
+						<tr id="friendsListTr" style="display: none;">
+							<td colspan="3" class="fontStyle noFriends">조회된 회원목록이 없습니다..</td>
+						</tr>
+					<% } %>
+				<% } %>
 						<tr id="letterFont" style="display: none;">
 		                    <td>
 		                    	<label for="fontChoice" id="labelTd" class="fontStyle">폰트 선택</label>
@@ -193,6 +221,7 @@
 				
 				if (bool) {
 					writeLetterFrm.style.backgroundImage = `url('<%= request.getContextPath() %>/upload/design/\${designImg}')`;
+					writeLetterFrm.style.backgroundSize = 'cover';
 				}
 			});
 		});

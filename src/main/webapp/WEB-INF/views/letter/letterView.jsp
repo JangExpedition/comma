@@ -37,7 +37,7 @@
 	<section>
 		<div id="letterTitle" class="fontStyle" onclick="history.back();">받은 편지함</div>
 		<div id="letterAllList">
-			<div id="letterListDiv" class="letterList" style="font-family:<%= fontName %>; background-image:url('<%= request.getContextPath() %>/upload/design/<%= designImg %>')">
+			<div id="letterListDiv" class="letterList" style="font-family:<%= fontName %>; background-image:url('<%= request.getContextPath() %>/upload/design/<%= designImg %>'); background-size: cover;">
 				<div id="letterListTitle">
 					<table>
 						<tr>

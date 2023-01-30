@@ -39,7 +39,7 @@
 							fontName = font.getName();
 					}
 		%>
-			<div id="letterListAnony" class="letterList letterListDiv" data-letter-no="<%= no %>" style="background-image:url('<%= request.getContextPath() %>/upload/design/<%= designImg %>'); font-family:<%= fontName %>;">
+			<div id="letterListAnony" class="letterList letterListDiv" data-letter-no="<%= no %>" style="background-image:url('<%= request.getContextPath() %>/upload/design/<%= designImg %>'); background-size:cover; font-family:<%= fontName %>;">
 				<div id="letterListTitle">
 					<table>
 						<tr>
@@ -98,7 +98,7 @@
 							fontName = font.getName();
 					}
 		%>
-			<div id="letterListFriend" class="letterList letterListDiv" data-letter-no="<%= no %>" style="font-family:<%= fontName %>; background-image:url('<%= request.getContextPath() %>/upload/design/<%= designImg %>');">
+			<div id="letterListFriend" class="letterList letterListDiv" data-letter-no="<%= no %>" style="font-family:<%= fontName %>; background-image:url('<%= request.getContextPath() %>/upload/design/<%= designImg %>'); background-size:cover;">
 				<div id="letterListTitle">
 					<table>
 						<tr>
