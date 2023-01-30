@@ -6,6 +6,7 @@
 	List<ChatLog> chatLogs = (List<ChatLog>)request.getAttribute("chatLogs");
 %>
 <section id="chatSection">	
+
 	<div id="chatContainer">	
 		<h2 id="chatTitle" class="fontStyle pointColor">익명채팅방</h2>
 		<div id="msgContainer">
