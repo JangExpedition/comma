@@ -15,6 +15,7 @@ import chat.model.dto.Chat;
 import chat.model.dto.ChatLog;
 import chat.model.dto.ChatMember;
 import chat.model.exception.ChatException;
+import common.Category;
 import member.model.dao.MemberDao;
 import member.model.dto.Gender;
 
@@ -50,6 +51,7 @@ public class ChatDao {
 		chat.setNo(rset.getInt("no"));
 		chat.setChatName(rset.getString("name"));
 		chat.setCaptin(rset.getString("captin"));
+		chat.setCategory(Category.valueOf(rset.getString("category")));
 		chat.setAbleGender(Gender.valueOf(rset.getString("able_gender")));
 		chat.setAbleAge(rset.getInt("able_age"));
 		chat.setAbleCount(rset.getInt("able_count"));
@@ -63,9 +65,10 @@ public class ChatDao {
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
 			pstmt.setString(1, chat.getChatName());
 			pstmt.setString(2, chat.getCaptin());
-			pstmt.setString(3, chat.getAbleGender().toString());
-			pstmt.setInt(4, chat.getAbleAge());
-			pstmt.setInt(5, chat.getAbleCount());
+			pstmt.setString(3, chat.getCategory().toString());
+			pstmt.setString(4, chat.getAbleGender().toString());
+			pstmt.setInt(5, chat.getAbleAge());
+			pstmt.setInt(6, chat.getAbleCount());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {

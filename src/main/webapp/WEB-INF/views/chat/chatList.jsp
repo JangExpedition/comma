@@ -10,16 +10,16 @@
 	<div id="chatContainer">
 		<div id="chatTitle" class="fontStyle pointColor"><h1>익명 채팅방</h1></div>
 		<div id = "chatCategory">
-			<select name = "category">
-				<option value="" disabled selected>카테고리를 선택하세요.</option>
-				<option value ="all">전체</option>
-				<option value ="study">진로</option>
-				<option value ="love">연애</option>
-				<option value ="family">가족</option>
-				<option value ="childcare">육아</option>
-				<option value ="career">직장</option>
-				<option value ="daily">일상</option>
-				<option value ="friends">친구</option>
+			<select name="category" id ="chatCate">
+					<option value="" disabled selected>카테고리를 선택하세요.</option>
+					<option value="ALL">전체</option>
+					<option value="STUDY">진로</option>
+					<option value="LOVE">연애</option>
+					<option value="FAMILY">가족</option>
+					<option value="CHILDCARE">육아</option>
+					<option value="CAREER">직장</option>
+					<option value="DAILY">일상</option>
+					<option value="FRIENDS">친구</option>
 			</select>
 		   	<input type = "button" id="ctreateChat" value="채팅방 개설하기">
 		</div>
@@ -52,7 +52,16 @@
 		</div>
 	</div>
 </section>
+<form action="<%= request.getContextPath() %>/chat/chatList" name="changeCsCateFrm">
+	<input type="hidden" id="chatCate" name="chatCate" />
+</form>
 <script>
+document.querySelector("#chatCate").addEventListener("change", (e)=>{
+	const frm = document.changeCsCateFrm;
+	frm.chatCate.value = e.target.value;
+	frm.submit();
+});
+    
 	/*
 	Date : 2023. 1. 27
 	@장원정

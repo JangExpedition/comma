@@ -35,7 +35,7 @@ public class ChatService {
 			chat.setNo(chatNo);
 			
 			List<ChatMember> chatMembers = chat.getChatMembers();
-			if (!chatMembers.isEmpty()) {
+			if (chatMembers != null) {
 				for (ChatMember chatmem : chatMembers) {
 					chatmem.setChatNo(chatNo);
 					result = chatDao.insertChatMember(conn, chatmem);

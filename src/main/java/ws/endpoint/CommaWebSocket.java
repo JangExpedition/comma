@@ -155,12 +155,38 @@ public class CommaWebSocket {
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
+			Set<String> participantSet = chatParticipantMap.get(chatNo);
+			if(participantSet != null) {
+				for(String participant : participantSet) {
+					Session sess = clientMap.get(participant);
+					Basic basic = sess.getBasicRemote();
+					try {
+						basic.sendText(msg);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+			break;
 		case CHATROOM_ENTER : 
 			try {
 				int result = chatService.enterChatMemmber(Integer.valueOf(chatNo), (String) data.get("sender"));
 			} catch(Exception e){
 				e.printStackTrace();
 			}
+			participantSet = chatParticipantMap.get(chatNo);
+			if(participantSet != null) {
+				for(String participant : participantSet) {
+					Session sess = clientMap.get(participant);
+					Basic basic = sess.getBasicRemote();
+					try {
+						basic.sendText(msg);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+			break;
 		case CHATROOM_LEAVE :
 			try {
 				int result = chatService.leaveChatMember(Integer.valueOf(chatNo), (String) data.get("sender"));
@@ -172,7 +198,7 @@ public class CommaWebSocket {
 			int nowCount = chatService.getNowCount(Integer.valueOf(chatNo));
 						
 			if(nowCount > 0) {
-				Set<String> participantSet = chatParticipantMap.get(chatNo);
+				participantSet = chatParticipantMap.get(chatNo);
 				if(participantSet != null) {
 					for(String participant : participantSet) {
 						Session sess = clientMap.get(participant);
@@ -185,8 +211,10 @@ public class CommaWebSocket {
 					}
 				}
 			} else{
+				// 채팅방 인원이 0이면 채팅방 제거
 				int result = chatService.deleteChat(Integer.valueOf(chatNo));
 			}
+			break;
 		}
 	}
 	

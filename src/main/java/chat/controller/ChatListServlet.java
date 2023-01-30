@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import chat.model.dto.Chat;
 import chat.model.service.ChatService;
+import common.Category;
 import counseling.model.dto.Counseling;
 import member.model.dto.Gender;
 import member.model.dto.Member;
@@ -29,6 +30,13 @@ public class ChatListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String _category = request.getParameter("chatCate");
+		Category category = null;
+		
+		if(_category != null) {
+			category = Category.valueOf(_category);
+		}
+		
 		HttpSession session = request.getSession();
 		Member loginMember = (Member) session.getAttribute("loginMember");
 		int memberAge = loginMember.getAge()/10;
@@ -37,10 +45,20 @@ public class ChatListServlet extends HttpServlet {
 		List<Chat> beforchatList = chatService.selectAllChat();
 		List<Chat> afterchatList = new ArrayList<>();
 		
-		for(Chat chat : beforchatList) {
-			if((chat.getAbleAge() <= memberAge) &&
-					((chat.getAbleGender() == memberGender) || (chat.getAbleGender() == Gender.X))) {
-				afterchatList.add(chat);
+		if(category == null || category == Category.ALL) {
+			for(Chat chat : beforchatList) {
+				if((chat.getAbleAge() <= memberAge) &&
+						((chat.getAbleGender() == memberGender) || (chat.getAbleGender() == Gender.X))) {
+					afterchatList.add(chat);
+				}
+			}
+		} else {
+			for(Chat chat : beforchatList) {
+				if((chat.getAbleAge() <= memberAge) &&
+						((chat.getAbleGender() == memberGender) || (chat.getAbleGender() == Gender.X)) &&
+						((chat.getCategory() == category) || (category == Category.ALL))) {
+					afterchatList.add(chat);
+				}
 			}
 		}
 		

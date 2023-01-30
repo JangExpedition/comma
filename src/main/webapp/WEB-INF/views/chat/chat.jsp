@@ -31,14 +31,14 @@
 			<th>카테고리 선택 :</th>
 			<td><select name="category" id ="categorySelect">
 					<option value="" disabled selected>카테고리를 선택하세요.</option>
-					<option value="all">전체</option>
-					<option value="study">진로</option>
-					<option value="love">연애</option>
-					<option value="family">가족</option>
-					<option value="childcare">육아</option>
-					<option value="career">직장</option>
-					<option value="daily">일상</option>
-					<option value="friends">친구</option>
+					<option value="ALL">전체</option>
+					<option value="STUDY">진로</option>
+					<option value="LOVE">연애</option>
+					<option value="FAMILY">가족</option>
+					<option value="CHILDCARE">육아</option>
+					<option value="CAREER">직장</option>
+					<option value="DAILY">일상</option>
+					<option value="FRIENDS">친구</option>
 			</select>
 			</td>
 		</tr>
