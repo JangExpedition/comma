@@ -1,6 +1,7 @@
 package chat.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import chat.model.dto.ChatLog;
 import chat.model.service.ChatService;
 
 /**
@@ -27,7 +29,12 @@ public class ChatViewServlet extends HttpServlet {
 			throw new IllegalArgumentException("채팅방 아이디가 유효하지 않습니다.");
 		}
 		
+		int no = Integer.valueOf(chatNo);
+		
+		List<ChatLog> chatLogs = chatService.selectAllChatLog(no);
+		
 		request.getSession().setAttribute("chatNo", chatNo);
+		request.getSession().setAttribute("chatLogs", no);
 //		
 		request.getRequestDispatcher("/WEB-INF/views/chat/chatView.jsp")
 		.forward(request, response);

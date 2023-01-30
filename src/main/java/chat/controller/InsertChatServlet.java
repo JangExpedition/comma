@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import chat.model.dto.Chat;
-import chat.model.dto.ChatMember;
 import chat.model.service.ChatService;
+import common.Category;
 import member.model.dto.Gender;
 import member.model.dto.Member;
 
@@ -32,12 +32,14 @@ public class InsertChatServlet extends HttpServlet {
 			Member loginMember = (Member) session.getAttribute("loginMember");
 			String captin = loginMember.getNickname();
 			String chatName = request.getParameter("chatTitle");
-			String category = request.getParameter("category");
+			Category category = Category.valueOf(request.getParameter("category"));
 			Gender gender = Gender.valueOf(request.getParameter("gender"));
 			int ableAge = Integer.valueOf(request.getParameter("age"));
 			int ableCount = Integer.valueOf(request.getParameter("chattingPerson"));
 			
-			Chat chat = new Chat(0, chatName, captin, gender, ableAge, 0, ableCount, null);
+			Chat chat = new Chat(0, chatName, captin, category, gender, ableAge, 0, ableCount, null, null, null);
+			
+			System.out.println("InsertChatServlet" + chat);
 			
 			int result = chatService.insertChat(chat);
 			
