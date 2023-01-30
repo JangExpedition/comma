@@ -1,3 +1,18 @@
+body{
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	 background: #f1edff;
+}
+
+#writeDiarySection {
+	width: 66%;
+}
+
+
+
 #designChoiceModalBack {
 	display: none;
 	align-items: center;
@@ -57,6 +72,7 @@
 
 table, tbody{
 	height: 100%;
+	width:100%;
 }
 
 #designModalContent td {
@@ -86,46 +102,60 @@ table, tbody{
 	cursor: pointer;
 }
 
+#diaryEnrollFrm td:first-child {
+	width: 250px;
+}
+#diaryEnrollFrm td:last-child {
+	width: 100%;
+}
+
 #diaryEnrollFrm tr:nth-child(3) td {
 	text-align: right;
 }
 
 #diaryEnrollFrm tr:last-child td {
-	text-align: center;
+	text-align: right;
+	width: 100%;
+	
 }
 
 #diaryEnrollFrmSubmit {
 	padding: 10px 20px;
-	background-color: rgba(0, 0, 0, 0);
+	background-color:#ffff;
 	font-size: 20px;
 	color: #454a7b;
 	border: 1px solid #363c61;
 	border-radius: 5px;
-	box-shadow: 1px 1px 1px #272b45;
+	box-shadow: 3px 4px 3px #272b45;
+	padding: 5px 10px;
+	margin:10px 0px;
+	
 } 
+
 
 #diaryEnrollFrmSubmit:hover {
 	cursor: pointer;
 }
 
-body{
-	width: 100%;
-	height: 100vh;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
 
 #diaryEnrollTitle{
 	text-align: center;
+	font-size:23px;
+	border: 3px solid #381a8b;
 }
 
 .buttonStyle {
 	background-color: #fff;
-	border: 1px solid #454a7b;
+	border: 3px solid #454a7b;
 	border-radius: 5px;
-	width: 80px;
-	height: 25px;
+	/*width: 80px;
+	height: 25px;*/
+}
+
+#nowContent{
+  padding:8px 20px;
+  text-align: left;
+	
 }
 
 .buttonStyle:hover {
@@ -141,6 +171,69 @@ i:hover{
 }
 
 img{
-	width: 300px;
-	height: 300px;
+	width: 260px;
+	height: 260px;
+	border: 5px solid #454a7b;
+	border-radius: 0.8em;
+	
 }
+
+#goBackBtn {
+	width: 100%;
+}
+
+#goBack{
+	margin:16px 0px;
+	font-family: Hanna !important;
+	font-size:20px;
+	text-align:center;
+	color: #454a7b !important; 
+	border: 5px solid #454a7b;
+	box-shadow: 3px 4px 3px #272b45;
+	border-radius: 0.8em;
+	padding:8px 20px;
+	
+	
+}
+
+#diaryEnrollTitle{
+	padding:8px;
+	font-family: Hanna !important;
+	text-align:center;
+	color: #ffff !important; 
+	border: 3px solid #454a7b;
+	border-radius: 0.8em;
+	background-color: #454a7b;
+	
+}
+	
+#nowContent{
+	border: 6px solid #454a7b;	
+	border-radius: 0.7em;
+	width: 95%;
+
+}
+
+#fontChoice{
+	font-family: Hanna !important;
+	text-align:center;
+	color: #454a7b !important; 
+	border:3px solid #454a7b;
+	border-radius: 0.6em;
+	background-color:#ffff;
+	padding:6px 0px;
+	
+}
+
+#nowDate{
+	font-family: Hanna !important;
+	text-align:center;
+	color: #454a7b !important; 
+	border:3px solid #454a7b;
+	border-radius: 0.6em;
+	background-color:#ffff;
+	padding:5px 0px;
+	margin:16px 0px;
+	box-shadow: 3px 4px 3px #272b45;
+}
+	
