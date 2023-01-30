@@ -4,6 +4,7 @@
 
 #chatList{
 	color: #454a7b !important;
+	
 }
 
 
@@ -207,6 +208,7 @@ html, body {
 #chatContainer{
 	width: 70%;
 	height: 80%;
+
 }
 
 #chatTitle{
@@ -228,6 +230,7 @@ html, body {
     line-height: 24px;
     border-left: 1px solid #000;
     border-right: 1px solid #000;
+
 }
 
 #thead {
