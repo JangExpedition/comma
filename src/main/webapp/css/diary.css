@@ -1,3 +1,4 @@
+
 #category>div:not(#toDiary)>i.selected{
     display: none;
 }
