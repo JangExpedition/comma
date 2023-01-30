@@ -38,10 +38,23 @@ public class UpdateDiaryServlet extends HttpServlet {
 			
 			int diaryNo = Integer.valueOf(multiReq.getParameter("updateDiaryNo"));
 			String content = multiReq.getParameter("editContent");
+			String _designNo = multiReq.getParameter("designNo");
+			String _fontNo = multiReq.getParameter("fontNo");
+			int designNo = 0;
+			int fontNo = 0;
+		
+			if(!_designNo.isEmpty()) {
+				designNo = Integer.valueOf(_designNo);
+			}
+			if(!_fontNo.isEmpty()) {
+				fontNo = Integer.valueOf(_fontNo);
+			}
 			
 			Diary diary = diaryService.selectOneDiary(diaryNo);
 			
 			diary.setContent(content);
+			diary.setDesignNo(designNo);
+			diary.setFontNo(fontNo);
 			
 			if (multiReq.getFile("updateFile") != null) {
 				diary.setOriginalFilename(multiReq.getOriginalFileName("updateFile"));
@@ -49,7 +62,6 @@ public class UpdateDiaryServlet extends HttpServlet {
 			}
 			
 			int result = diaryService.upDateDiary(diary);
-			
 			
 		} catch(Exception e) {
 			e.printStackTrace();

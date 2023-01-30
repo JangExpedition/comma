@@ -37,11 +37,14 @@
 		    			</div>
 		    		<% 
 		    		} else{ 
-		    			for(Chat chat : chatList) { %>
-		    		<div class="tr" data-chat-no="<%= chat.getNo() %>">
+		    			for(Chat chat : chatList) { 
+		    			String canEnter = (chat.getAbleCount() == chat.getNowCount() ? "cant" : "can" );
+		    			System.out.println("chatList.jsp = " + chat + "==============");
+		    			%>
+		    		<div class="tr <%= canEnter %>" data-chat-no="<%= chat.getNo() %>">
 						<div class="td"><%= chat.getChatName() %></div>
 						<div class="td"><%= chat.getCaptin() %></div>
-						<div class="td"><%-- <%= chatMemberList.get %> --%></div>
+						<div class="td"><%= chat.getNowCount() %></div>
 						<div class="td"><%= chat.getAbleCount() %></div>
 					</div>
 					<%
@@ -61,6 +64,8 @@ document.querySelector("#chatCate").addEventListener("change", (e)=>{
 	frm.chatCate.value = e.target.value;
 	frm.submit();
 });
+
+$(".tr").css("pointEvent", "none");
     
 	/*
 	Date : 2023. 1. 27

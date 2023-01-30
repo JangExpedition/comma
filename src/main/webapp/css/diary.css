@@ -241,6 +241,7 @@ section {
 	text-align: left;
 	border: 0;
 	resize: none;
+	background-color: rgba( 255, 255, 255, 0);
 }
 
 #nowContent:focus {
@@ -303,8 +304,55 @@ section {
 	font-size: 20px;
 }
 
-#designChoiceModal{
+#designChoiceModal {
+	position: absolute;
 	display: none;
+	width: 300px;
+	height: 300px;
+	top: 15%;
+	text-align: center;
+	background-color: #fff;
+	border: 3px solid #272b45;
+	border-radius: 15px;
+	color: #454a7b;
+}
+
+#designModalTitle {
+	height: 73px;
+	text-align: center;
+	padding: 15px 0px;
+	font-size: 20px;
+	margin: 0px;
+	font-weight: bold;
+	color: #454a7b;
+	box-sizing: border-box;
+}
+
+#designModalContent {
+	font-size: 15px;
+	height: 227px;
+	padding: 0px 20px;
+	overflow: scroll;
+}
+
+.designImage {
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+}
+
+.modal-close {
+	position: absolute;
+	top: 15px;
+	right: 15px;
+	font-size: 15px;
+	background-color: rgba(0, 0, 0, 0);
+	color: #454a7b;
+	border: none;
+}
+
+.modal-close:hover {
+	cursor: pointer;
 }
 
 #noDiary{
@@ -349,4 +397,17 @@ section {
 
 i:hover{
 	cursor: pointer;
+}
+
+#designModalContent td {
+	padding: 5px 10px;
+}
+
+.designBtn {
+	background-color: #454a7b;
+	color: #fff;
+	border: 1px solid #363c61;
+	border-radius: 5px;
+	padding: 5px 10px;
+	box-shadow: 1px 1px 1px #272b45;
 }

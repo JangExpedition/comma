@@ -33,10 +33,12 @@ public class DiaryDao {
 		String sql = prop.getProperty("insertDiary");
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
 			pstmt.setString(1, diary.getWriter());
-			pstmt.setString(2, diary.getContent());
-			pstmt.setString(3, diary.getOriginalFilename());
-			pstmt.setString(4, diary.getRenamedFilename());
-			pstmt.setString(5, diary.getRegDate());
+			pstmt.setInt(2, diary.getDesignNo());
+			pstmt.setInt(3, diary.getFontNo());
+			pstmt.setString(4, diary.getContent());
+			pstmt.setString(5, diary.getOriginalFilename());
+			pstmt.setString(6, diary.getRenamedFilename());
+			pstmt.setString(7, diary.getRegDate());
 			
 			result = pstmt.executeUpdate();
 			
@@ -113,18 +115,21 @@ public class DiaryDao {
 	}
 
 	public int upDateDiary(Connection conn, Diary diary) {
+		System.out.println("DiaryDao = " + diary);
 		int result = 0;
 		String sql = prop.getProperty("upDateDiary");
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
 			pstmt.setString(1, diary.getContent());
 			pstmt.setString(2, diary.getOriginalFilename());
 			pstmt.setString(3, diary.getRenamedFilename());
-			pstmt.setInt(4, diary.getNo());
+			pstmt.setInt(4, diary.getFontNo());
+			pstmt.setInt(5, diary.getDesignNo());
+			pstmt.setInt(6, diary.getNo());
 			
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
-			throw new DiaryException("일기장 삭제오류!", e);
+			throw new DiaryException("일기장 수정오류!", e);
 		}
 		
 		return result;
