@@ -15,10 +15,10 @@ import com.google.gson.Gson;
 import member.model.service.MemberService;
 
 /**
- * Servlet implementation class AdminDeleteMemberServlet
+ * Servlet implementation class AdminDeleteMemberNickServlet
  */
-@WebServlet("/admin/deleteMember")
-public class AdminDeleteMemberServlet extends HttpServlet {
+@WebServlet("/admin/adminDeleteMemberNick")
+public class AdminDeleteMemberNickServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private MemberService memberService = new MemberService();
 
@@ -26,10 +26,9 @@ public class AdminDeleteMemberServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try {
-			String memberEmail = request.getParameter("memberEmail");
-							
-			int result = memberService.deleteMember(memberEmail);
+		try {			
+			String memberNick = request.getParameter("memberNick");
+			int result = memberService.deleteMemberNick(memberNick);
 			
 			request.getSession().setAttribute("msg", "회원 탈퇴 성공!");
 			
@@ -38,7 +37,7 @@ public class AdminDeleteMemberServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		response.sendRedirect(request.getContextPath() + "/admin/adminMemberList");
-	} // doPost() end
+		response.sendRedirect(request.getContextPath() + "/complain/complain");
+	}
 
 }
