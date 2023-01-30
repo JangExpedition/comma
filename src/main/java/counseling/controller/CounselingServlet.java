@@ -88,8 +88,7 @@ public class CounselingServlet extends HttpServlet {
 					afterCounselingList.add(counseling);
 				} else if((counseling.getLimitAge() <= memberAge) &&
 							((counseling.getLimitGender() == memberGender) || (counseling.getLimitGender() == Gender.X)) && 
-										((category.equals(counseling.getCategory())) || category.equals("all"))
-										) {
+										((category == counseling.getCategory()) || category == Category.ALL)) {
 					afterCounselingList.add(counseling);
 				}
 				
