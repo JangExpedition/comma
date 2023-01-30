@@ -1,3 +1,4 @@
+<%@page import="java.util.stream.Collectors"%>
 <%@page import="common.OX"%>
 <%@page import="letter.model.dto.AF"%>
 <%@page import="letter.model.dto.Letter"%>
@@ -28,6 +29,7 @@
 				System.out.println(letter.getSendWho());
 				if (letter.getSendWho() == AF.A) {
 					no = letter.getNo();
+					
 					for (Design design : designList) {
 						if (design.getNo() == letter.getDesignNo())
 							designImg = design.getRenamedFilename();
@@ -202,20 +204,6 @@
 			console.log('content' + content);
 			letterContent.innerText = content + '  .....';
 		});
-		
-		<%--
-		window.onload = () => {
-			document.querySelectorAll('.letterList').forEach((letter) => {
-				console.log(letter);
-				
-				const no = letter.dataset.letterNo;
-				const fontNo = letter.dataset.fontNo;
-				const designImg = letter.dataset.designImg;
-				
-				letter.style.backgroudImage = "url('<%= request.getContextPath() %>/upload/design/'" + designImg + "')";
-			});			
-		};
-		--%>
 		
 	</script>
 </body>

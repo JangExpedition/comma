@@ -91,6 +91,7 @@ public class FriendsDao {
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
 			pstmt.setString(1, friends.getMyNickname());
 			pstmt.setString(2, friends.getfNickname());
+			pstmt.setString(3, friends.getIsFriend().name());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -114,5 +115,56 @@ public class FriendsDao {
 		}
 		return lastNo;
 	}
+
+
+	public List<Friends> selectReceiveFriends(Connection conn, String nickname) {
+		List<Friends> receiveFriendsList = new ArrayList<>();
+		String sql = prop.getProperty("selectReceiveFriends");
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, nickname);
+			
+			try (ResultSet rset = pstmt.executeQuery()) {
+				while (rset.next())
+					receiveFriendsList.add(handleFriendsResultSet(rset));
+			}
+		} catch (SQLException e) {
+			throw new FriendsException("친구 신청 받은 목록 조회 오류", e);
+		}
+		return receiveFriendsList;
+	} // select ReceiveFriends() end
+	
+	public int updateIsFriend(Connection conn, Friends friend) {
+		int result = 0;
+		String sql = prop.getProperty("updateIsFriend");
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setString(1, friend.getfNickname());
+			pstmt.setString(2, friend.getMyNickname());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new FriendsException("친구 여부 수정 오류", e);
+		}
+		
+		return result;
+	} // updateIsFriend() end
+
+
+	public int deleteFriend(Connection conn, Friends friend) {
+		int result = 0;
+		String sql = prop.getProperty("deleteFriend");
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setString(1, friend.getMyNickname());
+			pstmt.setString(2, friend.getfNickname());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new FriendsException("친구 삭제 오류", e);
+		}
+		
+		return result;
+	} // deleteFriend() end
 	
 } // class end

@@ -126,6 +126,28 @@ input[type="checkbox"]:checked {
 	cursor: pointer;
 }
 
+.letterBtn {
+	padding: 5px 10px;
+	color: #454a7b;
+	background-color: rgba(0, 0, 0, 0);
+	border: 1px solid #454a7b;
+	font-size: 15px;
+	border-radius: 10px;
+}
+
+.letterBtn:hover {
+	cursor: pointer;
+}
+
+.waitFriend {
+	font-size: 15px;
+	color: #cfcfcf;
+	background-color: rgba(0, 0, 0, 0);
+	border: 1px solid #b5b5b5;
+	border-radius: 10px;
+	padding: 5px 10px;
+}
+
 #writeLetterFrm > fieldset{
     border: 0;
 }
@@ -214,4 +236,9 @@ input[type="checkbox"]:checked {
 
 .letterDetailImg {
 	width: 30%;
+}
+
+
+#writerDiv {
+	margin: 0px auto;
 }

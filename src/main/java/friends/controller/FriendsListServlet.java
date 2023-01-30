@@ -32,18 +32,13 @@ public class FriendsListServlet extends HttpServlet {
 		
 		// 업무로직
 		List<Friends> friendsList = friendsService.selectAllFriends(nickname);
+		List<Friends> receiveFriendsList = friendsService.selectReceiveFriends(nickname);
 		System.out.println(friendsList);
 		
 		// view단 처리
 		request.getSession().setAttribute("friendsList", friendsList);
+		request.setAttribute("receiveFriendsList", receiveFriendsList);
 		request.getRequestDispatcher("/WEB-INF/views/friends/friendsList.jsp").forward(request, response);
 	} // doGet() end
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-	} // doPost() end
 
 }
