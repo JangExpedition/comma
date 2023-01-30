@@ -104,6 +104,7 @@
 						<th>신고분류</th>
 						<th>내용</th>
 						<th>신고일</th>
+						<th></th>
 					</tr>
 		<%
 			if (complainList != null && !complainList.isEmpty()) {
@@ -118,6 +119,28 @@
 						<td><%= complain.getPartition() %></td>
 						<td><%= complain.getContent() %></td>
 						<td><%= complain.getRegDate() %></td>
+						<td>
+						<% if (complain.getWarningCnt() == 3) { %>
+							<form action="<%= request.getContextPath() %>/admin/adminDeleteMemberNick" method="post" name="memberDeleteFrm">
+								<input type="hidden" name="memberNick" />
+								<input type="button" id="delMemberBtn" class="delMemberBtn memberBtn" value="탈퇴" data-member-nick="<%= complain.getVillain() %>" />
+							</form>
+							<script>
+								/*
+								  회원탈퇴
+								*/
+								document.querySelector('#delMemberBtn').addEventListener('click', (e) => {
+									const memberNick = e.target.dataset.memberNick;
+									
+									if (confirm(`[\${memberNick}] 회원을 정말로 탈퇴시키시겠습니까?`)) {
+										const frm = document.memberDeleteFrm;
+										frm.memberNick.value = memberNick;
+										frm.submit();
+									}
+								});
+							</script>
+						<% } %>
+						</td>
 					</tr>
 		<%
 				}
@@ -137,9 +160,13 @@
 			<input type="hidden" name="warningCnt" />
 			<input type="hidden" name="letterContent" />
 		</form>
+		
 	</section>
-
+	
 	<script>
+		/*
+		  신고누적횟수 변경 및 편지 안내
+		*/
 		document.querySelectorAll(".warning-cnt").forEach((cnt) => {
 			cnt.addEventListener('change', (e) => {
 				console.log(e.target.value);

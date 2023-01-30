@@ -29,19 +29,15 @@
 								</tr>
 								<tr>
 									<td>
-										<img id="img" name="img" src="<%= request.getContextPath() %>/images/이미지첨부.png" alt="첨부한 이미지" class="enrollImage" />
-										<!-- 
 										<div id="enrollImage">
+											<img id="img" name="img" src="<%= request.getContextPath() %>/images/이미지첨부.png" alt="첨부한 이미지" class="enrollImage" />
 										</div>										
-										 -->
 									</td>
 									<td>
-										<label for="nowContent"></label>
-										<textarea name="nowContent" id="nowContent" cols="20" rows="16" placeholder="내용 작성"></textarea>
-										<!-- 
 										<div id="enrollContent">
+											<label for="nowContent"></label>
+											<textarea name="nowContent" id="nowContent" cols="20" rows="16" placeholder="내용 작성"></textarea>
 										</div>
-										 -->
 									</td>
 								</tr>
 								<tr>
