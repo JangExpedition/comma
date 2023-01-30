@@ -4,8 +4,12 @@
 body
 {
  font-family: 'Rubik', sans-serif;
- background-color: #454a7b;
-}
+ height: 100vh;
+ width: 100vw;
+ background-image: url(../images/index2.png);
+ background-repeat : no-repeat;
+ background-size : cover;
+  }
 
 h1,h2,h3,h4,h5,h6,p
 {
@@ -22,6 +26,7 @@ h1,h2,h3,h4,h5,h6,p
 
 .error_block
 {
+    
  width: 40%;
  position: absolute;
  left: 50%;
@@ -32,31 +37,33 @@ h1,h2,h3,h4,h5,h6,p
 
 .error_block h1
 {
- font-size: 100px;
+ font-size: 180px;
  color: #ffffff;
 }
 
 .error_block h3
 {
- font-size: 40px;
+ font-size: 45px;
  color: #fff;
 }
 
 #try{
   text-align: center; 
-  font-size: 18px;
+  font-size: 22px;
 }
 
 .error_btn
 {
  width: 250px;
  height: 45px;
- background: #bfafeb;
- border:none;
+ background: #b388e1;
+ border: 5px solid rgb(238, 238, 238);
  border-radius: 5px;
  color: #fff;
  font-size: 18px;
  font-weight: 600;
  margin-top: 30px;
  cursor: pointer;
+
+
 }
