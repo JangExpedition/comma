@@ -44,7 +44,7 @@ public class LetterDao {
 		letter.setRead_check(OX.valueOf(rset.getString("read_check")));
 		letter.setAnonymous(OX.valueOf(rset.getString("anonymous")));
 		letter.setSendWho(AF.valueOf(rset.getString("send_who")));
-		letter.setWriterRole(MemberRole.valueOf(rset.getString("member_role")));
+		letter.setWriterRole(rset.getString("member_role") != null ? MemberRole.valueOf(rset.getString("member_role")) : MemberRole.U);
 		return letter;
 	} // handleLetterResultSet() end
 
