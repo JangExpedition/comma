@@ -18,7 +18,7 @@
 				<div id="diaryEnroll">
 					<form id="diaryEnrollFrm" name="diaryEnrollFrm" action="<%= request.getContextPath() %>/diary/insertDiary" method="POST" enctype="multipart/form-data">
 					<input type="hidden" name="writer" value="<%= loginMember.getNickname() %>" />
-						<table>
+						<table id="writeDiaryContent">
 							<tbody>
 								<tr>
 									<td colspan="2">
@@ -37,7 +37,7 @@
 									</td>
 									<td>
 										<label for="nowContent"></label>
-										<textarea name="nowContent" id="nowContent" cols="20" rows="16" placeholder="내용 작성"></textarea>
+										<textarea name="nowContent" id="nowContent" placeholder="내용 작성"></textarea>
 										<!-- 
 										<div id="enrollContent">
 										</div>
@@ -49,7 +49,7 @@
 										<label for="enrollImage">
 											<i id="enrollImageChoice" class="fa-regular fa-image"></i>
 										</label>
-										<input type="file" name="enrollImage" id="enrollImage" style="display: none;" />
+										<!-- <input type="file" name="enrollImage" id="enrollImage" style="display: none;" /> -->
 										<select name="fontChoice" id="fontChoice">
 				                    	<%
 				                    		if (fontList != null && !fontList.isEmpty()) {
@@ -76,6 +76,8 @@
 							</tbody>
 						</table>
 						<input type="file" name="file" id="file" />
+						<input type="hidden" id="fontNoInput" name="fontNo" />
+						<input type="hidden" id="designNoInput" name="designNo" />
 					</form>
 				</div>
 			</div>
@@ -94,29 +96,29 @@
 				<tbody>
 					<tr>
 						<td>
-							<img src="<%= request.getContextPath() %>/images/default.png" alt="디자인1이미지" class="designImage" />
+							<img src="<%= request.getContextPath() %>/images/diaryImg1.png" alt="디자인1이미지" class="designImage" />
 						</td>
 						<td>디자인1</td>
 						<td>
-							<input type="button" value="선택" class="fontStyle designBtn" />
+							<input id="choiceDesign1" type="button" value="선택" class="fontStyle designBtn" />
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<img src="<%= request.getContextPath() %>/images/default.png" alt="디자인2이미지" class="designImage" />
+							<img src="<%= request.getContextPath() %>/images/diaryImg2.png" alt="디자인2이미지" class="designImage" />
 						</td>
 						<td>디자인2</td>
 						<td>
-							<input type="button" value="선택" class="fontStyle designBtn" />
+							<input id="choiceDesign2" type="button" value="선택" class="fontStyle designBtn" />
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<img src="<%= request.getContextPath() %>/images/default.png" alt="디자인3이미지" class="designImage" />
+							<img src="<%= request.getContextPath() %>/images/diaryImg3.jpeg" alt="디자인3이미지" class="designImage" />
 						</td>
 						<td>디자인3</td>
 						<td class="design-btn">
-							<input type="button" value="선택" class="fontStyle designBtn" />
+							<input id="choiceDesign3" type="button" value="선택" class="fontStyle designBtn" />
 						</td>
 					</tr>
 				</tbody>
@@ -125,6 +127,20 @@
 	</div>
 	</section>
 	<script>
+	document.querySelector("#choiceDesign1").addEventListener("click", (e)=>{
+		$("#nowContent").css("backgroundImage", "url('<%= request.getContextPath() %>/images/diaryImg1.png')");
+		designNoInput.value = 1;
+	});
+	
+	document.querySelector("#choiceDesign2").addEventListener("click", (e)=>{
+		$("#nowContent").css("backgroundImage", "url('<%= request.getContextPath() %>/images/diaryImg2.png')");
+		designNoInput.value = 2;
+	});
+	
+	document.querySelector("#choiceDesign3").addEventListener("click", (e)=>{
+		$("#nowContent").css("backgroundImage", "url('<%= request.getContextPath() %>/images/diaryImg3.jpeg')");
+		designNoInput.value = 3;
+	});
 	
 	document.querySelector('#fontChoice').addEventListener('change', (e) => {
 		document.querySelectorAll('.fontChoiceOption').forEach((option) => {
@@ -133,6 +149,7 @@
 			
 			if (bool) {
 				nowContent.style.fontFamily = `\${fontName}`;
+			 	fontNoInput.value =  fontChoice.value;
 			}
 		});
 	});
@@ -152,7 +169,7 @@
 				img.src = e.target.result;
 			};
 		} else{
-			img.style.display = "none";
+			img.src = "<%= request.getContextPath() %>/images/이미지첨부.png";
 		}
 		
 	});

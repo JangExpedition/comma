@@ -42,8 +42,10 @@ public class InsertDiaryServlet extends HttpServlet {
 			String writer = multiReq.getParameter("writer");
 			String content = multiReq.getParameter("nowContent");
 			String nowDate = multiReq.getParameter("nowDate");
+			int designNo = Integer.valueOf(multiReq.getParameter("designNo"));
+			int fontNo = Integer.valueOf(multiReq.getParameter("fontNo"));
 			
-			Diary diary = new Diary(0, writer, content, 0, 0, null, null, nowDate);
+			Diary diary = new Diary(0, writer, content, designNo, fontNo, null, null, nowDate);
 			
 			if (multiReq.getFile("file") != null) {
 				diary.setOriginalFilename(multiReq.getOriginalFileName("file"));

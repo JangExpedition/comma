@@ -28,67 +28,69 @@
 	
 	<section id="diaryTotalList" class="fontStyle">
 	<div id="diaryContainer">
-	<div id="diaryTitle">일기장</div>
-	<div id="inputBtn">
-	<% 
-	if(canWrite){
-		if(yFilter == null) { 
-	%>
-		<input type="button" id="writeBtn" class="fontStyle" value="일기 작성하기" />
-		<script>
-			document.querySelector("#writeBtn").addEventListener('click', () => {
-				location.href = "<%= request.getContextPath() %>/diary/writeDiary";
-			});
-		</script>
-	<% } 
-	} %>
-	</div>
-	
-	<div class="yearContainer">
-	<% if(yFilter == null) { %>
-		<%= formatToday %>
-	<% } else{ %>
-		<%= yFilter %>
-	<% } %>
-	</div>
-	<div id="diarySec">
-		<div id="yearFilter">
-		<p class="yFilter">#전체보기</p>
-		<%
-			Iterator<String> iter = memberHaveYearSet.iterator();
-			while(iter.hasNext()){
+		<div id="diaryTitle">일기장</div>
+		<div id="inputBtn">
+		<% 
+		if(canWrite){
+			if(yFilter == null) { 
 		%>
-		<p class="yFilter">#<%= iter.next() %></p>
+			<input type="button" id="writeBtn" class="fontStyle" value="일기 작성하기" />
+			<script>
+				document.querySelector("#writeBtn").addEventListener('click', () => {
+					location.href = "<%= request.getContextPath() %>/diary/writeDiary";
+				});
+			</script>
+		<% } 
+		} %>
+		</div>
+	
+		<div class="yearContainer">
+		<% if(yFilter == null) { %>
+			<%= formatToday %>
+		<% } else{ %>
+			<%= yFilter %>
 		<% } %>
 		</div>
-		
-		<% if(diaryList.isEmpty()) {%>
+		<div id="diarySec">
+			<div id="yearFilter">
+				<p class="yFilter">#전체보기</p>
+			<%
+				Iterator<String> iter = memberHaveYearSet.iterator();
+				while(iter.hasNext()){
+			%>
+				<p class="yFilter">#<%= iter.next() %></p>
+			<% } %>
+			</div>
+			
+			<% if(diaryList.isEmpty()) {%>
 			<div id="noDiary">
 				작성된 일기가 없습니다.
 			</div>
-		<% }else{ %>
-		<div id="didiary">
-		<% for(Diary diary : diaryList){ %>
-			<div id="diary" data-diary-no="<%= diary.getNo() %>" class="onediary" >
-				<div id="imgBox">
-				<% if(diary.getOriginalFilename() != null){ %>
-					<img src="<%= request.getContextPath() %>/upload/diary/<%= diary.getRenamedFilename() %>" alt="" class="writeImg" />
-				<% } else{ %>
-					<img src="<%= request.getContextPath() %>/images/default.png" alt="" class="writeImg" />
-				<% } %>
-				</div>
-				<div id="diaryContent">
-					<p class="writeDate"><%= diary.getRegDate() %></p>
-					<% if(diary.getContent().length() > 20) {%>
-					<p class="writeContent"><%= diary.getContent().substring(0, 20) + "..." %></p>
+			<% }else{ %>
+			<div id="didiary">
+			<% for(Diary diary : diaryList){ %>
+				<div id="diary" data-diary-no="<%= diary.getNo() %>" class="onediary" >
+					<div id="imgBox">
+					<% if(diary.getOriginalFilename() != null){ %>
+						<img src="<%= request.getContextPath() %>/upload/diary/<%= diary.getRenamedFilename() %>" alt="" class="writeImg" />
 					<% } else{ %>
-					<p class="writeContent"><%= diary.getContent() %></p>
+						<img src="<%= request.getContextPath() %>/images/default.png" alt="" class="writeImg" />
 					<% } %>
+					</div>
+					<div id="diaryContent">
+						<p class="writeDate"><%= diary.getRegDate() %></p>
+						<% if(diary.getContent().length() > 20) {%>
+						<p class="writeContent"><%= diary.getContent().substring(0, 20) + "..." %></p>
+						<% } else{ %>
+						<p class="writeContent"><%= diary.getContent() %></p>
+						<% } %>
+					</div>
 				</div>
+			<% } // for end %>
 			</div>
-		<% } %>
+			<% } %>
 		</div>
-		</div>
+	</div>
 	</section>
 	<!-- 일기 작성 모달 -->
 	<div id="diaryEnrollBack">
@@ -132,13 +134,29 @@
 						<i id="enrollImageChoice" class="fa-regular fa-image"></i>
 					</label>
 					<input type="file" name="updateFile" id="updateFile" style="display: none;" />
-					<i id="enrollFontChoice" class="fa-solid fa-font"></i>
+					<select name="fontChoice" id="fontChoice">
+                   	<%
+                   		if (fontList != null && !fontList.isEmpty()) {
+                   			for (Font font : fontList) {
+                   	%>
+                   				<option style="font-family:<%= font.getName() %>;" class="fontChoiceOption" value="<%= font.getNo() %>" data-font-name="<%= font.getName() %>"><%= font.getName() %></option>
+                   	<%
+                   			} // for end
+                   		} else {
+                   	%>
+	                    		<option value=0>폰트선택불가</option>
+                   	<%
+                   		} // else end
+                   	%>
+	                </select>
 					<i id="enrollDesignChoice" class="fa-solid fa-brush"></i>
 				</div>
 				<div id="updateDiaryBtn">
 					<input id="diaryUpdateFrmSubmit" class="fontStyle" type="submit" value="수정하기" />
 				</div>
 				<% } %>
+				<input type="hidden" id="fontNoInput" name="fontNo" />
+				<input type="hidden" id="designNoInput" name="designNo" />
 			</form>
 		</div>
 	</div>
@@ -155,29 +173,29 @@
 				<tbody>
 					<tr>
 						<td>
-							<img src="<%= request.getContextPath() %>/images/default.png" alt="디자인1이미지" class="designImage" />
+							<img src="<%= request.getContextPath() %>/images/diaryImg1.png" alt="디자인1이미지" class="designImage" />
 						</td>
 						<td>디자인1</td>
 						<td>
-							<input type="button" value="선택" class="fontStyle designBtn" />
+							<input id="choiceDesign1" type="button" value="선택" class="fontStyle designBtn" />
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<img src="<%= request.getContextPath() %>/images/default.png" alt="디자인2이미지" class="designImage" />
+							<img src="<%= request.getContextPath() %>/images/diaryImg2.png" alt="디자인2이미지" class="designImage" />
 						</td>
 						<td>디자인2</td>
 						<td>
-							<input type="button" value="선택" class="fontStyle designBtn" />
+							<input id="choiceDesign2" type="button" value="선택" class="fontStyle designBtn" />
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<img src="<%= request.getContextPath() %>/images/default.png" alt="디자인3이미지" class="designImage" />
+							<img src="<%= request.getContextPath() %>/images/diaryImg3.jpeg" alt="디자인3이미지" class="designImage" />
 						</td>
 						<td>디자인3</td>
 						<td class="design-btn">
-							<input type="button" value="선택" class="fontStyle designBtn" />
+							<input id="choiceDesign3" type="button" value="선택" class="fontStyle designBtn" />
 						</td>
 					</tr>
 				</tbody>
@@ -217,6 +235,8 @@
 				dataType: "json",
 				success(data){
 					
+					console.log("wjefijewlfjlefjkldsnfkl");
+					
 					const{no, writer, content, designNo, fontNo, originalFilename, renamedFilename, regDate} = data;
 					
 					diaryEnrollTitle.innerHTML = regDate;
@@ -229,6 +249,53 @@
 						diaryViewImg.src = `<%= request.getContextPath() %>/upload/diary/\${renamedFilename}`;
 						diaryUpdateImg.src = `<%= request.getContextPath() %>/upload/diary/\${renamedFilename}`;
  					}
+					
+					console.log(designNo, typeof designNo);
+					switch(designNo){
+					case 1: 
+						diaryEnrollModal.style.backgroundImage = "url('<%=request.getContextPath() %>/images/diaryImg1.png')";
+						diaryUpdateModal.style.backgroundImage = "url('<%=request.getContextPath() %>/images/diaryImg1.png')";
+						break;
+					case 2: 
+						diaryEnrollModal.style.backgroundImage = "url('<%=request.getContextPath() %>/images/diaryImg2.png')";
+						diaryUpdateModal.style.backgroundImage = "url('<%=request.getContextPath() %>/images/diaryImg2.png')";
+						break;
+					case 3: 
+						diaryEnrollModal.style.backgroundImage = "url('<%=request.getContextPath() %>/images/diaryImg3.jpeg')";
+						diaryUpdateModal.style.backgroundImage = "url('<%=request.getContextPath() %>/images/diaryImg3.jpeg')";
+						break;
+					}
+					
+					switch(fontNo){
+					case 1 : 
+						nowContent.style.fontFamily = "'Yeon Sung', cursive";
+						editContent.style.fontFamily = "'Yeon Sung', cursive";
+						break;
+					case 2 : 
+						nowContent.style.fontFamily = "'Nanum Gothic', sans-serif";
+						editContent.style.fontFamily = "'Nanum Gothic', sans-serif";
+						break;
+					case 21 : 
+						nowContent.style.fontFamily = "'Gaegu', cursive";
+						editContent.style.fontFamily = "'Gaegu', cursive";
+						break;
+					case 41 : 
+						nowContent.style.fontFamily = "'Hi Melody', cursive";
+						editContent.style.fontFamily = "'Hi Melody', cursive";
+						break;
+					case 42 : 
+						nowContent.style.fontFamily = "'Nanum Brush Script', cursive";
+						editContent.style.fontFamily = "'Nanum Brush Script', cursive";
+						break;
+					case 43 : 
+						nowContent.style.fontFamily = "'IBM Plex Sans KR', sans-serif";
+						editContent.style.fontFamily = "'IBM Plex Sans KR', sans-serif";
+						break;
+					case 44 : 
+						nowContent.style.fontFamily = "'East Sea Dokdo', cursive";
+						editContent.style.fontFamily = "'East Sea Dokdo', cursive";
+						break;
+					}
 					
 					nowContent.value = content;
 					editContent.value = content;
@@ -254,9 +321,34 @@
 			designChoiceModal.style.display = 'inline-block';
 		}); 
 		
+		document.querySelector("#choiceDesign1").addEventListener("click", (e)=>{
+			$("#diaryUpdateModal").css("backgroundImage", "url('<%= request.getContextPath() %>/images/diaryImg1.png')");
+			designNoInput.value = 1;
+		});
+		
+		document.querySelector("#choiceDesign2").addEventListener("click", (e)=>{
+			$("#diaryUpdateModal").css("backgroundImage", "url('<%= request.getContextPath() %>/images/diaryImg2.png')");
+			designNoInput.value = 2;
+		});
+		
+		document.querySelector("#choiceDesign3").addEventListener("click", (e)=>{
+			$("#diaryUpdateModal").css("backgroundImage", "url('<%= request.getContextPath() %>/images/diaryImg3.jpeg')");
+			designNoInput.value = 3;
+		});
+		
+		document.querySelector('#fontChoice').addEventListener('change', (e) => {
+			document.querySelectorAll('.fontChoiceOption').forEach((option) => {
+				const bool = option.selected;
+				const fontName = option.dataset.fontName;
+				
+				if (bool) {
+					editContent.style.fontFamily = `\${fontName}`;
+				 	fontNoInput.value =  fontChoice.value;
+				}
+			});
+		});
+		
 		</script>
-		<% } %>
-		</div>
 	
 	<form action="<%= request.getContextPath() %>/diary/diaryList" name="filterFrm">
 		<input type="hidden" id="yearFilter" name="yearFilter"/>

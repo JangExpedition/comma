@@ -75,6 +75,11 @@ table, tbody{
 	width:100%;
 }
 
+#writeDiaryContent td{
+	box-sizing: border-box;
+	width: 50%;
+}
+
 #designModalContent td {
 	padding: 5px 10px;
 }
@@ -153,9 +158,14 @@ table, tbody{
 }
 
 #nowContent{
-  padding:8px 20px;
-  text-align: left;
-	
+	padding:8px 20px;
+	text-align: left;
+	box-sizing: border-box;
+	width: 100%;
+	height: 100%;
+	resize: none;
+	border: 6px solid #454a7b;	
+	border-radius: 0.7em;
 }
 
 .buttonStyle:hover {
@@ -171,11 +181,10 @@ i:hover{
 }
 
 img{
-	width: 260px;
-	height: 260px;
+	width: 300px;
+	height: 300px;
 	border: 5px solid #454a7b;
 	border-radius: 0.8em;
-	
 }
 
 #goBackBtn {
@@ -205,13 +214,6 @@ img{
 	border-radius: 0.8em;
 	background-color: #454a7b;
 	
-}
-	
-#nowContent{
-	border: 6px solid #454a7b;	
-	border-radius: 0.7em;
-	width: 95%;
-
 }
 
 #fontChoice{
