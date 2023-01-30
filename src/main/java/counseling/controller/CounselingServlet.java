@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import chat.model.dto.Chat;
 import common.Attachment;
+import common.Category;
 import common.CommaUtils;
 import counseling.model.dto.Counseling;
 import counseling.model.service.CounselingService;
@@ -34,6 +34,13 @@ public class CounselingServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String _category = request.getParameter("counselingCate");
+		Category category = null;
+		
+		if(_category != null) {
+			category = Category.valueOf(_category);
+		}
+		
 		final int limit = 10;
 		int page = 1;
 		try {
@@ -63,14 +70,33 @@ public class CounselingServlet extends HttpServlet {
 		
 		List<Counseling> afterCounselingList = new ArrayList<>();
 		
-		// 작성자 본인글, 나이, 성별 필터링
-		for(Counseling counseling : counselingList) {
-			System.out.println("CounselingServlet = " + counseling);
-			if((counseling.getWriter() == memberNick) || (counseling.getLimitAge() <= memberAge) &&
-					((counseling.getLimitGender() == memberGender) || (counseling.getLimitGender() == Gender.X))) {
-				afterCounselingList.add(counseling);
+		if(category == null || category == Category.ALL) {
+			// 작성자 본인글, 나이, 성별 필터링
+			for(Counseling counseling : counselingList) {
+				
+				if(counseling.getWriter().equals(memberNick)) {
+					afterCounselingList.add(counseling);
+				}else if((counseling.getLimitAge() <= memberAge) &&
+						((counseling.getLimitGender() == memberGender) || (counseling.getLimitGender() == Gender.X))) {
+					afterCounselingList.add(counseling);
+				}
+			}
+		} else {
+			for(Counseling counseling : counselingList) {
+				
+				if(counseling.getWriter().equals(memberNick)) {
+					afterCounselingList.add(counseling);
+				} else if((counseling.getLimitAge() <= memberAge) &&
+							((counseling.getLimitGender() == memberGender) || (counseling.getLimitGender() == Gender.X)) && 
+										((category.equals(counseling.getCategory())) || category.equals("all"))
+										) {
+					afterCounselingList.add(counseling);
+				}
+				
+				
 			}
 		}
+		
 		
 		System.out.println("CounselingServlet = " + afterCounselingList);
 		
