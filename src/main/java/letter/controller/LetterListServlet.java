@@ -15,6 +15,9 @@ import friends.model.service.FriendsService;
 import letter.model.dto.Letter;
 import letter.model.service.LetterService;
 import member.model.dto.Member;
+import style.model.dto.Design;
+import style.model.dto.Font;
+import style.model.service.StyleService;
 
 /**
  * Servlet implementation class LetterListServlet
@@ -24,6 +27,7 @@ public class LetterListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private LetterService letterService = new LetterService();
 	private FriendsService friendsService = new FriendsService();
+	private StyleService styleService = new StyleService();
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -37,6 +41,8 @@ public class LetterListServlet extends HttpServlet {
 		// 업무로직
 		List<Letter> letterList = letterService.selectAllLetter(nickname);
 		List<Friends> friendsList = friendsService.selectAllFriends(nickname);
+		List<Font> fontList = styleService.selectAllFont();
+		List<Design> designList = styleService.selectAllDesign();
 
 		// 개행문자 변환처리
 		for (Letter letter : letterList) {			
@@ -47,6 +53,8 @@ public class LetterListServlet extends HttpServlet {
 		}
 		
 		request.setAttribute("letterList", letterList);
+		request.getSession().setAttribute("fontList", fontList);
+		request.getSession().setAttribute("designList", designList);
 		request.getSession().setAttribute("friendsList", friendsList);
 		
 		// view단 처리

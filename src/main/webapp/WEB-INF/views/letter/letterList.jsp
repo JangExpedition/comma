@@ -7,6 +7,8 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%
 	List<Letter> letterList = (List<Letter>) request.getAttribute("letterList");
+	List<Font> fontList = (List<Font>) session.getAttribute("fontList");
+	List<Design> designList = (List<Design>) session.getAttribute("designList");
 	System.out.println("letterList = " + letterList);
 	int no = 0;
 	String designImg = "";

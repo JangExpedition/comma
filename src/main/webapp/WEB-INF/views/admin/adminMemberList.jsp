@@ -71,8 +71,8 @@
 	        <div id="search-gender" class="search-type">
 	            <form action="<%=request.getContextPath()%>/admin/adminMemberFinder">
 	                <input type="hidden" name="searchType" value="gender"/>
-	                <input type="radio" name="searchKeyword" value="M" <%= "gender".equals(searchType) && "M".equals(searchKeyword) ? "checked" : "" %>> 남
-	                <input type="radio" name="searchKeyword" value="F" <%= "gender".equals(searchType) && "F".equals(searchKeyword) ? "checked" : "" %>> 여
+	                <input type="radio" name="searchKeyword" id="genderM" value="M" <%= "gender".equals(searchType) && "M".equals(searchKeyword) ? "checked" : "" %>><label for="genderM"> 남</label>
+	                <input type="radio" name="searchKeyword" id="genderF" value="F" <%= "gender".equals(searchType) && "F".equals(searchKeyword) ? "checked" : "" %>><label for="genderF"> 여</label>
 	                <button type="submit">검색</button>
 	            </form>
 	        </div>

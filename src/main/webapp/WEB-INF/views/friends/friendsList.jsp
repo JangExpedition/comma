@@ -3,7 +3,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%
-	friendsList = (List<Friends>) session.getAttribute("friendsList");
+	List<Friends> friendsList = (List<Friends>) session.getAttribute("friendsList");
 	List<Friends> receiveFriendsList = (List<Friends>) request.getAttribute("receiveFriendsList");
 	System.out.println("friendsList = " + friendsList);
 	System.out.println("receiveFriendsList = " + receiveFriendsList);

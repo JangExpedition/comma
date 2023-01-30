@@ -5,7 +5,7 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 <%
-	designList = (List<Design>) session.getAttribute("designList");
+	List<Design> designList = (List<Design>) session.getAttribute("designList");
 	String searchKeyword = request.getParameter("searchKeyword");
 %>
 
