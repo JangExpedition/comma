@@ -176,6 +176,7 @@
 			//제목을 작성하지 않은 경우 폼제출할 수 없음.
 			const titleVal = frm.questionTitle.value.trim(); // 좌우공백
 			if(!/^.+$/.test(titleVal)){
+				e.preventDefault();
 				alert("제목을 작성해주세요.");
 				frm.title.select();
 				return false;
@@ -184,6 +185,7 @@
 			//내용을 작성하지 않은 경우 폼제출할 수 없음.
 			const contentVal = frm.content.value.trim();
 			if(!/^(.|\n)+$/.test(contentVal)){
+				e.preventDefault();
 				alert("내용을 작성해주세요.");
 				frm.content.select();
 				return false;
