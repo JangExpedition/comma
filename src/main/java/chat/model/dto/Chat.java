@@ -11,6 +11,7 @@ public class Chat {
 	
 	private int no;
 	private String chatName;
+	private String chatPwd;
 	private String captin;
 	private Category category;
 	private Gender ableGender;
@@ -40,11 +41,12 @@ public class Chat {
 		this.regDate = regDate;
 	}
 
-	public Chat(int no, String chatName, String captin, Category category, Gender ableGender, int ableAge, int nowCount,
+	public Chat(int no, String chatName, String chatPwd, String captin, Category category, Gender ableGender, int ableAge, int nowCount,
 			int ableCount, Date regDate, List<ChatMember> chatMembers, List<ChatLog> chatLogs) {
 		super();
 		this.no = no;
 		this.chatName = chatName;
+		this.chatPwd = chatPwd;
 		this.captin = captin;
 		this.category = category;
 		this.ableGender = ableGender;
@@ -144,11 +146,20 @@ public class Chat {
 		this.chatLogs = chatLogs;
 	}
 
+	public String getChatPwd() {
+		return chatPwd;
+	}
+
+	public void setChatPwd(String chatPwd) {
+		this.chatPwd = chatPwd;
+	}
+
 	@Override
 	public String toString() {
-		return "Chat [no=" + no + ", chatName=" + chatName + ", captin=" + captin + ", category=" + category
-				+ ", ableGender=" + ableGender + ", ableAge=" + ableAge + ", nowCount=" + nowCount + ", ableCount="
-				+ ableCount + ", regDate=" + regDate + ", chatMembers=" + chatMembers + ", chatLogs=" + chatLogs + "]";
+		return "Chat [no=" + no + ", chatName=" + chatName + ", chatPwd=" + chatPwd + ", captin=" + captin
+				+ ", category=" + category + ", ableGender=" + ableGender + ", ableAge=" + ableAge + ", nowCount="
+				+ nowCount + ", ableCount=" + ableCount + ", regDate=" + regDate + ", chatMembers=" + chatMembers
+				+ ", chatLogs=" + chatLogs + "]";
 	}
-	
+
 }

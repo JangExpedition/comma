@@ -8,6 +8,9 @@
 <section id="chatSection">	
 
 	<div id="chatContainer">	
+	<div id="returnBtnContainer">
+		<button id="exitChat" type="button" class="fontStyle">채팅방 나가기</button>
+	</div>
 		<h2 id="chatTitle" class="fontStyle pointColor">익명채팅방</h2>
 		<div id="msgContainer">
 		<% if(chatLogs != null){ 
@@ -58,6 +61,22 @@ document.chatMsgFrm.addEventListener("submit", (e)=>{
 	e.target.reset();
 	
 	e.target.msg.focus();
+});
+
+document.querySelector("#exitChat").addEventListener("click", (e)=>{
+	
+	const chatNo = "<%= request.getParameter("chatNo") %>";
+	
+	$.ajax({
+		url: "<%= request.getContextPath() %>/chat/leaveChat",
+		method: "POST",
+		data: {chatNo},
+		dataType: "json",
+		success(data){
+			location.href = "<%= request.getContextPath() %>/chat/chatList";
+		},
+		error: console.log
+	});
 });
 </script>	
 </body>

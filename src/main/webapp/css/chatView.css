@@ -75,3 +75,23 @@
 	text-align : center;
 	font-size: 30px;
 }
+
+#returnBtnContainer{
+	width: 100%;
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
+	flex-direction: column;
+}
+
+#returnBtnContainer>button{
+	background-color: #454a7b;
+	color: #fff;
+	border: 0;
+	padding: 10px;
+	border-radius: 10px;
+}
+
+#returnBtnContainer>button:hover{
+	cursor: pointer;
+}
