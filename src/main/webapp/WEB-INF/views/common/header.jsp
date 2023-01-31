@@ -113,6 +113,7 @@
 	case "/comma/admin/adminChatFinder" :
 	case "/comma/admin/adminChatLogFinder" :
 	case "/comma/admin/counselingList" :
+	case "/comma/admin/counselingFinder" :
 		link.href = "<%= request.getContextPath() %>/css/admin.css";
 		break;
 	case "/comma/counseling/CSView" :

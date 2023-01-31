@@ -8,6 +8,7 @@
 	List<Counseling> counselingList = (List<Counseling>) request.getAttribute("counselingList");
 	List<Attachment> attachmentList = new ArrayList<>();
 
+	String orderBy = request.getParameter("orderBy");
 	String searchKeyword = request.getParameter("searchKeyword");
 %>
 	<section>
@@ -15,8 +16,10 @@
 		
 		<div id="search-container" class="fontStyle">
 	        <div id="search-category" class="search-type">
-	            <form action="<%=request.getContextPath()%>/admin/counselingFinder">
+	            <form action="<%=request.getContextPath()%>/admin/counselingFinder" name="counselingFinderFrm">
 	                <input type="hidden" name="searchType" value="category"/>
+	                <input type="radio" id="all" name="searchKeyword" value="all" <%= searchKeyword == null || "all".equals(searchKeyword) ? "checked" : "" %> />
+	                <label for="all"> 전체</label>
 	                <input type="radio" id="daily" name="searchKeyword" value="DAILY" <%= "DAILY".equals(searchKeyword) ? "checked" : "" %> />
 	                <label for="daily"> 일상</label>
 	                <input type="radio" id="career" name="searchKeyword" value="CAREER" <%= "CAREER".equals(searchKeyword) ? "checked" : "" %> />
@@ -32,17 +35,17 @@
 	                <input type="radio" id="childcare" name="searchKeyword" value="CHILDCARE" <%= "CHILDCARE".equals(searchKeyword) ? "checked" : "" %> />
 	                <label for="childcare"> 육아</label>
 	                <button type="submit">검색</button>
+	                <br />
+	                <div id="orderByList">
+		                <select name="orderBy" id="orderBy" class="fontStyle">
+							<option value="reg_date" <%= orderBy == null || "reg_date".equals(orderBy) ? "selected" : "" %>>작성일자순</option>
+							<option value="views" <%= "views".equals(orderBy) ? "selected" : "" %>>조회수순</option>
+							<option value="cs_like" <%= "cs_like".equals(orderBy) ? "selected" : "" %>>공감수순</option>
+						</select>
+	                </div>
 	            </form>
 	        </div>
 	    </div>
-		
-		<div id="">
-			<select name="orderBy" id="orderBy">
-				<option value="regDate">작성일자순</option>
-				<option value="views">조회수순</option>
-				<option value="like">공감수순</option>
-			</select>
-		</div>
 		
 		<div id="admin-list">
 			<table class="admin-list-table">
@@ -108,6 +111,14 @@
 					frm.submit();
 				}
 			});
+		});
+		
+		/*
+		  정렬 조건 변경 시 폼 제출 메소드
+		*/
+		document.querySelector('#orderBy').addEventListener('change', (e) => {
+			console.log('ddd');
+			document.counselingFinderFrm.submit();
 		});
 	</script>
 	

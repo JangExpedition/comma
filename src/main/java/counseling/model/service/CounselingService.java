@@ -261,9 +261,9 @@ public class CounselingService {
 		return counselingList;
 	} // selectAdminAllCounseling() end
 
-	public List<Counseling> selectAdminFinderCounseling(String searchKeyword) {
+	public List<Counseling> selectAdminFinderOrderByCounseling(String searchKeyword, String orderBy) {
 		Connection conn = getConnection();
-		List<Counseling> counselingList = counselingDao.selectAdminFinderCounseling(conn, searchKeyword);
+		List<Counseling> counselingList = counselingDao.selectAdminFinderOrderByCounseling(conn, searchKeyword, orderBy);
 		
 		for (Counseling cs : counselingList) {
 			List<Attachment> attachList = counselingDao.selectAttachments(conn, cs.getNo());
@@ -272,6 +272,19 @@ public class CounselingService {
 		
 		close(conn);
 		return counselingList;
-	} // selectAdminFinderCounseling() end
+	} // selectAdminFinderOrderByCounseling() end
+
+	public List<Counseling> selectAdminAllOrderByCounseling(String orderBy) {
+		Connection conn = getConnection();
+		List<Counseling> counselingList = counselingDao.selectAdminAllOrderByCounseling(conn, orderBy);
+		
+		for (Counseling cs : counselingList) {
+			List<Attachment> attachList = counselingDao.selectAttachments(conn, cs.getNo());
+			cs.setAttachments(attachList);
+		}
+		
+		close(conn);
+		return counselingList;
+	} // selectAdminAllOrderByCounseling() end
 
 }

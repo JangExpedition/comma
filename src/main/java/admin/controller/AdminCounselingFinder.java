@@ -1,6 +1,7 @@
 package admin.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -25,8 +26,20 @@ public class AdminCounselingFinder extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String searchKeyword = request.getParameter("searchKeyword");
+		String orderBy = request.getParameter("orderBy");
 		
-		List<Counseling> counselingList = counselingService.selectAdminFinderCounseling(searchKeyword);
+		List<Counseling> counselingList = new ArrayList<>();
+		
+		if ("all".equals(searchKeyword)) {
+			counselingList = counselingService.selectAdminAllOrderByCounseling(orderBy);
+		} else {
+			counselingList = counselingService.selectAdminFinderOrderByCounseling(searchKeyword, orderBy);
+		}
+		
+		request.setAttribute("searchKeyword", searchKeyword);
+		request.setAttribute("orderBy", orderBy);
+		request.setAttribute("counselingList", counselingList);
+		request.getRequestDispatcher("/WEB-INF/views/admin/adminCounselingList.jsp").forward(request, response);
 	} // doGet() end
 
 }

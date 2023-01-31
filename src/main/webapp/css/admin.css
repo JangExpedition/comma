@@ -175,3 +175,16 @@ input[type=number]::-webkit-inner-spin-button {
 .modalBtn:hover {
 	cursor: pointer;
 }
+
+#orderByList {
+	text-align: right;
+}
+
+#orderBy {
+	font-size: 15px;
+	padding: 2px;
+}
+
+button:hover, input[type=radio] ~ label:hover, input[type=button]:hover, select:hover {
+	cursor: pointer;
+}

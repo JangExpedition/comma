@@ -1,6 +1,7 @@
 package admin.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -24,7 +25,9 @@ public class AdminCounselingListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Counseling> counselingList = counselingService.selectAdminAllCounseling();
+		List<Counseling> counselingList = new ArrayList<>();
+		
+		counselingList = counselingService.selectAdminAllCounseling();
 		
 		request.setAttribute("counselingList", counselingList);
 		
