@@ -261,4 +261,17 @@ public class CounselingService {
 		return counselingList;
 	} // selectAdminAllCounseling() end
 
+	public List<Counseling> selectAdminFinderCounseling(String searchKeyword) {
+		Connection conn = getConnection();
+		List<Counseling> counselingList = counselingDao.selectAdminFinderCounseling(conn, searchKeyword);
+		
+		for (Counseling cs : counselingList) {
+			List<Attachment> attachList = counselingDao.selectAttachments(conn, cs.getNo());
+			cs.setAttachments(attachList);
+		}
+		
+		close(conn);
+		return counselingList;
+	} // selectAdminFinderCounseling() end
+
 }

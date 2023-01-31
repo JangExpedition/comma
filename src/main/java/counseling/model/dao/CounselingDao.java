@@ -443,4 +443,21 @@ public class CounselingDao {
 		}
 		return counselingList;
 	} // selectAdminAllCounseling() end
+
+	public List<Counseling> selectAdminFinderCounseling(Connection conn, String searchKeyword) {
+		List<Counseling> counselingList = new ArrayList<>();
+		String sql = prop.getProperty("selectAdminFinderCounseling");
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, searchKeyword);
+			try (ResultSet rset = pstmt.executeQuery()) {
+				while (rset.next()) {
+					counselingList.add(handleCounselingResultSet(rset));
+				}
+			}
+		} catch (SQLException e) {
+			throw new CounselingException("검색 조회 오류", e);
+		}
+		return counselingList;
+	} // selectAdminFinderCounseling() end
 }
