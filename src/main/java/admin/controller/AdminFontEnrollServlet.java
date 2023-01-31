@@ -30,10 +30,10 @@ public class AdminFontEnrollServlet extends HttpServlet {
 			Font font = new Font(0, name, link);
 			
 			int result = styleService.insertFont(font);
-			request.getSession().setAttribute("msg", "폰트 추가 성공!");
+			request.getSession().setAttribute("msg", "폰트를 추가했습니다.");
 			
 		} catch (Exception e) {
-			request.getSession().setAttribute("msg", "폰트 추가 실패!");
+			request.getSession().setAttribute("msg", "폰트를 추가하지 못했습니다.");
 			e.printStackTrace();
 		}
 		

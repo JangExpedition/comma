@@ -32,9 +32,9 @@ public class UpdateIsFriendServlet extends HttpServlet {
 			
 			int result = friendsService.updateIsFriend(friend);
 			
-			request.getSession().setAttribute("msg", "친구 여부 수정 성공!");
+			//request.getSession().setAttribute("msg", "친구 여부 수정 성공!");
 		} catch (Exception e) {
-			request.getSession().setAttribute("msg", "친구 여부 수정 실패!");
+			//request.getSession().setAttribute("msg", "친구 여부 수정 실패!");
 			e.printStackTrace();
 		}
 		

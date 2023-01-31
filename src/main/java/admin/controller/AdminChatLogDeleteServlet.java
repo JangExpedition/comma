@@ -24,9 +24,9 @@ public class AdminChatLogDeleteServlet extends HttpServlet {
 		int chatLogNo = Integer.parseInt(request.getParameter("chatLogNo"));
 		try {
 			int result = chatService.deleteChatLog(chatLogNo);
-			request.getSession().setAttribute("msg", "채팅 로그 삭제 성공!");
+			request.getSession().setAttribute("msg", "해당 채팅 로그를 삭제했습니다.");
 		} catch (Exception e) {
-			request.getSession().setAttribute("msg", "채팅 로그 삭제 실패!");
+			request.getSession().setAttribute("msg", "해당 채팅 로그를 삭제하는데 실패했습니다.");
 			e.printStackTrace();
 		}
 		

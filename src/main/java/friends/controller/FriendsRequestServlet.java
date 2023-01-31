@@ -44,9 +44,9 @@ public class FriendsRequestServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 			
-			request.getSession().setAttribute("msg", "친구 신청 성공!");
+			request.getSession().setAttribute("msg", "친구 신청이 되었습니다.");
 		} catch(Exception e) {
-			request.getSession().setAttribute("msg", "친구 신청 실패!");
+			request.getSession().setAttribute("msg", "친구 신청에 실패하셨습니다.");
 			e.printStackTrace();
 		}
 		

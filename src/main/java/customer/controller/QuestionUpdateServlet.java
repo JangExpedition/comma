@@ -104,7 +104,7 @@ public class QuestionUpdateServlet extends HttpServlet {
 			
 		} catch(Exception e) {
 			e.printStackTrace();
-			request.getSession().setAttribute("msg", "게시글 수정실패!");
+			request.getSession().setAttribute("msg", "게시글 수정에 실패하셨습니다.");
 			response.sendRedirect(request.getContextPath() + "/customer");
 		}
 		

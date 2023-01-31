@@ -166,6 +166,13 @@
 		enrollModal.addEventListener('click', (e) => {
 			if(e.target !== e.currentTarget) return;
 			enrollModal.style.display = 'none';
+		});
+		
+		/*
+		  모달 창 이외의 부분 클릭 시 창 닫기
+		*/
+		updateModal.addEventListener('click', (e) => {
+			if(e.target !== e.currentTarget) return;
 			updateModal.style.display = 'none';
 		});
 		

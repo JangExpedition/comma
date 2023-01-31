@@ -48,10 +48,10 @@ public class AdminDesignEnrollServlet extends HttpServlet {
 			}
 			
 			int result = styleService.insertDesign(design);
-			request.getSession().setAttribute("msg", "디자인 추가 성공!");
+			request.getSession().setAttribute("msg", "디자인을 추가했습니다.");
 			
 		} catch (Exception e) {
-			request.getSession().setAttribute("msg", "디자인 추가 실패!");
+			request.getSession().setAttribute("msg", "디자인을 추가하지 못했습니다.");
 			e.printStackTrace();
 		}
 		

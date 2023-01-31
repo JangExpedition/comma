@@ -33,10 +33,10 @@ public class AdminUpdateMemberRollServlet extends HttpServlet {
 			int result = memberService.updateMemberRole(memberNick, memberRole);
 			
 			if (result > 0) {
-				request.getSession().setAttribute("msg", "회원 권한 수정 성공!");
+				request.getSession().setAttribute("msg", "회원 권한을 수정했습니다.");
 			}
 		} catch (Exception e) {
-			request.getSession().setAttribute("msg", "회원 권한 수정 실패!");
+			request.getSession().setAttribute("msg", "회원 권한을 수정하지 못했습니다.");
 			e.printStackTrace();
 		}
 		

@@ -20,7 +20,7 @@ import notification.model.service.NotificationService;
 /**
  * Servlet implementation class InsertFriendServlet
  */
-@WebServlet("/friend/friendship")
+@WebServlet("/friends/friendship")
 public class InsertFriendServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private FriendsService friendsService = new FriendsService();

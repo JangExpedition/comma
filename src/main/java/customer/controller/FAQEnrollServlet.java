@@ -38,10 +38,10 @@ public class FAQEnrollServlet extends HttpServlet {
 		    
 		    int result = faqService.insertFaq(faq);
 		    
-		    request.getSession().setAttribute("msg", "FAQ 추가 성공!");
+		    request.getSession().setAttribute("msg", "FAQ가 정상적으로 추가되었습니다.");
 		}
 		catch(Exception e) {
-			request.getSession().setAttribute("msg", "FAQ 추가 실패!");
+			request.getSession().setAttribute("msg", "FAQ 추가에 실패하셨습니다.");
 			e.printStackTrace();
 		}
 		

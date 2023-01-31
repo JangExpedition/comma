@@ -8,7 +8,7 @@
 	List<Attachment> attachList = question.getAttachments();
 %>
 	<section class="fontStyle">
-		<div id="counselingEnrollContainer">
+		<div id="questionUpdateContainer">
 			<div>
 				<button id="goBack" class="buttonStyle">뒤로가기</button>
 			</div>

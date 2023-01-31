@@ -54,10 +54,10 @@ public class AdminDesignUpdateServlet extends HttpServlet {
 			}
 			
 			int result = styleService.updateDesign(design);
-			request.getSession().setAttribute("msg", "디자인 수정 성공!");
+			request.getSession().setAttribute("msg", "디자인을 수정했습니다.");
 			
 		} catch (Exception e) {
-			request.getSession().setAttribute("msg", "디자인 수정 실패!");
+			request.getSession().setAttribute("msg", "디자인을 수정하지 못했습니다.");
 			e.printStackTrace();
 		}
 		

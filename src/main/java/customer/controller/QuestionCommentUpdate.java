@@ -31,10 +31,10 @@ public class QuestionCommentUpdate extends HttpServlet {
 			QuestionComment qComment = new QuestionComment(no, writer, 0, content, null);
 			
 			int result = questionService.updateQuestionComment(qComment);
-			request.getSession().setAttribute("msg", "댓글 수정 성공!");
+			request.getSession().setAttribute("msg", "댓글이 정상적으로 수정되었습니다.");
 		} catch (Exception e) {
 			e.printStackTrace();
-			request.getSession().setAttribute("msg", "댓글 수정 실패!");
+			request.getSession().setAttribute("msg", "댓글 수정에 실패하셨습니다.");
 		}
 		
 		response.sendRedirect(request.getContextPath() + "/customer/questionView?no=" + qNo);

@@ -30,10 +30,10 @@ public class AdminFontUpdateServlet extends HttpServlet {
 			Font font = new Font(no, name, link);
 			
 			int result = styleService.updateFont(font);
-			request.getSession().setAttribute("msg", "폰트 수정 성공!");
+			request.getSession().setAttribute("msg", "폰트를 수정했습니다.");
 			
 		} catch (Exception e) {
-			request.getSession().setAttribute("msg", "폰트 수정 실패!");
+			request.getSession().setAttribute("msg", "폰트를 수정하지 못했습니다.");
 			e.printStackTrace();
 		}
 		

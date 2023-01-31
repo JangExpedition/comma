@@ -27,11 +27,44 @@
 							</tr>
 							<tr>
 								<th>
+									이메일
+								</th>
+								<td class="inputTd fontStyle">
+									<div class="tdDiv">
+										<input type="text" id="email" name="email" value="<%= loginMember.getEmail() %>" class="updateInput" readonly/>
+										<span id="errorMsg"></span>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<th>
 									닉네임
 								</th>
 								<td class="inputTd fontStyle">
 									<div class="tdDiv">
 										<input type="text" id="nickname" name="nickname" value="<%= loginMember.getNickname() %>" class="updateInput" readonly/>
+										<span id="errorMsg"></span>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<th>
+									생년월일
+								</th>
+								<td class="inputTd fontStyle">
+									<div class="tdDiv">
+										<input type="text" id="birthday" name="birthday" value="<%= loginMember.getBirthday() %> (<%= loginMember.getAge() %>세)" class="updateInput" readonly/>
+										<span id="errorMsg"></span>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<th>
+									성별
+								</th>
+								<td class="inputTd fontStyle">
+									<div class="tdDiv">
+										<input type="text" id="gender" name="gender" value="<%= loginMember.getGender() %>" class="updateInput" readonly/>
 										<span id="errorMsg"></span>
 									</div>
 								</td>

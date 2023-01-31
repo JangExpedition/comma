@@ -35,10 +35,10 @@ public class WarningCountUpdateServlet extends HttpServlet {
 			param.put("content", content);
 			
 			int result = memberService.updateWarningCount(param);
-			request.getSession().setAttribute("msg", "누적 신고 횟수 수정 성공!");
+			request.getSession().setAttribute("msg", "누적 신고 횟수를 정상적으로 수정했습니다.");
 			
 		} catch (Exception e) {
-			request.getSession().setAttribute("msg", "누적 신고 횟수 수정 실패!");
+			request.getSession().setAttribute("msg", "누적 신고 횟수를 수정하는데 실패했습니다.");
 			e.printStackTrace();
 		}
 		response.sendRedirect(request.getContextPath() + "/complain/complain");

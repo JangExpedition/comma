@@ -16,7 +16,7 @@
 							<tr>
 								<td class="errorTd fontStyle"></td><td></td><td></td>
 							</tr>
-							</tr>
+							<!-- </tr> -->
 							<tr>
 								<td class="labelTd fontStyle"><label for="password">비밀번호</label></td><td></td><td></td>
 							</tr>
@@ -79,6 +79,7 @@
 									<option value="10">10</option>
 									<option value="11">11</option>
 									<option value="12">12</option>
+								</select>
 								</td>
 								<td class="birth"><input type="text" name="birthDate" id="birthDate" placeholder="일"></td>
 							</tr>
