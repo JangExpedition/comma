@@ -20,7 +20,7 @@ import member.model.dto.Member;
  * Servlet Filter implementation class LoginFilter
  */
 //@WebFilter()
-@WebFilter({"/member/emailCertify", "/member/memberEnroll", "/member/selectAllMember", "/letter/*", "/diary/*", "/counseling/*", "/friends/*", "/chat/*", "/mypage/*", "/customer/*"})
+@WebFilter({"/letter/*", "/diary/*", "/counseling/*", "/friends/*", "/chat/*", "/mypage/*", "/customer/*"})
 public class LoginFilter extends HttpFilter implements Filter {
 
 	/**
