@@ -443,4 +443,39 @@ public class CounselingDao {
 		}
 		return counselingList;
 	} // selectAdminAllCounseling() end
+
+	public List<Counseling> selectAdminFinderOrderByCounseling(Connection conn, String searchKeyword, String orderBy) {
+		List<Counseling> counselingList = new ArrayList<>();
+		String sql = prop.getProperty("selectAdminFinderOrderByCounseling");
+		
+		sql = sql.replace("#", orderBy);
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, searchKeyword);
+			try (ResultSet rset = pstmt.executeQuery()) {
+				while (rset.next()) {
+					counselingList.add(handleCounselingResultSet(rset));
+				}
+			}
+		} catch (SQLException e) {
+			throw new CounselingException("검색 및 정렬 조회 오류", e);
+		}
+		return counselingList;
+	} // selectAdminFinderOrderByCounseling() end
+
+	public List<Counseling> selectAdminAllOrderByCounseling(Connection conn, String orderBy) {
+		List<Counseling> counselingList = new ArrayList<>();
+		String sql = prop.getProperty("selectAdminAllOrderByCounseling");
+		
+		sql = sql.replace("#", orderBy);
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			try (ResultSet rset = pstmt.executeQuery()) {
+				while (rset.next()) {
+					counselingList.add(handleCounselingResultSet(rset));
+				}
+			}
+		} catch (SQLException e) {
+			throw new CounselingException("검색 및 정렬 조회 오류", e);
+		}
+		return counselingList;
+	} // selectAdminAllOrderByCounseling() end
 }

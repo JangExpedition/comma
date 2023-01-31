@@ -15,6 +15,10 @@ section {
     font-family: Hanna !important;
 }
 
+.letterViewDiv:hover {
+	cursor: pointer;
+}
+
 input[type="checkbox"]:checked {
 	background-color: #454a7b;
 	border: none;
@@ -240,6 +244,10 @@ input[type="checkbox"]:checked {
 	width: 20px;
 }
 
+#complainImg:hover {
+	cursor: pointer;
+}
+
 .letterDetailImg {
 	width: 30%;
 }
@@ -247,4 +255,8 @@ input[type="checkbox"]:checked {
 
 #writerDiv {
 	margin: 0px auto;
+}
+
+input[type=checkbox]:hover, select:hover, input[type=file]:hover, label:hover {
+	cursor: pointer;
 }

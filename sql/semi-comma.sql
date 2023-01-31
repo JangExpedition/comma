@@ -31,6 +31,7 @@ select * from design;
 select * from font;
 select * from complain;
 select * from counseling;
+select * from like_counseling;
 select * from attachment_counseling;
 select * from cs_comment;
 select * from question;
