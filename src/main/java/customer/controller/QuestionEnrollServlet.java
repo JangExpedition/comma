@@ -75,10 +75,10 @@ public class QuestionEnrollServlet extends HttpServlet {
 			}
 		    
 		    int result = questionService.insertQuestion(question);
-		    request.getSession().setAttribute("msg", "질문 작성 성공!");
+		    request.getSession().setAttribute("msg", "문의내역이 정상적으로 작성되었습니다.");
 		}
 		catch(Exception e) {
-			request.getSession().setAttribute("msg", "질문 작성 실패!");
+			request.getSession().setAttribute("msg", "문의내역 작성에 실패하셨습니다.");
 			e.printStackTrace();
 		}
 		

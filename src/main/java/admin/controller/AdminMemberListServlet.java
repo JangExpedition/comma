@@ -31,12 +31,4 @@ public class AdminMemberListServlet extends HttpServlet {
 		request.getRequestDispatcher("/WEB-INF/views/admin/adminMemberList.jsp").forward(request, response);
 	} // doGet() end
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
 }

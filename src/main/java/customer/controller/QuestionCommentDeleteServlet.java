@@ -33,11 +33,11 @@ public class QuestionCommentDeleteServlet extends HttpServlet {
 		
 		try {
 			int result = questionService.deleteQuestionComment(no);
-			request.getSession().setAttribute("msg", "댓글 삭제 성공!");
+			request.getSession().setAttribute("msg", "댓글이 정상적으로 삭제되었습니다.");
 			//map.put("result", "삭제 성공!");
 		} catch(Exception e) {
 			//map.put("result", "삭제 실패!");
-			request.getSession().setAttribute("msg", "댓글 삭제 실패!");
+			request.getSession().setAttribute("msg", "댓글 삭제에 실패하셨습니다.");
 			e.printStackTrace();
 		}
 

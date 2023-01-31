@@ -25,9 +25,9 @@ public class FAQDeleteServlet extends HttpServlet {
 			int no = Integer.parseInt(request.getParameter("faqNo"));
 			int result = faqService.deleteFaq(no);
 			
-			request.getSession().setAttribute("msg", "FAQ 삭제 성공!");
+			request.getSession().setAttribute("msg", "FAQ가 정상적으로 삭제되었습니다.");
 		} catch(Exception e) {
-			request.getSession().setAttribute("msg", "FAQ 삭제 실패!");
+			request.getSession().setAttribute("msg", "FAQ 삭제에 실패하셨습니다.");
 			e.printStackTrace();
 		}
 		request.setAttribute("type", "faq");

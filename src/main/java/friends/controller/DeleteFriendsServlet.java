@@ -33,9 +33,9 @@ public class DeleteFriendsServlet extends HttpServlet {
 			int result = friendsService.deleteFriend(friend1);
 			result = friendsService.deleteFriend(friend2);
 			
-			request.getSession().setAttribute("msg", "친구 삭제 성공!");
+			// request.getSession().setAttribute("msg", "친구가 정상적으로 삭제되었습니다.");
 		} catch (Exception e) {
-			request.getSession().setAttribute("msg", "친구 삭제 실패!");
+			request.getSession().setAttribute("msg", "친구 삭제에 실패하셨습니다.");
 			e.printStackTrace();
 		}
 		

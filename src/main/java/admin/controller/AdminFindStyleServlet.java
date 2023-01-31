@@ -34,23 +34,17 @@ public class AdminFindStyleServlet extends HttpServlet {
 		
 		if ("font".equals(type)) {
 			fontList = styleService.selectFindFont(searchKeyword);
-			//designList = styleService.selectAllDesign();
 			
 			request.getSession().setAttribute("fontList", fontList);
-			//request.getSession().setAttribute("designList", designList);
 			request.getRequestDispatcher("/WEB-INF/views/admin/adminFontList.jsp").forward(request, response);
 		}
 		else {
 			designList = styleService.selectFindDesign(searchKeyword);
-			//fontList = styleService.selectAllFont();
 			
-			//request.getSession().setAttribute("fontList", fontList);
 			request.getSession().setAttribute("designList", designList);
 			request.getRequestDispatcher("/WEB-INF/views/admin/adminDesignList.jsp").forward(request, response);
 		}
 		
-		//request.setAttribute("type", type);
-		//request.getRequestDispatcher("/WEB-INF/views/admin/adminStyleList.jsp").forward(request, response);
 	} // doGet() end
 
 }

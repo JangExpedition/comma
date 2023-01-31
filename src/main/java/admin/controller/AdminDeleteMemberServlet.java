@@ -31,10 +31,10 @@ public class AdminDeleteMemberServlet extends HttpServlet {
 							
 			int result = memberService.deleteMember(memberEmail);
 			
-			request.getSession().setAttribute("msg", "회원 탈퇴 성공!");
+			request.getSession().setAttribute("msg", "해당 회원을 탈퇴시켰습니다.");
 			
 		} catch (Exception e) {
-			request.getSession().setAttribute("msg", "회원 탈퇴 실패!");
+			request.getSession().setAttribute("msg", "해당 회원을 탈퇴시키는데 실패했습니다.");
 			e.printStackTrace();
 		}
 		

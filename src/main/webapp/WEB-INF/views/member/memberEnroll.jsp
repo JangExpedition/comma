@@ -79,6 +79,7 @@
 									<option value="10">10</option>
 									<option value="11">11</option>
 									<option value="12">12</option>
+								</select>
 								</td>
 								<td class="birth"><input type="text" name="birthDate" id="birthDate" placeholder="일"></td>
 							</tr>

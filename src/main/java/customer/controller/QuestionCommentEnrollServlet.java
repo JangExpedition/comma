@@ -32,9 +32,9 @@ public class QuestionCommentEnrollServlet extends HttpServlet {
 			
 			int result = questionService.insertQuestionComment(qComment);
 			
-			request.getSession().setAttribute("msg", "댓글 등록 성공!");
+			request.getSession().setAttribute("msg", "댓글이 정상적으로 등록되었습니다.");
 		} catch(Exception e) {
-			request.getSession().setAttribute("msg", "댓글 등록 실패!");
+			request.getSession().setAttribute("msg", "댓글 등록에 실패하셨습니다.");
 			e.printStackTrace();
 		}
 		
