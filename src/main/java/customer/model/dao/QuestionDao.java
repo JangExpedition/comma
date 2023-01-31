@@ -223,13 +223,34 @@ private Properties prop = new Properties();
 	} // insertQuestionComment() end
 
 
-	public List<Question> selectFindQuestion(Connection conn, String nickname, String searchContent) {
+	public List<Question> selectFindMyQuestion(Connection conn, String nickname, String searchContent) {
+		List<Question> questionList = new ArrayList<>();
+		String sql = prop.getProperty("selectFindMyQuestion");
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, '%' + searchContent + '%');
+			pstmt.setString(2, nickname);
+			
+			try (ResultSet rset = pstmt.executeQuery()){
+				while(rset.next()) {
+					Question question = handleQuestionResultSet(rset);
+					questionList.add(question);
+				}
+			}
+			
+		} catch (SQLException e) {
+			throw new QuestionException("나의 문의 내역 검색 결과 오류", e);
+		}
+		return questionList;
+	} // selectFindMyQuestion() end
+
+
+	public List<Question> selectFindQuestion(Connection conn, String searchContent) {
 		List<Question> questionList = new ArrayList<>();
 		String sql = prop.getProperty("selectFindQuestion");
 		
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setString(1, '%' + searchContent + '%');
-			pstmt.setString(2, nickname);
 			
 			try (ResultSet rset = pstmt.executeQuery()){
 				while(rset.next()) {

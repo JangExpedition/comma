@@ -39,7 +39,19 @@ public class CustomerFinderServlet extends HttpServlet {
 		List<FAQ> faqList = new ArrayList<>();
 		
 		if ("question".equals(searchType)) {
-			questionList = questionService.selectFindQuestion(nickname, searchContent);
+			if ("".equals(searchContent)) {
+				if (member.getMemberRole() == MemberRole.A || member.getMemberRole() == MemberRole.M) {
+					questionList = questionService.selectAllQuestion();
+				} else {
+					questionList = questionService.selectMyAllQuestion(nickname);
+				}
+			} else {
+				if (member.getMemberRole() == MemberRole.A || member.getMemberRole() == MemberRole.M) {
+					questionList = questionService.selectFindQuestion(searchContent);
+				} else {
+					questionList = questionService.selectFindMyQuestion(nickname, searchContent);
+				}
+			}
 			faqList = faqService.selectAllFAQ();
 		} else {
 			if (member.getMemberRole() == MemberRole.A || member.getMemberRole() == MemberRole.M) {

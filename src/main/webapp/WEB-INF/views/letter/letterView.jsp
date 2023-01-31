@@ -38,7 +38,7 @@
 %>
 
 	<section>
-		<div id="letterTitle" class="fontStyle" onclick="location.href='<%= request.getContextPath() %>/letter/letterList';">받은 편지함</div>
+		<div id="letterTitle" class="fontStyle letterViewDiv" onclick="location.href='<%= request.getContextPath() %>/letter/letterList';">받은 편지함</div>
 		<div id="letterAllList">
 			<div id="letterListDiv" class="letterList" style="font-family:<%= fontName %>; background-image:url('<%= request.getContextPath() %>/upload/design/<%= designImg %>'); background-size: cover;">
 				<div id="letterListTitle">
@@ -126,7 +126,25 @@
 		}
 	}
 %>
+<%
+	if (letter.getWriterRole() != MemberRole.A && letter.getWriterRole() != MemberRole.M && letter.getWriter() != null) {
+%>
 		<input id="replay" class="replayBtn letterBtn" type="button" value="답장하기" data-friend-nick="<%= letter.getWriter() %>" data-anonymous="<%= letter.getAnonymous() %>" />
+		<script>
+			/*
+			  답장
+			*/
+			replay.addEventListener('click', (e) => {
+				const friendNick = e.target.dataset.friendNick;
+				const anonymous = e.target.dataset.anonymous;
+				localStorage.setItem('friendNick', friendNick);
+				localStorage.setItem('anonymous', anonymous);
+				location.href = "<%= request.getContextPath() %>/letter/writeLetter";
+			});
+		</script>
+<%
+	}
+%>
 	</div>
 	
 	<form action="<%= request.getContextPath() %>/friends/friendRequest" method="post" id="friendRequestFrm" name="friendRequestFrm">
@@ -142,45 +160,6 @@
 		complainImg.addEventListener('click', (e) => {
 			document.querySelector('[name=complainFrm]').submit();
 		});
-
-		
-		/*
-		  답장
-		*/
-		replay.addEventListener('click', (e) => {
-			const friendNick = e.target.dataset.friendNick;
-			const anonymous = e.target.dataset.anonymous;
-			localStorage.setItem('friendNick', friendNick);
-			localStorage.setItem('anonymous', anonymous);
-			location.href = "<%= request.getContextPath() %>/letter/writeLetter";
-		});
-		
-		
-		
-		
-		<%--
-		document.friendRequestFrm.addEventListener("submit", (e)=>{
-			e.preventDefault();
-			
-			const formData = new FormData(e.target);
-			console.log(formData);
-			
-			$.ajax({
-				url: "<%= request.getContextPath() %>/friend/friendship",
-				method: "POST",
-				data: formData,
-				dataType: "json",
-				contentType : false,
-				processData : false,
-				success(data){
-					console.log(data.result);
-					alert(data.result);
-				},
-				error : console.log,
-			});
-		});
-		--%>
-		
 	</script>
 </body>
 </html>
