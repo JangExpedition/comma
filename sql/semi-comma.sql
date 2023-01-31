@@ -501,6 +501,9 @@ alter table notification
     add constraint fk_notification_mem_nick foreign key (mem_nick) references member(nickname) on delete cascade
     add constraint ck_notification_check_read check (check_read in ('O', 'X'));
 
+alter table notification
+    modify not_message varchar2(1000);
+
 -- seq_notification_no 시퀀스 생성
 create sequence seq_notification_no;
 
