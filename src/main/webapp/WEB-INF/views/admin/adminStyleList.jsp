@@ -6,8 +6,8 @@
 
 <%
 	String type = (String) request.getAttribute("type");
-	fontList = (List<Font>) session.getAttribute("fontList");
-	designList = (List<Design>) session.getAttribute("designList");
+	List<Font> fontList = (List<Font>) session.getAttribute("fontList");
+	List<Design> designList = (List<Design>) session.getAttribute("designList");
 	String searchKeyword = request.getParameter("searchKeyword");
 %>
 	

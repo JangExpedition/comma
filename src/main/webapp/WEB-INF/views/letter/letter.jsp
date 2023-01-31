@@ -4,8 +4,10 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%
-	friendsList = (List<Friends>) session.getAttribute("friendsList");
+	List<Friends> friendsList = (List<Friends>) session.getAttribute("friendsList");
 	List<Member> memberList = (List<Member>) request.getAttribute("memberList");
+	List<Font> fontList = (List<Font>) session.getAttribute("fontList");
+	List<Design> designList = (List<Design>) session.getAttribute("designList");
 %>
 	<script>		
 		const friendNick = localStorage.getItem('friendNick');
@@ -194,6 +196,9 @@
 			if (friendNick == null)
 				random.click();
 			writeLetterFrm.style.backgroundImage = "url('<%= request.getContextPath() %>/upload/design/<%= designList.get(0).getRenamedFilename() %>')";
+			writeLetterFrm.style.fontFamily = "<%= fontList.get(0).getName() %>";
+			content.style.fontFamily = "<%= fontList.get(0).getName() %>";
+			content.style.fontSize = "20px";
 		};
 		
 		/*

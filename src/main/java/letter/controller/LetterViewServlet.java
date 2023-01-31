@@ -15,6 +15,9 @@ import friends.model.service.FriendsService;
 import letter.model.dto.Letter;
 import letter.model.service.LetterService;
 import member.model.dto.Member;
+import style.model.dto.Design;
+import style.model.dto.Font;
+import style.model.service.StyleService;
 
 /**
  * Servlet implementation class LetterViewServlet
@@ -24,6 +27,7 @@ public class LetterViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private LetterService letterService = new LetterService();
 	private FriendsService friendsService = new FriendsService();
+	private StyleService styleService = new StyleService();
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -37,6 +41,8 @@ public class LetterViewServlet extends HttpServlet {
 		// 업무로직
 		Letter letter = letterService.selectOneLetter(letterNo);
 		List<Friends> friendsList = friendsService.selectAllFriends(nickname);
+		List<Font> fontList = styleService.selectAllFont();
+		List<Design> designList = styleService.selectAllDesign();
 		
 		letter.setContent(
 				CommaUtils.convertLineFeedToBr(
@@ -44,6 +50,8 @@ public class LetterViewServlet extends HttpServlet {
 				);
 		
 		request.setAttribute("letter", letter);
+		request.getSession().setAttribute("fontList", fontList);
+		request.getSession().setAttribute("designList", designList);
 		request.getSession().setAttribute("friendsList", friendsList);
 		
 		request.getRequestDispatcher("/WEB-INF/views/letter/letterView.jsp").forward(request, response);

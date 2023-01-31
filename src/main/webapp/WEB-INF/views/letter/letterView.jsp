@@ -7,11 +7,13 @@
 <%
 	Letter letter = (Letter) request.getAttribute("letter");
 	List<Attachment> attachList = letter.getAttachments();
+	List<Friends> friendsList = (List<Friends>) session.getAttribute("friendsList");
+	List<Font> fontList = (List<Font>) session.getAttribute("fontList");
+	List<Design> designList = (List<Design>) session.getAttribute("designList");
 	partition = Partition.LETTER;
 	Boolean bool = friendsList.contains(letter.getWriter());
 	System.out.println(bool);
 	
-	friendsList = (List<Friends>) session.getAttribute("friendsList");
 	
 	String designImg = "";
 	for (Design design : designList) {

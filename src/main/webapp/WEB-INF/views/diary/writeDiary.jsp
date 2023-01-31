@@ -6,6 +6,8 @@
 <%
 	LocalDateTime today = LocalDateTime.now();
 	String formatToday = today.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+	List<Font> fontList = (List<Font>) session.getAttribute("fontList");
+	List<Design> designList = (List<Design>) session.getAttribute("designList");
 %>
 <section id="writeDiarySection">
 <div id="diaryEnrollBack">
@@ -18,7 +20,7 @@
 				<div id="diaryEnroll">
 					<form id="diaryEnrollFrm" name="diaryEnrollFrm" action="<%= request.getContextPath() %>/diary/insertDiary" method="POST" enctype="multipart/form-data">
 					<input type="hidden" name="writer" value="<%= loginMember.getNickname() %>" />
-						<table>
+						<table id="writeDiaryContent">
 							<tbody>
 								<tr>
 									<td colspan="2">
@@ -36,7 +38,7 @@
 									<td>
 										<div id="enrollContent">
 											<label for="nowContent"></label>
-											<textarea name="nowContent" id="nowContent" cols="20" rows="16" placeholder="내용 작성"></textarea>
+											<textarea name="nowContent" id="nowContent" placeholder="내용 작성"></textarea>
 										</div>
 									</td>
 								</tr>
@@ -72,6 +74,8 @@
 							</tbody>
 						</table>
 						<input type="file" name="file" id="file" />
+						<input type="hidden" id="fontNoInput" name="fontNo" />
+						<input type="hidden" id="designNoInput" name="designNo" />
 					</form>
 				</div>
 			</div>
@@ -88,39 +92,34 @@
 		<div id="designModalContent">
 			<table>
 				<tbody>
+				<% if(designList != null || !designList.isEmpty()){ 
+					int cnt = 1;
+					for(Design design : designList){ %>
 					<tr>
 						<td>
-							<img src="<%= request.getContextPath() %>/images/default.png" alt="디자인1이미지" class="designImage" />
+							<img src="<%= request.getContextPath() %>/upload/design/<%= design.getRenamedFilename() %>" alt="" class="designImage" />
 						</td>
-						<td>디자인1</td>
+						<td>디자인<%= cnt %></td>
 						<td>
-							<input type="button" value="선택" class="fontStyle designBtn" />
+							<input id="choiceDesign" type="button" value="선택" class="fontStyle designBtn" data-design-no="<%= design.getNo() %>" data-renamed-filename="<%= design.getRenamedFilename() %>" />
 						</td>
 					</tr>
-					<tr>
-						<td>
-							<img src="<%= request.getContextPath() %>/images/default.png" alt="디자인2이미지" class="designImage" />
-						</td>
-						<td>디자인2</td>
-						<td>
-							<input type="button" value="선택" class="fontStyle designBtn" />
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<img src="<%= request.getContextPath() %>/images/default.png" alt="디자인3이미지" class="designImage" />
-						</td>
-						<td>디자인3</td>
-						<td class="design-btn">
-							<input type="button" value="선택" class="fontStyle designBtn" />
-						</td>
-					</tr>
+				<% cnt++; 
+					}
+				} %>
 				</tbody>
 			</table>
 		</div>
 	</div>
 	</section>
 	<script>
+	$('.designBtn').on('click', (e) => {
+		
+		nowContent.style.backgroundImage = `url("<%= request.getContextPath() %>/upload/design/\${e.target.dataset.renamedFilename}")`;
+		
+		designNoInput.value = e.target.dataset.designNo;
+		
+	});
 	
 	document.querySelector('#fontChoice').addEventListener('change', (e) => {
 		document.querySelectorAll('.fontChoiceOption').forEach((option) => {
@@ -129,6 +128,7 @@
 			
 			if (bool) {
 				nowContent.style.fontFamily = `\${fontName}`;
+			 	fontNoInput.value =  fontChoice.value;
 			}
 		});
 	});
@@ -148,7 +148,7 @@
 				img.src = e.target.result;
 			};
 		} else{
-			img.style.display = "none";
+			img.src = "<%= request.getContextPath() %>/images/이미지첨부.png";
 		}
 		
 	});
