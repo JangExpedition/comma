@@ -200,8 +200,7 @@
 				</div>
 			</div>
 		</div>
-			
-		</div>
+	</div>
 	<script>	
 		let cnt = 0; // 회원가입 폼 페이지 번호 변수
 		let count = 0; // 비밀번호 찾기 폼 페이지 번호 변수
