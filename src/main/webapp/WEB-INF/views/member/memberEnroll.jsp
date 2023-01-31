@@ -16,7 +16,7 @@
 							<tr>
 								<td class="errorTd fontStyle"></td><td></td><td></td>
 							</tr>
-							</tr>
+							<!-- </tr> -->
 							<tr>
 								<td class="labelTd fontStyle"><label for="password">비밀번호</label></td><td></td><td></td>
 							</tr>
