@@ -19,7 +19,7 @@ import style.model.service.StyleService;
  * Servlet implementation class WriteDiary
  */
 @WebServlet("/diary/writeDiary")
-public class WriteDiary extends HttpServlet {
+public class WriteDiaryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private StyleService styleService = new StyleService();
 
