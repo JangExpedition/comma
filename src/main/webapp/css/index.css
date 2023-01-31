@@ -1,316 +1,297 @@
 
-* {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  box-sizing: border-box;  
-  font-family: Pretendard;
-}
-
-body {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #222;
-  color: white;
-}
-
-
-
 #firstSection{
-	width: 100%;
-	height: 100vh;
-	text-align: center;
-	background-image: url(../images/index2.png);
+   width: 100%;
+   height: 100vh;
+   text-align: center;
+   background-image: url(../images/index2.png);
     background-size: cover;
 }
 
 #hello{
-	display : flex;
-	flex-direction: column;
-	margin: auto;
-	align-items: center;
+   display : flex;
+   flex-direction: column;
+   margin: auto;
+   align-items: center;
 }
 
 #mainTitle{
-	font-size: 400px;
-	margin: 250px auto 0;
+   font-size: 400px;
+   margin: 250px auto 0;
 }
 
 #comment{
-	font-size: 30px;
+   font-size: 30px;
 }
 
 #introSection{
-	width: 100%;
-	height: 400vh;
-	background-color: #454a7b;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+   width: 100%;
+   height: 400vh;
+   background-color: #454a7b;
+   display: flex;
+   align-items: center;
+   justify-content: center;
 }
 
 table{
-	width: 80%;
-	height: 90%;
-	margin-left : 150px;
-	border-spacing: 20px;
+   width: 80%;
+   height: 90%;
+   margin-left : 150px;
+   border-spacing: 20px;
 }
 
 td{
-	text-align: center;
-	font-size: 30px;
-	box-sizing: border-box;
-	padding: 0;
+   text-align: center;
+   font-size: 30px;
+   box-sizing: border-box;
+   padding: 0;
 }
 
 .introImg{
-	width: 450px;
-	height: 450px;
+   width: 450px;
+   height: 450px;
 }
 
 #gapBox{
-	height: 200px
+   height: 200px
 }
 
 #lastIntro{
-	height: 410px;
-	font-size: 50px;
+   height: 410px;
+   font-size: 50px;
 }
 
 #background{
-	width: 100%;
-	height: 100vh;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	background-image: url(../images/index2.png);
-	background-size: cover;
+   width: 100%;
+   height: 100vh;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   background-image: url(../images/index2.png);
+   background-size: cover;
 }
 
 #centerContainer{
-	width: 700px;
-	height: 480px;
-	background-color: rgba(255, 255, 255, 0.5);
+   width: 700px;
+   height: 480px;
+   background-color: rgba(255, 255, 255, 0.5);
 }
 #welcomeBox{
-	width: 700px;
-	height: 150px;
+   width: 700px;
+   height: 150px;
 }
 #commaBox{
-	height: 70%;
-	width: 100%;
-	display: flex;
-	align-items: flex-end;
-	justify-content: center;
-	font-size: 50px;
-	font-weight: bolder;
+   height: 70%;
+   width: 100%;
+   display: flex;
+   align-items: flex-end;
+   justify-content: center;
+   font-size: 50px;
+   font-weight: bolder;
 }
 #commentBox{
-	text-align: center;
-	font-weight: bolder;
-	color: #636466;
+   text-align: center;
+   font-weight: bolder;
+   color: #636466;
 }
 #enrollAndLoginBox{
-	display: flex;
-	padding-bottom: 30px;
+   display: flex;
+   padding-bottom: 30px;
 }
 #enrollBox{
-	width: 50%;
-	height: 300px;
-	border-right: 1px solid lightgray;
-	box-sizing: border-box;
-	padding: 0 30px;
+   width: 50%;
+   height: 300px;
+   border-right: 1px solid lightgray;
+   box-sizing: border-box;
+   padding: 0 30px;
 }
 #agreeBox{
-	font-size: 13px;
+   font-size: 13px;
 }
 .easyLogin{
-	height: 45px;
-	width: 100%;
-	margin-top: 10px;
+   height: 45px;
+   width: 100%;
+   margin-top: 10px;
 }
 
 #signUpWithEmail{
-	background-color: #454a7b;
-	color: #fff;
-	margin-top: 10px;
-	width: 100%;
-	height: 30px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	border-radius: 15px;
-	border: 1px solid #454a7b;
-	box-sizing: border-box;
-	cursor: pointer;
+   background-color: #454a7b;
+   color: #fff;
+   margin-top: 10px;
+   width: 100%;
+   height: 30px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   border-radius: 15px;
+   border: 1px solid #454a7b;
+   box-sizing: border-box;
+   cursor: pointer;
 }
 #signUpWithEmail:hover{
-	color: #454a7b;
-	background-color: #fff;
-	border: 1px solid #fff;
+   color: #454a7b;
+   background-color: #fff;
+   border: 1px solid #fff;
 }
 #enrollModal, #searchEmailModal, #searchPwdModal{
-	display: none;
-	align-items: center;
-	justify-content: center;
-	width: 100%;
-	height: 100vh;
-	position: absolute;
-	left: 0;
-	top: 500vh;
-	background-color: rgba(0, 0, 0, 0.5);
+   display: none;
+   align-items: center;
+   justify-content: center;
+   width: 100%;
+   height: 100vh;
+   position: absolute;
+   left: 0;
+   top: 500vh;
+   background-color: rgba(0, 0, 0, 0.5);
 }
 #modalDialog, #searchEmailModalDialog, #searchPwdModalDialog{
-	width: 600px;
-	height: 400px;
-	background-color: #fff;
-	border: 1px solid #fff;
-	border-radius: 10px;
-	box-sizing: border-box;
+   width: 600px;
+   height: 400px;
+   background-color: #fff;
+   border: 1px solid #fff;
+   border-radius: 10px;
+   box-sizing: border-box;
 }
 #modalHeader, #searchEmailModalHeader, #searchPwdModalHeader{
-	height: 56px;
-	display: flex;
-	justify-content: flex-start;
-	padding: 8px;
-	box-sizing: border-box;
+   height: 56px;
+   display: flex;
+   justify-content: flex-start;
+   padding: 8px;
+   box-sizing: border-box;
 }
 #closeBtn, #searchEmailCloseBtn, #searchPwdCloseBtn{
-	width: 40px;
-	height: 40px;
-	box-sizing: border-box;
-	border: 1px solid #fff;
-	border-radius: 50%;
-	font-size: 20px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	cursor: pointer;
+   width: 40px;
+   height: 40px;
+   box-sizing: border-box;
+   border: 1px solid #fff;
+   border-radius: 50%;
+   font-size: 20px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   cursor: pointer;
 }
 #closeBtn:hover, #searchEmailCloseBtn:hover, #searchPwdCloseBtn:hover{
-	background-color: #fafafa;
+   background-color: #fafafa;
 }
 #modalBody, #searchEmailModalBody, #searchPwdModalBody{
-	height: 344px;
+   height: 344px;
 }
 #signUpTitle, #findEmailTitle, #findPasswordTitle{
-	font-size: 20px;
-	font-weight: bolder;
+   font-size: 20px;
+   font-weight: bolder;
 }
 #modalFooter, #searchEamilModalFooter, #PwdModalFooter{
-	display: flex;
-	justify-content: flex-end;
-	border-top: 1px solid lightgrey;
-	box-sizing: border-box;
-	padding: 8px;
+   display: flex;
+   justify-content: flex-end;
+   border-top: 1px solid lightgrey;
+   box-sizing: border-box;
+   padding: 8px;
 }
 #loginFrm{
-	width: 350px;
-	height: 288px;
+   width: 350px;
+   height: 288px;
 }
 
 fieldset{
-	margin: 0;
-	border: 0;
-	padding: 0 20px;
-	display: flex;
-	flex-direction: column;
-	height: 288px;
+   margin: 0;
+   border: 0;
+   padding: 0 20px;
+   display: flex;
+   flex-direction: column;
+   height: 288px;
 }
 
 .enrollFset{
-	height: 288px;
+   height: 288px;
 }
 
 #loginTitle{
-	border-bottom: 1px solid lightgray;
-	height: 40px;
-	display: flex;
-	align-items: center;
-	font-weight: bold;
+   border-bottom: 1px solid lightgray;
+   height: 40px;
+   display: flex;
+   align-items: center;
+   font-weight: bold;
 }
 label{
-	margin-top: 20px;
-	font-weight: bolder;
+   margin-top: 20px;
+   font-weight: bolder;
 }
 .inputBar{
-	height: 45px;
-	margin-top: 10px;
-	padding: 8px;
-	box-sizing: border-box;
+   height: 45px;
+   margin-top: 10px;
+   padding: 8px;
+   box-sizing: border-box;
 }
 #submitBox{
-	display: flex;
-	align-items: center;
-	height: 40px;
-	padding: 0 20px;
+   display: flex;
+   align-items: center;
+   height: 40px;
+   padding: 0 20px;
 }
 #searchPwd{
-	width: 240px;
+   width: 240px;
 }
 #searchPwd > span {
-	cursor: pointer;
-	font-size: 15px;
-	color: #939598;
+   cursor: pointer;
+   font-size: 15px;
+   color: #939598;
 }
 
 #secondEnrollFrm{
-	display: none;
+   display: none;
 }
 
 #thirdEnrollFrm{
-	display: none;
+   display: none;
 }
 
 #fourthEnrollFrm{
-	display: none;
+   display: none;
 }
 
 .btnStyle{
-	background-color: #454a7b;
-	color: #fff;
-	font-weight: bolder;
-	border-radius: 20px;
-	border: 0;
-	width: 70px;
-	height: 40px;
-	cursor: pointer;
+   background-color: #454a7b;
+   color: #fff;
+   font-weight: bolder;
+   border-radius: 20px;
+   border: 0;
+   width: 70px;
+   height: 40px;
+   cursor: pointer;
 }
 
 .btnStyle:disabled{
-	background-color: #fafafa;
-	color: #454a7b;
-	pointer-events: none;
+   background-color: #fafafa;
+   color: #454a7b;
+   pointer-events: none;
 }
 
 .errorMsg{
-	color: tomato;
-	font-size: 15px;
-	margin-top: 10px;
+   color: tomato;
+   font-size: 15px;
+   margin-top: 10px;
 }
 
 #emailResultBox, #pwdResultBox{
-	display: none;	
-	width: 100%;
-	height: 287px;
+   display: none;   
+   width: 100%;
+   height: 287px;
 }
 
 #emailResultSpan, #pwdResultSpan{
-	width: 100%;
-	height: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	margin: 0;
-	font-size: 25px;
+   width: 100%;
+   height: 100%;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   margin: 0;
+   font-size: 25px;
 }
 
 #searchEamilResultFooter, #searchPwdResultFooter{
-	display: none;
-	justify-content: flex-end;
-	border-top: 1px solid lightgrey;
-	box-sizing: border-box;
-	padding: 8px;
+   display: none;
+   justify-content: flex-end;
+   border-top: 1px solid lightgrey;
+   box-sizing: border-box;
+   padding: 8px;
 }
