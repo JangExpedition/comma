@@ -43,7 +43,7 @@
 		%>
 			<div id="letterListAnony" class="letterList letterListDiv" data-letter-no="<%= no %>" style="background-image:url('<%= request.getContextPath() %>/upload/design/<%= designImg %>'); background-size:cover; font-family:<%= fontName %>;">
 				<div id="letterListTitle">
-					<table>
+					<table id="letterListTable">
 						<tr>
 							<td class="firstTd">
 								<p class="letterListInfo">
@@ -55,7 +55,7 @@
 						<%
 								} else {
 						%>
-									<span id="letterListWriter" class="fontStyle"><%= letter.getWriter() %></span>
+									<span id="letterListWriter" class="fontStyle"><%= letter.getWriter() != null ? letter.getWriter() : "탈퇴한 회원" %></span>
 						<%
 								}
 							} else {
@@ -67,14 +67,19 @@
 									&nbsp;님으로부터
 								</p>
 							</td>
-						</tr>
-						<tr>
 							<td>
-								<p id="letterListContent"><%= letter.getContent() %></p>
+						<% if (letter.getRead_check() == OX.X) { %>
+								<i class="fa-solid fa-circle"></i>
+						<% } %>
 							</td>
 						</tr>
 						<tr>
-							<td class="lastTd">
+							<td colspan="2">
+								<p id="letterListContent"><%= letter.getWriter() %></p>
+							</td>
+						</tr>
+						<tr>
+							<td class="lastTd" colspan="2">
 								<a href="<%= request.getContextPath() %>/letter/letterView?no=<%= letter.getNo() %>" class="fontStyle contentMore">더 읽어보기 &lt;&lt;</a>
 							</td>
 						</tr>
@@ -102,7 +107,7 @@
 		%>
 			<div id="letterListFriend" class="letterList letterListDiv" data-letter-no="<%= no %>" style="font-family:<%= fontName %>; background-image:url('<%= request.getContextPath() %>/upload/design/<%= designImg %>'); background-size:cover;">
 				<div id="letterListTitle">
-					<table>
+					<table id="letterListTable">
 						<tr>
 							<td class="firstTd">
 								<p class="letterListInfo">
@@ -114,7 +119,7 @@
 						<%
 								} else {
 						%>
-									<span id="letterListWriter" class="fontStyle"><%= letter.getWriter() %></span>
+									<span id="letterListWriter" class="fontStyle"><%= letter.getWriter() != null ? letter.getWriter() : "탈퇴한 회원" %></span>
 						<%
 								}
 							} else {
@@ -126,14 +131,19 @@
 									&nbsp;님으로부터
 								</p>
 							</td>
+							<td>
+						<% if (letter.getRead_check() == OX.X) { %>
+								<i class="fa-solid fa-circle"></i>
+						<% } %>
+							</td>
 						</tr>
 						<tr>
-							<td>
+							<td colspan="2">
 								<p id="letterListContent"><%= letter.getContent() %></p>
 							</td>
 						</tr>
 						<tr>
-							<td class="lastTd">
+							<td class="lastTd" colspan="2">
 								<a href="<%= request.getContextPath() %>/letter/letterView?no=<%= letter.getNo() %>" class="fontStyle contentMore">더 읽어보기 &lt;&lt;</a>
 							</td>
 						</tr>

@@ -80,5 +80,20 @@ public class LetterService {
 		}
 		return result;
 	}
+
+	public int updateReadCheckLetter(Letter letter) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = letterDao.updateReadCheckLetter(conn, letter);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	} // updateReadCheckLetter() end
 	
 } // class end
