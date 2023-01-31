@@ -64,7 +64,7 @@ section {
 	border: none;
 }
 
-.chatBtn {
+.chatBtn, .csBtn {
 	margin: 2px;
 	padding: 5px 10px;
 	background-color: #212E40;

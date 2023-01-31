@@ -428,4 +428,19 @@ public class CounselingDao {
 		}
 		return result;
 	}
+
+	public List<Counseling> selectAdminAllCounseling(Connection conn) {
+		List<Counseling> counselingList = new ArrayList<>();
+		String sql = prop.getProperty("selectAdminAllCounseling");
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql);
+			 ResultSet rset = pstmt.executeQuery()) {
+			while (rset.next()) {
+				counselingList.add(handleCounselingResultSet(rset));
+			}
+		} catch (SQLException e) {
+			throw new CounselingException("전체 목록 조회 오류", e);
+		}
+		return counselingList;
+	} // selectAdminAllCounseling() end
 }
