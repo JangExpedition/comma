@@ -36,14 +36,12 @@ public class QuestionDeleteServlet extends HttpServlet {
 				System.out.println(bool ? "파일 삭제 성공!" : "파일 삭제 실패!");
 			}
 			
-			
-			
 			int result = questionService.deleteQuestion(no);
-			request.getSession().setAttribute("msg", "게시글 삭제 성공!");
+			request.getSession().setAttribute("msg", "해당 문의 내역이 정상적으로 삭제되었습니다.");
 			
 		} catch(Exception e) {
 			e.printStackTrace();
-			request.getSession().setAttribute("msg", "게시글 삭제 실패!");
+			request.getSession().setAttribute("msg", "해당 문의 내역 삭제에 실패하셨습니다.");
 		}
 		
 		response.sendRedirect(request.getContextPath() + "/customer");

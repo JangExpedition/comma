@@ -25,9 +25,9 @@ public class AdminChatDeleteServlet extends HttpServlet {
 			int no = Integer.parseInt(request.getParameter("chatNo"));
 			
 			int result = chatService.deleteChat(no);
-			request.getSession().setAttribute("msg", "채팅방 삭제 성공!");
+			request.getSession().setAttribute("msg", "채팅방을 삭제했습니다.");
 		} catch (Exception e) {
-			request.getSession().setAttribute("msg", "채팅방 삭제 실패!");
+			request.getSession().setAttribute("msg", "채팅방을 삭제하는데 실패했습니다.");
 			e.printStackTrace();
 		}
 		response.sendRedirect(request.getContextPath() + "/admin/adminChatList");

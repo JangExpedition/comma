@@ -45,9 +45,9 @@ public class FAQUpdateServlet extends HttpServlet {
 			
 			int result = faqService.updateFaq(faq);
 			
-			request.getSession().setAttribute("msg", "FAQ 수정 성공!");
+			request.getSession().setAttribute("msg", "FAQ가 정상적으로 수정되었습니다.");
 		} catch(Exception e) {
-			request.getSession().setAttribute("msg", "FAQ 수정 실패!");
+			request.getSession().setAttribute("msg", "FAQ 수정에 실패하셨습니다.");
 			e.printStackTrace();
 		}
 		

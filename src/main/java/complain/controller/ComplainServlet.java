@@ -48,9 +48,9 @@ public class ComplainServlet extends HttpServlet {
 			
 			// 업무로직
 			int result = complainService.insertComplain(complain);
-			request.getSession().setAttribute("msg", "신고 성공!");
+			request.getSession().setAttribute("msg", "신고되었습니다.");
 		} catch (Exception e) {
-			request.getSession().setAttribute("msg", "신고 실패!");
+			request.getSession().setAttribute("msg", "신고하지 못했습니다.");
 			e.printStackTrace();
 		}
 		

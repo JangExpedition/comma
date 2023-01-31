@@ -148,9 +148,9 @@ public class WriteLetterServlet extends HttpServlet {
 			System.out.println(letter.getNo());
 			notificationService.notifyNewLetter(letter);
 			
-			request.getSession().setAttribute("msg", "편지 보내기 성공!");
+			request.getSession().setAttribute("msg", "편지가 성공적으로 보내졌습니다.");
 		} catch (Exception e) {
-			request.getSession().setAttribute("msg", "편지 보내기 실패!");
+			request.getSession().setAttribute("msg", "편지 보내기에 실패하셨습니다.");
 			e.printStackTrace();
 		}
 		
