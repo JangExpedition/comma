@@ -248,4 +248,17 @@ public class CounselingService {
 		return result;
 	}
 
+	public List<Counseling> selectAdminAllCounseling() {
+		Connection conn = getConnection();
+		List<Counseling> counselingList = counselingDao.selectAdminAllCounseling(conn);
+		
+		for (Counseling cs : counselingList) {
+			List<Attachment> attachList = counselingDao.selectAttachments(conn, cs.getNo());
+			cs.setAttachments(attachList);
+		}
+		
+		close(conn);
+		return counselingList;
+	} // selectAdminAllCounseling() end
+
 }

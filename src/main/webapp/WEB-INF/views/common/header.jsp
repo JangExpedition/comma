@@ -112,6 +112,7 @@
 	case "/comma/admin/adminChatLog" :
 	case "/comma/admin/adminChatFinder" :
 	case "/comma/admin/adminChatLogFinder" :
+	case "/comma/admin/counselingList" :
 		link.href = "<%= request.getContextPath() %>/css/admin.css";
 		break;
 	case "/comma/counseling/CSView" :
@@ -232,11 +233,26 @@
 				});
 				</script>
 			<% } %>
+			
+			<% if (loginMember.getMemberRole() == MemberRole.U) { %>
 				<div id="toDiary" class="navBtn">일기장</div>
+				<script>
+			    /*
+			      Date : 2023. 01. 15
+			      @최민경
+			      
+			      diary.jsp 이동 메소드
+			     */
+			     document.querySelector("#toDiary").addEventListener('click', (e) => {
+			    	location.href = "<%= request.getContextPath() %>/diary/diaryList"; 
+			     });
+				</script>
+			<% } %>
+			
 				<div id="toPost" class="navBtn">우편함</div>
 				<div id="toLetter" class="navBtn">편지쓰기</div>
 			<% if (loginMember.getMemberRole() == MemberRole.A || loginMember.getMemberRole() == MemberRole.M) { %>
-				<div id="toAdminChatList" class="navBtn">익명채팅방</div><script>
+				<div id="toAdminChatList" class="navBtn">익명채팅</div><script>
 				/*
 			    Date : 2023. 1. 23
 			    @한혜진
@@ -249,7 +265,7 @@
 				});
 				</script>
 			<% } else { %>
-				<div id="toChat" class="navBtn">익명채팅</div>
+				<div id="toChat" class="navBtn">익명채팅방</div>
 				<script>
 				/*
 			    Date : 2023. 1. 23
@@ -263,7 +279,34 @@
 				});
 				</script>
 			<% } %>
+			
+			<% if (loginMember.getMemberRole() == MemberRole.U) { %>
 				<div id="toCounseling" class="navBtn">고민상담소</div>
+				<script>
+				    /*
+				    Date : 2023. 01. 19
+				    @한혜진
+				    
+				    counseling.jsp 이동 메소드
+				    */
+				    document.querySelector("#toCounseling").addEventListener('click', (e) => {
+				    	location.href = "<%= request.getContextPath() %>/counseling/counselingList"; 
+				     });
+				</script>
+			<% } else { %>
+				<div id="toAdminCounseling" class="navBtn">고민상담소</div>
+				<script>
+				    /*
+				    Date : 2023. 01. 19
+				    @한혜진
+				    
+				    counseling.jsp 이동 메소드
+				    */
+				    document.querySelector("#toAdminCounseling").addEventListener('click', (e) => {
+				    	location.href = "<%= request.getContextPath() %>/admin/counselingList"; 
+				     });
+				</script>
+			<% } %>
 				<div id="toMypage" class="navBtn">마이페이지</div>
 				<div id="toQuestion" class="navBtn">고객센터</div>
 				<div id="logoutBtn" class="navBtn">로그아웃</div>
@@ -332,16 +375,6 @@
 	    });
 	    
 	    /*
-	      Date : 2023. 01. 15
-	      @최민경
-	      
-	      diary.jsp 이동 메소드
-	     */
-	     document.querySelector("#toDiary").addEventListener('click', (e) => {
-	    	location.href = "<%= request.getContextPath() %>/diary/diaryList"; 
-	     });
-	    
-	    /*
 	    Date : 2023. 01. 18
 	    @한혜진
 	    
@@ -359,16 +392,6 @@
 	    */
 	    document.querySelector("#toQuestion").addEventListener('click', (e) => {
 	    	location.href = "<%= request.getContextPath() %>/customer"; 
-	     });
-	    
-	    /*
-	    Date : 2023. 01. 19
-	    @한혜진
-	    
-	    counseling.jsp 이동 메소드
-	    */
-	    document.querySelector("#toCounseling").addEventListener('click', (e) => {
-	    	location.href = "<%= request.getContextPath() %>/counseling/counselingList"; 
 	     });
 	    
 	    /*
