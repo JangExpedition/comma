@@ -4,7 +4,10 @@
 
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%
-	List<Chat> chatList = (List<Chat>)request.getAttribute("chatList");
+	List<Chat> chatList = (List<Chat>)session.getAttribute("chatList");
+	if(!chatList.isEmpty()){
+		System.out.println(chatList.get(0).getChatPwd());
+	}
 %>
 <section id="chatSection">
 	<div id="chatContainer">
@@ -54,18 +57,31 @@
 			</div>
 		</div>
 	</div>
+	<div id="pwdBackground">
+		<div id="pwdBox">
+			<div id="XBox" class="fontStyle"><div id="X">X</div></div>
+			<span id="infoPwd" class="fontStyle white">비밀번호가 있는 채팅방입니다.</span>
+			<form action="" name="insertPwd">
+				<input id="chatPwd" type="password" placeholder="비밀번호를 입력해주세요." />
+				<input type="submit" id="insertPwdBtn" class="fontStyle" value="입력" />
+			</form>
+		</div>
+	</div>
 </section>
 <form action="<%= request.getContextPath() %>/chat/chatList" name="changeCsCateFrm">
 	<input type="hidden" id="chatCate" name="chatCate" />
 </form>
 <script>
-document.querySelector("#chatCate").addEventListener("change", (e)=>{
-	const frm = document.changeCsCateFrm;
-	frm.chatCate.value = e.target.value;
-	frm.submit();
-});
+	document.querySelector("#chatCate").addEventListener("change", (e)=>{
+		const frm = document.changeCsCateFrm;
+		frm.chatCate.value = e.target.value;
+		frm.submit();
+	});
 
-$(".tr").css("pointEvent", "none");
+	$(".tr").css("pointEvent", "none");
+	
+	let pwd = 0;
+	let chatNo = 0;
     
 	/*
 	Date : 2023. 1. 27
@@ -73,13 +89,53 @@ $(".tr").css("pointEvent", "none");
 	게시글 조회 메서드
 	*/
 	$(".tr").click((e)=>{
-		location.href = "<%= request.getContextPath() %>/chat/chatView?chatNo=" + $(event.target).parent('.tr').data('chatNo');
+		chatNo = $(event.target).parent('.tr').data('chatNo');
+		$.ajax({
+			url : "<%= request.getContextPath() %>/chat/selectOneChat",
+			dataType: "json",
+			data: {chatNo},
+			success(data){
+				pwd = data.chatPwd;
+				const nowCount = data.nowCount;
+				const ableCount = data.ableCount;
+				
+				if(nowCount == ableCount){
+					alert("정원이 가득찬 채팅방입니다.");
+					return;
+				}
+				
+				if(pwd != null){
+					pwdBackground.style.display = "flex";
+				}else{
+					location.href = "<%= request.getContextPath() %>/chat/chatView?chatNo=" + chatNo;
+				}
+			}
+		})
 	});
-	/*
-	Date : 2023. 1. 27
-	@장원정
-	게시글 조회 메서드
-	*/
+	
+	document.querySelector("#X").addEventListener("click", (e)=>{
+		chatPwd.value = "";
+		document.querySelector("#pwdBackground").style.display = "none";
+	});
+	document.querySelector("#pwdBackground").addEventListener("click", (e)=>{
+		if(e.target !== e.currentTarget){
+			return;
+		}
+		chatPwd.value = "";
+		document.querySelector("#pwdBackground").style.display = "none";
+	});
+	
+	document.insertPwd.addEventListener("submit", (e)=>{
+		e.preventDefault();
+		console.log(pwd, chatPwd.value);
+		if(pwd == chatPwd.value){
+			location.href = "<%= request.getContextPath() %>/chat/chatView?chatNo=" + chatNo;
+		} else{
+			alert("비밀번호가 일치하지 않습니다.");
+			chatPwd.value = "";
+		}
+	});
+	
 	document.querySelector("#ctreateChat").addEventListener('click', (e) => {
 		location.href = "<%= request.getContextPath() %>/chat/chat";
 	 });

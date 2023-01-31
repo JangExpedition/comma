@@ -47,6 +47,7 @@
 	
 	const link = document.createElement("link");
 	link.rel = "stylesheet";
+	
 	switch(location.pathname){
 	case "/comma/" : 
 		link.href = "<%= request.getContextPath() %>/css/index.css";
@@ -121,9 +122,6 @@
 		break;
 	case "/comma/counseling/counselingUpdate" :
 		link.href = "<%= request.getContextPath() %>/css/counselingUpdate.css";
-		break;
-	case "/comma/chat/chatList" :
-		link.href = "<%= request.getContextPath() %>/css/chatList.css";
 		break;
 	case "/comma/admin/adminStyleList" :
 	case "/comma/admin/adminFontList" :

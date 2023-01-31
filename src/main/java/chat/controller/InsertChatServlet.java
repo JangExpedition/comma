@@ -36,8 +36,13 @@ public class InsertChatServlet extends HttpServlet {
 			Gender gender = Gender.valueOf(request.getParameter("gender"));
 			int ableAge = Integer.valueOf(request.getParameter("age"));
 			int ableCount = Integer.valueOf(request.getParameter("chattingPerson"));
+			String chatPassword = request.getParameter("chatpassword");
+			String chatPwd = null;
+			if("on".equals(chatPassword)) {
+				chatPwd = request.getParameter("chatPwd");
+			}
 			
-			Chat chat = new Chat(0, chatName, captin, category, gender, ableAge, 0, ableCount, null, null, null);
+			Chat chat = new Chat(0, chatName, chatPwd, captin, category, gender, ableAge, 0, ableCount, null, null, null);
 			
 			System.out.println("InsertChatServlet" + chat);
 			

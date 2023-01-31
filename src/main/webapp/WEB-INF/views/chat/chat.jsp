@@ -20,11 +20,11 @@
 		</tr>
 	
 		
-		<!-- <tr>
+		<tr>
 			<th><label for="chatpassword"><input type="checkbox" name="chatpassword" id="chatpassword" />
 			채팅방 비밀번호 : </label></th>
 			<td><input type="text" name="chatPwd" value="" /></td>
-		</tr> -->
+		</tr>
 
 
 		<tr>

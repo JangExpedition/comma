@@ -174,4 +174,11 @@ public class ChatService {
 		return chatLogList;
 	} // selectFindChatLog() end
 
+	public Chat selectOneChat(int chatNo) {
+		Connection conn = getConnection();
+		Chat chat = chatDao.selectOneChat(conn, chatNo);
+		close(conn);
+		return chat;
+	}
+
 }

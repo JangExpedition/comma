@@ -13,11 +13,9 @@ import javax.servlet.http.HttpFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
-import member.model.dto.Member;
-import member.model.dto.MemberRole;
-
-@WebFilter({"/", "/friends/*", "/diary/*", "/letter/*", "/chat/chatList", "/counseling/*", "/mypage/*", "/customer/*"})
+@WebFilter({"/", "/letter/*", "/diary/*", "/counseling/*", "/friends/*", "/mypage/*", "/customer/*", "/chat/chat", "/caht/chatView", "/chat/chatList"})
 public class ChatNoFilter extends HttpFilter implements Filter {
 
 	/**
