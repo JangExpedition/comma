@@ -15,6 +15,10 @@ import javax.servlet.http.HttpSession;
 import diary.model.dto.Diary;
 import diary.model.service.DiaryService;
 import member.model.dto.Member;
+import style.model.dto.Design;
+import style.model.dto.Font;
+import style.model.dto.Part;
+import style.model.service.StyleService;
 
 /**
  * Servlet implementation class DailyListServlet
@@ -23,6 +27,7 @@ import member.model.dto.Member;
 public class DiaryListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private DiaryService diaryService = new DiaryService();
+	private StyleService styleService = new StyleService();
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -33,6 +38,15 @@ public class DiaryListServlet extends HttpServlet {
 		String yearFilter = request.getParameter("yearFilter");
 		
 		List<Diary> diaryList = diaryService.selectAllDiary(member);
+		List<Font> fontList = styleService.selectAllFont();
+		List<Design> _designList = styleService.selectAllDesign();
+		List<Design> designList = new ArrayList<>();
+		
+		for(Design design : _designList) {
+			if(design.getPart() == Part.D) {
+				designList.add(design);
+			}
+		}
 		
 		HashSet<String> memberHaveYearSet = new HashSet<>();
 		
@@ -55,6 +69,9 @@ public class DiaryListServlet extends HttpServlet {
 			request.setAttribute("diaryList", afterDiaryList);
 			request.setAttribute("yearFilter", yearFilter);
 		}
+		
+		session.setAttribute("fontList", fontList);
+		session.setAttribute("designList", designList);
 		
 		request.getRequestDispatcher("/WEB-INF/views/diary/diaryList.jsp")
 			.forward(request, response);
