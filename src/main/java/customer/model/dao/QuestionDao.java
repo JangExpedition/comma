@@ -33,6 +33,7 @@ private Properties prop = new Properties();
 	public Question handleQuestionResultSet(ResultSet rset) throws SQLException {
 		Question question = new Question();
 		question.setNo(rset.getInt("no"));
+		question.setRowNo(rset.getInt("rnum"));
 		question.setWriter(rset.getString("writer"));
 		question.setTitle(rset.getString("title"));
 		question.setContent(rset.getString("content"));

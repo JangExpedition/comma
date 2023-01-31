@@ -61,7 +61,7 @@
 					for (Question question : questionList) {
 			%>
 					<tr>
-						<td><%= question.getNo() %></td>
+						<td><%= question.getRowNo() %></td>
 					<% if (loginMember.getMemberRole() != MemberRole.U) { %>
 						<td><%= question.getWriter() %></td>
 						<td>

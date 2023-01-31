@@ -9,6 +9,7 @@ import common.Form;
 
 public class Question extends Form{
 	
+	private int rowNo;
 	private String title;
 	private List<Attachment> attachments = new ArrayList<>();
 	
@@ -29,6 +30,22 @@ public class Question extends Form{
 		this.attachments = attachments;
 	}
 
+	public Question(int no, String writer, String content, Date regDate, int rowNo, String title,
+			List<Attachment> attachments) {
+		super(no, writer, content, regDate);
+		this.rowNo = rowNo;
+		this.title = title;
+		this.attachments = attachments;
+	}
+
+	public int getRowNo() {
+		return rowNo;
+	}
+
+	public void setRowNo(int rowNo) {
+		this.rowNo = rowNo;
+	}
+
 	public String getTitle() {
 		return title;
 	}
@@ -47,7 +64,8 @@ public class Question extends Form{
 
 	@Override
 	public String toString() {
-		return "Question [title=" + title + ", attachments=" + attachments + ", toString()=" + super.toString() + "]";
+		return "Question [rowNo=" + rowNo + ", title=" + title + ", attachments=" + attachments + ", toString()="
+				+ super.toString() + "]";
 	}
 
 	// addAttachment
