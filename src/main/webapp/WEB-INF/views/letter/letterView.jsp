@@ -38,7 +38,7 @@
 %>
 
 	<section>
-		<div id="letterTitle" class="fontStyle" onclick="history.back();">받은 편지함</div>
+		<div id="letterTitle" class="fontStyle" onclick="location.href='<%= request.getContextPath() %>/letter/letterList';">받은 편지함</div>
 		<div id="letterAllList">
 			<div id="letterListDiv" class="letterList" style="font-family:<%= fontName %>; background-image:url('<%= request.getContextPath() %>/upload/design/<%= designImg %>'); background-size: cover;">
 				<div id="letterListTitle">
@@ -54,7 +54,7 @@
 						<%
 								} else {
 						%>
-									<span id="letterListWriter" class="fontStyle"><%= letter.getWriter() %></span>
+									<span id="letterListWriter" class="fontStyle"><%= letter.getWriter() != null ? letter.getWriter() : "탈퇴한 회원" %></span>
 						<%
 								}
 							} else {

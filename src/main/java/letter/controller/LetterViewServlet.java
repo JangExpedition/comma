@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import common.CommaUtils;
+import common.OX;
 import friends.model.dto.Friends;
 import friends.model.service.FriendsService;
 import letter.model.dto.Letter;
@@ -40,6 +41,10 @@ public class LetterViewServlet extends HttpServlet {
 		
 		// 업무로직
 		Letter letter = letterService.selectOneLetter(letterNo);
+		letter.setRead_check(OX.O);
+		
+		int result = letterService.updateReadCheckLetter(letter);
+		
 		List<Friends> friendsList = friendsService.selectAllFriends(nickname);
 		List<Font> fontList = styleService.selectAllFont();
 		List<Design> designList = styleService.selectAllDesign();

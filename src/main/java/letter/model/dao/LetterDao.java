@@ -170,5 +170,21 @@ public class LetterDao {
 		}
 		return attachList;
 	} // selectAllAttachment() end
+
+
+	public int updateReadCheckLetter(Connection conn, Letter letter) {
+		int result = 0;
+		String sql = prop.getProperty("updateReadCheckLetter");
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, letter.getRead_check().name());
+			pstmt.setInt(2, letter.getNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new LetterException("편지 읽기여부 변경 오류", e);
+		}
+		return result;
+	} // updateReadCheckLetter() end
 	
 } // class end

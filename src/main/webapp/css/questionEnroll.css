@@ -1,8 +1,22 @@
 @charset "UTF-8";
 
 section{
-    width: 70%;
+    width: 100%;
     text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding-top: 40px;
+}
+
+#questionEnrollContainer{
+	margin: 0 auto;
+	width: 70%;
+	height: 80%;
+}
+
+#goBackDiv {
+	text-align: left;
 }
 
 #enrollTitle{
@@ -94,4 +108,17 @@ imgDiv{
 	display: none;
 	width: 150px;
 	height: 150px;
+}
+
+
+.buttonStyle {
+	background-color: #fff;
+	border: 1px solid #454a7b;
+	border-radius: 5px;
+	width: 80px;
+	height: 25px;
+}
+
+.buttonStyle:hover {
+	cursor: pointer;
 }

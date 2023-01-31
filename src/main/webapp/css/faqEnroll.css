@@ -1,8 +1,21 @@
 @charset "UTF-8";
 
 section{
-    width: 70%;
-    text-align: center;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding-top: 40px;
+}
+
+#faqEnrollContainer{
+	width: 70%;
+	height: 80%;
+	text-align: center;
+}
+
+#goBackDiv {
+	text-align: left;
 }
 
 #enrollTitle{
@@ -74,4 +87,16 @@ section{
 	font-size: 18px;
 	padding: 5px 10px;
 	border-radius: 10px;
+}
+
+.buttonStyle {
+	background-color: #fff;
+	border: 1px solid #454a7b;
+	border-radius: 5px;
+	width: 80px;
+	height: 25px;
+}
+
+.buttonStyle:hover {
+	cursor: pointer;
 }
