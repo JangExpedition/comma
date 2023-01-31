@@ -8,11 +8,12 @@ section{
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    font-size: 15px;
 }
 
 
 #updateContainer{
-	width: 70%;
+	width: 60%;
 	height: 70%;
 	display: flex;
     flex-direction: column;
