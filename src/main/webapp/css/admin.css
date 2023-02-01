@@ -6,6 +6,12 @@ section {
 
 }
 
+#link {
+	text-decoration: none;
+	border: none;
+	color: #000;
+}
+
 #adminTitle {
 	padding-top: 50px;
     text-align: center;
