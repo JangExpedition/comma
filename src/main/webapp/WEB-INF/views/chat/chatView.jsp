@@ -67,6 +67,7 @@ document.querySelector("#exitChat").addEventListener("click", (e)=>{
 		error: console.log
 	});
 });
+
 </script>	
 </body>
 </html>

@@ -92,7 +92,7 @@
 							<img src="<%= request.getContextPath() %>/upload/profile/<%= friend.getRenamedFileName() %>" alt="" class="friendsImage" />							
 						<% } %>
 						</td>
-						<td><%= friend.getfNickname() %></td>
+						<td><%= friend.getMyNickname() %></td>
 						<td>
 							<form action="<%= request.getContextPath() %>/friends/friendsUpdate" method="post" name="isFriendUpdateFrm">
 								<input type="hidden" name="myNick" value="<%= friend.getfNickname() %>" />

@@ -52,6 +52,10 @@ public class InsertFriendServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 			
+			List<Friends> friendsList = friendsService.selectAllFriends(myNick);
+			
+			request.getSession().setAttribute("friendsList", friendsList);
+			
 			response.sendRedirect(request.getContextPath() + "/counseling/CSView?no=" + no);
 			
 		} catch(Exception e) {

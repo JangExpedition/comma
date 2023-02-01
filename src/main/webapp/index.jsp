@@ -37,7 +37,6 @@
     	</table>
     </section>
     <% if(loginMember == null) { %>
-    <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
     <section id="background">
 		<div id="centerContainer">
 			<div id="welcomeBox">
@@ -46,7 +45,6 @@
 			<div id="enrollAndLoginBox">
 				<div id="enrollBox">
 					<div id="agreeBox" class="pointColor fontStyle">By continuing you indicate that you agree to Comma’s Terms of Service and Privacy Policy.</div>
-					<div id="naver_id_login" class="easyLogin"></div>
 					<div id="signUpWithEmail" class="fontStyle">Sign up with email</div>
 				</div>
 				<div>
@@ -884,15 +882,6 @@
 			});
 		};
 		
-	</script>
-	<script type="text/javascript">
-		var naver_id_login = new naver_id_login("QpkQpxEPEtiAfKtw0PUw", "http://localhost:8080/comma/");
-		var state = naver_id_login.getUniqState();
-		naver_id_login.setButton("white", 2,40);
-		naver_id_login.setDomain("http://localhost:8080/comma/");
-		naver_id_login.setState(state);
-		naver_id_login.setPopup();
-		naver_id_login.init_naver_id_login();
 	</script>
 	<% } %>
 </body>
