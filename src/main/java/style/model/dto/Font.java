@@ -4,26 +4,23 @@ public class Font {
 	private int no;
 	private int rnum;
 	private String name;
-	private String link;
 	
 	public Font() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Font(int no, String name, String link) {
+	public Font(int no, String name) {
 		super();
 		this.no = no;
 		this.name = name;
-		this.link = link;
 	}
 
-	public Font(int no, int rnum, String name, String link) {
+	public Font(int no, int rnum, String name) {
 		super();
 		this.no = no;
 		this.rnum = rnum;
 		this.name = name;
-		this.link = link;
 	}
 
 	public int getNo() {
@@ -50,17 +47,9 @@ public class Font {
 		this.name = name;
 	}
 
-	public String getLink() {
-		return link;
-	}
-
-	public void setLink(String link) {
-		this.link = link;
-	}
-
 	@Override
 	public String toString() {
-		return "Font [no=" + no + ", rnum=" + rnum + ", name=" + name + ", link=" + link + "]";
+		return "Font [no=" + no + ", rnum=" + rnum + ", name=" + name + "]";
 	}
 	
 }

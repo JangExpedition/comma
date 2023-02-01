@@ -25,9 +25,8 @@ public class AdminFontEnrollServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			String name = request.getParameter("name");
-			String link = request.getParameter("link");
 			
-			Font font = new Font(0, name, link);
+			Font font = new Font(0, name);
 			
 			int result = styleService.insertFont(font);
 			request.getSession().setAttribute("msg", "폰트를 추가했습니다.");
