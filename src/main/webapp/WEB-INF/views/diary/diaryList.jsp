@@ -264,7 +264,18 @@ $(".onediary").click((e)=>{
 				diaryUpdateImg.src = `<%= request.getContextPath() %>/upload/diary/\${renamedFilename}`;
 				}
 			
-			switch(designNo){
+			let dNum = 0;
+			
+			<% for(Design design : designList){ %>
+				Dnum = <%= design.getNo() %>;
+				if(dNum == designNo){
+					console.log(dNum, designNo);
+					diaryEnrollModal.style.backgroundImage = "url('<%=request.getContextPath() %>/images/<%= design.getRenamedFilename() %>')";
+					diaryUpdateModal.style.backgroundImage = "url('<%=request.getContextPath() %>/images/<%= design.getRenamedFilename() %>')";
+				}
+			<% } %>
+			
+			<%-- switch(designNo){
 			case 1: 
 				diaryEnrollModal.style.backgroundImage = "url('<%=request.getContextPath() %>/images/diaryImg1.png')";
 				diaryUpdateModal.style.backgroundImage = "url('<%=request.getContextPath() %>/images/diaryImg1.png')";
@@ -309,7 +320,7 @@ $(".onediary").click((e)=>{
 				editContent.style.fontFamily = "'East Sea Dokdo', cursive";
 				break;
 			}
-			
+			 --%>
 			nowContent.value = content;
 			editContent.value = content;
 			
