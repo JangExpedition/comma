@@ -6,6 +6,12 @@ section {
 
 }
 
+#link {
+	text-decoration: none;
+	border: none;
+	color: #000;
+}
+
 #adminTitle {
 	padding-top: 50px;
     text-align: center;
@@ -107,6 +113,10 @@ input[type=number]::-webkit-inner-spin-button {
 	border: none;
 	border-radius: 25px;
 	color: #454a7b;
+}
+
+.fontModal {
+	top: 10%;
 }
 
 .chatModal {

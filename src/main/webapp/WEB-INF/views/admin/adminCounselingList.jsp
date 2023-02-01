@@ -64,7 +64,9 @@
 				for (Counseling counseling : counselingList) {
 		%>
 					<tr>
-						<td><%= counseling.getTitle() %></td>
+						<td>
+							<a id="link" href="<%= request.getContextPath() %>/counseling/CSView?no=<%= counseling.getNo() %>"><%= counseling.getTitle() %></a>
+						</td>
 						<td><%= counseling.getWriter() %></td>
 						<td><%= counseling.getCategory() %></td>
 						<td><%= counseling.getRegDate() %></td>
