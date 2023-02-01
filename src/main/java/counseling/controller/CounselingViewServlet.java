@@ -15,6 +15,9 @@ import counseling.model.dto.Counseling;
 import counseling.model.dto.CounselingComment;
 import counseling.model.dto.LikeCounseling;
 import counseling.model.service.CounselingService;
+import friends.model.dto.Friends;
+import friends.model.service.FriendsService;
+import member.model.dto.Member;
 
 /**
  * Servlet implementation class CounselingViewServlet
@@ -23,12 +26,15 @@ import counseling.model.service.CounselingService;
 public class CounselingViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private CounselingService counselingService = new CounselingService();
+	private FriendsService friendsService = new FriendsService();
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int no = Integer.valueOf(request.getParameter("no"));
+		Member member = (Member) request.getSession().getAttribute("loginMember");
+		List<Friends> friendsList = friendsService.selectAllFriends(member.getNickname());
 		
 		// board 쿠키처리 board="[84][22]"
 		String csCookieVal = "";
@@ -69,6 +75,7 @@ public class CounselingViewServlet extends HttpServlet {
 		
 		List<LikeCounseling> likeCounselingList = counselingService.selectAllLikeCs(no);
 		
+		request.setAttribute("friendsList", friendsList);
 		request.setAttribute("counseling", counseling);
 		request.setAttribute("comments", csComments);
 		request.setAttribute("likeList", likeCounselingList);

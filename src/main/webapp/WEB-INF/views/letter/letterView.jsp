@@ -66,9 +66,26 @@
 									&nbsp;님으로부터
 								</p>
 							</td>
+						<% if (letter.getWriter() != null && letter.getWriterRole() == MemberRole.U) { %>
 							<td class="secondTd">
 								<p id="complain"><img src="<%= request.getContextPath() %>/images/siren.png" id="complainImg" alt="신고아이콘" /></p>
+								<form action="<%= request.getContextPath() %>/complain/complain" method="post" name="complainFrm">
+									<input type="hidden" name="my_nickname" value="<%= loginMember.getNickname() %>" />
+									<input type="hidden" name="v_nickname" value="<%= letter.getWriter() %>" />
+									<input type="hidden" name="partition" value="<%= partition %>" />
+									<input type="hidden" name="content" value="<%= letter.getContent() %>" />
+									<input type="hidden" name="part_no" value="<%= letter.getNo() %>" />
+								</form>
+								<script>
+									/*
+									  신고 버튼 클릭 시 신고
+									*/
+									complainImg.addEventListener('click', (e) => {
+										document.querySelector('[name=complainFrm]').submit();
+									});
+								</script>
 							</td>
+						<% } %>
 						</tr>
 						<tr>
 							<td colspan="3">
@@ -89,13 +106,6 @@
 							</td>
 						</tr>
 					</table>
-					<form action="<%= request.getContextPath() %>/complain/complain" method="post" name="complainFrm">
-						<input type="hidden" name="my_nickname" value="<%= loginMember.getNickname() %>" />
-						<input type="hidden" name="v_nickname" value="<%= letter.getWriter() %>" />
-						<input type="hidden" name="partition" value="<%= partition %>" />
-						<input type="hidden" name="content" value="<%= letter.getContent() %>" />
-						<input type="hidden" name="part_no" value="<%= letter.getNo() %>" />
-					</form>
 				</div>
 			</div>
 		</div>
@@ -103,7 +113,7 @@
 	
 	<div id="writerDiv">
 <%
-	if (letter.getWriterRole() != MemberRole.A && letter.getWriterRole() != MemberRole.M && letter.getAnonymous() == OX.X) {
+	if (letter.getWriterRole() != MemberRole.A && letter.getWriterRole() != MemberRole.M && letter.getAnonymous() == OX.X && letter.getWriter() != null) {
 		if (isFriend == 0) {
 %>
 		<input id="friendRequest" class="friendRequestBtn letterBtn" type="button" value="친구신청" />
@@ -153,13 +163,5 @@
 		<input type="hidden" name="myNick" value="<%= loginMember.getNickname() %>" />
 	</form>
 	
-	<script>
-		/*
-		  신고 버튼 클릭 시 신고
-		*/
-		complainImg.addEventListener('click', (e) => {
-			document.querySelector('[name=complainFrm]').submit();
-		});
-	</script>
 </body>
 </html>

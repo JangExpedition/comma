@@ -113,6 +113,13 @@
 	</div>
 	</section>
 	<script>
+	document.diaryEnrollFrm.addEventListener("submit", (e)=>{
+		if(e.target.nowContent.value == ""){
+			e.preventDefault();
+			alert("내용을 작성해주세요.")
+		}
+	});
+	
 	$('.designBtn').on('click', (e) => {
 		
 		nowContent.style.backgroundImage = `url("<%= request.getContextPath() %>/upload/design/\${e.target.dataset.renamedFilename}")`;

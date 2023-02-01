@@ -75,12 +75,10 @@
 	                <input type="hidden" name="searchType" value="partition"/>
 	                <input type="radio" id="letter" name="searchKeyword" value="LETTER" <%= "partition".equals(searchType) && "LETTER".equals(searchKeyword) ? "checked" : "" %> />
 	                <label for="letter"> 편지</label>
-	                <input type="radio" id="counseling" name="searchKeyword" value="COUNSESING" <%= "partition".equals(searchType) && "COUNSESING".equals(searchKeyword) ? "checked" : "" %> />
+	                <input type="radio" id="counseling" name="searchKeyword" value="COUNSELING" <%= "partition".equals(searchType) && "COUNSELING".equals(searchKeyword) ? "checked" : "" %> />
 	                <label for="counseling"> 고민상담소</label>
 	                <input type="radio" id="comment" name="searchKeyword" value="COMMENT" <%= "partition".equals(searchType) && "COMMENT".equals(searchKeyword) ? "checked" : "" %> />
 	                <label for="comment"> 댓글</label>
-	                <input type="radio" id="chatting" name="searchKeyword" value="CHATTING" <%= "partition".equals(searchType) && "CHATTING".equals(searchKeyword) ? "checked" : "" %> />
-	                <label for="chatting"> 채팅</label>
 	                <button type="submit">검색</button>
 	            </form>
 	        </div>

@@ -191,7 +191,7 @@
 	취소버튼 메서드
 	*/
 	document.querySelector("#resetBtn").addEventListener("click", (e)=>{
-		const profileName = <%= loginMember.getRenamedFilename() %>;
+		let profileName = "<%= loginMember.getRenamedFilename() %>";
 		if(profileName == null){
 			document.querySelector("#profileImg").src = "<%= request.getContextPath() %>/images/default.png";		
 		}else{

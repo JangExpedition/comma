@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import chat.model.dto.ChatLog;
 import chat.model.service.ChatService;
+import member.model.dto.Member;
 
 /**
  * Servlet implementation class ChatViewServlet
@@ -24,6 +25,8 @@ public class ChatViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Member member = (Member) request.getSession().getAttribute("loginMember");
+		String nickname = member.getNickname();
 		String chatNo = request.getParameter("chatNo");
 		if(chatNo == null || "".equals(chatNo)) {
 			throw new IllegalArgumentException("채팅방 아이디가 유효하지 않습니다.");
@@ -35,7 +38,7 @@ public class ChatViewServlet extends HttpServlet {
 		
 		request.getSession().setAttribute("chatNo", chatNo);
 		request.getSession().setAttribute("chatLogs", no);
-//		
+		
 		request.getRequestDispatcher("/WEB-INF/views/chat/chatView.jsp")
 		.forward(request, response);
 		
