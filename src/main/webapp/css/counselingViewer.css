@@ -229,3 +229,34 @@
 	cursor: pointer;
 }
 
+#complain {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+	padding: 0px 10px;
+}
+
+#commentComplain {
+    display: inline-block;
+}
+
+#complainImg {
+	width: 20px;
+}
+
+#complainImg:hover {
+	cursor: pointer;
+}
+
+#complainCommentImg {
+	width: 15px;
+}
+
+#complainCommentImg:hover {
+	cursor: pointer;
+}
+
+.complainBtn {
+	border: none;
+	background-color: rgba(0, 0, 0, 0);
+}
