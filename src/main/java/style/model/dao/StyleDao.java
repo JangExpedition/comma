@@ -35,7 +35,6 @@ public class StyleDao {
 		font.setNo(rset.getInt("no"));
 		font.setRnum(rset.getInt("rnum"));
 		font.setName(rset.getString("name"));
-		font.setLink(rset.getString("link"));
 		return font;
 	} // handleFontResultSet() end
 
@@ -76,7 +75,6 @@ public class StyleDao {
 		
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setString(1, font.getName());
-			pstmt.setString(2, font.getLink());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -91,7 +89,6 @@ public class StyleDao {
 		
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setString(1, font.getName());
-			pstmt.setString(2, font.getLink());
 			pstmt.setInt(3, font.getNo());
 			
 			result = pstmt.executeUpdate();

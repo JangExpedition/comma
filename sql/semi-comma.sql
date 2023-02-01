@@ -174,8 +174,7 @@ create sequence seq_design_no;
 -- font 테이블 생성
 create table font (
 	no number,
-	name varchar2(100) not null,
-	link varchar2(2000) not null
+	name varchar2(100) not null
 );
 -- font 제약조건 추가
 alter table font
