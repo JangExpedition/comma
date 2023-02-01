@@ -25,9 +25,8 @@ public class AdminFontUpdateServlet extends HttpServlet {
 		try {
 			int no = Integer.parseInt(request.getParameter("no"));
 			String name = request.getParameter("name");
-			String link = request.getParameter("link");
 			
-			Font font = new Font(no, name, link);
+			Font font = new Font(no, name);
 			
 			int result = styleService.updateFont(font);
 			request.getSession().setAttribute("msg", "폰트를 수정했습니다.");

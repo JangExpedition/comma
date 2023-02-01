@@ -40,7 +40,6 @@
 			            <tr>
 			                <th>번호</th>
 			                <th>폰트 이름</th>
-			                <th>폰트 링크</th>
 			                <th></th>
 			            </tr>
 			        </thead>
@@ -52,9 +51,8 @@
 			            <tr style="font-family:<%= font.getName() %>">
 			                <td><%= font.getRnum() %></td>
 							<td><%= font.getName() %></td>
-							<td><%= font.getLink() %></td>
 							<td>
-								<input type="button" class="fontStyle fontChange" id="fontchange" value="폰트 수정" data-font-no=<%= font.getNo() %> data-font-name="<%= font.getName() %>" data-font-link="<%= font.getLink() %>" />							
+								<input type="button" class="fontStyle fontChange" id="fontchange" value="폰트 수정" data-font-no=<%= font.getNo() %> data-font-name="<%= font.getName() %>" />							
 							</td>
 			            </tr>
 		    <%
@@ -69,17 +67,6 @@
 	        %>
 			        </tbody>
 			    </table>
-			
-			    <div class="page-wrap">
-			
-			        <ul class="page-nation">
-			            <li><a href="/board/list?p=1">1</a></li>
-			            <li><a href="/board/list?p=2">2</a></li>
-			            <li><a href="/board/list?p=3">3</a></li>
-			            <li><a href="/board/list?p=4">4</a></li>
-			            <li><a href="/board/list?p=5">5</a></li>
-			        </ul>
-			    </div>
 			</div>
 		</div>
 		
@@ -162,10 +149,6 @@
 							<td><input type="text" id="writerInput" name="name" /></td>
 						</tr>
 						<tr>
-							<th class="fontStyle">링크</th>
-							<td><input type="text" id="writerInput" name="link" /></td>
-						</tr>
-						<tr>
 							<td colspan="2">
 								<input type="submit" id="fontEnrollBtn" class="modalBtn pointColor fontStyle" value="추가하기">                   
 							</td>
@@ -194,10 +177,6 @@
 						<tr>
 							<th class="fontStyle">폰트이름</th>
 							<td><input type="text" id="updateName" name="name" /></td>
-						</tr>
-						<tr>
-							<th class="fontStyle">링크</th>
-							<td><input type="text" id="updateLink" name="link" /></td>
 						</tr>
 						<tr>
 							<td colspan="2">
@@ -349,12 +328,10 @@
 
 				const no = e.target.dataset.fontNo;
 				const name = e.target.dataset.fontName;
-				const link = e.target.dataset.fontLink;
 				const updateFrm = document.fontUpdateFrm;
 				
 				updateFrm.updateNo.value = no;
 				updateFrm.updateName.value = name;
-				updateFrm.updateLink.value = link;
 			});
 		});
 		

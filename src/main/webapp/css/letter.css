@@ -150,6 +150,10 @@ input[type="checkbox"]:checked {
 	padding: 5px 10px;
 }
 
+#waitFriend:hover {
+	cursor: default;
+}
+
 #writeLetterFrm > fieldset{
     border: 0;
 }
