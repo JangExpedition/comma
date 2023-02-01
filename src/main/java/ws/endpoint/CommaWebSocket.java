@@ -168,12 +168,7 @@ public class CommaWebSocket {
 				}
 			}
 			break;
-		case CHATROOM_ENTER : 
-			try {
-				int result = chatService.enterChatMemmber(Integer.valueOf(chatNo), (String) data.get("sender"));
-			} catch(Exception e){
-				e.printStackTrace();
-			}
+		case CHATROOM_ENTER :
 			participantSet = chatParticipantMap.get(chatNo);
 			if(participantSet != null) {
 				for(String participant : participantSet) {

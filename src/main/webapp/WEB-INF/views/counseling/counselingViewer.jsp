@@ -26,6 +26,18 @@
 			canLike = false;
 		}
 	}
+	
+	List<Friends> friendsList = (List<Friends>) session.getAttribute("friendsList");
+	int isFriend = 0;
+	OX ox = null;
+	for (Friends friend : friendsList) {
+		if (friend.getfNickname().equals(counseling.getWriter())) {
+			++isFriend;
+			ox = friend.getIsFriend();
+		}
+	}
+	
+	partition = Partition.COUNSELING;
 %>
 <section id="csViewerSection">
 	<div id="csContainer">
@@ -47,9 +59,34 @@
 				<% }else{ %>
 				<div id="p1">익명</div>
 				<% } %>
-				<div id="friendship" data-writer="<%= counseling.getWriter() %>" data-login-member="<%= loginMember.getNickname() %>">
-					친구신청
-				</div>
+				<% if(isFriend == 0){ %>
+					<div id="friendship" class="friendship" data-writer="<%= counseling.getWriter() %>" data-login-member="<%= loginMember.getNickname() %>">
+						친구신청
+					</div>
+				<% } else{ 
+					if(ox == OX.O){ %>
+						<div id="friendshiped" class="friendship" data-writer="<%= counseling.getWriter() %>" data-login-member="<%= loginMember.getNickname() %>">
+							이미 친구입니다.
+						</div>
+					<% }else{ %>
+						<div id="friendshiping" class="friendship" data-writer="<%= counseling.getWriter() %>" data-login-member="<%= loginMember.getNickname() %>">
+							신청 중
+						</div>
+				<% 		}
+					} %>
+				<form action="<%= request.getContextPath() %>/friends/friendship" name="friendRequestFrm" method="POST">
+					<input type="hidden" name="fNick" value="<%= counseling.getWriter() %>" />
+					<input type="hidden" name="myNick" value="<%= loginMember.getNickname() %>" />
+					<input type="hidden" name="no" value="<%= counseling.getNo() %>" />
+				</form>
+				<script>
+					friendship.addEventListener('click', (e) => {
+						const nickname = "<%= counseling.getWriter() %>";
+						if (confirm(`[\${nickname}]님께 친구 신청을 하시겠습니까?`)) {
+							document.friendRequestFrm.submit();
+						}
+					});
+				</script>
 				<div id="p2"><%= counseling.getRegDate() %></div>
 				<%
 					boolean canEdit = loginMember != null && 
@@ -255,38 +292,8 @@
 		<input type="hidden" name="myNick" value="<%= loginMember.getNickname() %>"/>
 	</form>
 	<script>
-	
-	<%-- $("#friendship").click((e)=>{
-		if(confirm(`\${e.target.dataset.writer}에게 친구요청을 보내시겠습니까?`)){
-			if(e.target.dataset.writer === "<%= loginMember.getNickname() %>"){
-				alert("본인에게는 친구신청이 불가합니다.")
-				return;
-			}
-			document.toFriendshipFrm.submit();
-		}
-	});
-	
-	document.toFriendshipFrm.addEventListener("submit", (e)=>{
-		e.preventDefault();
-		
-		const formData = new FormData(e.target);
-		
-		$.ajax({
-			url: "<%= request.getContextPath() %>/friend/friendship",
-			method: "POST",
-			data: formData,
-			dataType: "json",
-			contentType : false,
-			processData : false,
-			success(data){
-				alert("data.result");
-			},
-			error : console.log,
-		});
-	}); --%>
-	
 	$(".writerNickname").click((e)=>{
-		document.querySelector("#friendship").style.display = "flex";
+		$(".friendship").css("display", "flex");
 	});
 	
 	
