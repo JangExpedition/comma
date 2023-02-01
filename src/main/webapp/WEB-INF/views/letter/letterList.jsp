@@ -78,7 +78,7 @@
 						</tr>
 						<tr>
 							<td colspan="2">
-								<p id="letterListContent"><%= letter.getWriter() %></p>
+								<p id="letterListContent"><%= letter.getContent() %></p>
 							</td>
 						</tr>
 						<tr>
