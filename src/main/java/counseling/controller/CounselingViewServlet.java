@@ -75,7 +75,7 @@ public class CounselingViewServlet extends HttpServlet {
 		
 		List<LikeCounseling> likeCounselingList = counselingService.selectAllLikeCs(no);
 		
-		request.setAttribute("friendsList", friendsList);
+		request.getSession().setAttribute("friendsList", friendsList);
 		request.setAttribute("counseling", counseling);
 		request.setAttribute("comments", csComments);
 		request.setAttribute("likeList", likeCounselingList);
