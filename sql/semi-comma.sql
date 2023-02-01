@@ -274,7 +274,7 @@ create table counseling (
 alter table counseling
     add constraint pk_counseling_no primary key (no)
     add constraint fk_counseling_writer foreign key (writer) references member(nickname) on delete cascade
-    add constraint ck_counseling_category check (category in ('DAILY', 'CAREER', 'LOVE', 'FRIENDS', 'FAMILY', 'STUDY', 'CHILDCARE'))
+    add constraint ck_counseling_category check (category in ('ALL', 'DAILY', 'CAREER', 'LOVE', 'FRIENDS', 'FAMILY', 'STUDY', 'CHILDCARE'))
     add constraint ck_counseling_limit_gender check (limit_gender in ('M', 'F', 'X'))
     add constraint ck_counseling_limit_age check (limit_age >= 0 and limit_age <= 5)
     add constraint ck_counseling_anonymous check (anonymous in ('O', 'X'));
@@ -412,7 +412,7 @@ alter table complain
     add constraint pk_complain_no primary key (no)
     add constraint fk_complain_writer foreign key (writer) references member(nickname) on delete cascade
     add constraint fk_complain_villain foreign key (villain) references member(nickname) on delete cascade
-    add constraint ck_complain_partition check (partition in ('LETTER', 'COUNSELING', 'COMMENT', 'CHATTING'));
+    add constraint ck_complain_partition check (partition in ('LETTER', 'COUNSELING', 'COMMENT'));
 
 -- seq_complain_no 시퀀스 생성
 create sequence seq_complain_no;
@@ -436,6 +436,7 @@ create table chatting (
 alter table chatting
     add constraint pk_chatting_no primary key (no)
     add constraint fk_chatting_maker foreign key (captin) references member(nickname) on delete cascade
+    add constraint ck_chatting_category check (category in ('ALL', 'DAILY', 'CAREER', 'LOVE', 'FRIENDS', 'FAMILY', 'STUDY', 'CHILDCARE'))
     add constraint ck_chatting_able_gender check (able_gender in ('M', 'F', 'X'))
     add constraint ck_chatting_able_age check (able_age >= 0 and able_age <= 5);
 
@@ -464,12 +465,9 @@ create sequence seq_chatting_member_no;
 -- chatting_log 테이블 생성
 create table chatting_log (
     no number, -- 채팅로그 별 고유 번호
-    chat_no number,
+    chat_no number not null,
     member_nick varchar2(50) not null,
---    which_one char(1) not null,
-    content varchar2(1000),
-    original_filename varchar2(300),
-    renamed_filename varchar2(300),
+    content varchar2(1000) not null,
     reg_date timestamp default systimestamp
 );
 -- chatting_log 제약조건 추가
@@ -477,7 +475,6 @@ alter table chatting_log
     add constraint pk_chatting_log_no primary key (no)
     add constraint fk_chatting_log_chat_no foreign key (chat_no) references chatting(no) on delete cascade
     add constraint fk_chatting_log_member_nick foreign key (member_nick) references member(nickname) on delete cascade;
---    add constraint ck_chatting_log_which_one check (which_one in ('C', 'F'));
 
 -- seq_chatting_log_no 시퀀스 생성
 create sequence seq_chatting_log_no;
@@ -485,12 +482,12 @@ create sequence seq_chatting_log_no;
 -- notification 테이블 생성
 create table notification (
     no number,
-    mem_nick varchar2(50),
-    not_type varchar2(50),
-    not_content_pk number,
-    not_message varchar2(100),
-    not_datetime timestamp default systimestamp,
-    check_read char(1)
+    mem_nick varchar2(50) not null,
+    not_type varchar2(50) not null,
+    not_content_pk number not null,
+    not_message varchar2(100) not null,
+    not_datetime timestamp default systimestamp not null,
+    check_read char(1) not null
 );
 
 -- notification 제약조건 추가
@@ -498,6 +495,7 @@ alter table notification
     add constraint pk_notification_no primary key(no)
     add constraint fk_notification_mem_nick foreign key (mem_nick) references member(nickname) on delete cascade
     add constraint ck_notification_check_read check (check_read in ('O', 'X'));
+
 
 alter table notification
     modify not_message varchar2(1000);
@@ -572,7 +570,8 @@ comment on column member.age is '회원 나이';
 
 -- leave_member 테이블
 comment on table leave_member is '탈퇴회원관리테이블';
-comment on column leave_member.email is '탈퇴회원 이메일(PK, 변경불가)';
+comment on column leave_member.no is '탈퇴회원 번호(PK, 변경불가)';
+comment on column leave_member.email is '탈퇴회원 이메일';
 comment on column leave_member.nickname is '탈퇴회원 닉네임(UQ)';
 comment on column leave_member.password is '탈퇴회원 비밀번호(필수입력)';
 comment on column leave_member.birthday is '탈퇴회원 생년월일(필수입력)';
@@ -708,7 +707,7 @@ comment on table complain is '신고 테이블';
 comment on column complain.no is '신고 번호(PK, 변경불가)';
 comment on column complain.writer is '신고자(FK member.nickname on delete cascade)';
 comment on column complain.villain is '피신고자(FK member.nickname on delete cascade)';
-comment on column complain.partition is '신고 분류 문자(CK in (LETTER, COUNSELING, COMMENT, CATTING))';
+comment on column complain.partition is '신고 분류 문자(CK in (LETTER, COUNSELING, COMMENT))';
 comment on column complain.content is '신고 내용(필수 입력)';
 comment on column complain.partition_no is '신고 분류 번호(편지, 고민상담소, 댓글, 채팅의 no)';
 comment on column complain.reg_date is '신고일';
@@ -717,9 +716,12 @@ comment on column complain.reg_date is '신고일';
 comment on table chatting is '채팅방 테이블';
 comment on column chatting.no is '채팅방 번호(PK, 변경불가)';
 comment on column chatting.name is '채팅방 이름(필수입력)';
+comment on column chatting.password is '채팅방 비밀번호';
 comment on column chatting.captin is '채팅방 방장(FK member.nickname on delete cascade)';
+comment on column chatting.category is '채팅방 카테고리';
 comment on column chatting.able_gender is '채팅방 참여 가능 성별(CK in (M, F, X))';
 comment on column chatting.able_age is '채팅방 참여 가능 연령(CK 0 <= age <= 5)';
+comment on column chatting.now_count is '채팅방 현재 참가 인원';
 comment on column chatting.able_count is '채팅방 참여 가능 인원';
 comment on column chatting.reg_date is '채팅방 생성일';
 
@@ -735,11 +737,8 @@ comment on column chatting_member.end_date is '채팅방 퇴장일';
 comment on table chatting_log is '채팅로그 테이블';
 comment on column chatting_log.no is '채팅로그 번호 테이블(PK, 변경불가)';
 comment on column chatting_log.chat_no is '참여 채팅방 번호(FK chatting.no on delete cascade)';
-comment on column chatting_log.member_no is '채팅 작성자(FK member.nickname on delete cascade)';
-comment on column chatting_log.which_one is '채팅로그 구분(CK in (C, F))';
+comment on column chatting_log.member_nick is '채팅 작성자(FK member.nickname on delete cascade)';
 comment on column chatting_log.content is '채팅 내용';
-comment on column chatting_log.original_filename is '채팅 첨부파일 원본명';
-comment on column chatting_log.renamed_filename is '채팅 첨부파일 저장명';
 comment on column chatting_log.reg_date is '채팅시간';
 
 -- notification 테이블
