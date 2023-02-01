@@ -12,7 +12,7 @@
 						<tbody>
 							<tr id="rowspanTr">
 									<th>
-										프로필 사진
+										프로필 사진 *
 									</th>
 									<td>
 										<div class="tdDiv">
@@ -70,7 +70,7 @@
 								</td>
 							</tr>
 							<tr>
-								<th>비밀번호</th>
+								<th>비밀번호 *</th>
 								<td class="inputTd fontStyle" >
 									<input type="button" id="password" name="password" value="비밀번호 변경" class="button fontStyle updateInput" />
 								</td>
