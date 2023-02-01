@@ -185,7 +185,7 @@
 		            <br />
 		            <%= adoptComment.getContent() %>
 		        </div>
-		        <% if(!adoptComment.getWriter().equals(loginMember.getNickname())){ %> 
+		        <% if(counseling.getWriter().equals(loginMember.getNickname())){ %> 
 	            <div id="btnContainer">
 	            	<button class="buttonStyle btn-adopt" data-cs-comment-no="<%= adoptComment.getCommentNo() %>" data-cs-no="<%= adoptComment.getNo() %>" data-choice="X">채택취소</button>
 	            </div>
