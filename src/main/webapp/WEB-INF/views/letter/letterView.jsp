@@ -103,7 +103,7 @@
 	
 	<div id="writerDiv">
 <%
-	if (letter.getWriterRole() != MemberRole.A && letter.getWriterRole() != MemberRole.M && letter.getAnonymous() == OX.X) {
+	if (letter.getWriterRole() != MemberRole.A && letter.getWriterRole() != MemberRole.M && letter.getAnonymous() == OX.X && letter.getWriter() != null) {
 		if (isFriend == 0) {
 %>
 		<input id="friendRequest" class="friendRequestBtn letterBtn" type="button" value="친구신청" />
