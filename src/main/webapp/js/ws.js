@@ -39,25 +39,24 @@ setTimeout(() => {
 				notification.append(i1);
 				break;
 			case "CHATROOM_ENTER" :
-				setTimeout(()=>{
-					$.ajax({
-						url: `http://localhost:8080/comma/chat/chatLoad`,
-						data: {chatNo},
-						dataType: "json",
-						success(chatLogs){
-							console.log(chatLogs);
-							chatLogs.forEach((log)=>{
-								if(log.memberNick == memberId){
-									wrapper.insertAdjacentHTML('beforeend', `<div class="right ${log.memberNick} fontStyle"><span class="sender">${log.memberNick}</span> <span id="message" class="pointColor">${log.content}</span></div>`);
-								} else{
-									wrapper.insertAdjacentHTML('beforeend', `<div class="left ${log.memberNick} fontStyle"><span class="sender">${log.memberNick}</span> <span id="message" class="pointColor">${log.content}</span></div>`);
-								}	
-							})
-						},
-						error: console.log
-					});
-				}, 500);
-				wrapper.insertAdjacentHTML('beforeend', `<div class="line fontStyle">${sender}님이 입장했습니다.</div>`);
+				$.ajax({
+					url: `http://localhost:8080/comma/chat/chatLoad`,
+					data: {chatNo},
+					dataType: "json",
+					success(chatLogs){
+						console.log(chatLogs);
+						chatLogs.forEach((log)=>{
+							if(log.memberNick == memberId){
+								wrapper.insertAdjacentHTML('beforeend', `<div class="right ${log.memberNick} fontStyle"><span class="sender">${log.memberNick}</span> <span id="message" class="pointColor">${log.content}</span></div>`);
+							} else{
+								wrapper.insertAdjacentHTML('beforeend', `<div class="left ${log.memberNick} fontStyle"><span class="sender">${log.memberNick}</span><span id="message" class="pointColor">${log.content}</span></div>`);
+							}	
+						})
+					},
+					error: console.log,
+					complete: wrapper.insertAdjacentHTML('beforeend', `<div class="line fontStyle">${sender}님이 입장했습니다.</div>`)
+				});
+				
 				// beforeend : 마지막에 넣어달라
 				break;
 			case "CHATROOM_LEAVE" :
@@ -82,4 +81,5 @@ setTimeout(() => {
 	ws.addEventListener('close', (e) => {
 		console.log('close : ', e);
 	});
+	
 }, 500);

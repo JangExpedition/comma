@@ -21,9 +21,6 @@
 	</div>
 </section>
 <script>
-
-$(".<%= loginMember.getNickname() %>").css("backgroundColor", "#000");
-
 document.querySelector("#msg").addEventListener("keyup", (e)=>{
 	if(e.keyCode === 13){
 		document.querySelector("#send").click();

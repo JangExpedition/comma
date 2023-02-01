@@ -104,3 +104,12 @@
 #returnBtnContainer>button:hover{
 	cursor: pointer;
 }
+
+#complainImg{
+	width: 20px;
+	margin-left: 10px;
+}
+
+#complainImg:hover{
+	cursor: pointer;
+}

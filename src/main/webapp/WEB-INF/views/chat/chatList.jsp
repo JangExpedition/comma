@@ -95,7 +95,6 @@
 			dataType: "json",
 			data: {chatNo},
 			success(data){
-				pwd = data.chatPwd;
 				const nowCount = data.nowCount;
 				const ableCount = data.ableCount;
 				
@@ -104,11 +103,12 @@
 					return;
 				}
 				
-				if(pwd != null){
-					pwdBackground.style.display = "flex";
-				}else{
+				if(data.chatPwd == null){
 					location.href = "<%= request.getContextPath() %>/chat/chatView?chatNo=" + chatNo;
+				}else{
+					pwdBackground.style.display = "flex";
 				}
+				
 			}
 		})
 	});

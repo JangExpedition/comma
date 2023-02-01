@@ -468,10 +468,7 @@ create table chatting_log (
     no number, -- 채팅로그 별 고유 번호
     chat_no number,
     member_nick varchar2(50) not null,
---    which_one char(1) not null,
     content varchar2(1000),
-    original_filename varchar2(300),
-    renamed_filename varchar2(300),
     reg_date timestamp default systimestamp
 );
 -- chatting_log 제약조건 추가
