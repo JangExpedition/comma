@@ -264,63 +264,26 @@ $(".onediary").click((e)=>{
 				diaryUpdateImg.src = `<%= request.getContextPath() %>/upload/diary/\${renamedFilename}`;
 				}
 			
-			let dNum = 0;
 			
+			switch(designNo){
 			<% for(Design design : designList){ %>
-				Dnum = <%= design.getNo() %>;
-				if(dNum == designNo){
-					console.log(dNum, designNo);
-					diaryEnrollModal.style.backgroundImage = "url('<%=request.getContextPath() %>/images/<%= design.getRenamedFilename() %>')";
-					diaryUpdateModal.style.backgroundImage = "url('<%=request.getContextPath() %>/images/<%= design.getRenamedFilename() %>')";
-				}
+			case <%= design.getNo() %>: 
+				diaryEnrollModal.style.backgroundImage = "url('<%=request.getContextPath() %>/upload/design/<%= design.getRenamedFilename() %>')";
+				diaryUpdateModal.style.backgroundImage = "url('<%=request.getContextPath() %>/upload/design/<%= design.getRenamedFilename() %>')";
+				break;
 			<% } %>
-			
-			<%-- switch(designNo){
-			case 1: 
-				diaryEnrollModal.style.backgroundImage = "url('<%=request.getContextPath() %>/images/diaryImg1.png')";
-				diaryUpdateModal.style.backgroundImage = "url('<%=request.getContextPath() %>/images/diaryImg1.png')";
-				break;
-			case 2: 
-				diaryEnrollModal.style.backgroundImage = "url('<%=request.getContextPath() %>/images/diaryImg2.png')";
-				diaryUpdateModal.style.backgroundImage = "url('<%=request.getContextPath() %>/images/diaryImg2.png')";
-				break;
-			case 3: 
-				diaryEnrollModal.style.backgroundImage = "url('<%=request.getContextPath() %>/images/diaryImg3.jpeg')";
-				diaryUpdateModal.style.backgroundImage = "url('<%=request.getContextPath() %>/images/diaryImg3.jpeg')";
-				break;
 			}
 			
 			switch(fontNo){
-			case 1 : 
-				nowContent.style.fontFamily = "'Yeon Sung', cursive";
-				editContent.style.fontFamily = "'Yeon Sung', cursive";
-				break;
-			case 2 : 
-				nowContent.style.fontFamily = "'Nanum Gothic', sans-serif";
-				editContent.style.fontFamily = "'Nanum Gothic', sans-serif";
-				break;
-			case 21 : 
-				nowContent.style.fontFamily = "'Gaegu', cursive";
-				editContent.style.fontFamily = "'Gaegu', cursive";
-				break;
-			case 41 : 
-				nowContent.style.fontFamily = "'Hi Melody', cursive";
-				editContent.style.fontFamily = "'Hi Melody', cursive";
-				break;
-			case 42 : 
-				nowContent.style.fontFamily = "'Nanum Brush Script', cursive";
-				editContent.style.fontFamily = "'Nanum Brush Script', cursive";
-				break;
-			case 43 : 
-				nowContent.style.fontFamily = "'IBM Plex Sans KR', sans-serif";
-				editContent.style.fontFamily = "'IBM Plex Sans KR', sans-serif";
-				break;
-			case 44 : 
-				nowContent.style.fontFamily = "'East Sea Dokdo', cursive";
-				editContent.style.fontFamily = "'East Sea Dokdo', cursive";
-				break;
+				<% for(Font font : fontList){ %>
+				case <%= font.getNo() %> : 
+					nowContent.style.fontFamily = "<%= font.getName() %>";
+					editContent.style.fontFamily = "<%= font.getName() %>";
+					break;
+				<% } %>
 			}
-			 --%>
+			
+			
 			nowContent.value = content;
 			editContent.value = content;
 			
