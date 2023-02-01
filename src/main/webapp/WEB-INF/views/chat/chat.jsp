@@ -56,13 +56,14 @@
 		</tr>
 		<tr>
 			<th>참여 연령대 :</th>
-			<td><input type="radio" name="age" value="1" /> 10대 이상
-			 <input type="radio" name="age" value="2" /> 20대 이상 
-			 <input type="radio" name="age" value="3" /> 30대 이상 
-			 <input type="radio" name="age" value="4" /> 40대 이상
-			 <input type="radio" name="age" value="5" /> 50대 이상 
-			 <input type="radio" name="age" value="0" /> 연령 무관
-			 </td>
+			<td>
+				<input type="radio" id="age1" name="age" value="1" /><label for="age1"> 10대 이상</label>
+				<input type="radio" id="age2" name="age" value="2" /><label for="age2"> 20대 이상</label>
+				<input type="radio" id="age3" name="age" value="3" /><label for="age3"> 30대 이상</label>
+				<input type="radio" id="age4" name="age" value="4" /><label for="age4"> 40대 이상</label>
+				<input type="radio" id="age5" name="age" value="5" /><label for="age5"> 50대 이상</label>
+				<input type="radio" id="age0" name="age" value="0" /><label for="age0"> 연령 무관</label>
+			</td>
 		</tr>
 
 		<tr>

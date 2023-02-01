@@ -108,7 +108,7 @@
 					<form action="<%= request.getContextPath() %>/complain/complain" method="post" name="csComplainFrm">
 						<input type="hidden" name="my_nickname" value="<%= loginMember.getNickname() %>" />
 						<input type="hidden" name="v_nickname" value="<%= counseling.getWriter() %>" />
-						<input type="hidden" name="partition" value="<%= partition %>" />
+						<input type="hidden" name="partition" value="<%= Partition.COUNSELING %>" />
 						<input type="hidden" name="content" value="<%= counseling.getContent() %>" />
 						<input type="hidden" name="part_no" value="<%= counseling.getNo() %>" />
 					</form>

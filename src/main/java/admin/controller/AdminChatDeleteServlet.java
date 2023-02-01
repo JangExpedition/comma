@@ -21,8 +21,8 @@ public class AdminChatDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int no = Integer.parseInt(request.getParameter("chatNo"));
 		try {
-			int no = Integer.parseInt(request.getParameter("chatNo"));
 			
 			int result = chatService.deleteChat(no);
 			request.getSession().setAttribute("msg", "채팅방을 삭제했습니다.");
@@ -30,7 +30,7 @@ public class AdminChatDeleteServlet extends HttpServlet {
 			request.getSession().setAttribute("msg", "채팅방을 삭제하는데 실패했습니다.");
 			e.printStackTrace();
 		}
-		response.sendRedirect(request.getContextPath() + "/admin/adminChatList");
+		response.sendRedirect(request.getContextPath() + "/admin/adminChatList?no=" + no);
 	} // doPost() end
 
 }
