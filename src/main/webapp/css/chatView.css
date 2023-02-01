@@ -60,6 +60,15 @@
 	flex-direction: column
 }
 
+.right{
+	margin: 10px 0;
+	width: auto;
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
+	flex-direction: column
+}
+
 #message{
 	border: 1px solid #000;
 	border-radius: 10px;
