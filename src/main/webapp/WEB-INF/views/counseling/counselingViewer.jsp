@@ -30,7 +30,7 @@
 <section id="csViewerSection">
 	<div id="csContainer">
 		<div>
-			<button id="goBack" class="buttonStyle">뒤로가기</button>
+			<button id="goBack" class="buttonStyle" onclick="history.back();">뒤로가기</button>
 		</div>
 		<div id="titleContainer">
 			<span id="csCategory"><%= counseling.getCategory() %></span>
@@ -268,10 +268,12 @@
 		};
 	});
 	
+	<%--
 	// 뒤로가기 메서드
 	document.querySelector("#goBack").addEventListener("click", (e)=>{
 		location.href = "<%= request.getContextPath() %>/counseling/counselingList";
 	});
+	--%>
 	
 	// 댓글 삭제
 	document.querySelectorAll(".btn-delete").forEach((button) => {
