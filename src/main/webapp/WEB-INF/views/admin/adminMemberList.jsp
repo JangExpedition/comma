@@ -131,8 +131,6 @@
 							<div class="btnFrm">
 								<input type="button" id="sendLetterBtn" class="sendLetterBtn memberBtn" value="편지" data-member-nick="<%= member.getNickname() %>" />
 								<input type="button" id="delMemberBtn" class="delMemberBtn memberBtn" value="탈퇴" data-member-nick="<%= member.getNickname() %>" data-member-email="<%= member.getEmail() %>" />
-								<script>
-								</script>
 							</div>
 						</td>
 					</tr>
@@ -155,23 +153,23 @@
 		<input type="hidden" name="memberNick" />
 		<input type="hidden" name="memberRole" />
 	</form>
-	
 	<form action="<%= request.getContextPath() %>/admin/deleteMember" method="post" name="memberDeleteFrm">
 		<input type="hidden" name="memberEmail" />
 	</form>
-
 	<script>
 		/*
 		  회원탈퇴
 		*/
 		document.querySelectorAll('.delMemberBtn').forEach((del) => {
 			del.addEventListener('click', (e) => {
+				e.preventDefault();
+				
 				const memberNick = e.target.dataset.memberNick;
-				const memberEmail = e.target.dataset.memberEmail;
+				const memberEmail= e.target.dataset.memberEmail;
 				
 				if (confirm(`[\${memberNick}] 회원을 정말로 탈퇴시키시겠습니까?`)) {
 					const frm = document.memberDeleteFrm;
-					frm.memberEmail.value = memberEmail;
+					frm.memberEmail = memberEmail;
 					frm.submit();
 				}
 			});
