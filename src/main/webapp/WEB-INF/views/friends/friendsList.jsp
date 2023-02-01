@@ -30,7 +30,7 @@
 		%>
 					<tr>
 						<td>
-						<% if (friend.getOriginalFileName() == null) { %>
+						<% if (friend.getRenamedFileName() == null) { %>
 							<img src="<%= request.getContextPath() %>/images/default.png" alt="" class="friendsImage" />							
 						<% } else { %>
 							<img src="<%= request.getContextPath() %>/upload/profile/<%= friend.getRenamedFileName() %>" alt="" class="friendsImage" />							
@@ -86,7 +86,7 @@
 		%>
 					<tr>
 						<td>
-						<% if (friend.getOriginalFileName() == null) { %>
+						<% if (friend.getRenamedFileName() == null) { %>
 							<img src="<%= request.getContextPath() %>/images/default.png" alt="" class="friendsImage" />							
 						<% } else { %>
 							<img src="<%= request.getContextPath() %>/upload/profile/<%= friend.getRenamedFileName() %>" alt="" class="friendsImage" />							
