@@ -201,6 +201,16 @@
 			content.style.fontSize = "20px";
 		};
 		
+		document.querySelector('#textFriendsNickList').addEventListener('change', (e) => {
+			if (anonymous === 'O') {
+				textFriendsList.value = e.target.value;
+				textFriendsNickList.value = '익명';
+			} else {
+				textFriendsNickList.value = e.target.value;
+				textFriendsList.value = e.target.value;
+			}
+		});
+		
 		/*
 		  폰트 선택 시 폰트 변경
 		*/
@@ -424,8 +434,9 @@
 			textFriendsList.value = friendNick;
 			textFriendsNickList.value = friendNick;
 			
-			if (anonymous === 'O')
+			if (anonymous === 'O') {
 				textFriendsNickList.value = '익명';
+			}
 		}
 	</script>
 </body>
