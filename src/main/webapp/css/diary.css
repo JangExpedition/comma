@@ -234,6 +234,7 @@ section {
 }
 
 #nowContent, #editContent {
+	font-size: 30px;
 	width: 100%;
 	padding: 10px;
 	box-sizing: border-box;
@@ -242,7 +243,14 @@ section {
 	border: 0;
 	resize: none;
 	background-color: rgba( 255, 255, 255, 0);
+	-ms-overflow-style: none; /* IE 스크롤 숨기기 */
+	scrollbar-width: none; /* 파이어폭스 스크롤 숨기기 */ 
 }
+
+#nowContent::-webkit-scrollbar, #editContent::-webkit-scrollbar {
+	display: none; /* 크롬, 사파리, 오페라, 엣지 스크롤 숨기기 */
+}
+
 
 #nowContent:focus {
 	outline: none;
@@ -382,6 +390,10 @@ section {
 	height: 100%;
 	overflow: scroll;
 }
+
+/* #enrollContent::-webkit-scrollbar, #updateContent::-webkit-scrollbar {
+	display: none; 크롬, 사파리, 오페라, 엣지 스크롤 숨기기
+} */
 
 #editItemBox{
 	text-align: right;
