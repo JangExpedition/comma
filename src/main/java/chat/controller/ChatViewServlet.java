@@ -35,7 +35,7 @@ public class ChatViewServlet extends HttpServlet {
 		
 		request.getSession().setAttribute("chatNo", chatNo);
 		request.getSession().setAttribute("chatLogs", no);
-//		
+		
 		request.getRequestDispatcher("/WEB-INF/views/chat/chatView.jsp")
 		.forward(request, response);
 		
