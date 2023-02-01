@@ -26,6 +26,8 @@
 			canLike = false;
 		}
 	}
+	
+	partition = Partition.COUNSELING;
 %>
 <section id="csViewerSection">
 	<div id="csContainer">
@@ -66,6 +68,24 @@
 				<%
 					}
 				%>
+				<div id="complain">
+					<img src="<%= request.getContextPath() %>/images/siren.png" id="complainImg" alt="신고아이콘" />
+					<form action="<%= request.getContextPath() %>/complain/complain" method="post" name="csComplainFrm">
+						<input type="hidden" name="my_nickname" value="<%= loginMember.getNickname() %>" />
+						<input type="hidden" name="v_nickname" value="<%= counseling.getWriter() %>" />
+						<input type="hidden" name="partition" value="<%= partition %>" />
+						<input type="hidden" name="content" value="<%= counseling.getContent() %>" />
+						<input type="hidden" name="part_no" value="<%= counseling.getNo() %>" />
+					</form>
+					<script>
+						/*
+						  신고 버튼 클릭 시 신고
+						*/
+						complainImg.addEventListener('click', (e) => {
+							document.querySelector('[name=csComplainFrm]').submit();
+						});
+					</script>
+				</div>
 			</div>
 		</div>
 		<div id="csContent" >
@@ -150,6 +170,18 @@
 	                <td>
 	                    <sub class=comment-writer><%= comment.getWriter() %></sub>
 	                    <sub class=comment-date><%= comment.getRegDate() %></sub>
+						<div id="commentComplain">
+							<form action="<%= request.getContextPath() %>/complain/complain" method="post" name="csCommentComplainFrm">
+								<input type="hidden" name="my_nickname" value="<%= loginMember.getNickname() %>" />
+								<input type="hidden" name="v_nickname" value="<%= comment.getWriter() %>" />
+								<input type="hidden" name="partition" value="<%= Partition.COMMENT %>" />
+								<input type="hidden" name="content" value="<%= comment.getContent() %>" />
+								<input type="hidden" name="part_no" value="<%= comment.getNo() %>" />
+								<button type="submit" class="complainBtn">
+									<img src="<%= request.getContextPath() %>/images/siren.png" id="complainCommentImg" class="complainCommentImg" alt="신고아이콘" />
+								</button>
+							</form>
+						</div>
 	                    <br />
 	                    <%= comment.getContent() %>
 	                </td>
@@ -178,6 +210,18 @@
 	                <td>
 	                    <sub class=comment-writer><%= comment.getWriter() %></sub>
 	                    <sub class=comment-date><%= comment.getRegDate() %></sub>
+						<div id="commentComplain">
+							<form action="<%= request.getContextPath() %>/complain/complain" method="post" name="csCommentComplainFrm">
+								<input type="hidden" name="my_nickname" value="<%= loginMember.getNickname() %>" />
+								<input type="hidden" name="v_nickname" value="<%= comment.getWriter() %>" />
+								<input type="hidden" name="partition" value="<%= Partition.COMMENT %>" />
+								<input type="hidden" name="content" value="<%= comment.getContent() %>" />
+								<input type="hidden" name="part_no" value="<%= comment.getNo() %>" />
+								<button type="submit" class="complainBtn">
+									<img src="<%= request.getContextPath() %>/images/siren.png" id="complainCommentImg" class="complainCommentImg" alt="신고아이콘" />
+								</button>
+							</form>
+						</div>
 	                <br />
 	                    <%= comment.getContent() %>
 	                </td>

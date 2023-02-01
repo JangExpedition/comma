@@ -251,8 +251,6 @@ create table diary (
 alter table diary
     add constraint pk_diary_no primary key (no)
     add constraint fk_diary_writer foreign key (writer) references member(nickname) on delete cascade;
---    add constraint fk_diary_design_no foreign key (design_no) references design(no)
---    add constraint fk_diary_font_no foreign key (font_no) references font(no);
 
 -- seq_diary_no 시퀀스 생성
 create sequence seq_diary_no;
