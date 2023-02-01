@@ -42,7 +42,7 @@
 					<th class="lableTd pointColor">성별 선택</th>
 					<td class="input fontsytle">
 						<select name="gender" id="gender" name="gender" class="inputBar" required >
-							<option value="A">전체</option>
+							<option value="X">전체</option>
 							<option value="M">남자</option>
 							<option value="F">여자</option>
 						</select>
