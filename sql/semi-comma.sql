@@ -21,7 +21,7 @@ grant connect, resource to comma;
 -- 모든 테이블 select
 -- ======================================================================
 select * from member;
---update member set member_role = 'A' where nickname like ('admin%');
+--update member set member_role = 'A' where email like ('admin%');
 select * from leave_member;
 select * from friends;
 select * from letter;
