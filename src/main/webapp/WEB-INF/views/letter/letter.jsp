@@ -70,6 +70,17 @@
 		                    <td>
 		                    	<input type="hidden" list="friendsList" id="textFriendsList" name="friendsList" />
 		                    	<input type="text" list="friendsList" id="textFriendsNickList" name="friendsNickList" />
+		                    	<script>
+			                		document.querySelector('#textFriendsNickList').addEventListener('change', (e) => {
+			                			if (anonymous === 'O') {
+			                				textFriendsList.value = e.target.value;
+			                				textFriendsNickList.value = '익명';
+			                			} else {
+			                				textFriendsNickList.value = e.target.value;
+			                				textFriendsList.value = e.target.value;
+			                			}
+			                		});
+		                    	</script>
 		                        <datalist id="friendsList">
 		                    <% for (Friends friend : friendsList) { %>
 		                            <option id="friendNickList" value="<%= friend.getfNickname() %>"><%= friend.getfNickname() %></option>
@@ -90,6 +101,17 @@
 		                    <td>
 		                    	<input type="hidden" list="friendsList" id="textFriendsList" name="friendsList" />
 		                    	<input type="text" list="friendsList" id="textFriendsNickList" name="friendsNickList" />
+		                    	<script>
+			                		document.querySelector('#textFriendsNickList').addEventListener('change', (e) => {
+			                			if (anonymous === 'O') {
+			                				textFriendsList.value = e.target.value;
+			                				textFriendsNickList.value = '익명';
+			                			} else {
+			                				textFriendsNickList.value = e.target.value;
+			                				textFriendsList.value = e.target.value;
+			                			}
+			                		});
+		                    	</script>
 		                        <datalist id="friendsList">
 		                    <% for (Member member : memberList) { %>
 		                    	<% if (!member.getNickname().equals(loginMember.getNickname())) { %>
@@ -201,89 +223,6 @@
 			content.style.fontSize = "20px";
 		};
 		
-		document.querySelector('#textFriendsNickList').addEventListener('change', (e) => {
-			if (anonymous === 'O') {
-				textFriendsList.value = e.target.value;
-				textFriendsNickList.value = '익명';
-			} else {
-				textFriendsNickList.value = e.target.value;
-				textFriendsList.value = e.target.value;
-			}
-		});
-		
-		/*
-		  폰트 선택 시 폰트 변경
-		*/
-		document.querySelector('#fontChoice').addEventListener('change', (e) => {
-			document.querySelectorAll('.fontChoiceOption').forEach((option) => {
-				const bool = option.selected;
-				const fontName = option.dataset.fontName;
-				
-				if (bool) {
-					writeLetterFrm.style.fontFamily = `\${fontName}`;
-					content.style.fontFamily = `\${fontName}`;
-				}
-			});
-		});
-		
-		/*
-		  디자인 선택 시 백그라운드 이미지 변경
-		*/
-		document.querySelector('#designChoice').addEventListener('change', (e) => {
-			document.querySelectorAll('.designChoiceOption').forEach((option) => {
-				const bool = option.selected;
-				const designImg = option.dataset.designImg;
-				
-				if (bool) {
-					writeLetterFrm.style.backgroundImage = `url('<%= request.getContextPath() %>/upload/design/\${designImg}')`;
-					writeLetterFrm.style.backgroundSize = 'cover';
-				}
-			});
-		});
-		
-		/*
-		  폼 제출 시 내용 또는 친구를 선택하지 않은 경우 폼 제출 막는 이벤트
-		*/
-		writeLetterFrm.addEventListener('submit', (e) => {
-			const content = e.target.content;
-			const friendCheck = document.querySelector('#sendFriend');
-			
-			// 내용을 작성하지 않은 경우 폼 제출할 수 없음.
-			if (!/^(.|\n)+$/.test(content.value)) {
-				alert("내용을 작성해주세요.");
-				e.preventDefault();
-				content.select();
-				return;
-			}
-			
-			// 친구에게 보내는데 친구를 선택하지 않은 경우 폼 제출할 수 없음
-			if (friendCheck.checked && textFriendsList.value == '') {
-				alert("편지를 보낼 친구를 선택해주세요.");
-				e.preventDefault();
-				textFriendsList.select();
-				return;
-			}
-		});
-		
-		
-		/*
-		  친구에게 보내기 클릭 시 닉네임으로만 보낼 수 있도록 제한
-		*/
-		friend.addEventListener('click', (e) => {
-			anony.style.display = 'none';
-			senderNick.checked = true;
-			senderRandom.checked = false;
-		});
-		
-		/*
-		  임의의 누군가에게 보내는 경우 닉네임 또는 익명으로 보내기 선택 가능
-		*/
-		random.addEventListener('click', (e) => {
-			anony.style.display = '';
-			senderNick.checked = true;
-			senderRandom.checked = false;
-		});
-	
 		/*
 		  받는 사람 체크박스 하나씩만 선택 가능
 		*/
@@ -366,6 +305,79 @@
 			
 			target.checked = true;
 		}; // clickAgeChoice end
+		
+		/*
+		  폰트 선택 시 폰트 변경
+		*/
+		document.querySelector('#fontChoice').addEventListener('change', (e) => {
+			document.querySelectorAll('.fontChoiceOption').forEach((option) => {
+				const bool = option.selected;
+				const fontName = option.dataset.fontName;
+				
+				if (bool) {
+					writeLetterFrm.style.fontFamily = `\${fontName}`;
+					content.style.fontFamily = `\${fontName}`;
+				}
+			});
+		});
+		
+		/*
+		  디자인 선택 시 백그라운드 이미지 변경
+		*/
+		document.querySelector('#designChoice').addEventListener('change', (e) => {
+			document.querySelectorAll('.designChoiceOption').forEach((option) => {
+				const bool = option.selected;
+				const designImg = option.dataset.designImg;
+				
+				if (bool) {
+					writeLetterFrm.style.backgroundImage = `url('<%= request.getContextPath() %>/upload/design/\${designImg}')`;
+					writeLetterFrm.style.backgroundSize = 'cover';
+				}
+			});
+		});
+		
+		/*
+		  폼 제출 시 내용 또는 친구를 선택하지 않은 경우 폼 제출 막는 이벤트
+		*/
+		writeLetterFrm.addEventListener('submit', (e) => {
+			const content = e.target.content;
+			const friendCheck = document.querySelector('#sendFriend');
+			
+			// 내용을 작성하지 않은 경우 폼 제출할 수 없음.
+			if (!/^(.|\n)+$/.test(content.value)) {
+				alert("내용을 작성해주세요.");
+				e.preventDefault();
+				content.select();
+				return;
+			}
+			
+			// 친구에게 보내는데 친구를 선택하지 않은 경우 폼 제출할 수 없음
+			if (friendCheck.checked && textFriendsList.value == '') {
+				alert("편지를 보낼 친구를 선택해주세요.");
+				e.preventDefault();
+				textFriendsList.select();
+				return;
+			}
+		});
+		
+		
+		/*
+		  친구에게 보내기 클릭 시 닉네임으로만 보낼 수 있도록 제한
+		*/
+		friend.addEventListener('click', (e) => {
+			anony.style.display = 'none';
+			senderNick.checked = true;
+			senderRandom.checked = false;
+		});
+		
+		/*
+		  임의의 누군가에게 보내는 경우 닉네임 또는 익명으로 보내기 선택 가능
+		*/
+		random.addEventListener('click', (e) => {
+			anony.style.display = '';
+			senderNick.checked = true;
+			senderRandom.checked = false;
+		});
 		
 		
 		/*
