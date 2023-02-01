@@ -30,17 +30,6 @@ public class LeaveChatServlet extends HttpServlet {
 			Member loginMember = (Member) request.getSession().getAttribute("loginMember");
 			String nickname = loginMember.getNickname();
 			
-			
-			int result = chatService.leaveChatMember(chatNo, nickname);
-			
-			// 채팅방 현재 인원수 조회
-			int nowCount = chatService.getNowCount(Integer.valueOf(chatNo));
-						
-			// 채팅방 인원이 0이면 채팅방 제거
-			if(nowCount == 0) {
-				result = chatService.deleteChat(Integer.valueOf(chatNo));
-			}
-			
 			response.setContentType("application/jsp; charset=utf-8");
 			Gson gson = new Gson();
 			String jsonStr = gson.toJson(nickname);

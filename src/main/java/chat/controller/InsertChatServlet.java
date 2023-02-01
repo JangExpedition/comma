@@ -44,9 +44,9 @@ public class InsertChatServlet extends HttpServlet {
 			
 			Chat chat = new Chat(0, chatName, chatPwd, captin, category, gender, ableAge, 0, ableCount, null, null, null);
 			
-			System.out.println("InsertChatServlet" + chat);
-			
 			int result = chatService.insertChat(chat);
+			
+			System.out.println("InsertChatServlet" + chat);
 			
 			response.sendRedirect(request.getContextPath() + "/chat/chatView?chatNo=" + chat.getNo());
 			

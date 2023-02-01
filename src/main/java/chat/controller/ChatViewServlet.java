@@ -34,8 +34,6 @@ public class ChatViewServlet extends HttpServlet {
 		
 		int no = Integer.valueOf(chatNo);
 		
-		int result = chatService.enterChatMemmber(no, nickname);
-		
 		List<ChatLog> chatLogs = chatService.selectAllChatLog(no);
 		
 		request.getSession().setAttribute("chatNo", chatNo);
