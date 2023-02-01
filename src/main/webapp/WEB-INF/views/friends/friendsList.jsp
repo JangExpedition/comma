@@ -7,6 +7,8 @@
 	List<Friends> receiveFriendsList = (List<Friends>) request.getAttribute("receiveFriendsList");
 	System.out.println("friendsList = " + friendsList);
 	System.out.println("receiveFriendsList = " + receiveFriendsList);
+	
+	String searchNick = (String) request.getAttribute("searchNick");
 %>
 	<section class="fontStyle">
 		<div id="friendsTitle" class="fontStyle">친구</div>
@@ -14,7 +16,7 @@
 		<div id="search-container">
 			<form action="<%= request.getContextPath() %>/friends/friendsFinder">
 				<input type="hidden" name="memberNick" value="<%= loginMember.getNickname() %>" />
-				<input type="text" class="fontStyle id="searchNick" name="searchNick" size="30" placeholder="검색할 닉네임을 입력해주세요." />
+				<input type="text" class="fontStyle" id="searchNick" name="searchNick" size="30" placeholder="검색할 닉네임을 입력해주세요." value="<%= searchNick != null ? searchNick : "" %>" />
 				<input type="submit" id="searchBtn" class="fontStyle" value="검색" />
 			</form>
 		</div>
@@ -30,6 +32,8 @@
 						<td>
 						<% if (friend.getOriginalFileName() == null) { %>
 							<img src="<%= request.getContextPath() %>/images/default.png" alt="" class="friendsImage" />							
+						<% } else { %>
+							<img src="<%= request.getContextPath() %>/upload/profile/<%= friend.getRenamedFileName() %>" alt="" class="friendsImage" />							
 						<% } %>
 						</td>
 						<td><%= friend.getfNickname() %></td>
@@ -67,6 +71,7 @@
 				</tbody>
 			</table>
 		</div>
+		<br /><br />
 	</section>
 	
 	<section class="fontStyle">
@@ -83,6 +88,8 @@
 						<td>
 						<% if (friend.getOriginalFileName() == null) { %>
 							<img src="<%= request.getContextPath() %>/images/default.png" alt="" class="friendsImage" />							
+						<% } else { %>
+							<img src="<%= request.getContextPath() %>/upload/profile/<%= friend.getRenamedFileName() %>" alt="" class="friendsImage" />							
 						<% } %>
 						</td>
 						<td><%= friend.getfNickname() %></td>

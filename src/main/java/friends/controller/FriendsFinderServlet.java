@@ -39,6 +39,7 @@ public class FriendsFinderServlet extends HttpServlet {
 		System.out.println("friends = " + friendsList);
 		
 		// view단 처리
+		request.setAttribute("searchNick", searchNick);
 		request.getSession().setAttribute("friendsList", friendsList);
 		request.getRequestDispatcher("/WEB-INF/views/friends/friendsList.jsp").forward(request, response);
 		
