@@ -31,6 +31,7 @@ select * from design;
 select * from font;
 select * from complain;
 select * from counseling;
+select * from like_counseling;
 select * from attachment_counseling;
 select * from cs_comment;
 select * from question;
@@ -41,7 +42,6 @@ select * from chatting;
 select * from chatting_member;
 select * from chatting_log;
 select * from like_counseling;
-
 
 
 -- ======================================================================
@@ -425,6 +425,7 @@ create sequence seq_complain_no;
 create table chatting (
     no number,
     name varchar2(100) not null, -- 채팅방 이름
+    password varchar2(100),
     captin varchar2(50) not null,  -- 방장
     category varchar2(15) not null,
     able_gender char(1) not null,
@@ -510,6 +511,7 @@ create sequence seq_notification_no;
 -- ======================================================================
 -- 트리거 생성 (create)
 -- ======================================================================
+    
 -- member delete 시 leave_member insert
 create or replace trigger trig_member_leave_member
     before

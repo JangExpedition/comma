@@ -135,3 +135,7 @@ header{
     transform: rotate(-13deg);
   }
 }
+
+button:hover, input[type=button]:hover {
+	cursor: pointer;
+}

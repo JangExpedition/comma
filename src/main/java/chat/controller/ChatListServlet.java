@@ -61,8 +61,7 @@ public class ChatListServlet extends HttpServlet {
 				}
 			}
 		}
-		
-		request.setAttribute("chatList", afterchatList);
+		request.getSession().setAttribute("chatList", afterchatList);
 		
 		request.getRequestDispatcher("/WEB-INF/views/chat/chatList.jsp")
 			.forward(request, response);;
