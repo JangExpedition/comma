@@ -135,8 +135,6 @@ public class ChatDao {
 			pstmt.setInt(1, chatLog.getChatNo());
 			pstmt.setString(2, chatLog.getMemberNick());
 			pstmt.setString(3, chatLog.getContent());
-			pstmt.setString(4, chatLog.getOriginalFilename());
-			pstmt.setString(5, chatLog.getRenamedFilename());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -260,8 +258,6 @@ public class ChatDao {
 		chatLog.setChatNo(rset.getInt("chat_no"));
 		chatLog.setMemberNick(rset.getString("member_nick"));
 		chatLog.setContent(rset.getString("content"));
-		chatLog.setOriginalFilename(rset.getString("original_filename"));
-		chatLog.setRenamedFilename(rset.getString("renamed_filename"));
 		chatLog.setRegDate(rset.getDate("reg_date"));
 		return chatLog;
 	}

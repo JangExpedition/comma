@@ -29,6 +29,10 @@
 	<link href="https://fonts.googleapis.com/css2?family=Cute+Font&family=Dongle:wght@300;400&family=East+Sea+Dokdo&family=Gaegu:wght@300;400&family=Gamja+Flower&family=Hi+Melody&family=IBM+Plex+Sans+KR:wght@200;300;400&family=Jua&family=Moon+Dance&family=Nanum+Brush+Script&family=Nanum+Gothic&family=Nanum+Myeongjo&family=Nanum+Pen+Script&family=Rubik+Bubbles&family=Sunflower:wght@300;500&family=Yeon+Sung&display=swap" rel="stylesheet">
 	<script src="<%= request.getContextPath() %>/js/jquery-3.6.1.js"></script>
 <% if (loginMember != null) { %>
+	<script>
+		const memberId = '<%= loginMember.getNickname() %>';
+		console.log(location.pathname);
+	</script>
 	<script src="<%= request.getContextPath() %>/js/ws.js"></script>
 <% } %>
 	<script>

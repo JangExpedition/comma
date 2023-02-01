@@ -31,7 +31,7 @@ public class LeaveChatServlet extends HttpServlet {
 			String nickname = loginMember.getNickname();
 			
 			
-				int result = chatService.leaveChatMember(chatNo, nickname);
+			int result = chatService.leaveChatMember(chatNo, nickname);
 			
 			// 채팅방 현재 인원수 조회
 			int nowCount = chatService.getNowCount(Integer.valueOf(chatNo));

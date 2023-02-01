@@ -188,11 +188,6 @@ public class CommaWebSocket {
 			}
 			break;
 		case CHATROOM_LEAVE :
-			try {
-				int result = chatService.leaveChatMember(Integer.valueOf(chatNo), (String) data.get("sender"));
-			}catch(Exception e) {
-				e.printStackTrace();
-			}
 			
 			// 채팅방 현재 인원수 조회
 			int nowCount = chatService.getNowCount(Integer.valueOf(chatNo));
