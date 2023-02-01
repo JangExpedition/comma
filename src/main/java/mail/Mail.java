@@ -17,7 +17,7 @@ public class Mail extends Authenticator{
 	public static void naverMailSend(String email, String content) {
         String host = "smtp.naver.com";
         String user = "jangssssi@naver.com";
-        String password = "tnlavy12!";       
+        String password = "tnlavy1!";       
         
 
         // SMTP 서버 정보를 설정한다.
