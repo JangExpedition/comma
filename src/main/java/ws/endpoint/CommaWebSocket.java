@@ -19,6 +19,7 @@ import javax.websocket.server.ServerEndpoint;
 
 import com.google.gson.Gson;
 
+import chat.model.dto.Chat;
 import chat.model.dto.ChatLog;
 import chat.model.service.ChatService;
 import ws.MessageType;
@@ -169,6 +170,9 @@ public class CommaWebSocket {
 			}
 			break;
 		case CHATROOM_ENTER :
+			
+			int result = chatService.enterChatMemmber(Integer.valueOf(chatNo), (String) data.get("sender"));
+			
 			participantSet = chatParticipantMap.get(chatNo);
 			if(participantSet != null) {
 				for(String participant : participantSet) {
@@ -183,6 +187,7 @@ public class CommaWebSocket {
 			}
 			break;
 		case CHATROOM_LEAVE :
+			result = chatService.leaveChatMember(Integer.valueOf(chatNo), (String) data.get("sender"));
 			
 			// 채팅방 현재 인원수 조회
 			int nowCount = chatService.getNowCount(Integer.valueOf(chatNo));
@@ -202,7 +207,7 @@ public class CommaWebSocket {
 				}
 			} else{
 				// 채팅방 인원이 0이면 채팅방 제거
-				int result = chatService.deleteChat(Integer.valueOf(chatNo));
+				result = chatService.deleteChat(Integer.valueOf(chatNo));
 			}
 			break;
 		}
