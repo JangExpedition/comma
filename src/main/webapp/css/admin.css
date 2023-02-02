@@ -197,3 +197,15 @@ input[type=number]::-webkit-inner-spin-button {
 button:hover, input[type=radio] ~ label:hover, input[type=button]:hover, select:hover {
 	cursor: pointer;
 }
+
+#goBackDiv {
+	margin-top: 40px;
+}
+
+.buttonStyle {
+	background-color: #fff;
+	border: 1px solid #454a7b;
+	border-radius: 5px;
+	width: 80px;
+	height: 25px;
+}

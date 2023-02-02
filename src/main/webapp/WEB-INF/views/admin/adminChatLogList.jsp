@@ -47,6 +47,10 @@
 	</script>
 	
 	<section>
+		<div id="goBackDiv">
+			<button id="goBack" class="buttonStyle" onclick="back();">뒤로가기</button>
+		</div>
+		
 		<div id="adminTitle" class="fontStyle">채팅목록</div>
 		
 		<div id="search-container" class="fontStyle">
@@ -137,6 +141,11 @@
 				}
 			});
 		});
+
+		// 뒤로가기 메서드
+		const back = () => {
+			location.href = "<%= request.getContextPath() %>/admin/adminChatList";
+		};
 	</script>
 </body>
 </html>
