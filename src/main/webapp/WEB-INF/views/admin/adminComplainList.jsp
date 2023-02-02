@@ -4,7 +4,7 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%
 	List<Complain> complainList = (List<Complain>) request.getAttribute("complainList");
-
+	System.out.println(loginMember);
 	String searchType = request.getParameter("searchType");
 	String searchKeyword = request.getParameter("searchKeyword");
 	System.out.println("searchType = " + searchType);
@@ -120,7 +120,7 @@
 						<td>
 						<% if (complain.getWarningCnt() == 3) { %>
 							<form action="<%= request.getContextPath() %>/admin/adminDeleteMemberNick" method="post" name="memberDeleteFrm">
-								<input type="hidden" name="memberNick" />
+								<input type="hidden" name="memberNick" value="<%= complain.getVillain() %>" />
 								<input type="button" id="delMemberBtn" class="delMemberBtn memberBtn" value="탈퇴" data-member-nick="<%= complain.getVillain() %>" />
 							</form>
 							<script>
@@ -132,7 +132,7 @@
 									
 									if (confirm(`[\${memberNick}] 회원을 정말로 탈퇴시키시겠습니까?`)) {
 										const frm = document.memberDeleteFrm;
-										frm.memberNick.value = memberNick;
+										//frm.memberNick.value = memberNick;
 										frm.submit();
 									}
 								});
@@ -154,6 +154,7 @@
 			</table>
 		</div>
 		<form action="<%= request.getContextPath() %>/complain/warningCountUpdate" name="complainUpdateFrm" method="post">
+			<input type="hidden" name="adminNick" value="<%= loginMember.getNickname() %>" />
 			<input type="hidden" name="memberNick" />
 			<input type="hidden" name="warningCnt" />
 			<input type="hidden" name="letterContent" />

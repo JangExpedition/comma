@@ -19,9 +19,6 @@
 		<div id="letterSmallTitle">
 			<input type="button" id="letterSmallRandom" class="letterSmall fontStyle" value="익명에게 받은 편지" />
 			<input type="button" id="letterSmallFriends" class="letterSmall fontStyle" value="친구에게 받은 편지" />
-		<% if (loginMember.getMemberRole() != MemberRole.U) { %>
-			<input type="button" id="letterSmallAll" class="letterSmall fontStyle" value="모든 회원이 받은 편지" />
-		<% } %>
 		</div>
 		<div id="letterAllList">
 	<% if (letterList == null) { %>

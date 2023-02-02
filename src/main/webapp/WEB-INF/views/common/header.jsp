@@ -163,7 +163,7 @@
 				});
 			    
 				</script>
-			<% } else { %>
+			<% } else if (loginMember.getMemberRole() == MemberRole.A) { %>
 				<div id="toAdminMemberList" class="navBtn">회원</div>
 				<script>
 				/*
@@ -176,25 +176,22 @@
 					location.href = "<%= request.getContextPath() %>/admin/adminMemberList";	
 				});
 				</script>
-			<% } %>
-			
-			<% if (loginMember.getMemberRole() == MemberRole.A || loginMember.getMemberRole() == MemberRole.M) { %>
-				<%--
-				<div id="toStyleList" class="navBtn">폰트 및 디자인</div>
+				
+				<div id="toComplainList" class="navBtn">신고</div>
 				<script>
 				/*
 			      Date : 2023. 1. 27
-			      @한혜진
+			      @최민경
 			    
-			      adminStyleList.jsp 이동 메서드
+			      adminComplainList.jsp 이동 메서드
 			    */
-				document.querySelector("#toStyleList").addEventListener("click", (e)=>{
-					location.href = "<%= request.getContextPath() %>/admin/adminStyleList";	
+				document.querySelector("#toComplainList").addEventListener("click", (e)=>{
+					location.href = "<%= request.getContextPath() %>/complain/complain";	
 				});
-				
 				</script>
-				 --%>
-				 
+			<% } %>
+			
+			<% if (loginMember.getMemberRole() == MemberRole.A || loginMember.getMemberRole() == MemberRole.M) { %>
 				<div id="toFontList" class="navBtn">폰트</div>
 				<script>
 				/*
@@ -220,21 +217,8 @@
 				document.querySelector("#toDesignList").addEventListener("click", (e)=>{
 					location.href = "<%= request.getContextPath() %>/admin/adminDesignList";	
 				});
-				
 				</script>
 				
-				<div id="toComplainList" class="navBtn">신고</div>
-				<script>
-				/*
-			      Date : 2023. 1. 27
-			      @최민경
-			    
-			      adminComplainList.jsp 이동 메서드
-			    */
-				document.querySelector("#toComplainList").addEventListener("click", (e)=>{
-					location.href = "<%= request.getContextPath() %>/complain/complain";	
-				});
-				</script>
 			<% } %>
 			
 			<% if (loginMember.getMemberRole() == MemberRole.U) { %>
@@ -252,7 +236,21 @@
 				</script>
 			<% } %>
 			
+			<% if (loginMember.getMemberRole() == MemberRole.U) { %>
 				<div id="toPost" class="navBtn">우편함</div>
+				<script>
+				    /*
+				      Date: 2023. 01. 20
+				      @최민경
+				      
+				      letterList.jsp 이동 메소드
+				    */
+				    document.querySelector("#toPost").addEventListener('click', (e) => {
+				    	location.href = "<%= request.getContextPath() %>/letter/letterList";
+				    });
+				</script>
+			<% } %>
+			
 				<div id="toLetter" class="navBtn">편지쓰기</div>
 			<% if (loginMember.getMemberRole() == MemberRole.A || loginMember.getMemberRole() == MemberRole.M) { %>
 				<div id="toAdminChatList" class="navBtn">익명채팅</div><script>
@@ -396,16 +394,6 @@
 	    document.querySelector("#toQuestion").addEventListener('click', (e) => {
 	    	location.href = "<%= request.getContextPath() %>/customer"; 
 	     });
-	    
-	    /*
-	      Date: 2023. 01. 20
-	      @최민경
-	      
-	      letterList.jsp 이동 메소드
-	    */
-	    document.querySelector("#toPost").addEventListener('click', (e) => {
-	    	location.href = "<%= request.getContextPath() %>/letter/letterList";
-	    });
 	    
 	    
 		/*

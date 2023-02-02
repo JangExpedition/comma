@@ -123,7 +123,7 @@ public class MemberService {
 		try {
 			result = memberDao.updateWarningCount(conn, param);
 			
-			result = new LetterDao().insertLetter(conn, new Letter(0, "admin1", (String) param.get("memberNick"), 1, 1, (String) param.get("content"), null, null, "X", 0, OX.X, AF.F));
+			result = new LetterDao().insertLetter(conn, new Letter(0, (String) param.get("adminNick"), (String) param.get("memberNick"), 1, 1, (String) param.get("content"), null, null, "X", 0, OX.X, AF.F));
 			
 			commit(conn);
 		} catch(Exception e) {
