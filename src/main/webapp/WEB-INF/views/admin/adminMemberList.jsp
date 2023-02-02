@@ -143,7 +143,7 @@
 									});
 								</script>
 						<% } %>
-						<% if (!member.getEmail().equals(loginMember.getEmail())) { %>
+						<% if (!member.getEmail().equals(loginMember.getEmail()) || member.getMemberRole() != MemberRole.A) { %>
 								<input type="button" id="delMemberBtn" class="delMemberBtn memberBtn" value="탈퇴" data-member-nick="<%= member.getNickname() %>" data-member-email="<%= member.getEmail() %>" />
 						<% } %>
 							</div>
