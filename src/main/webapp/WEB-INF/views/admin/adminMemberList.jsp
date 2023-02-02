@@ -143,7 +143,9 @@
 									});
 								</script>
 						<% } %>
+						<% if (!member.getEmail().equals(loginMember.getEmail())) { %>
 								<input type="button" id="delMemberBtn" class="delMemberBtn memberBtn" value="탈퇴" data-member-nick="<%= member.getNickname() %>" data-member-email="<%= member.getEmail() %>" />
+						<% } %>
 							</div>
 						</td>
 					</tr>
