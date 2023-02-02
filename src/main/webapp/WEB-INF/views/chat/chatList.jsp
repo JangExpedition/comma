@@ -83,11 +83,7 @@
 	let pwd = 0;
 	let chatNo = 0;
     
-	/*
-	Date : 2023. 1. 27
-	@장원정
-	게시글 조회 메서드
-	*/
+	
 	$(".tr").click((e)=>{
 		chatNo = $(event.target).parent('.tr').data('chatNo');
 		$.ajax({
@@ -106,6 +102,7 @@
 				if(data.chatPwd == null){
 					location.href = "<%= request.getContextPath() %>/chat/chatView?chatNo=" + chatNo;
 				}else{
+					pwd = data.chatPwd;
 					pwdBackground.style.display = "flex";
 				}
 				
