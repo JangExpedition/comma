@@ -47,9 +47,15 @@ setTimeout(() => {
 						console.log(chatLogs);
 						chatLogs.forEach((log)=>{
 							if(log.memberNick == memberId){
-								wrapper.insertAdjacentHTML('beforeend', `<div class="right ${log.memberNick} fontStyle"><span class="sender">${log.memberNick}</span> <span id="message" class="pointColor">${log.content}</span></div>`);
+								wrapper.insertAdjacentHTML('beforeend', `<div class="right ${log.memberNick} fontStyle">
+																			<span class="sender">${log.memberNick}</span>
+																			<span id="message" class="pointColor">${log.content}</span>
+																		 </div>`);
 							} else{
-								wrapper.insertAdjacentHTML('beforeend', `<div class="left ${log.memberNick} fontStyle"><span class="sender">${log.memberNick}</span><span id="message" class="pointColor">${log.content}</span></div>`);
+								wrapper.insertAdjacentHTML('beforeend', `<div class="left ${log.memberNick} fontStyle">
+																			<span class="sender">${log.memberNick}</span>
+																			<span id="message" class="pointColor">${log.content}</span>
+																		 </div>`);
 							}	
 						})
 					},
