@@ -182,7 +182,7 @@
 				
 				if (confirm(`[\${memberNick}] 회원을 정말로 탈퇴시키시겠습니까?`)) {
 					const frm = document.memberDeleteFrm;
-					frm.memberEmail = memberEmail;
+					frm.memberEmail.value = memberEmail;
 					frm.submit();
 				}
 			});
