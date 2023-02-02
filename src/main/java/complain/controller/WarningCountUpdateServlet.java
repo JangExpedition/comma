@@ -25,11 +25,13 @@ public class WarningCountUpdateServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
+			String adminNick = request.getParameter("adminNick");
 			String memberNick = request.getParameter("memberNick");
 			int warningCnt = Integer.parseInt(request.getParameter("warningCnt"));
 			String content = request.getParameter("letterContent");
 			
 			Map<String, Object> param = new HashMap<>();
+			param.put("adminNick", adminNick);
 			param.put("memberNick", memberNick);
 			param.put("warningCnt", warningCnt);
 			param.put("content", content);
