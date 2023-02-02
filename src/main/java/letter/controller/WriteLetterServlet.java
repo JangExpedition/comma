@@ -96,10 +96,13 @@ public class WriteLetterServlet extends HttpServlet {
 			if (sendWho == AF.A) {
 				List<Member> memberList = memberService.selectAllMemberWithOutMe(param);
 				System.out.println(memberList);
+				
 				int limit = memberList.size();
 				System.out.println("limit = " + limit);
+				
 				int ranNum = (int) (Math.random() * limit);
 				System.out.println("ranNum = " + ranNum);
+				
 				addressee = memberList.get(ranNum).getNickname();
 			} else {
 				addressee = multiReq.getParameter("friendsList");
