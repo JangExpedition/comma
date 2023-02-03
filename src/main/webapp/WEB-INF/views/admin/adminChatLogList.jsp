@@ -102,7 +102,7 @@
 						<td><%= chatLog.getRegDate() %></td>
 						<td>
 							<div class="btnFrm">
-								<input type="button" id="chatLogDelBtn" class="chatDelBtn chatBtn" value="삭제" data-log-no="<%= chatLog.getNo() %>" data-log-content="<%= chatLog.getContent() %>" />
+								<input type="button" id="chatLogDelBtn" class="chatDelBtn chatBtn" value="삭제" data-log-no="<%= chatLog.getNo() %>" data-chat-no="<%= chatLog.getChatNo() %>" data-log-content="<%= chatLog.getContent() %>" />
 							</div>
 						</td>
 					</tr>
@@ -123,6 +123,7 @@
 	
 	<form action="<%= request.getContextPath() %>/admin/adminChatLogDelete" method="post" name="chatDeleteFrm">
 		<input type="hidden" name="chatLogNo" />
+		<input type="hidden" name="chatNo" />
 	</form>
 
 	<script>
@@ -132,11 +133,13 @@
 		document.querySelectorAll('.chatDelBtn').forEach((del) => {
 			del.addEventListener('click', (e) => {
 				const chatLogNo = e.target.dataset.logNo;
+				const chatNo = e.target.dataset.chatNo;
 				const chatLogContent = e.target.dataset.logContent;
 				
 				if (confirm(`[\${chatLogContent}] 채팅내역을 정말로 삭제하시겠습니까?`)) {
 					const frm = document.chatDeleteFrm;
 					frm.chatLogNo.value = chatLogNo;
+					frm.chatNo.value = chatNo;
 					frm.submit();
 				}
 			});
