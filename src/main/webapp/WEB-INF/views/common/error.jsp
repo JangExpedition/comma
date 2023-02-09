@@ -14,15 +14,14 @@
 
 <div class="error_container">
     <div class="error_block">
-        
   
          <h1><strong>404</strong></h1>
 
         <h3>Oops... Page Not Found !</h3>
         <br>
-        <div id="try"><p><strong> using the button below to go to main page of the site</p></strong></div>
+        <div id="try"><p><strong> using the button below to go to main page of the site</strong></p></div>
 
-        <a href="http://localhost:8090/comma/"><input type="button" class="error_btn" value="Go To Main Page"></a>
+        <a href="<%= request.getContextPath() %>"><input type="button" class="error_btn" value="Go To Main Page"></a>
 
     </div>
  </div>

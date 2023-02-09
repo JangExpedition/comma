@@ -22,6 +22,8 @@ public class AdminChatLogDeleteServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int chatLogNo = Integer.parseInt(request.getParameter("chatLogNo"));
+		int chatNo = Integer.parseInt(request.getParameter("chatNo"));
+		
 		try {
 			int result = chatService.deleteChatLog(chatLogNo);
 			request.getSession().setAttribute("msg", "해당 채팅 로그를 삭제했습니다.");
@@ -30,7 +32,7 @@ public class AdminChatLogDeleteServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		response.sendRedirect(request.getContextPath() + "/admin/adminChatLog?no=" + chatLogNo);
+		response.sendRedirect(request.getContextPath() + "/admin/adminChatLog?no=" + chatNo);
 	} // doPost() end
 
 }
