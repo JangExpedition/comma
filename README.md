@@ -2,6 +2,8 @@
 ---
 익명 기반의 커뮤니티 사이트
 
+![쉼표 gif](https://user-images.githubusercontent.com/114918904/233762114-9c68b90a-0057-435f-bfef-2c7800669c3f.gif)
+
 https://youtu.be/aOHp69YyrBM
 
 ### 개발환경
